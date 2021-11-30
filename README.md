@@ -34,15 +34,15 @@ The most important Functionalities & Features (unsorted)
 	 Profile management
 	 Message send / inbox
 	 Right to left and left to right responsive design
-	 Anyone from staff team can write new page or write translation of a page (about, contact …etc.).
+	 Anyone from staff team can write new page or write translation of a page (about, contact …etc.)
 	 Staff can manage translation (for example a button which has text in English “GO” we need to
 	translate it manually in website without using api or whatever)
 	 Staff need to approve the following:
-	o “Field of training – Faculty – Level – Specialization” changes.
-	o Profile photo changes.
+		o “Field of training – Faculty – Level – Specialization” changes.	
+		o Profile photo changes.
 	 Design
-	o colors: I recommend to use the colors used in the following colors (50/46/44/24/22/21)
-	shown in this website: https://visme.co/blog/website-color-schemes/.
-	o Avoid:
+		o colors: I recommend to use the colors used in the following colors (50/46/44/24/22/21)
+		  shown in this website: https://visme.co/blog/website-color-schemes/.
+		o Avoid:
 	 Lot of colors
 	 Funny design (fonts …etc)	
