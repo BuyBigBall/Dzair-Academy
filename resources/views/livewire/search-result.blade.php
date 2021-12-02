@@ -16,7 +16,7 @@
            </div>
            <div class="row">
               <div class="card-body col-md-9 col-sm-6 p-3">
-                @if( !empty($search_result) && is_array($search_result) && count($search_result) )
+                @if( !empty($search_result) && is_array($search_result) && count($search_result)>0 )
                 <!-- select page show & pagenation -->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="form-group d-flex align-items-center">
@@ -51,8 +51,9 @@
                   @foreach($search_result as $row)
                   <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                     <div class="d-flex flex-column">
-                      <span class="text-dark ">The Title for Course X goes here and in case it has more than first line
-                        we need to hide and add a show more </span>
+                      <a href="{{ route('course-download', 1)}}">
+                        <span class="text-dark ">The Title for Course X goes here and in case it has more than first line
+                          we need to hide... </span> </a>
                       <div class="mt-2 mb-1 row">
                         <span class="text-xs col-md-4 col-sm-6">By: <a href="#" class="text-dark font-weight-bold">useranmesssssss</a></span>
                         <span class="text-xs col-md-4 col-sm-6">Date: <span class="text-dark font-weight-bold">11/11/2021</span></span>

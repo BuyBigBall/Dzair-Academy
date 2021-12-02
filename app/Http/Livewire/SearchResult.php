@@ -45,8 +45,6 @@ class SearchResult extends Component
         // $request->input('filetype_archives')
         // $request->input('filetype_images')
         
-        $search_result = [];
-        $this->search_result = $search_result;
     }
     public function mount()
     {
@@ -56,7 +54,9 @@ class SearchResult extends Component
 
     public function render()
     {
-        return view('livewire.search-result')
-                ->with('search_result', [1,2]);
+        $search_result = [1, 3];
+        $this->search_result = $search_result;
+        return view('livewire.search-result');
+               // ->with('search_result', [3, 2 , 1]);
     }
 }

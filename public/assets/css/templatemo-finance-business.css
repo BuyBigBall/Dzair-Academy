@@ -1366,3 +1366,29 @@ footer .contact-form button.filled-button:hover {
 	color: rgb(255, 25, 25,0.8);
 	font-size:0.8rem;
 }
+
+
+footer
+{
+	padding : 20px 0px;
+}
+
+.btn-primary
+{
+	background-color: #388087 !important;
+}
+
+.hidden
+{
+	display:none;
+}
+.show
+{
+	display:block;
+}
+
+footer .list-group-item
+{
+	padding:0px 8px;
+	margin-bottom:0px !important;
+}

@@ -3970,7 +3970,7 @@ fieldset:disabled .btn {
   color: #67748e;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #C2E2CE;
   background-clip: padding-box;
   border: 0 solid transparent;
   border-radius: 0.5rem;
@@ -21341,3 +21341,10 @@ p {
   background: transparent;
 }
 /*# sourceMappingURL=dashboard-free.css.map */
+
+
+.footer-item .list-group-item
+{
+  background-color: transparent;
+  border: none;
+}

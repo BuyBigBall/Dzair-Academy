@@ -15,8 +15,16 @@ use App\Http\Livewire\Courses;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 
+
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
+use App\Http\Livewire\Courses\CourseManagement;
+use App\Http\Livewire\Courses\CourseDetail;
+use App\Http\Livewire\Message\MessageManage;
+use App\Http\Livewire\Message\MessageInbox;
+use App\Http\Livewire\Message\MessageOutbox;
+
+use App\Http\Livewire\Collection\CollectionManage;
 
 use App\Http\Controllers\ApplicationController;
 
@@ -42,7 +50,7 @@ Route::get('/login', Login::class)->name('login');
 
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
-Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
+Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password');//->middleware('signed');
 
 Route::post('/search-result', SearchResult::class)->name('search-result');
 
@@ -54,8 +62,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses', Courses::class)->name('courses');
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
+    Route::get('/user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    Route::get('/course-management', CourseManagement::class)->name('course-management');
+    Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
+    Route::get('/message', MessageManage::class)->name('message');
+    Route::get('/message/inbox', MessageInbox::class)->name('inbox');
+    Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
+    //Route::get('/message/outbox', [MessageOutbox::class, 'outbox'])->name('outbox');
+    Route::get('/collection', CollectionManage::class)->name('collection');
+    
 });
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);

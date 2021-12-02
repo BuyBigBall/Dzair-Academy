@@ -15,9 +15,14 @@ public/hot
 public_html/storage
 public_html/hot
 
-storage/*.key
+/storage/*.key
+vendor
 .env
-Homestead.yaml
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
 Homestead.json
-/.vagrant
+Homestead.yaml
+npm-debug.log
+yarn-error.log
 .phpunit.result.cache

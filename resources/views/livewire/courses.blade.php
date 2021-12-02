@@ -89,7 +89,7 @@
                                 <div class="col-md-3 col-sm-6 ">
                                     <div class="form-check">
                                         <input class="form-check-input crstype all" type="checkbox" value="" 
-                                            id="course_all" checked=""/>
+                                            id="course_all" checked="" />
                                         <label class="custom-control-label" for="course_all">all categories</label>
                                     </div>
                                 </div>
