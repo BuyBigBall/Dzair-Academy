@@ -108,7 +108,7 @@ class Courses extends Component
                         'specialization_id' => $this->specialization,
                         'level'             => $this->level,
                         'faculty_id'        => $this->faculty,
-                        'traning_id'        => $this->training,
+                        'training_id'        => $this->training,
                         'created_by'        => Auth::id(),
                         'updated_by'        => Auth::id(),
                         'title'             => $this->title,

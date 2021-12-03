@@ -160,7 +160,7 @@ CREATE TABLE `materials` (
   `specialization_id` int(10) unsigned NOT NULL,
   `level` varchar(10) CHARACTER SET ascii NOT NULL,
   `faculty_id` int(10) unsigned DEFAULT NULL,
-  `traning_id` int(10) unsigned DEFAULT NULL,
+  `training_id` int(10) unsigned DEFAULT NULL,
   `created_by` int(10) unsigned NOT NULL,
   `updated_by` int(10) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE `materials` (
 
 /*Data for the table `materials` */
 
-insert  into `materials`(`id`,`specialization_id`,`level`,`faculty_id`,`traning_id`,`created_by`,`updated_by`,`title`,`description`,`filename`,`filepath`,`filetype`,`filesize`,`cate_course`,`cate_exercise`,`cate_exam`,`protected`,`created_at`,`updated_at`) values 
+insert  into `materials`(`id`,`specialization_id`,`level`,`faculty_id`,`training_id`,`created_by`,`updated_by`,`title`,`description`,`filename`,`filepath`,`filetype`,`filesize`,`cate_course`,`cate_exercise`,`cate_exam`,`protected`,`created_at`,`updated_at`) values 
 (1,1,'L1',1,1,1,1,'wwwwwwwww','wwwwwwwwwwwww','ArNlgka3keQAanfU7LiBEyjqoXx7nCYcWsN1yYv6.zip','1/courses/ArNlgka3keQAanfU7LiBEyjqoXx7nCYcWsN1yYv6.zip',3,27459,1,1,1,NULL,'2021-11-27 05:18:30','2021-11-27 05:18:30');
 
 /*Table structure for table `migrations` */

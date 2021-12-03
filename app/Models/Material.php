@@ -13,7 +13,7 @@ class Material extends Model
                         'specialization_id'
                         , 'level' 
                         , 'faculty_id' 
-                        , 'traning_id'
+                        , 'training_id'
                         , 'created_by'
                         , 'updated_by'
                         , 'title'
@@ -26,5 +26,15 @@ class Material extends Model
                         , 'cate_exercise'
                         , 'cate_exam'
                         , 'protected'
-                    ];
+            ];
+    public function creator() {
+        return $this->hasOne('App\Models\User','id', 'created_by');
+        //return $this->belongsTo('App\Models\User','id', 'created_by');
+    }
+    public function updater() {
+        return $this->hasOne('App\Models\User','id','updated_by');
+    }
+    public function lang() {
+        return $this->hasMany(MaterialLanguage::class);
+    }
 }

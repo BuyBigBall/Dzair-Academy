@@ -52,7 +52,14 @@ Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-passwo
 
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password');//->middleware('signed');
 
+//Route::post('/search-result', [SearchResult::class, 'index'])->name('search-result');
 Route::post('/search-result', SearchResult::class)->name('search-result');
+Route::get ('/search-result', SearchResult::class)->name('search-result');
+
+//Route::view('search-result','livewire.search-result'); 
+// Route::get('/search-result', function() {
+//     return view('livewire.search-result');
+// })->name('search-result');
 
 Route::middleware('auth')->group(function () {
     Route::get('/search', Search::class)->name('search');
@@ -69,7 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/message', MessageManage::class)->name('message');
     Route::get('/message/inbox', MessageInbox::class)->name('inbox');
     Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
-    //Route::get('/message/outbox', [MessageOutbox::class, 'outbox'])->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
     
 });

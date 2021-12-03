@@ -46,10 +46,24 @@ function ln($obj)
     return null;
 }
 
+function filetypename($filetype)
+{
+    if($filetype==1)        return 'document';
+    else if($filetype==2)   return 'image/video';
+    else if($filetype==3)   return 'archive';
+    return 'other';
+}
+function size($size)
+{
+    if($size>=1024*1024) return round($size/1024/1024,1).'MB';
+    else if($size>=1024) return round($size/1024,1).'KB';
+    return $size.'B';
+}
 function lang()
 {
     $lang = App::getLocale();
-    return env('DEFAULT_LANGUAGE', $lang);
+    return $lang;
+    //return env('DEFAULT_LANGUAGE', $lang);
 }
 //We use this to translate text 
 function translate($key,  $lang = null, $coll = 'general' ){
