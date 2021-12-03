@@ -6,10 +6,8 @@
          <div class="card-header">
             <div class="row">
                 <div class="col-md-4 col-sm-6">
-                      <h4 class="title">{{ __('pages.Search Results')}}</h4>
-                      <div>Previous filters : (training area type), faculty, 
-                            specialization, level, ... and so on
-                      </div>
+                      <h4 class="title">{{ translate('Search Results')}}</h4>
+                      <div>Previous filters : {{$filter}} </div>
                 </div>
                 <div class="col-md-8 col-sm-6 p-0" style='min-height:60px; overflow:hidden'>
                     <img src="../assets/img/top1.png" style='width:800px; height:92px;' />

@@ -14,7 +14,7 @@
     <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
         <li class="page-item @if($pagination->currentPage()==1) disabled @endif">
-        <a class="page-link" href="{{$pagination->path().'?page='.( ($pagination->currentPage() - $pagination->perPage())<=0 ? 1 :  ($pagination->currentPage() - $pagination->perPage()) )}}" tabindex="-1">
+        <a class="page-link" href="{{ route($current_route).'?page='.( ($pagination->currentPage() - $pagination->perPage())<=0 ? 1 :  ($pagination->currentPage() - $pagination->perPage()) )}}" tabindex="-1">
             <i class="fa fa-angle-left"></i>
             <span class="sr-only">Previous</span>
         </a>
@@ -25,10 +25,10 @@
             @if($i==$pagination->currentPage()-1)  
             active 
             @endif
-            "><a class="page-link" href="{{$pagination->path().'?page='.($i+1)}}">{{($i+1)}}</a></li>
+            "><a class="page-link" href="{{route($current_route).'?page='.($i+1)}}">{{($i+1)}}</a></li>
         @endfor
         <li class="page-item  @if($pagination->currentPage()==$pagination->lastPage()) disabled @endif">
-        <a class="page-link" href="{{$pagination->path().'?page='.(   ($pagination->currentPage() + $pagination->perPage())>$pagination->lastPage() ? $pagination->lastPage() : ($pagination->currentPage() + $pagination->perPage())    )}}">
+        <a class="page-link" href="{{route($current_route).'?page='.(   ($pagination->currentPage() + $pagination->perPage())>$pagination->lastPage() ? $pagination->lastPage() : ($pagination->currentPage() + $pagination->perPage())    )}}">
             <i class="fa fa-angle-right"></i>
             <span class="sr-only">Next</span>
         </a>

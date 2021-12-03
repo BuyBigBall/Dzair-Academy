@@ -16,9 +16,23 @@ class SearchResult extends Component
 {
     use WithPagination;
 
+    //  **** page main fields  ****** /
     public  $perPage = 10;
     public  $curPage = 1;
+    public  $search_input;
     private $search_result;
+    public  $current_route = 'search-result';
+
+    //  **** search field value  ****** /
+    public  $training;
+    public  $faculty;
+    public  $specialization;
+    public  $level;
+    public  $doc;
+    public  $img;
+    public  $zip;
+    public  $word;
+    public  $filter;
 
     public function __construct()
     {
@@ -27,46 +41,89 @@ class SearchResult extends Component
     
     public function index(Request $request)
     {
+        // dd(($request = Request::capture()));
+    }
+
+    public function updated($field, $newValue)
+    {
+        // $this->validateOnly($field);
     }
 
     public function updatedPerPage($value)
     {
         $this->perPage = $value;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
-        //dd(($request = Request::capture()));
-        $this->mount(Request::capture(), true);
-        $this->emit('renderPerPage');
+        // $this->emit('renderPerPage');
     }
 
     public function mount(Request $request, $flag=null)
     {
-        if($flag==null)
+        //if($flag==null)
         if(Cookie::has("perPage"))
         {
             $this->perPage = Cookie::get("perPage");
         }
+        $this->search_input = $request->input();
+        if( !empty($this->search_input['training']))        $this->training = Training::find($this->search_input['training'])->name;
+        if( !empty($this->search_input['faculty']))         $this->faculty = Faculty::find($this->search_input['faculty'])->name;
+        if( !empty($this->search_input['specialization']))  $this->specialization = Specialization::find($this->search_input['specialization'])->name;
+        if( !empty($this->search_input['level']))           $this->level = $this->search_input['level'];
+        if( !empty($this->search_input['doc']))             $this->doc = filetypename(1);
+        if( !empty($this->search_input['img']))             $this->img = filetypename(2);
+        if( !empty($this->search_input['zip']))             $this->zip = filetypename(3);
+        if( !empty($this->search_input['word']))            $this->word = $this->search_input['word'];
+    
+        $this->filter = $this->training;
+        if(!empty($this->filter) && !empty($this->faculty) )  
+        $this->filter .= ',';
+        $this->filter .= $this->faculty;
+        if(!empty($this->filter) && !empty($this->specialization) ) 
+        $this->filter .= ',';
+        $this->filter .= $this->specialization;
+        if(!empty($this->filter) && !empty($this->level) ) 
+        $this->filter .= ',';
+        $this->filter .= $this->level;
+        if(!empty($this->filter) && !empty($this->doc) ) 
+        $this->filter .= ',';
+        $this->filter .= $this->doc;
+        if(!empty($this->filter) && !empty($this->img) ) 
+        $this->filter .= ',';
+        $this->filter .= $this->img;
+        if(!empty($this->filter) && !empty($this->zip) ) 
+        $this->filter .= ',';
+        $this->filter .= $this->zip;
+        if(!empty($this->filter) && !empty($this->word) ) 
+        $this->filter .= ',';
+        if(!empty($this->word))
+        $this->filter .= ("search:'".$this->word."'");
+
+        //dd($this->search_input);
+    }
+    public function nextPage($page)
+    {
+    }
+    public function render()
+    {
         $searchCond = [];        $searchWord = [];        $searchOr = []; $searchOr1 = [];
 
-        //print_r($request->input('faculty')); die;
-        if( ! empty($request->input('training')))               $searchCond[] = ['training_id' , $request->input('training')];
-        if( ! empty($request->input('faculty')))                $searchCond[] = ['faculty_id' , $request->input('faculty')];
-        if( ! empty($request->input('specialization')))         $searchCond[] = ['specialization_id' , $request->input('specialization')];
-        if( ! empty($request->input('level')))                  $searchCond[] = ['level' , $request->input('level')];
-        if( ! empty($request->input('course')))                 $searchCond[] = ['course' , $request->input('course')];
+        if( ! empty($this->search_input['training']))               $searchCond[] = ['training_id' , $this->search_input['training']];
+        if( ! empty($this->search_input['faculty']))                $searchCond[] = ['faculty_id' , $this->search_input['faculty']];
+        if( ! empty($this->search_input['specialization']))         $searchCond[] = ['specialization_id' , $this->search_input['specialization']];
+        if( ! empty($this->search_input['level']))                  $searchCond[] = ['level' , $this->search_input['level']];
+        if( ! empty($this->search_input['course']))                 $searchCond[] = ['course' , $this->search_input['course']];
 
+        if( ! empty($this->search_input['cate_course']))            $searchOr1[] = ['cate_course' , $this->search_input['cate_course']];
+        if( ! empty($this->search_input['cate_exercise']))          $searchOr1[] = ['cate_exercise' , $this->search_input['cate_exercise']];
+        if( ! empty($this->search_input['cate_exam']))              $searchOr1[] = ['cate_exam' , $this->search_input['cate_exam']];
 
-        if( ! empty($request->input('cate_course')))            $searchOr1[] = ['cate_course' , $request->input('cate_course')];
-        if( ! empty($request->input('cate_exercise')))          $searchOr1[] = ['cate_exercise' , $request->input('cate_exercise')];
-        if( ! empty($request->input('cate_exam')))              $searchOr1[] = ['cate_exam' , $request->input('cate_exam')];
-
-        if( ! empty($request->input('word')))                  
+        if( ! empty($this->search_input['word']))                  
         {
-            $searchWord[] =  ['title' , 'like' , '%'.$request->input('word').'%']; 
-            $searchWord[] =  ['description' , 'like' , '%'.$request->input('word').'%'];
+            $searchWord[] =  ['title' , 'like' , '%'.$this->search_input['word'].'%']; 
+            $searchWord[] =  ['description' , 'like' , '%'.$this->search_input['word'].'%'];
         } 
-        if( ! empty($request->input('filetype_docs')))          $searchOr[] = ['filetype' , 1];
-        if( ! empty($request->input('filetype_archives')))      $searchOr[] = ['filetype' , 2];
-        if( ! empty($request->input('filetype_images')))        $searchOr[] = ['filetype' , 3];
+        if( ! empty($this->search_input['filetype_docs']))          $searchOr[] = ['filetype' , 1];
+        if( ! empty($this->search_input['filetype_archives']))      $searchOr[] = ['filetype' , 2];
+        if( ! empty($this->search_input['filetype_images']))        $searchOr[] = ['filetype' , 3];
 
         //print_r($searchCond); die;
         $query = Material::where($searchCond)
@@ -92,23 +149,10 @@ class SearchResult extends Component
                                 $query4->where('language', lang() );
                             }])->orderBy('created_at','desc');
                            
-        // if($request->input('page')==2)
-        //     print($query->toSql()); die;
-        $this->search_result = $query->paginate( $this->perPage ); // dd($rows);
+        //print($query->toSql()); die;
+        $this->search_result = $query->paginate( $this->perPage );
         $this->curPage = $this->search_result->currentPage();
-    }
-    public function nextPage($page)
-    {
-        //$this->search_result->setPage($this->curPage + 1);
-        //dd($page);
-        // $this->emit('pageChanged');
-        // $this->setPage($this->curPage + 1);
-        //dd($this->curPage );
-        //$this->post->addLikeBy(auth()->user());
-    }
-    public function render()
-    {
-        //dd($this->search_result);
+        
         return view('livewire.search-result', ['pagination'=>$this->search_result] );
     }
 }
