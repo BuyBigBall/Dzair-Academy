@@ -1,10 +1,12 @@
 <div class="form-group d-flex align-items-center">
     <label class="d-inline me-3">Views</label>
-    <select class="form-control">
-        <option value="20"  @if($perPage==20)  selected @endif >20</option>
-        <option value="50"  @if($perPage==50)  selected @endif >50</option>
-        <option value="100" @if($perPage==100) selected @endif >100</option>
-
+    <select class="form-control" wire:model="perPage" >
+        <option wire:key="2"   @if($perPage===2)   selected @endif >2</option>
+        <option wire:key="5"   @if($perPage===5)   selected @endif >5</option>
+        <option wire:key="10"  @if($perPage===10)  selected @endif >10</option>
+        <option wire:key="20"  @if($perPage===20)  selected @endif >20</option>
+        <option wire:key="50"  @if($perPage===50)  selected @endif >50</option>
+        <option wire:key="100" @if($perPage===100) selected @endif >100</option>
     </select>
 </div>
 
