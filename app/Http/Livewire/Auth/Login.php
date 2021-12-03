@@ -50,9 +50,9 @@ class Login extends Component
             auth()->login($user, $this->remember_me);
             if( $this->remember_me )
             {
-                Cookie::queue("cookieUserName", $this->email, 3);
-                Cookie::queue("cookieUserPwd", $this->password, 3);
-                Cookie::queue("cookieSetFlag", $this->remember_me, 3);
+                Cookie::queue("cookieUserName", $this->email, env('COOKIE_EXPIRE_SECONDS'));
+                Cookie::queue("cookieUserPwd", $this->password, env('COOKIE_EXPIRE_SECONDS'));
+                Cookie::queue( cookie()->forever("cookieSetFlag", $this->remember_me) );
                 //print_r(Cookie::has("cookieSetFlag")); die;
             }
             return redirect()->intended('/search');

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
 
-class SearchResult extends Component
+class Translate extends Component
 {
     use WithPagination;
 
@@ -99,12 +99,6 @@ class SearchResult extends Component
     }
     public function nextPage($page)
     {
-        //$this->search_result->setPage($this->curPage + 1);
-        //dd($page);
-        // $this->emit('pageChanged');
-        // $this->setPage($this->curPage + 1);
-        //dd($this->curPage );
-        //$this->post->addLikeBy(auth()->user());
     }
     public function render()
     {

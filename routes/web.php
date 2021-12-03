@@ -14,6 +14,8 @@ use App\Http\Livewire\Tables;
 use App\Http\Livewire\Courses;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
+use App\Http\Livewire\Translate;
+use App\Http\Livewire\Settings;
 
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
@@ -70,13 +72,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/user-profile', UserProfile::class)->name('user-profile');
-    Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    Route::get('/user-management', UserManagement::class)->name('user-management');
     Route::get('/course-management', CourseManagement::class)->name('course-management');
     Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
     Route::get('/message', MessageManage::class)->name('message');
     Route::get('/message/inbox', MessageInbox::class)->name('inbox');
     Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
+
+    Route::get('/translate', Translate::class)->name('translate');
+    Route::get('/settings', Settings::class)->name('settings');
     
 });
 
