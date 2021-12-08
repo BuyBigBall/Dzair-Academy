@@ -15,6 +15,7 @@ use App\Http\Livewire\Courses;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 use App\Http\Livewire\Translate;
+use App\Http\Livewire\TranslateMaterial;
 use App\Http\Livewire\Settings;
 
 
@@ -81,6 +82,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/collection', CollectionManage::class)->name('collection');
 
     Route::get('/translate', Translate::class)->name('translate');
+    Route::get('/translate-material', TranslateMaterial::class)->name('translate-material');
+    Route::post('/translate-material', TranslateMaterial::class)->name('translate-material');
+    
     Route::get('/settings', Settings::class)->name('settings');
     
 });

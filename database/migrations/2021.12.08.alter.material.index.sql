@@ -1,0 +1,2 @@
+ALTER TABLE `materials` ADD COLUMN `course_id` INT UNSIGNED NULL AFTER `training_id`, ADD INDEX (`faculty_id`), ADD INDEX (`course_id`), ADD INDEX (`training_id`); 
+ALTER TABLE `materials` ADD FOREIGN KEY (`faculty_id`) REFERENCES `softui`.`faculties`(`id`) ON DELETE CASCADE, ADD FOREIGN KEY (`training_id`) REFERENCES `softui`.`trainings`(`id`) ON DELETE CASCADE, ADD FOREIGN KEY (`course_id`) REFERENCES `softui`.`courses`(`id`) ON DELETE CASCADE; 

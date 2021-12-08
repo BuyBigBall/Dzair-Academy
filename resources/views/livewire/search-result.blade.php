@@ -21,10 +21,7 @@
                   @if( !empty($pagination) && count($pagination)>0 )
                   <!-- select page show & pagenation -->
                   <div class="d-flex justify-content-between align-items-center">
-                    
-                    
-                  @include('livewire.pagination')
-
+                    @include('livewire.pagination')
                   </div>
                   <ul class="list-group">
                     @foreach($pagination as $row)

@@ -21,7 +21,7 @@ class SearchResult extends Component
     public  $curPage = 1;
     public  $search_input;
     private $search_result;
-    public  $current_route = 'search-result';
+    public  $current_route = 'search-result';  //for pagination jump
 
     //  **** search field value  ****** /
     public  $training;
@@ -110,7 +110,7 @@ class SearchResult extends Component
         if( ! empty($this->search_input['faculty']))                $searchCond[] = ['faculty_id' , $this->search_input['faculty']];
         if( ! empty($this->search_input['specialization']))         $searchCond[] = ['specialization_id' , $this->search_input['specialization']];
         if( ! empty($this->search_input['level']))                  $searchCond[] = ['level' , $this->search_input['level']];
-        if( ! empty($this->search_input['course']))                 $searchCond[] = ['course' , $this->search_input['course']];
+        if( ! empty($this->search_input['course']))                 $searchCond[] = ['course_id' , $this->search_input['course']];
 
         if( ! empty($this->search_input['cate_course']))            $searchOr1[] = ['cate_course' , $this->search_input['cate_course']];
         if( ! empty($this->search_input['cate_exercise']))          $searchOr1[] = ['cate_exercise' , $this->search_input['cate_exercise']];
@@ -130,14 +130,16 @@ class SearchResult extends Component
                          ->where( function($query1) use ($searchWord) {
                              if(count($searchWord)>0)
                              $query1->orWhere([$searchWord[0]])->orWhere([$searchWord[1]]);
-                         })->where( function ($query2) use ($searchOr){
+                            })
+                         ->where( function ($query2) use ($searchOr){
                              if(count($searchOr)==3)
                                 $query2->orWhere([$searchOr[0]])->orWhere([$searchOr[1]])->orWhere([$searchOr[2]]);
                             if(count($searchOr)==2)
                                 $query2->orWhere([$searchOr[0]])->orWhere([$searchOr[1]]);
                             if(count($searchOr)==1)
                                 $query2->orWhere([$searchOr[0]]);
-                            })->where( function ($query3) use ($searchOr1){
+                            })
+                         ->where( function ($query3) use ($searchOr1){
                                 if(count($searchOr1)==3)
                                    $query3->orWhere([$searchOr1[0]])->orWhere([$searchOr1[1]])->orWhere([$searchOr1[2]]);
                                if(count($searchOr1)==2)
@@ -145,9 +147,10 @@ class SearchResult extends Component
                                if(count($searchOr1)==1)
                                    $query3->orWhere([$searchOr1[0]]);
                             })
-                            ->with(['lang'=>function($query4){
+                         ->with(['lang'=>function($query4){
                                 $query4->where('language', lang() );
-                            }])->orderBy('created_at','desc');
+                            }])
+                            ->orderBy('created_at','desc');
                            
         //print($query->toSql()); die;
         $this->search_result = $query->paginate( $this->perPage );

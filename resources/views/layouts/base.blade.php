@@ -102,9 +102,16 @@
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css">
     <link id="pagestyle" href="../assets/css/rtl.css" rel="stylesheet" />
     @endif
+    @livewireStyles
+
+
     <!-- Alpine -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    @livewireStyles
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- for modal -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>    
 
 </head>
 
@@ -132,7 +139,7 @@
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.2"></script>
     @livewireScripts
 
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="../vendor/jquery/jquery.min.js"></script> -->
     <script src="../assets/js/main.js?v=0.0.0"></script>
 </body>
 
