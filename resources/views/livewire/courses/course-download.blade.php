@@ -53,20 +53,8 @@
                                         </div>
                                     </div>
                                     <!-- End Title TextBox row -->
-
-                                    <!-- categories row -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group d-sm-flex align-items-center">
-                                                <label class="custom-control-label me-3 w-25">{{ translate('Categories')}}</label>
-                                                <div
-                                                    class="form-control d-flex justify-content-start align-items-start"
-                                                    id="category">{{$category_string}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End categories row -->
-
+                                    
+                                    <!-- Start Description TextBox row -->
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-left">
@@ -79,15 +67,58 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Description TextBox row -->
+                                    
+                                    <!-- categories row -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <label class="custom-control-label me-3 w-25">{{ translate('Categories')}}</label>
+                                                <div class="form-control d-flex justify-content-start align-items-start border-0 pt-0"
+                                                    id="category">{{$category_string}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End categories row -->
 
+                                    <!-- file informations row -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <label class="custom-control-label me-3 w-25">{{ translate('File')}}</label>
+                                                <div class="form-control d-flex justify-content-start align-items-start border-0 pt-0"
+                                                    id="category">
+                                                    <table>
+                                                    <tr>
+                                                            <td class="text-left">{{translate("Name")}}</td>
+                                                            <td class="text-left ps-2">{{$file_information['filename']}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">{{translate("Type")}}</td>
+                                                            <td class="text-left ps-2">{{filetypename($file_information['filetype'])}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">{{translate("Size")}}</td>
+                                                            <td class="text-left ps-2">{{size($file_information['filesize'])}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End file informations row -->
+
+                                    @if($protected)
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-center">
                                                 <label for="encryptPassword" class="custom-control-label me-3 w-25">{{translate('password:')}}</label>
-                                                <input class="form-control" id='encryptPassword' type="password"/>
+                                                <input  class="form-control" id='encryptPassword' type="password" 
+                                                        name='encryptPassword' wire:model="encryptPassword" />
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
 
                                     <div class="row">
                                         <div class="col-md-3"></div>
@@ -95,7 +126,7 @@
                                             <button type="submit" class="btn btn-primary w-200">{{ translate('Download') }}</button>
                                         </div>
                                         <div class="col-md-3">
-                                            <button type="submit" class="btn btn-secondary w-200">{{ translate('Back') }}</button>
+                                            <button type="submit" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
                                         </div>
                                         <div class="col-md-3"></div>
                                     </div>

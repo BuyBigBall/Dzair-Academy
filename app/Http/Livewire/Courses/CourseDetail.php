@@ -23,6 +23,11 @@ class CourseDetail extends Component
     public $specialization;
     public $level;
     public $course;
+    public $protected;
+    public $encryptPassword;
+    public $file_information;
+
+    private $password;
 
     public $selection_string;
 
@@ -32,6 +37,9 @@ class CourseDetail extends Component
         $this->material = $mat = Material::find($id);
         $this->material_laanguage = $mat_lang = Material::find($id)->lang()->where('language', lang())->first();
         
+        $this->password = $mat->protected;
+        $this->protected = !empty($mat->protected);
+
         $this->title        = $mat_lang->title;
         $this->description  = $mat_lang->description;
 
@@ -48,6 +56,7 @@ class CourseDetail extends Component
         $this->specialization   = $mat->specialization_id;
         $this->course           = $mat->course_id;
 
+
         $this->selection_string = '';
         if(!empty($this->selection_string) && !empty($this->training))   $this->selection_string .= htmlentities(' / ') ;
         if(!empty($this->training))          $this->selection_string .= Training::find($this->training)->toArray()[lang()];
@@ -60,6 +69,11 @@ class CourseDetail extends Component
         if(!empty($this->selection_string) && !empty($this->course))   $this->selection_string .= ' / ';
         if(!empty($this->course))            $this->selection_string .= Course::find($this->course)->toArray()[lang()];
 
+        $this->file_information = [];
+        $this->file_information['filename'] = $mat->filename;
+        $this->file_information['filepath'] = $mat->filepath;
+        $this->file_information['filetype'] = $mat->filetype;
+        $this->file_information['filesize'] = $mat->filesize;
         //dd($this->selection_string);
     }
 

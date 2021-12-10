@@ -11,7 +11,7 @@ use App\Http\Livewire\SearchResult;
 use App\Http\Livewire\Billing;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\Tables;
-use App\Http\Livewire\Courses;
+use App\Http\Livewire\CourseMaterial;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 use App\Http\Livewire\Translate;
@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');
-    Route::get('/courses', Courses::class)->name('courses');
+    Route::get('/course-material', CourseMaterial::class)->name('course-material');
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/user-profile', UserProfile::class)->name('user-profile');

@@ -12,7 +12,7 @@ use App\Models\MaterialLanguage;
 use App\Models\Material;
 use Illuminate\Support\Facades\Auth;
 
-class Courses extends Component
+class CourseMaterial extends Component
 {
     use WithFileUploads;
 
@@ -29,8 +29,8 @@ class Courses extends Component
     public $specialization; 
     public $course;       
     public $level;          
-    public $title;          
 
+    public $title;          
     public $description;          
     public $file;          
     public $protection;          
@@ -90,6 +90,7 @@ class Courses extends Component
         $validatedData = $this->validate();
         
         //$this->photo->storePubliclyAs('photos', 'avatar', 's3');  # save to S3 service store
+        $origin_filename = $this->file->getClientOriginalName();
         $store_result = $this->file->store($this->specialization . '/courses');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
 
         $file_extension = explode('.', $store_result );
@@ -116,7 +117,7 @@ class Courses extends Component
                         'filetype'          => GetFile_Type( $file_extension),
                         'filesize'          => $this->file->getSize(),
                         'filepath'          => $file_path,
-                        'filename'          => $file_name,
+                        'filename'          => $origin_filename,
                         'cate_course'       => $this->cate_course,
                         'cate_exercise'     => $this->cate_exercise,
                         'cate_exam'         => $this->cate_exam,
@@ -133,13 +134,15 @@ class Courses extends Component
                     ]);
         $materal_language_id = $materal_language->id;
 
-        //dd( $materal_language );
-        //print($materal_language_id); die;
+        $this->title = null;          
+        $this->description = null;          
+        $this->file = null;          
+        $this->protection = null;          
 
     }
 
     public function render()
     {
-        return view('livewire.courses');
+        return view('livewire.coursematerial');
     }
 }
