@@ -25,7 +25,7 @@ return [
     | to your script bundler like webpack.
     |
     */
-    'include_js' => true,
+    'include_js' => false,  //if false, app.js:require('./vendor/livewire-ui/modal');require('../../vendor/livewire-ui/modal/resources/js/modal');
 
 
     /*

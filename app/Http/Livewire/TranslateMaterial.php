@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
+use LivewireUI\Modal\ModalComponent;
+
 class TranslateMaterial extends Component
 {
     use WithPagination;
 
+    //protected $listeners = ['open' => 'loadGalaxy'];
     public  $perPage = 10;
     public  $curPage = 1;
     private $search_result;

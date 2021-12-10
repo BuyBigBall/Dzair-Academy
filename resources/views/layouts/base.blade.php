@@ -95,23 +95,21 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link rel="stylesheet" href="../assets/css/templatemo-finance-business.css">
+    
     @if(Config::get('languages')[App::getLocale()]['dir'] == 'ltr')
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
     @endif
+    
     @if(Config::get('languages')[App::getLocale()]['dir'] == 'rtl')
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css">
     <link id="pagestyle" href="../assets/css/rtl.css" rel="stylesheet" />
     @endif
+    
     @livewireStyles
-
 
     <!-- Alpine -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
-
-    <!-- for modal -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>    
 
 </head>
 
@@ -119,8 +117,9 @@
 
     {{ $slot }}
 
+    
     <!--   Core JS Files   -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="../vendor/jquery/jquery.min.js"></script>  < !-- to up --> 
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
@@ -133,13 +132,55 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.2"></script>
-    @livewireScripts
 
-    <!-- <script src="../vendor/jquery/jquery.min.js"></script> -->
+    @livewireScripts
+    <livewire:contact-modal />
+    <button x-data="{}" x-on:click="window.livewire.emitTo('contact-modal', 'show')" class="text-indigo-500">
+        Show contact modal
+    </button>
+
+    <button type="button" wire:click="$emit('ContactModal', 'livewire.modal.contact-modal')">
+        Contact Us
+    </button>
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+        </button>
+
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+    <!-- <button onclick="Livewire.emit('openModal', 'hello-world')">Open Modal</button>
+    <button wire:click="$emit('openModal', 'hello-world')">Open Modal</button> -->
     <script src="../assets/js/main.js?v=0.0.0"></script>
 </body>
 
