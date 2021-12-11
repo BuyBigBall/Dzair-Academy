@@ -3,13 +3,54 @@
 namespace App\Http\Livewire\Collection;
 
 use Livewire\Component;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use App\Models\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CollectionManage extends Component
 {
-    
-    
+    public  $perPage = 10;
+    public  $curPage = 1;
+
+    public  $current_route = 'collection';   //for pagination jump
+    public  $word;          //wire:model
+
+    private $search_result;
+
+    public function __construct()
+    {
+        if(Auth::user()==null) redirect(route('login'));
+        parent::__construct();
+        $this->current_route = Route::currentRouteName();
+    }
+    public function updatedPerPage($value)
+    {
+        $this->perPage = $value;
+        Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
+    }
+
     public function render()
     {
-        return view('livewire.collection.index');
+        $searchWord = [];
+        if( ! empty($this->word))                  
+        {
+            $searchWord[] =  ['collection_name' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['collections.description' , 'like' , '%'.$this->word.'%']; 
+        } 
+
+        $query = \App\Models\Collection::where('user_id', Auth::id())
+                ->where( function($query1) use ($searchWord) {
+                        if(count($searchWord)>0)
+                            foreach($searchWord as $cond)
+                                $query1->orWhere([$cond]);
+                            
+                    })
+                ->orderBy('created_at', 'ASC');
+             //dd($query.toSql());
+             //dd($query->getQuery()->toSql());
+        $this->search_result = $query->paginate( $this->perPage );
+        return view('livewire.collection.index', ['pagination'=>$this->search_result]);
     }
 }

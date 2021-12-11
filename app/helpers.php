@@ -22,7 +22,14 @@ if( !defined('ARCHIVE_EXTENSIONS')) define('ARCHIVE_EXTENSIONS', [
 if( !defined('MAX_COURSE_UPLOAD_SIZE')) define('MAX_COURSE_UPLOAD_SIZE', 1024);
 //We use this to convert date to new format
 
-
+function userphoto($path)
+{
+    if( !!empty($path) || !file_exists(__DIR__ . '/../public' . ($path)))
+    {
+        return '/assets/img/user.png';
+    }
+    return asset($path);
+}
 function GetFile_Type($extension)
 {
     if( in_array( strtolower($extension), VIDEO_EXTENSIONS) ) return 2;

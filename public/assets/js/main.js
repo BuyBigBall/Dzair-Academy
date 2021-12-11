@@ -28,3 +28,18 @@ $(document).ready(function() {
     });
  });
 
+function ConfirmFunction(strWarning, retfunc)
+{
+    $('#confirmModal #notice').html(strWarning);
+    //$('#myModal').on('hidden', returnFunction() );
+    $('#myModal .btn-primary').click( function() {
+        alert('123132');
+        retfunc();
+    } );
+    $('#confirmModal').modal('show');
+}
+
+function func()
+{
+    alert('test test');
+}

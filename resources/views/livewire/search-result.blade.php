@@ -54,12 +54,16 @@
                     {{ translate('Could not found results.')}}
                   </div>
                   @endif
+                  <div class="col-md-9 d-flex justify-content-center">
+                    <button class="btn btn-secondary" onclick="history.back(-1);">{{translate('Back')}}</button>
+                  </div>
                 </div>
                 <div class="col-md-3 col-sm-6 p-0" style='min-height:50vh; overflow:hidden;'>
                   <img src='../assets/img/Campaign-banner-image2.png' />
                 </div>
               </div>
             </div>
+
          </div>
        </div>
 

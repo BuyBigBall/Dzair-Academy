@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Livewire\LaravelExamples;
-
+use Livewire\WithPagination;
 use Livewire\Component;
+// use Illuminate\Cache\RateLimiting\Limit;
+// use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 class UserManagement extends Component
 {
@@ -53,12 +59,11 @@ class UserManagement extends Component
     public function render()
     {
         $searchWord = [];
-
         if( ! empty($this->word))                  
         {
-            $searchWord[] =  ['training.en' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['training.fr' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['training.ar' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['trainings.en' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['trainings.fr' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['trainings.ar' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['faculties.en' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['faculties.fr' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['faculties.ar' , 'like' , '%'.$this->word.'%']; 
@@ -76,35 +81,38 @@ class UserManagement extends Component
             $searchWord[] =  ['users.about' , 'like' , '%'.$this->word.'%']; 
         } 
 
-        $cols =  "   materials.id as idx" 
-                ." , MIN(materials.title) as strkey"."" 
-                ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en "
-                ." , GROUP_CONCAT(IF(language='fr', material_languages.title, '') SEPARATOR  '') as fr "
-                ." , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as ar ";
-
+        $cols =  "   users.id as idx" 
+                ." , MIN(users.role) as userrole"."" 
+                ." , MIN(users.name) as username"."" 
+                ." , MIN(users.email) as useremail"."" 
+                ." , MIN(users.Phone) as Phone"."" 
+                ." , MIN(users.location) as location".""
+                ." , MIN(users.photo) as photo".""
+                ." , MIN(users.email_verified_at) as email_verified_at"."";
+                            
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as spacialization";
         $cols .= " , MIN(courses." . lang(). ") as course";
-        $cols .= " , MIN(materials.level) as level";
+
 
         $query = \App\Models\User::selectRaw(
             DB::raw($cols))
-                ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
-                ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
-                ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
-                ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-                ->leftJoin('courses' , 'courses.id', '=', 'materials.course_id')
+                ->leftJoin('courses' , 'courses.id', '=', 'users.course_id')
+                ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
+                ->leftJoin('faculties' , 'faculties.id', '=', 'specializations.faculty_id')
+                ->leftJoin('trainings' , 'trainings.id', '=', 'faculties.training_id')
              ->where( function($query1) use ($searchWord) {
                 if(count($searchWord)>0)
-                    //$query1->orWhere([$searchWord[0]])->orWhere([$searchWord[1]])->orWhere([$searchWord[2]])->orWhere([$searchWord[3]]);
-                    $query1->orWhere($searchWord);
+                    foreach($searchWord as $cond)
+                        $query1->orWhere([$cond]);
                     
                })
              ->groupBy('users.id')->orderBy('users.role')->orderBy('users.id', 'ASC');
-        
-        $this->search_result = $query->paginate( $this->perPage );
+             //dd($query->getQuery()->toSql());
+             //dd($query.toSql());
+             $this->search_result = $query->paginate( $this->perPage );
 
-        return view('livewire.laravel-examples.user-management');
+        return view('livewire.laravel-examples.user-management', ['pagination'=>$this->search_result]);
     }
 }
