@@ -43,6 +43,23 @@ function ToDate($date)
     return $date->format('Y-m-d');
 };
 
+
+function mat_lang($mat)
+{
+    $lang = App::getLocale();
+    env('DEFAULT_LANGUAGE', $lang);
+    
+    foreach($mat->lang as $matlang)
+    {
+        if($matlang->language==$lang && !empty($matlang))  
+        {
+            //dd($matlang);
+            return $matlang;
+        }
+    }
+    return null;
+}
+
 function ln($obj)
 {
     $lang = App::getLocale();

@@ -28,6 +28,7 @@ use App\Http\Livewire\Message\MessageInbox;
 use App\Http\Livewire\Message\MessageOutbox;
 
 use App\Http\Livewire\Collection\CollectionManage;
+use App\Http\Livewire\Collection\CollectionFIles;
 
 use App\Http\Controllers\ApplicationController;
 
@@ -80,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/message/inbox', MessageInbox::class)->name('inbox');
     Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
+    Route::get('/collection-files/{id}', CollectionFiles::class)->name('collection-files');
 
     Route::get('/translate', Translate::class)->name('translate');
     Route::get('/translate-material', TranslateMaterial::class)->name('translate-material');

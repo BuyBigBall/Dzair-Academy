@@ -14,7 +14,7 @@
                 </div>
            </div>
            <div class="card-body p-3">
-             <form action="{{ route('search-result') }}" method="post">
+             <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">
                @csrf
               <div class="row">
                   <div class="col-md-9 col-sm-6">

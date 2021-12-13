@@ -37,4 +37,16 @@ class Material extends Model
     public function lang() {
         return $this->hasMany(MaterialLanguage::class);
     }
+    public function course() {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
+    public function faculty() {
+        return $this->belongsTo('App\Models\Faculty', 'faculty_id');
+    }
+    public function training() {
+        return $this->belongsTo('App\Models\Training', 'training_id');
+    }
+    public function specialization() {
+        return $this->belongsTo('App\Models\Specialization', 'specialization_id');
+    }
 }

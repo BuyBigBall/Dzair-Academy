@@ -7,6 +7,7 @@ use App\Models\Specialization;
 use App\Models\Course;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;
+use Illuminate\Http\Request;
 
 class Search extends Component
 {
@@ -22,14 +23,19 @@ class Search extends Component
     public $course;       //wire:model
     public $level;          //wire:model
     public $word;          //wire:model
+    
+    private $collection_id; //the id of collection into add the course file.
 
     public function __construct()
     {
         parent::__construct();
     }
     
-    public function mount()
+    public function mount(Request $request)
     {
+        if( !empty($request->collection_id))
+            $this->collection_id = $request->collection_id;
+
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');;
     }
@@ -51,6 +57,6 @@ class Search extends Component
 
     public function render()
     {
-        return view('livewire.search');
+        return view('livewire.search', ['collection_id' => $this->collection_id]);
     }
 }

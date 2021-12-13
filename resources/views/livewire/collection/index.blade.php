@@ -74,11 +74,16 @@
                                                     >
                                                     <i class="fa fa-edit text-secondary"></i>
                                                 </a>
-                                                <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('collection files')}}"
+                                                <!-- <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('collection files')}}"
                                                     class="mx-1" 
-                                                    data-id='{{$row->id}}' >
+                                                    data-id='{{$row->id}}' > -->
+                                                <a href="{{route('collection-files', $row->id)}}" 
+                                                    class="mx-1" 
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-original-title="collection files"
+                                                    >
                                                     <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
-                                                </span>
+                                                </a>
                                                 <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection')}}"
                                                         class="mx-1" 
                                                         data-id='{{$row->id}}'  onclick="ConfirmFunction('test', func)">

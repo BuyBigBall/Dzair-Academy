@@ -34,6 +34,12 @@
                           <span class="text-xs col-md-4 col-sm-6">Date: <span class="text-dark font-weight-bold">{{ date('d/m/Y', strtotime($row->created_at)) }}</span></span>
                           <span class="text-xs col-md-4 col-sm-6">File: <span class="text-dark font-weight-bold"> {{ filetypename($row->filetype) }} {{size($row->filesize)}}</span></span>
                         </div>
+                        
+                        <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('add this file to a collection')}}"
+                                class="mx-1" 
+                                data-id='{{$row->id}}'  onclick="$('#collectionModal').modal('show');">
+                            <i class="cursor-pointer fas fa-bookmark text-secondary"></i>
+                        </span>
                       </div>
                     </li>
                     @endforeach
@@ -55,7 +61,8 @@
                   </div>
                   @endif
                   <div class="col-md-9 d-flex justify-content-center">
-                    <button class="btn btn-secondary" onclick="history.back(-1);">{{translate('Back')}}</button>
+                    <button class="btn btn-secondary mx-3" onclick="history.back(-1);">{{translate('Back')}}</button>
+                    <!-- <button class="btn btn-primary mx-3" onclick="$('#collectionModal').modal('show');">{{translate('Add to Collection')}}</button> -->
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-6 p-0" style='min-height:50vh; overflow:hidden;'>
@@ -69,6 +76,67 @@
 
      </div>
    </div>
+
+
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="collectionModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="collectionModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="collectionModalLabel">{{translate('Select Collection to add this file')}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <div class="form-group">
+                                <label for="user-name" class="form-control-label">{{translate('Collection Name')}}</label>
+                                <div class="">
+                                    <input
+                                        wire:model="coll_name"
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Name"
+                                        id="collection-name" /></div>
+                                </div>
+                            </div> -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="user-email" class="form-control-label">{{translate('Description')}}</label>
+                                    <div class="">
+                                        <select
+                                            wire:model="collection_id" class="form-control"
+                                            placeholder="{{ translate('select collection') }}" size="10"
+                                            id="collections">
+                                            <!-- <option value=''>{{ translate('select collection') }}</option> -->
+                                            @foreach($collection_options as $row)
+                                              <option value='{{ $row->id }}'> {{ $row->collection_name }}</option>
+                                            @endforeach
+                                          </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel' }}</button>
+                <button type="button" class="btn btn-primary">{{ 'Add' }}</button>
+            </div>
+        </div>
+    <!-- </div> -->
+</div>       
  </main>
 
  <script>

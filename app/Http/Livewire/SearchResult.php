@@ -11,6 +11,8 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Collection;
 
 class SearchResult extends Component
 {
@@ -33,6 +35,9 @@ class SearchResult extends Component
     public  $zip;
     public  $word;
     public  $filter;
+    
+    public  $collection_options;
+    public  $collection_id;
 
     public function __construct()
     {
@@ -59,6 +64,13 @@ class SearchResult extends Component
     public function mount(Request $request, $flag=null)
     {
         //if($flag==null)
+        if ( Auth::user() )
+        {
+            if( !empty($request->collection_id) ) $this->collection_id = $request->collection_id;
+            $query = Collection::where('user_id', Auth::id() );
+            $this->collection_options = $query->get();
+        }
+
         if(Cookie::has("perPage"))
         {
             $this->perPage = Cookie::get("perPage");
