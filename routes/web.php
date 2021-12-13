@@ -82,6 +82,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
     Route::get('/collection-files/{id}', CollectionFiles::class)->name('collection-files');
+    
+    Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
 
     Route::get('/translate', Translate::class)->name('translate');
     Route::get('/translate-material', TranslateMaterial::class)->name('translate-material');

@@ -46,7 +46,7 @@
                                         @foreach($pagination as $row)
                                         <tr>
                                             <td class="ps-4 text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{$row->idx}}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{$row->id}}</p>
                                             </td>
                                             <td>
                                                 <div class="text-center">
@@ -60,8 +60,11 @@
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
                                             </td>
+                                            <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
                                             <td class="text-center">
                                                 <span  data-bs-toggle="tooltip" 
+                                                    wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
+                                                    onclick="shareme( '{{route('collection-shares', $skey )}}' )"
                                                     data-bs-original-title="{{translate('copy shared url')}}"
                                                     class="mx-1" >
                                                     <i class="cursor-pointer fa fa-files-o text-secondary"></i>
@@ -117,8 +120,7 @@
         </div>
     </div>
 </div>
-
-
+<input id='copy_sharekey' type='text' value='' style='position:absolute;left:-100px; top:-100px;' />
 <!-- Modal -->
 <div class="modal fade" id="collectionModal" tabindex="-1" role="dialog" aria-labelledby="collectionModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -175,6 +177,7 @@
                 </div> -->
             </div>
         </div>
+        
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel' }}</button>
             <button type="button" class="btn btn-primary">{{ 'Save' }}</button>
@@ -183,3 +186,12 @@
     </div>
 </main>
 
+<script>
+    function shareme(share_url)
+    {
+        document.getElementById("copy_sharekey").value=share_url;
+        document.getElementById("copy_sharekey").select();
+        document.execCommand('copy');
+        alert("you can share this collection as following url: \r\n" + document.getElementById("copy_sharekey").value);
+    }
+</script>

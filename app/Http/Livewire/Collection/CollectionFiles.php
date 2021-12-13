@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collection;
 use App\Models\CollectionItem;
+use App\Models\CollectionShare;
 use Illuminate\Support\Facades\Auth;
 
 class CollectionFiles extends Component
@@ -16,17 +17,40 @@ class CollectionFiles extends Component
     public  $word;          //wire:model
 
     private $search_result;
-
+    private $current_route;
     public function __construct()
     {
-        if(Auth::user()==null) redirect(route('login'));
+        if(Auth::user()==null)                              redirect(route('login'));
         parent::__construct();
-        $this->current_route = Route::currentRouteName();
     }
-    public function mount(Request $request, $id=null)
+    public function mount(Request $request, $id=null, $sharekey=null)
     {
-        $coll = Collection::find($id); if(!!empty($coll)) $id = null;
-        if(!!empty($id))
+        $this->current_route = Route::currentRouteName();
+        if($this->current_route=='collection-files')
+        {
+            if(!!empty( ( $coll = Collection::find($id) ) ))    $id = null;
+            if($coll->user_id!=Auth::id())                      $id = null;
+        }
+
+        if($this->current_route=='collection-shares')
+        {
+            //$sharekey=$id;
+            //dd($sharekey);
+            if( !!empty($sharekey))         $id = null;
+            else if( !!empty( ( $coll = Collection::where('publish_key', $sharekey)->first() ) ))    $id = null;
+            else                            $id=$coll->id;
+
+            if($id!=null )//&& $coll->user_id!=Auth::id())
+            {
+                $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                CollectionShare::updateOrCreate(
+                    ['collection_id' => $id],
+                    ['to_user'=>Auth::id(), 'share_url'=>Auth::id(), 'share_url'=>$actual_link]
+                );
+            }
+        }
+
+        if( !!empty($id) )
         {
             return redirect(route('collection'));
         }

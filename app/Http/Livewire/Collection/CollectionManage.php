@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CollectionManage extends Component
 {
@@ -18,6 +19,8 @@ class CollectionManage extends Component
     public  $word;          //wire:model
 
     private $search_result;
+    
+    protected $listeners = ['share_url' => 'share_collection'];
 
     public function __construct()
     {
@@ -29,6 +32,12 @@ class CollectionManage extends Component
     {
         $this->perPage = $value;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
+    }
+    
+    public function share_collection($collection_id, $share_key)
+    {
+        $coll = Collection::find($collection_id);
+        $coll->update(['is_publish'=>1, 'publish_key'=>$share_key]);
     }
 
     public function render()
