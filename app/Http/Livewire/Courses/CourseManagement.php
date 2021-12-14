@@ -9,9 +9,11 @@ use App\Models\Specialization;
 use App\Models\Course;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CourseManagement extends Component
 {
+    private $const_path_level = ['training'=>1,'faculty'=>2,'specialization'=>3,'course'=>4,'material'=>5];
     public $training_options    = [] ;
     public $faculty_options     = [];
     public $course_options      = [];
@@ -28,8 +30,47 @@ class CourseManagement extends Component
     public $course;         //wire:model
     public $level;          //wire:model
     public $word;           //wire:model
+
+    public $path_level = 1;
+    protected $listeners = [
+        'deleteCourse' => 'deleteCourse'        ,
+    ];
+    // protected $rules = [
+    //     'del_id' => 'required',
+    // ];
+
+    public function deleteCourse($del_id){
+        //$this->validate();
+        //dd($del_id);
+        if(Auth::user()->role=='admin' && !empty($del_id) )
+        {
+            #this->path_level
+            #$del_id
+            $dbtable = null;
+            if( $this->path_level==1) $dbtable = Training::find($del_id);
+            if( $this->path_level==2) $dbtable = Faculty::find($del_id);
+            if( $this->path_level==3) $dbtable = Specialization::find($del_id);
+            if( $this->path_level==4) $dbtable = Course::find($del_id);
+            if( $this->path_level==5) $dbtable = Material::find($del_id);
+            
+            if(  $dbtable!=null )
+            {
+                $dbtable->delete();
+            }
+            else
+            {
+                dd([$this->path_level, $del_id]);
+            }
+            if( $this->path_level==1) $this->mount(); 
+            if( $this->path_level==2) $this->updatedTraining(); 
+            if( $this->path_level==3) $this->updatedFaculty(); 
+            if( $this->path_level==4) $this->updatedSpecialization(); 
+            if( $this->path_level==5) $this->updatedCourse(); 
+        }
+    }
     public function mount()
     {
+        $this->path_level = $this->const_path_level['training'];
         $this->list_items = 
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
         $this->list_title = translate('All Trainings');
@@ -42,6 +83,7 @@ class CourseManagement extends Component
     public function updatedTraining($value)
     {
         if($value==0) return $this->mount();
+        $this->path_level = $this->const_path_level['faculty'];
         $this->list_items = 
         $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Faculties');
@@ -50,6 +92,7 @@ class CourseManagement extends Component
     public function updatedFaculty($value)
     {
         if($value==0) return $this->updatedTraining($this->training);
+        $this->path_level = $this->const_path_level['specialization'];
         $this->list_items = 
         $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Specializations');
@@ -58,6 +101,7 @@ class CourseManagement extends Component
     public function updatedSpecialization($value)
     {
         if($value==0) return $this->updatedFaculty($this->faculty);
+        $this->path_level = $this->const_path_level['course'];
         $this->list_items = 
         $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Courses');
@@ -67,7 +111,7 @@ class CourseManagement extends Component
     public function updatedCourse($value)
     {
         if($value==0) return $this->updatedSpecialization($this->specialization);
-
+        $this->path_level = $this->const_path_level['material'];
         $cols =  "   materials.id as id" 
                 ." , MIN(materials.title) as strkey"."" 
                 ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en "

@@ -76,6 +76,7 @@
                     </div>
                     <!-- End Search Box row -->
                     <div class="row p-1 ps-3"> <h5><p>{{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong></p></h5></div>
+                    <input type='hidden' id='path_level' name='path_level' value='' wire:model="path_level" />
                     <div class="table-responsive p-0" style='min-height:60vh'>
                         <table class="align-items-center mb-0" id='course-items-table' width="99%">
                             <thead>
@@ -91,6 +92,9 @@
                                     @if( !empty($list_items[0]['level']))
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                       {{translate('Level')}}
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-left">
+                                      {{translate('Title')}}
                                     </th>
                                     @endif
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
@@ -123,6 +127,9 @@
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{$row['level']}}</p>
                                     </td>
+                                    <td class="text-left">
+                                        <p class="text-xs font-weight-bold mb-0">{{$row['strkey']}}</p>
+                                    </td>
                                     @endif
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{$row['en']}}</p>
@@ -139,10 +146,15 @@
                                             data-bs-original-title="Edit user">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
-                                        <span>
+                                        <span onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCourse, '{{$row['id']}}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
-                                        @endif
+                                      @else
+                                        <a href="{{route('translate-material', 'id='.$row['id'])}}" class="mx-3" data-bs-toggle="tooltip"
+                                            data-bs-original-title="translate this material">
+                                            <i class="fa fa-edit text-secondary"></i>
+                                        </a>
+                                      @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -156,3 +168,10 @@
 
 </div>
 </main>
+
+<script>
+    function deleteCourse(del_id)
+    {
+        window.livewire.emit('deleteCourse', del_id);
+    }
+</script>

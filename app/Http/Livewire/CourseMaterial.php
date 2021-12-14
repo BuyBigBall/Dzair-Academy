@@ -141,6 +141,8 @@ class CourseMaterial extends Component
         $this->description = null;          
         $this->file = null;          
         $this->protection = null;          
+        //wire:click.prevent="$emit('WireAlert', '')"
+        $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
 
     }
 

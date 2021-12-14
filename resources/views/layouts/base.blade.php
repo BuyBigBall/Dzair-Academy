@@ -114,6 +114,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
+    @livewire('alert-modal')
 
     {{ $slot }}
 
@@ -139,22 +140,22 @@
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.2"></script>
 
     @livewireScripts
-    <livewire:contact-modal />
+    <!-- <livewire:contact-modal />
     <button x-data="{}" x-on:click="window.livewire.emitTo('contact-modal', 'show')" class="text-indigo-500">
         Show contact modal
     </button>
 
     <button type="button" wire:click="$emit('ContactModal', 'livewire.modal.contact-modal')">
         Contact Us
-    </button>
+    </button> -->
 
 
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
         data-bs-target="#confirmModal">
         Launch demo modal
-        </button>
+        </button> -->
 
         <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -175,7 +176,7 @@
             </div>
             </div>
         </div>
-        </div>
+    </div>
 
 
 
