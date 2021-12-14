@@ -125,6 +125,7 @@ class SearchResult extends Component
             $searchWord[] =  ['title' , 'like' , '%'.$this->search_input['word'].'%']; 
             $searchWord[] =  ['description' , 'like' , '%'.$this->search_input['word'].'%'];
         } 
+        $searchOr[] = ['filetype' , 0];
         if( ! empty($this->search_input['filetype_docs']))          $searchOr[] = ['filetype' , 1];
         if( ! empty($this->search_input['filetype_archives']))      $searchOr[] = ['filetype' , 2];
         if( ! empty($this->search_input['filetype_images']))        $searchOr[] = ['filetype' , 3];
@@ -156,10 +157,10 @@ class SearchResult extends Component
                             }])
                             ->orderBy('created_at','desc');
                            
-        //print($query->toSql()); die;
+        // print($query->toSql()); die;
         $this->search_result = $query->paginate( $this->perPage );
         $this->curPage = $this->search_result->currentPage();
-        
+       // dd($this->search_result );
         return view('livewire.search-result', ['pagination'=>$this->search_result] );
     }
 }

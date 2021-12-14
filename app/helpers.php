@@ -13,7 +13,7 @@ if( !defined('IMAGE_EXTENSIONS')) define('IMAGE_EXTENSIONS', [
     'png','jpg','bmp','gif'
 ]);
 if( !defined('DOCUMENTS_EXTENSIONS')) define('DOCUMENTS_EXTENSIONS', [
-    'docx','doc','xls','xlsx','txt','ppt','pptx'
+    'docx','doc','xls','xlsx','txt','ppt','pptx','pdf'
 ]);
 if( !defined('ARCHIVE_EXTENSIONS')) define('ARCHIVE_EXTENSIONS', [
     'zip','rar','7z','alz'

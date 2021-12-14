@@ -103,13 +103,16 @@ class CourseMaterial extends Component
         $file_path = $store_result;
 
         // Add registration data to modal
-        //dd( $validatedData );
+        // dd( $validatedData );
+        // dd($file_extension);
+        // dd(GetFile_Type( $file_extension));
         $course_material = Material::create(
                     [
                         'specialization_id' => $this->specialization,
                         'level'             => $this->level,
                         'faculty_id'        => $this->faculty,
-                        'training_id'        => $this->training,
+                        'training_id'       => $this->training,
+                        'course_id'         => $this->course,
                         'created_by'        => Auth::id(),
                         'updated_by'        => Auth::id(),
                         'title'             => $this->title,
