@@ -17,6 +17,6 @@ class ContactModal extends Component
     }
     public function render()
     {
-        return view('livewire.modal.contact-modal');
+        return view('livewire.modal.contactus');
     }
 }

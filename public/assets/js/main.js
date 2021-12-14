@@ -28,18 +28,15 @@ $(document).ready(function() {
     });
  });
 
-function ConfirmFunction(strWarning, retfunc)
+function ConfirmFunction(strWarning, retfunc, params)
 {
     $('#confirmModal #notice').html(strWarning);
     //$('#myModal').on('hidden', returnFunction() );
-    $('#myModal .btn-primary').click( function() {
-        alert('123132');
-        retfunc();
+    $('#confirmModal .btn-primary').unbind( "click" );
+    $('#confirmModal .btn-primary').click( function() {
+        retfunc(params);
+        $('#confirmModal').modal('hide');
     } );
     $('#confirmModal').modal('show');
 }
 
-function func()
-{
-    alert('test test');
-}

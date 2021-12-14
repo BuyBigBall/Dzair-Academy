@@ -74,7 +74,7 @@
                                                     data-bs-original-title="{{translate('delete this course file')}}"
                                                     class="mx-1" 
                                                     collection-id='{{$collection->id}}' mat-id='{{$row->mat->id}}'
-                                                    onclick="ConfirmFunction('test', func)">
+                                                    onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCollectionFile, '{{$row->id}}')">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </span>
                                         </td>
@@ -110,7 +110,11 @@
         </div>
     </div>
 </div>
-
-
 </main>
+<script>
+    function deleteCollectionFile(del_id)
+    {
+        window.livewire.emit('deleteCollectionFle', del_id);
+    }
+</script>
 

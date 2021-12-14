@@ -18,10 +18,29 @@ class CollectionFiles extends Component
 
     private $search_result;
     private $current_route;
+
+    protected $listeners = [
+        'deleteCollectionFle' => 'deleteCollectionFle'        ,
+    ];
+
+
     public function __construct()
     {
         if(Auth::user()==null)                              redirect(route('login'));
         parent::__construct();
+    }
+
+    public function deleteCollectionFle($del_id)
+    {
+        if( ($coll_tem=CollectionItem::find($del_id))!=null )
+        {
+            $coll_tem->delete();
+        }
+        else
+        {
+            dd($del_id);
+        }
+        
     }
     public function mount(Request $request, $id=null, $sharekey=null)
     {
@@ -72,7 +91,8 @@ class CollectionFiles extends Component
             $searchWord[] =  ['collections.description' , 'like' , '%'.$this->word.'%']; 
         } 
 
-        $query = \App\Models\CollectionItem::leftjoin('collections', 'collections.id', '=', 'collection_items.collection_id')
+        $query = \App\Models\CollectionItem::selectRaw(DB::raw("collection_items.id, collection_items.collection_id, collection_items.material_id, collection_items.created_at"))
+                ->leftjoin('collections', 'collections.id', '=', 'collection_items.collection_id')
                 ->where('collections.user_id', Auth::id())
                 ->where('collections.id', $this->collection->id)
                 ->where( function($query1) use ($searchWord) {
@@ -83,20 +103,9 @@ class CollectionFiles extends Component
                 ->orderBy('collection_items.created_at', 'ASC');
 
         $this->search_result = $query->get( ); 
+        //dd($this->search_result[0]->mat);
         $i=0;
-        // foreach($this->search_result as $row)
-        // {
-        //    dd($row->mat->lang);
-        //   if($i++==1)  dd($row);
-        //     print($row->id.' , ');
-        //     print($row->mat->id . '<br>');
-            
-        //     //dd($row->mat->training) ;
-        //     //dd($row->mat->faculty);
-        //     //dd($row->mat->specialization);
-        //     //dd($row->mat->course);
-        // }
-        // die;
+        
         return view('livewire.collection.files', 
             [
                 'search_result'=>$this->search_result

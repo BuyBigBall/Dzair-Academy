@@ -64,9 +64,12 @@ function ln($obj)
 {
     $lang = App::getLocale();
     env('DEFAULT_LANGUAGE', $lang);
-    if($lang=='en')    return $obj->en;
-    if($lang=='fr')    return $obj->fr;
-    if($lang=='ar')    return $obj->ar;
+    if($obj!=null)
+    {
+        if($lang=='en')    return $obj->en;
+        if($lang=='fr')    return $obj->fr;
+        if($lang=='ar')    return $obj->ar;
+    }
     return null;
 }
 
