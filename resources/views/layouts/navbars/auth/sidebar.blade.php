@@ -5,7 +5,7 @@
             <h4 class="ms-1 font-weight-bold text-success text-gradient">{{__('pages.siteName')}}</h4>
         </a>
     </div>
-    <hr class="horizontal dark mt-0">
+    <hr class="horizontal dark mt-0 w-100">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item pb-2">
@@ -61,8 +61,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'management-user' ? 'active' : '' }}" 
-                        href="{{ route('user-management') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'management-user' ? 'active' : '' }}" href="{{ route('user-management') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-users ps-2 pe-2 text-center
                         {{ in_array(request()->route()->getName(),['user-profile']) ? 'text-white' : 'text-dark' }}"></i>
@@ -89,7 +88,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">{{translate('Message Management')}}</span>                
+                    <span class="nav-link-text ms-1">{{translate('Message Management')}}</span>
                 </a>
             </li>
 
@@ -114,8 +113,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'translate-material' ? 'active' : '' }}" 
-                            href="{{ route('translate-material') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'translate-material' ? 'active' : '' }}" href="{{ route('translate-material') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-print ps-2 pe-2 text-center
                         {{ in_array(request()->route()->getName(),['course-management']) ? 'text-white' : 'text-dark' }}"></i>
@@ -126,8 +124,7 @@
 
             @if( Auth::user()->role=='admin' )
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'translate' ? 'active' : '' }}" 
-                            href="{{ route('translate') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'translate' ? 'active' : '' }}" href="{{ route('translate') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-print ps-2 pe-2 text-center
                         {{ in_array(request()->route()->getName(),['course-management']) ? 'text-white' : 'text-dark' }}"></i>
@@ -136,8 +133,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'ads-manage' ? 'active' : '' }}" 
-                        href="{{ route('ads-manage') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'ads-manage' ? 'active' : '' }}" href="{{ route('ads-manage') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -159,7 +155,7 @@
                 </a>
             </li>
             @endif
-            
+
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-profile' ? 'active' : '' }}" href="{{ route('user-profile') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
