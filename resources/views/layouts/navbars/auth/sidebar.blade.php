@@ -91,20 +91,6 @@
                     </div>
                     <span class="nav-link-text ms-1">{{translate('Message Management')}}</span>                
                 </a>
-                <ul class="{{ Route::currentRouteName() == 'message' || Route::currentRouteName() == 'inbox' || Route::currentRouteName() == 'outbox' ? 'show' : 'hidden' }}" >
-                <li class="nav-item navbar-nav"><a href="{{ route('message') }}" >
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{ translate('send')}}</h6>
-                    </a>
-                    </li>
-                <li class="nav-item navbar-nav"><a href="{{ route('inbox') }}" >
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{ translate('inbox')}}</h6>
-                    </a>
-                </li>
-                <li class="nav-item navbar-nav"><a href="{{ route('outbox') }}" >
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{ translate('outbox')}}</h6>
-                    </a>
-                </li>
-                </ul>
             </li>
 
             <li class="nav-item">
