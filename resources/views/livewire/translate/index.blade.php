@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="{{asset('asset/css/dataTables.bootstrap.min.css')}}">
 <script type="text/javascript" src="{{asset('asset/js/jquery.min.js')}}"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
-<main>
+<main class="body-content">
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-12">

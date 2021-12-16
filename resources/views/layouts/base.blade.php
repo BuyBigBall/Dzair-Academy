@@ -82,7 +82,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-        Soft UI Dashboard by Creative Tim
+        dzair academy
     </title>
     <!-- Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -91,8 +91,9 @@
     <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- <script src="https://kit.fontawesome.com/42deadbeef.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../assets/fontawesome/css/all.css">
     <!-- CSS Files -->
     <link rel="stylesheet" href="../assets/css/templatemo-finance-business.css">
     
@@ -101,7 +102,7 @@
     @endif
     
     @if(Config::get('languages')[App::getLocale()]['dir'] == 'rtl')
-    <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css">
+    <!-- <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css"> -->
     <link id="pagestyle" href="../assets/css/rtl.css" rel="stylesheet" />
     @endif
     
@@ -114,7 +115,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-    @livewire('alert-modal')
+    @livewire('modal.alert-modal')
 
     {{ $slot }}
 
@@ -140,24 +141,7 @@
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.2"></script>
 
     @livewireScripts
-    <!-- <livewire:contact-modal />
-    <button x-data="{}" x-on:click="window.livewire.emitTo('contact-modal', 'show')" class="text-indigo-500">
-        Show contact modal
-    </button>
-
-    <button type="button" wire:click="$emit('ContactModal', 'livewire.modal.contact-modal')">
-        Contact Us
-    </button> -->
-
-
-
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-        data-bs-target="#confirmModal">
-        Launch demo modal
-        </button> -->
-
-        <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -178,11 +162,6 @@
         </div>
     </div>
 
-
-
-
-    <!-- <button onclick="Livewire.emit('openModal', 'hello-world')">Open Modal</button>
-    <button wire:click="$emit('openModal', 'hello-world')">Open Modal</button> -->
     <script src="../assets/js/main.js?v=0.0.0"></script>
 </body>
 

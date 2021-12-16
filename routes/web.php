@@ -17,7 +17,7 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\Translate;
 use App\Http\Livewire\TranslateMaterial;
 use App\Http\Livewire\Settings;
-
+use App\Http\Livewire\Welcome;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
@@ -45,9 +45,7 @@ use Illuminate\Http\Request;
 |
 */
 
-
-Route::get('/', [Login::class, 'welcome']);
-// Route::get('/', Login::class)->name('login');
+Route::get('/', Welcome::class)->name('welcome');
 
 Route::get('/sign-up', SignUp::class)->name('sign-up');
 Route::get('/login', Login::class)->name('login');

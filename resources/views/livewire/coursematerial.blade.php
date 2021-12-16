@@ -1,4 +1,4 @@
-<main>
+<main class="body-content">
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
@@ -183,9 +183,9 @@
                                         </div>
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-9">
+                                        <div class="col-md-12 text-right">
                                             <button type="submit"
-                                                class="btn bg-primary btn-lg">Upload</button>
+                                                class="btn bg-primary">Upload</button>
                                         </div>
                                     </div>
                                 </div>

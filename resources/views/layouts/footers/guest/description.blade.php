@@ -1,71 +1,65 @@
 <!-- Footer Starts Here -->
 <footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 footer-item">
-                <h4>Dzair Academy</h4>
-                <p>Vivamus tellus mi. Nulla ne cursus elit,vulputate. Sed ne cursus augue hasellus lacinia sapien vitae.</p>
-                <ul class="social-icons">
-                    <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-item">
-                <h4>Useful Links</h4>
-                <ul class="menu-list">
-                    <li><a href="#">Vivamus ut tellus mi</a></li>
-                    <li><a href="#">Nulla nec cursus elit</a></li>
-                    <li><a href="#">Vulputate sed nec</a></li>
-                    <li><a href="#">Cursus augue hasellus</a></li>
-                    <li><a href="#">Lacinia ac sapien</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-item">
-                <h4>Additional Pages</h4>
-                <ul class="menu-list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">How We Work</a></li>
-                    <li><a href="#">Quick Support</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-item last-item">
-                <h4>Contact Us</h4>
-                <div class="contact-form">
-                    <form id="contact footer-contact" action="" method="post">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
-                                </fieldset>
+        <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+            <div class="order-first">
+                <div class="nav-item dropup pe-2 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="d-flex py-1">
+                            <div class="my-auto">
+                                <img src="../assets/img/flag/{{Config::get('languages')[App::getLocale()]['flag-icon']}}.svg" 
+                                        class="avatar avatar-sm rounded me-2"
+                                        style='width:36px;'
+                                    >
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <fieldset>
-                                    <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="filled-button">Send Message</button>
-                                </fieldset>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="text-sm font-weight-normal mb-0">
+                                    <span class="font-weight-bold menu-list text-white">{{Config::get('languages')[App::getLocale()]['display']}}</span>
+                                </h6>
                             </div>
                         </div>
-                    </form>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-start px-2 py-3 me-sm-n4 overflow-hidden" 
+                        aria-labelledby="dropdownMenuButton" style='margin-left:-200;'>
+                        @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                        <li class="mb-2">
+                            <a href="/lang/{{ $lang}}" class="dropdown-item border-radius-md" href="javascript:;">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <img src="../assets/img/flag/{{$language['flag-icon']}}.svg" class="avatar avatar-sm rounded me-3 p-2">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">{{$language['display']}}</span>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
                 </div>
             </div>
+            <div class="order-md-1 order-last text-white opacity-5">
+                {{ translate('© 2022 - 2021 Dzair Academy - All Rights Reserved.')}}
+            </div>
+            <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">
+                <li class=""><a href="#" class="text-white">About Us</a></li>
+                <!-- <li class=""><a href="#">How We Work</a></li> -->
+                <li class="px-3">
+                    <a class="cursor-pointer text-white"
+                        data-bs-toggle="modal" data-bs-target="#dialogContactus"
+                        >Contact Us</a>
+                </li>
+                <li class=""><a href="#" class="text-white">Privacy Policy</a></li>
+            </ul>
         </div>
     </div>
 </footer>
 
-<div class="sub-footer">
+<!-- <div class="sub-footer">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -75,4 +69,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -65,8 +65,5 @@ class Login extends Component
     {
         return view('livewire.auth.login');
     }
-    public function welcome()
-    {
-        return view('welcome');
-    }
+    
 }

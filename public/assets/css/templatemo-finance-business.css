@@ -384,7 +384,7 @@ header .navbar .navbar-toggler-icon:after {
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
-	height:95vh;
+	height:94vh;
 }
 
 .Modern-Slider .item-1 .img-fill {
@@ -890,7 +890,7 @@ ul.slick-dots {
 /* Footer Style */
 
 footer {
-	background-color: #badfe7;
+	background-color: #388087;
 	padding: 80px 0px;
 	color: #333;
 }
@@ -1370,7 +1370,7 @@ footer .contact-form button.filled-button:hover {
 
 footer
 {
-	padding : 20px 0px;
+	padding : 16px 0px;
 }
 
 .btn-primary

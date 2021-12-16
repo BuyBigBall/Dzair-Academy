@@ -1,4 +1,4 @@
-<div>
+<div class="body-content">
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header pb-0 px-3">

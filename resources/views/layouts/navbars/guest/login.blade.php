@@ -1,7 +1,7 @@
 <!-- Additional CSS Files -->
 <link rel="stylesheet" href="assets/css/fontawesome.css">
 <link rel="stylesheet" href="assets/css/templatemo-finance-business.css">
-<link rel="stylesheet" href="assets/css/owl.css">
+<!-- <link rel="stylesheet" href="assets/css/owl.css"> -->
 <style>
     @media (max-width: 992px) {
         .custom-collapse {

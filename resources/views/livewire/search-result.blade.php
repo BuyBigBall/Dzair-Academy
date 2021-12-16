@@ -1,4 +1,4 @@
- <main>
+ <main class="body-content">
    <div class="container-fluid py-4">
      <div class="row mt-4">
        <div class="col-md-12 mb-lg-0 mb-4">
@@ -10,7 +10,7 @@
                  <div>Previous filters : {{$filter}} </div>
                </div>
                <div class="col-md-8 col-sm-6 p-0" style='min-height:60px; overflow:hidden'>
-                 <img src="../assets/img/top1.png" style='width:800px; height:92px;' />
+                 <img src="../assets/img/top1.png" style='width:100%; height:92px;' />
 
                </div>
              </div>
@@ -73,8 +73,7 @@
      </div>
    </div>
 
-
-   @livewire('collectionadd-modal')
+   @livewire('modal.collectionadd-modal')
  </main>
 
  <script>

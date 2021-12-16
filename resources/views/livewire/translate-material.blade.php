@@ -1,4 +1,4 @@
-<main>
+<main class="body-content">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
 <div class="container-fluid py-4">
     <div class="row">
@@ -165,9 +165,12 @@
                                                 </p>
                                             </div>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                                data-bs-original-title="translate this material">
+                                        <td class="text-center text-xs ">
+                                            <a class="mx-3" data-bs-toggle="tooltip"
+                                                data-bs-original-title="translate this material"
+                                                data-id='{{$row->id}}'
+                                                wire:click.prevent="$emit('ShowMaterialModal', '{{$row->idx}}')"
+                                                >
                                                 <i class="fa fa-edit text-secondary"></i>
                                             </a>
                                         </td>
@@ -185,7 +188,8 @@
         </div>
     </div>
 </div>
-
+<!-- Translate Material Modal -->
+@livewire('modal.translatematerial-modal')
 
 <!-- <div class="modal-dialog modal-xl">
     <div class="modal-content">
