@@ -166,7 +166,8 @@
                                             </div>
                                         </td>
                                         <td class="text-center text-xs ">
-                                            <a class="mx-3" data-bs-toggle="tooltip"
+                                            <a  href='#'
+                                                class="mx-3" data-bs-toggle="tooltip"
                                                 data-bs-original-title="translate this material"
                                                 data-id='{{$row->id}}'
                                                 wire:click.prevent="$emit('ShowMaterialModal', '{{$row->idx}}')"

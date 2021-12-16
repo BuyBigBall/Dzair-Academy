@@ -73,7 +73,7 @@
                                                 </p>
                                             </div>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center text-xs">
                                             <a href="#" class="mx-3" data-bs-toggle="tooltip"
                                                 data-bs-original-title="mark as read">
                                                 <i class="fa fa-edit text-secondary"></i>
