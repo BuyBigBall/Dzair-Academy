@@ -169,6 +169,6 @@ class TranslateMaterial extends Component
         // $this->perPage = 5;        // $this->curPage = 1;
        
         $this->search_result = $query->paginate( $this->perPage );
-        return view('livewire.translate-material', ['pagination'=>$this->search_result] );
+        return view('livewire.translate.translate-material', ['pagination'=>$this->search_result] );
     }
 }

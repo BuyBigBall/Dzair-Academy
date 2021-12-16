@@ -37,13 +37,13 @@
                                             {{ translate('ID')}}
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[0]}}
+                                            english
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[1]}}
+                                            français
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[2]}}
+                                            عربي
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ translate('Action')}}
@@ -75,7 +75,10 @@
                                         </td>
                                         <td class="text-center text-xs">
                                             <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                                data-bs-original-title="mark as read">
+                                                data-bs-original-title="mark as read"
+                                                data-id='{{$row->id}}'
+                                                wire:click.prevent="$emit('ShowTranslateModal', '{{$row->idx}}')"                                                
+                                                >
                                                 <i class="fa fa-edit text-secondary"></i>
                                             </a>
                                         </td>
@@ -92,14 +95,7 @@
         </div>
     </div>
 </div>
-</main>
-<!-- 
-<script type="text/javascript" src="{{asset('asset/js/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('asset/js/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('asset/js/jquery-ui.js')}}"></script>
+<!-- Translate Material Modal -->
+@livewire('modal.translateapp-modal')
 
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#all-words-table').DataTable();
-} );
-</script> -->
+</main>
