@@ -68,7 +68,11 @@ class TranslateMaterial extends Component
     public function index(Request $request)
     {
     }
-
+    public function updatedCurPage($value)
+    {
+        $this->curPage = $value;
+        //dd($this->curPage);
+    }
     public function updatedPerPage($value)
     {
         $this->perPage = $value;

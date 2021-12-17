@@ -151,7 +151,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">{{translate('Ads Management')}}</span>
+                    <span class="nav-link-text ms-1">{{translate('Settings')}}</span>
                 </a>
             </li>
             @endif

@@ -67,7 +67,7 @@
                                                     onclick="shareme( '{{route('collection-shares', $skey )}}' )"
                                                     data-bs-original-title="{{translate('copy shared url')}}"
                                                     class="mx-1" >
-                                                    <i class="cursor-pointer fa fa-files-o text-secondary"></i>
+                                                    <i class="cursor-pointer fa fa-copy text-secondary"></i>
                                                 </span>
                                                 <a href="javascript:$('#collectionModal').modal('show');" 
                                                     class="mx-1" 

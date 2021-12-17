@@ -13,19 +13,31 @@
 @if( $pagination->lastPage()>1)
     <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
+        <li class="page-item px-3 ">
+            <!-- {{ translate('go to : ') }} -->
+            <select wire:model="curPage" class="form-control" onchange="location.href='{{route($current_route).'?page='}}' + this.value;">
+                @for($i=0; $i< $pagination->lastPage(); $i++)
+                <option value="{{ $i+1 }}" @if($i==$pagination->currentPage()-1) selected @endif>{{$i+1}} {{translate('page')}}</option>
+                @endfor
+            </select>
+        </li>
+
         <li class="page-item @if($pagination->currentPage()==1) disabled @endif">
         <a class="page-link" href="{{ route($current_route).'?page='.( ($pagination->currentPage() - $pagination->perPage())<=0 ? 1 :  ($pagination->currentPage() - $pagination->perPage()) )}}" tabindex="-1">
             <i class="fa fa-angle-left"></i>
             <span class="sr-only">Previous</span>
         </a>
         </li>
-
-        @for($i=0; $i< $pagination->lastPage(); $i++)
-        <li class="page-item 
-            @if($i==$pagination->currentPage()-1)  
-            active 
+        <?php if($pagination->currentPage()<=3) $i=0;
+              else $i=$pagination->currentPage()-3;  ?>
+        @for(; $i< $pagination->lastPage(); $i++)
+            @if($i<$pagination->currentPage()+2)
+            <li class="page-item 
+                @if($i==$pagination->currentPage()-1)  
+                active 
+                @endif
+                "><a class="page-link" href="{{route($current_route).'?page='.($i+1)}}">{{($i+1)}}</a></li>
             @endif
-            "><a class="page-link" href="{{route($current_route).'?page='.($i+1)}}">{{($i+1)}}</a></li>
         @endfor
         <li class="page-item  @if($pagination->currentPage()==$pagination->lastPage()) disabled @endif">
         <a class="page-link" href="{{route($current_route).'?page='.(   ($pagination->currentPage() + $pagination->perPage())>$pagination->lastPage() ? $pagination->lastPage() : ($pagination->currentPage() + $pagination->perPage())    )}}">
@@ -34,5 +46,7 @@
         </a>
         </li>
     </ul>
+    
+        
     </nav>
     @endif

@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\DB;
 class TranslateappModal extends Component
 {
     public  $show;
-    private $modal;
 
-    public  $pid;
+    public  $err_msg;
+    public  $main_key;
+    public  $default_words;
     public  $en_words;
     public  $fr_words;
     public  $ar_words;
@@ -24,32 +25,46 @@ class TranslateappModal extends Component
         'ShowTranslateModal' => 'doShow'        ,
     ];
     protected $rules = [
-        'pid' => 'required',
+        'main_key' => 'required',
     ];
 
     public function mount(Request $request) {
-        if( !empty($request->pid) ) {
-            $this->pid = $request->id;
-        }
+        // if( !empty($request->main_key) ) {
+        //     $this->main_key = $request->id;
+        // }
 
         $this->show = false;
     }
 
-    public function doShow($_id) {
-        $this->pid = $_id;
-        $cols =  "   translates.id as idx" 
+    public function doShow($main_key) {
+        #dd($_id);
+        $this->main_key = $main_key;
+        $cols =  "   translates.key as strkey" 
             ." , GROUP_CONCAT(IF(lang='en', `value`, '') SEPARATOR  '') as en "
             ." , GROUP_CONCAT(IF(lang='fr', `value`, '') SEPARATOR  '') as fr "
             ." , GROUP_CONCAT(IF(lang='ar', `value`, '') SEPARATOR  '') as ar ";
-        $query = \App\Models\Material::selectRaw(DB::raw($cols))
+        $query = \App\Models\Translate::selectRaw(DB::raw($cols))
                 ->where([ 
-                    'translates.id'=>$this->pid
+                    'translates.key'=>$this->main_key
                 ])
-                ->groupBy('translates.id');
+                ->groupBy('translates.key');
         $app_words = $query->first();
-        $this->en_words = $app_words->en;
-        $this->fr_words = $app_words->fr;
-        $this->ar_words = $app_words->ar;
+        if($app_words)
+        {
+            $this->default_words = $app_words->strkey;
+            $this->en_words = $app_words->en;
+            $this->fr_words = $app_words->fr;
+            $this->ar_words = $app_words->ar;
+            $this->err_msg = "";
+        }
+        else
+        {
+            $this->err_msg = "could not found maik key";
+            $this->default_words = "";
+            $this->en_words = "";
+            $this->fr_words = "";
+            $this->ar_words = "";
+        }
         $this->show = true;
     }
 
@@ -58,19 +73,17 @@ class TranslateappModal extends Component
     }
 
     public function save() {
-        $this->validate();
+        //$this->validate();
         if ( !!empty(Auth::user() ))
         {
             return Redirect('login');
         }
-
+        //dd($this->main_key);
         {
-            if(!empty($this->pid)){
-                Translate::find($this->pid)->update([
-                    'en' => $this->en_words,
-                    'fr' => $this->fr_words,
-                    'ar' => $this->ar_words,
-                ]);
+            if(!empty($this->main_key)){
+                Translate::updateOrCreate(['key'=>$this->main_key,'lang'=>'en'],['value' => $this->en_words]);
+                Translate::updateOrCreate(['key'=>$this->main_key,'lang'=>'fr'],['value' => $this->fr_words]);
+                Translate::updateOrCreate(['key'=>$this->main_key,'lang'=>'ar'],['value' => $this->ar_words]);
             }
             return Redirect(route('translate-app'));
         }

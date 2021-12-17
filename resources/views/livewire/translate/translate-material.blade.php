@@ -128,14 +128,14 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ translate('ID')}}
                                         </th>
-                                        <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[0]}}
+                                        <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">
+                                            english
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[1]}}
+                                            français
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ getSupportedLocales()[2]}}
+                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">
+                                            عربي
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ translate('Action')}}

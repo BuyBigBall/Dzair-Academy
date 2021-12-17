@@ -14009,7 +14009,7 @@ fieldset:disabled .btn {
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
 }
 
 .form-check:not(.form-switch) .form-check-input[type="checkbox"],

@@ -24,7 +24,11 @@ class Settings extends Component
     {
         parent::__construct();
     }
-    
+    public function updatedCurPage($value)
+    {
+        $this->curPage = $value;
+        //dd($this->curPage);
+    }
     public function index(Request $request)
     {
     }

@@ -1,7 +1,5 @@
-<!-- <link rel="stylesheet" type="text/css" href="{{asset('asset/css/dataTables.bootstrap.min.css')}}">
-<script type="text/javascript" src="{{asset('asset/js/jquery.min.js')}}"></script> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
 <main class="body-content">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-12">
@@ -21,28 +19,27 @@
                     </div>
                 </div>
                 <div class="card-body pt-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                                @include('livewire.pagination')
+                            </div>
                     <div class="table-responsive row">
                         <!-- #################################### -->
                         <div class="col-md-12 col-sm-6 text-right d-flex justify-content-center align-items-start" >
-                            <?php /* <livewire:user-datatables 
-                                searchable="name, email"
-                                exportable
-                            />
-                            // */ ?>
+                            
                             <table class="col-md-12 col-sm-6 align-items-center mb-0" 
-                                id='all-words-table' style="display:table;">
+                                id='all-words-table' style="display:table;min-height:30vh;">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ translate('ID')}}
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">
                                             english
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             français
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">
                                             عربي
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -50,11 +47,12 @@
                                         </th>
                                     </tr>
                                 </thead>
+                                <?php $num = $perPage * ($pagination->currentPage()-1) + 1; ?>
                                 <tbody>
                                 @foreach($pagination as $row)
                                     <tr>
                                         <td class="text-center">
-                                            <div> <p class="text-xs font-weight-bold mb-0"> {{$row->idx}}</p></div>
+                                            <div> <p class="text-xs font-weight-bold mb-0"> {{$num++}}</p></div>
                                         </td>
                                         <td class="text-left" style='width:25%'>
                                             <div class='cell'>
@@ -69,15 +67,15 @@
                                         <td class="text-right" style='width:25%'>
                                             <div class='cell'>
                                                 <p class="text-xs font-weight-bold mb-0">
-                                            {{$row->ar}}
+                                                {{$row->ar}}
                                                 </p>
                                             </div>
                                         </td>
                                         <td class="text-center text-xs">
                                             <a href="#" class="mx-3" data-bs-toggle="tooltip"
                                                 data-bs-original-title="mark as read"
-                                                data-id='{{$row->id}}'
-                                                wire:click.prevent="$emit('ShowTranslateModal', '{{$row->idx}}')"                                                
+                                                data-id='{{$row->strkey}}'
+                                                wire:click.prevent="$emit('ShowTranslateModal', '{{$row->strkey}}')"
                                                 >
                                                 <i class="fa fa-edit text-secondary"></i>
                                             </a>

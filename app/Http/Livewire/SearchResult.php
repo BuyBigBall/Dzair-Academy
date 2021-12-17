@@ -51,7 +51,11 @@ class SearchResult extends Component
     {
         // $this->validateOnly($field);
     }
-
+    public function updatedCurPage($value)
+    {
+        $this->curPage = $value;
+        //dd($this->curPage);
+    }
     public function updatedPerPage($value)
     {
         $this->perPage = $value;

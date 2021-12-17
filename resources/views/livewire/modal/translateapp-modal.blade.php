@@ -1,4 +1,10 @@
 <div>
+    <style>
+        textarea
+        {
+            padding:0.45rem 0.65rem;
+        }
+    </style>
     <!-- Let's also add the backdrop / overlay here -->
     <div
         class="modal-backdrop fade show"
@@ -36,14 +42,26 @@
                 </div>
                 <div class="modal-body" style="flex-wrap:nowrap;overflow:auto;">
                     <div class="col-md-12">
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="default_words" class="form-control-label">default</label>
+                                    <div class="">
+                                    <textarea wire:model="main_key" 
+                                            class="form-control" readonly
+                                            row=3 id="default_words"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="en_words" class="form-control-label">english</label>
                                     <div class="">
-                                    <textarea wire:model="en_words" readonly="true" 
+                                    <textarea wire:model="en_words" 
                                             class="form-control" 
-                                            row=4 id="en_words"></textarea>
+                                            row=3 id="en_words"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -53,9 +71,9 @@
                                 <div class="form-group">
                                     <label for="fr_words" class="form-control-label">français</label>
                                     <div class="">
-                                        <textarea wire:model="fr_words" readonly="true" 
+                                        <textarea wire:model="fr_words" 
                                             class="form-control" 
-                                            row=4 id="fr_words"></textarea>
+                                            row=3 id="fr_words"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +83,9 @@
                                 <div class="form-group">
                                     <label for="ar_words" class="form-control-label">عربي</label>
                                     <div class="">
-                                        <textarea wire:model="ar_words" readonly="true" 
+                                        <textarea wire:model="ar_words" 
                                             class="form-control" 
-                                            row=4 id="ar_words"></textarea>
+                                            row=3 id="ar_words"></textarea>
                                     </div>
                                 </div>
                             </div>

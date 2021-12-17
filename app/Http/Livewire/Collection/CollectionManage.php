@@ -28,6 +28,12 @@ class CollectionManage extends Component
         parent::__construct();
         $this->current_route = Route::currentRouteName();
     }
+
+    public function updatedCurPage($value)
+    {
+        $this->curPage = $value;
+        //dd($this->curPage);
+    }
     public function updatedPerPage($value)
     {
         $this->perPage = $value;

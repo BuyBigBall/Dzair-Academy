@@ -17,7 +17,7 @@ class Translate extends Component
 {
     use WithPagination;
 
-    public  $perPage = 10;
+    public  $perPage = 5;
     public  $curPage = 1;
     private $search_result;
     public  $search_input;
@@ -31,13 +31,18 @@ class Translate extends Component
     public function index(Request $request)
     {
     }
+    public function updatedCurPage($value)
+    {
+        $this->curPage = $value;
+        //dd($this->curPage);
+    }
 
     public function updatedPerPage($value)
     {
         $this->perPage = $value;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
-        $this->mount( ($request=Request::capture()) );
-        $this->emit('renderPerPage');
+        //$this->mount( ($request=Request::capture()) );
+        //$this->emit('renderPerPage');
     }
 
     public function mount(Request $request)
@@ -47,6 +52,8 @@ class Translate extends Component
         {
             $this->perPage = Cookie::get("perPage");
         }
+        // if(!empty($this->page))
+        //     $this->curPage = $this->page;
         $this->search_input = $request->input();
     }
     public function nextPage($page)
@@ -58,10 +65,10 @@ class Translate extends Component
         $query = \App\Models\Translate::selectRaw(
             DB::raw("min(id) as idx, translates.key as strkey, GROUP_CONCAT(IF(lang='en', translates.value, '') SEPARATOR  '') as en , GROUP_CONCAT(IF(lang='fr', translates.value, '') SEPARATOR  '') as fr , GROUP_CONCAT(IF(lang='ar', translates.value, '') SEPARATOR  '') as ar"))
             ->where($searchCond)->groupBy('key')->orderBy('created_at','asc');
-        // print($query->toSql()); die;// dd($query->get());
-        // $this->perPage = 5;        // $this->curPage = 1;
-       
-        $this->search_result = $query->get();
+        $this->search_result = $query->paginate($this->perPage, ['*']);
+        
+        $this->curPage = $this->search_result->currentPage();
+        //dd($this->search_result);
         return view('livewire.translate.index', ['pagination'=>$this->search_result] );
     }
 }
