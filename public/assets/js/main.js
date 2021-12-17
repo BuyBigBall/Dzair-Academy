@@ -27,6 +27,22 @@ $(document).ready(function() {
             $(".mattype.all").prop('disabled', false);
     });
  });
+ 
+ function MsgboxFunction(strContent, retfunc, params)
+{
+    $('#noticeModal #notice_content').html(strContent);
+    //$('#myModal').on('hidden', returnFunction() );
+    $('#noticeModal .btn-primary').unbind( "click" );
+    $('#noticeModal .btn-primary').click( function() {
+        if(retfunc!=undefined)
+        {
+            retfunc(params);
+        }
+        $('#noticeModal').modal('hide');
+    } );
+    $('#noticeModal').modal('show');
+}
+
 
 function ConfirmFunction(strWarning, retfunc, params)
 {
@@ -34,9 +50,15 @@ function ConfirmFunction(strWarning, retfunc, params)
     //$('#myModal').on('hidden', returnFunction() );
     $('#confirmModal .btn-primary').unbind( "click" );
     $('#confirmModal .btn-primary').click( function() {
-        retfunc(params);
+        if(retfunc!=undefined)
+        {
+            retfunc(params);
+        }
         $('#confirmModal').modal('hide');
     } );
     $('#confirmModal').modal('show');
 }
 
+window.addEventListener('contentSaved', (e) => {
+    MsgboxFunction(e.detail.message);
+});

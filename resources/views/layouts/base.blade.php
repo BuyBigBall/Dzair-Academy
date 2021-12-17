@@ -162,6 +162,26 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noticeModalLabel">{{translate('Notice')}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id='notice_content'></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">{{ 'Ok' }}</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../assets/js/main.js?v=0.0.0"></script>
 </body>
 

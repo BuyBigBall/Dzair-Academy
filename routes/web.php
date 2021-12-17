@@ -89,10 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/translate-app', Translate::class)->name('translate-app');
     Route::post('/translate-app', Translate::class)->name('translate-app');
     
-    
-    Route::get('/ads-manage', Settings::class)->name('ads-manage');
     Route::get('/settings', Settings::class)->name('settings');
-    
     
 });
 

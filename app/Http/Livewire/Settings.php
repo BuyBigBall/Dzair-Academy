@@ -10,103 +10,140 @@ use Livewire\Component;
 use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 class Settings extends Component
 {
-    use WithPagination;
+    use WithFileUploads;
 
-    public  $perPage = 10;
-    public  $curPage = 1;
-    private $search_result;
+    public $ads1_file;
+    public $ads1_link;
+    public $ads2_file;
+    public $ads2_link;
+    public $ads3_file;
+    public $ads3_link;
+    public $email;
+    public $password;
 
     public function __construct()
     {
         parent::__construct();
     }
-    public function updatedCurPage($value)
-    {
-        $this->curPage = $value;
-        //dd($this->curPage);
-    }
+
+    protected $rules = [
+        'email'     => 'required',
+        'password'  => 'required',
+        'ads1_link' => 'required',
+        'ads2_link' => 'required',
+        'ads3_link' => 'required',
+
+        # required no need
+        'ads1_file'  => 'max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
+        'ads2_file'  => 'max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
+        'ads3_file'  => 'max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
+    ];
+    protected $messages = [
+        'password.required'  => ('The password cannot be empty.'),
+        'ads1_link.required' => ('The link address for advertise 1 cannot be empty.'),
+        'ads2_link.required' => ('The link address for advertise 2 cannot be empty.'),
+        'ads3_link.required' => ('The link address for advertise 3 cannot be empty.'),
+        # no need
+        // 'ads1_file.required' => ('The file for advertise 1 cannot be empty.'),
+        // 'ads2_file.required' => ('The file for advertise 2 cannot be empty.'),
+        // 'ads3_file.required' => ('The file for advertise 3 cannot be empty.'),
+    ];
     public function index(Request $request)
     {
-    }
-
-    public function updatedPerPage($value)
-    {
-        $this->perPage = $value;
-        Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
-        //dd(($request = Request::capture()));
-        $this->mount(Request::capture(), true);
-        $this->emit('renderPerPage');
+        
     }
 
     public function mount(Request $request, $flag=null)
     {
-        if($flag==null)
-        if(Cookie::has("perPage"))
-        {
-            $this->perPage = Cookie::get("perPage");
-        }
-        $searchCond = [];        $searchWord = [];        $searchOr = []; $searchOr1 = [];
-
-        //print_r($request->input('faculty')); die;
-        if( ! empty($request->input('training')))               $searchCond[] = ['training_id' , $request->input('training')];
-        if( ! empty($request->input('faculty')))                $searchCond[] = ['faculty_id' , $request->input('faculty')];
-        if( ! empty($request->input('specialization')))         $searchCond[] = ['specialization_id' , $request->input('specialization')];
-        if( ! empty($request->input('level')))                  $searchCond[] = ['level' , $request->input('level')];
-        if( ! empty($request->input('course')))                 $searchCond[] = ['course' , $request->input('course')];
-
-
-        if( ! empty($request->input('cate_course')))            $searchOr1[] = ['cate_course' , $request->input('cate_course')];
-        if( ! empty($request->input('cate_exercise')))          $searchOr1[] = ['cate_exercise' , $request->input('cate_exercise')];
-        if( ! empty($request->input('cate_exam')))              $searchOr1[] = ['cate_exam' , $request->input('cate_exam')];
-
-        if( ! empty($request->input('word')))                  
-        {
-            $searchWord[] =  ['title' , 'like' , '%'.$request->input('word').'%']; 
-            $searchWord[] =  ['description' , 'like' , '%'.$request->input('word').'%'];
-        } 
-        if( ! empty($request->input('filetype_docs')))          $searchOr[] = ['filetype' , 1];
-        if( ! empty($request->input('filetype_archives')))      $searchOr[] = ['filetype' , 2];
-        if( ! empty($request->input('filetype_images')))        $searchOr[] = ['filetype' , 3];
-
-        //print_r($searchCond); die;
-        $query = Material::where($searchCond)
-                         ->where( function($query1) use ($searchWord) {
-                             if(count($searchWord)>0)
-                             $query1->orWhere([$searchWord[0]])->orWhere([$searchWord[1]]);
-                         })->where( function ($query2) use ($searchOr){
-                             if(count($searchOr)==3)
-                                $query2->orWhere([$searchOr[0]])->orWhere([$searchOr[1]])->orWhere([$searchOr[2]]);
-                            if(count($searchOr)==2)
-                                $query2->orWhere([$searchOr[0]])->orWhere([$searchOr[1]]);
-                            if(count($searchOr)==1)
-                                $query2->orWhere([$searchOr[0]]);
-                            })->where( function ($query3) use ($searchOr1){
-                                if(count($searchOr1)==3)
-                                   $query3->orWhere([$searchOr1[0]])->orWhere([$searchOr1[1]])->orWhere([$searchOr1[2]]);
-                               if(count($searchOr1)==2)
-                                   $query3->orWhere([$searchOr1[0]])->orWhere([$searchOr1[1]]);
-                               if(count($searchOr1)==1)
-                                   $query3->orWhere([$searchOr1[0]]);
-                            })
-                            ->with(['lang'=>function($query4){
-                                $query4->where('language', lang() );
-                            }])->orderBy('created_at','desc');
-                           
-        // if($request->input('page')==2)
-        //     print($query->toSql()); die;
-        $this->search_result = $query->paginate( $this->perPage ); // dd($rows);
-        $this->curPage = $this->search_result->currentPage();
+        $this->email = env('MAIL_USERNAME');
+        $this->password = env('MAIL_PASSWORD');
+        $this->ads1_file = env('ADVERTISE1_URL');
+        $this->ads1_link = env('ADVERTISE1_LINK');
+        $this->ads2_file = env('ADVERTISE2_URL');
+        $this->ads2_link = env('ADVERTISE2_LINK');
+        $this->ads3_file = env('ADVERTISE3_URL');
+        $this->ads3_link = env('ADVERTISE3_LINK');
     }
-    public function nextPage($page)
+    public function updatedAds1File($value)
     {
+        $this->validate([
+            'ads1_file' => 'max:'.MAX_COURSE_UPLOAD_SIZE.       // Max 1MB =1024K
+                     '|mimes:'.env('ALLOW_ADS_EXTENSIONS')
+        ]);
+    }
+    public function updatedAds2File($value)
+    {
+
+        $this->validate([
+            'ads2_file' => 'max:'.MAX_COURSE_UPLOAD_SIZE.       // Max 1MB =1024K
+                     '|mimes:'.env('ALLOW_ADS_EXTENSIONS')
+        ]);
+    }
+   
+    public function updatedAds3File($value)
+    {
+        $this->validate([
+            'ads3_file' => 'max:'.MAX_COURSE_UPLOAD_SIZE.       // Max 1MB =1024K
+                     '|mimes:'.env('ALLOW_ADS_EXTENSIONS')
+        ]);
+    }
+    public function save(Request $request)
+    {
+        
+        $validatedData = $this->validate();
+        // dd($request);
+        // dd($request->hasFile('ads2_file'));
+        //if ($request->hasFile('document')) {
+        if( !empty($_FILE['ads1_file']))
+        {
+            $origin_filename = $this->ads1_file->getClientOriginalName();
+            $store_result = $this->ads1_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
+            $file_extension = explode('.', $store_result );
+            $file_name = explode('/', $store_result);
+            $file_name = $file_name[ count($file_name)-1];
+            $file_path1 = $store_result;
+            setEnv('ADVERTISE1_URL',  $file_path1 );
+        }
+
+        if( !empty($_FILE['ads2_file']))
+        {
+            $origin_filename = $this->ads2_file->getClientOriginalName();
+            $store_result = $this->ads2_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
+            $file_extension = explode('.', $store_result );
+            $file_name = explode('/', $store_result);
+            $file_name = $file_name[ count($file_name)-1];
+            $file_path2 = $store_result;
+            setEnv('ADVERTISE2_URL',  $file_path2 );
+        }
+
+        if( !empty($_FILE['ads3_file']))
+        {
+            $origin_filename = $this->ads3_file->getClientOriginalName();
+            $store_result = $this->ads3_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
+            $file_extension = explode('.', $store_result );
+            $file_name = explode('/', $store_result);
+            $file_name = $file_name[ count($file_name)-1];
+            $file_path3 = $store_result;        
+            setEnv('ADVERTISE3_URL',  $file_path3 );
+        }
+
+        # setEnv
+        setEnv('MAIL_USERNAME',   $this->email );
+        setEnv('MAIL_PASSWORD',   $this->password );
+
+        setEnv('ADVERTISE1_LINK', $this->ads1_link );
+        setEnv('ADVERTISE2_LINK', $this->ads2_link );
+        setEnv('ADVERTISE3_LINK', $this->ads3_link );
+
+        $this->dispatchBrowserEvent('contentSaved', ['type' => 'success',  'message' => 'Setting saved Successfully!']);
+
     }
     public function render()
     {
-        //dd($this->search_result);
-        return view('livewire.search-result', ['pagination'=>$this->search_result] );
+        return view('livewire.settings', [] );
     }
 }
