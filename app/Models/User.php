@@ -45,10 +45,10 @@ class User extends Authenticatable
         return $this->hasMany([['App\Models\Material','created_by'], ['App\Models\Material','updated_by']]);
     }
     public function course() {
-        return $this->belongsTo('App\Models\Course', '');
+        return $this->hasOne('App\Models\Course', 'id', 'course_id');
     }
     public function collection() {
-        return $this->hasMany('App\Models\Collection', '');
+        return $this->hasMany('App\Models\Collection', 'user_id', 'id');
     }
 
 }

@@ -33,20 +33,20 @@
                                         <div class="col-md-12 col-sm-6">
                                             <div class="form-group d-sm-flex align-items-center">
                                             <label class="custom-control-label me-3 w-25">{{ translate('To')}}</label>
-                                            <input class="form-control"   wire:model="to_user" name='to_user' 
-                                                Placeholder=""
+                                            <input wire:model="email" name='email' 
+                                                type="email" Placeholder="user@example.com"
+                                                class="form-control"  
                                                 />                                        
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-center">
-                                                @error('to_user') <span class="error">{{ $message }}</span> @enderror     
+                                                @error('email') <span class="error">{{ $message }}</span> @enderror     
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End Title TextBox row -->
                                     
-
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-center">

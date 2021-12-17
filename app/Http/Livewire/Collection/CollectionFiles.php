@@ -59,7 +59,7 @@ class CollectionFiles extends Component
             else if( !!empty( ( $coll = Collection::where('publish_key', $sharekey)->first() ) ))    $id = null;
             else                            $id=$coll->id;
 
-            if($id!=null )//&& $coll->user_id!=Auth::id())
+            if($id!=null && $coll->user_id!=Auth::id())
             {
                 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                 CollectionShare::updateOrCreate(

@@ -46,7 +46,7 @@ class CourseMaterial extends Component
         'course' => 'required',
         'level' => 'required',
         'title' => 'required|max:200',
-        'file'  => 'required:max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
+        'file'  => 'required|max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
     ];
     public function __construct()
     {

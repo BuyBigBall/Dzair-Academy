@@ -29,6 +29,7 @@ use App\Http\Livewire\Message\MessageOutbox;
 
 use App\Http\Livewire\Collection\CollectionManage;
 use App\Http\Livewire\Collection\CollectionFIles;
+use App\Http\Livewire\Collection\CollectionShared;
 
 use App\Http\Controllers\ApplicationController;
 
@@ -76,11 +77,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/course-management', CourseManagement::class)->name('course-management');
     Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
     Route::get('/message', MessageManage::class)->name('message');
+    Route::get('/send-message/{email}', MessageManage::class)->name('send-message');
+    
     // Route::get('/message/inbox', MessageInbox::class)->name('inbox');
     // Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
+    Route::get('/collection-shared', CollectionShared::class)->name('collection-shared-forme');
+
     Route::get('/collection-files/{id}', CollectionFiles::class)->name('collection-files');
-    
     Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
 
     Route::get('/translate', Translate::class)->name('translate');

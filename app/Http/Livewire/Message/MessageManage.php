@@ -6,16 +6,15 @@ use Livewire\Component;
 
 class MessageManage extends Component
 {
+    public $email;
+    public $content;
+    
+    public function mount($email=null) 
+    {
+        $this->email = $email;
+    }
     public function render()
     {
         return view('livewire.message.index');
-    }
-    public function inbox()
-    {
-        return view('livewire.message.inbox');
-    }
-    public function outbox()
-    {
-        return view('livewire.message.outbox');
     }
 }

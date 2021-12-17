@@ -35,7 +35,7 @@
                                                 {{ translate('Number of Files')}}
                                             </th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                {{ translate('Added Date')}}
+                                                {{ translate('Shared Date')}}
                                             </th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 {{ translate('Action')}}
@@ -46,40 +46,27 @@
                                         @foreach($pagination as $row)
                                         <tr>
                                             <td class="ps-4 text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{$row->id}}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{$row->coll->id}}</p>
                                             </td>
                                             <td>
                                                 <div class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0">{{$row->collection_name}}</p>
+                                                    <p class="text-xs font-weight-bold mb-0">{{$row->coll->collection_name}}</p>
                                                 </div>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                {{ $row->mat!=null ? count($row->mat) : 0}}</p>
+                                                {{ $row->coll->mat!=null ? count($row->coll->mat) : 0}}</p>
                                             </td>
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
                                             </td>
-                                            <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
+                                            <?php $surl = $row->shre_url; ?>
                                             <td class="text-center">
-                                                <span  data-bs-toggle="tooltip" 
-                                                    wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
-                                                    onclick="shareme( '{{route('collection-shares', $skey )}}' )"
-                                                    data-bs-original-title="{{translate('copy shared url')}}"
+                                                <a href="{{ route('send-message', !empty($row->coll) && !empty($row->coll->owner) ? $row->coll->owner->email : '')}}" data-bs-toggle="tooltip" 
+                                                    data-bs-original-title="{{translate('send message')}}"
                                                     class="mx-1" >
                                                     <i class="cursor-pointer fa fa-copy text-secondary"></i>
-                                                </span>
-                                                <a href="javascript:$('#collectionModal').modal('show');" 
-                                                    class="mx-1" 
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-original-title="edit collection"
-                                                    data-id='{{$row->id}}' 
-                                                    >
-                                                    <i class="fa fa-edit text-secondary"></i>
                                                 </a>
-                                                <!-- <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('collection files')}}"
-                                                    class="mx-1" 
-                                                    data-id='{{$row->id}}' > -->
                                                 <a href="{{route('collection-files', $row->id)}}" 
                                                     class="mx-1" 
                                                     data-bs-toggle="tooltip"
@@ -87,9 +74,9 @@
                                                     >
                                                     <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
                                                 </a>
-                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection')}}"
+                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('discard this collection?')}}"
                                                         class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('test', func)">
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{translate('discard this collection?')}}', func)">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
                                             </td>
@@ -101,8 +88,6 @@
                         </div>
                         <!-- #################################### -->
 
-
-                        
                         <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                             <div style='background:#C2E2CE; min-height:50vh;width:98%;'>
                                 ADS SPOT EXAMPLE 3
@@ -111,8 +96,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">
-                            <button onclick="$('#collectionModal').modal('show');" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button>
-                            <button onclick="javascript:history.back(01);" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
+                            <a href="{{ route('message') }}" class="btn btn-primary btn-sm mb-1 mx-2">{{translate('Send Message')}}</a>
+                            <button onclick="javascript:history.back(01);" class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
                         </div>
                     </div>
 

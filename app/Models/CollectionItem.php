@@ -11,7 +11,7 @@ class CollectionItem extends Model
 
     protected $fillable = ['collection_id', 'material_id'];
 
-    public function col() {
+    public function coll() {
         return $this->belongsTo('App\Models\Collection','collection_id');
     }
     public function mat() {
