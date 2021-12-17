@@ -218,46 +218,46 @@ function get_option($option, $default = null)
 // template :   template keyname
 function sendMail(array $request) //[recipent, title, content, template]
 {
-    // $recipent   = $request['recipent'];
-    // $content    = $request['content'];
-    // if ( empty($request['subject']))                $request['subject'] = '';
-    // if ( empty($request['content']))                $content = [];
-    // if (!empty($request['template'])) {
-    //     if($request['template']=='welcome')
-    //     {
-    //         $url = route('activate');
-    //         $activate_link = $url . '?token='.$content['token'];
-    //     }
-    //     $template = $request['template'];
-    // }
-    // $success_count = 0;
-    // foreach ($recipent as $to) {
-    //     if(!empty($template)) {
-    //         $user = \App\Models\User::where('email', $to)->first();
-    //         $template = view('emails.' . $request['template'])
-    //                     ->with('email',     $user->email )
-    //                     ->with('name',      $user->name )
-    //                     ->with('subject',   $request['subject'] )
-    //                     ->with('activate',  $activate_link );
+    $recipent   = $request['recipent'];
+    $content    = $request['content'];
+    if ( empty($request['subject']))                $request['subject'] = '';
+    if ( empty($request['content']))                $content = [];
+    if (!empty($request['template'])) {
+        if($request['template']=='welcome')
+        {
+            $url = route('activate');
+            $activate_link = $url . '?token='.$content['token'];
+        }
+        $template = $request['template'];
+    }
+    $success_count = 0;
+    foreach ($recipent as $to) {
+        if(!empty($template)) {
+            $user = \App\Models\User::where('email', $to)->first();
+            $template = view('emails.' . $request['template'])
+                        ->with('email',     $user->email )
+                        ->with('name',      $user->name )
+                        ->with('subject',   $request['subject'] )
+                        ->with('activate',  $activate_link );
 
-    //         Mail::send('emails.content', ['content' => $template ], 
-    //             function ($mail) use ($user, $request) 
-    //             {
-    //                 $mail->to($user->email, $user->name);
-    //                 $mail->subject($request['subject']);
-    //                 $mail->from( settings::selectSettings('MAIL_FROM_ADDRESS') );
-    //                 // if (isset($request['attach']) && $request['attach'] != '') {
-    //                 //     $mail->attach(public_path() . $request['attach']);
-    //                 // }
-    //             });
-    //         $success_count++;
-    //     }
-    // }
+            Mail::send('emails.content', ['content' => $template ], 
+                function ($mail) use ($user, $request) 
+                {
+                    $mail->to($user->email, $user->name);
+                    $mail->subject($request['subject']);
+                    $mail->from( settings::selectSettings('MAIL_FROM_ADDRESS') );
+                    // if (isset($request['attach']) && $request['attach'] != '') {
+                    //     $mail->attach(public_path() . $request['attach']);
+                    // }
+                });
+            $success_count++;
+        }
+    }
 
-    // if (count(Mail::failures()) > 0) {
-    //     return false;
-    // } else {
-    //     return $success_count;
-    // }
+    if (count(Mail::failures()) > 0) {
+        return false;
+    } else {
+        return $success_count;
+    }
 
 }

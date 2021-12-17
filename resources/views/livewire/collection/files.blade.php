@@ -114,7 +114,7 @@
 <script>
     function deleteCollectionFile(del_id)
     {
-        window.livewire.emit('deleteCollectionFle', del_id);
+        window.livewire.emit('deleteCollectionFile', del_id);
     }
 </script>
 

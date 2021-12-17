@@ -26,8 +26,9 @@
                             </div>
 
                             <!-- #################################### -->
-                            <div class="col-md-6 col-sm-6 text-right d-flex justify-content-center align-items-end" >
-                                <div class="row col-md-12 col-sm-6" >
+                            <div class="col-md-6 col-sm-6 d-flex justify-content-center align-items-start" >
+                            <form wire:submit.prevent="sendMail" action="#" method="POST" role="form text-left">
+                                <div class="col-md-12 col-sm-6 justify-content-center align-items-start" >
                                     <!-- Target user row -->
                                     <div class="row"> 
                                         <div class="col-md-12 col-sm-6">
@@ -55,14 +56,25 @@
                                                         wire:model="content" 
                                                         name="content" 
                                                         rows="8"></textarea>
-                                                @error('message') <span class="error">{{ $message }}</span> @enderror     
+                                                @error('content') <span class="error">{{ $message }}</span> @enderror     
                                             </div>
                                         </div>
                                     </div>                            
                                     
-
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-primary mb-0 mx-2">
+                                            {{ translate('Send Message') }}
+                                        </button>
+                                        <button onclick="history.back(-1);" class="btn btn-secondary mb-0 mx-2">
+                                            {{ translate('Back') }}
+                                        </button>
+                                        </div>
+                                    </div>
                                 </div>
+                                </form>
                             </div>
+                            
                             <!-- #################################### -->
 
 

@@ -16,7 +16,7 @@
                             
                         </div>
                         <!-- End TextBox Box row -->
-                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button">{{translate('New')}}</a>
+                        <!-- <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button">{{translate('New')}}</a> -->
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

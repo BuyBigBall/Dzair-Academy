@@ -10,6 +10,7 @@ use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
+use App\Models\CollectionShare;
 
 class CollectionShared extends Component
 {
@@ -21,11 +22,27 @@ class CollectionShared extends Component
 
     private $search_result;
     
+    protected $listeners = [
+        'discardSharedCollection' => 'discardSharedCollection' ,
+    ];
+
     public function __construct()
     {
         if(Auth::user()==null) redirect(route('login'));
         parent::__construct();
         $this->current_route = Route::currentRouteName();
+    }
+    
+    public function discardSharedCollection($del_id)
+    {
+        if( ($coll_tem=CollectionShare::find($del_id))!=null )
+        {
+            $coll_tem->delete();
+        }
+        else
+        {
+            dd($del_id);
+        }
     }
 
     public function updatedCurPage($value)

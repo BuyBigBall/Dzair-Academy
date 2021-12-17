@@ -18,9 +18,9 @@ class CollectionFiles extends Component
 
     private $search_result;
     private $current_route;
-
+    
     protected $listeners = [
-        'deleteCollectionFle' => 'deleteCollectionFle'        ,
+        'deleteCollectionFile' => 'deleteCollectionFile'        ,
     ];
 
 
@@ -30,7 +30,7 @@ class CollectionFiles extends Component
         parent::__construct();
     }
 
-    public function deleteCollectionFle($del_id)
+    public function deleteCollectionFile($del_id)
     {
         if( ($coll_tem=CollectionItem::find($del_id))!=null )
         {

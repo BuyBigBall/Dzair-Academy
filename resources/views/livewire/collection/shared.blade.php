@@ -74,9 +74,9 @@
                                                     >
                                                     <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
                                                 </a>
-                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('discard this collection?')}}"
+                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('discard this collection share?')}}"
                                                         class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{translate('discard this collection?')}}', func)">
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{translate('discard this collection share?')}}', discardSharedCollection, '{{$row->id}}')">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
                                             </td>
@@ -124,7 +124,7 @@
                         <div class="form-group">
                             <label for="user-name" class="form-control-label">{{translate('Collection Name')}}</label>
                             <div class="">
-                                <input wire:model="coll_name" class="form-control" type="text" placeholder="Name" id="collection-name">
+                                <input wire:model="coll_name" class="form-control" type="text" placeholder="{{translate('Name')}}" id="collection-name">
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="user-email" class="form-control-label">{{translate('Description')}}</label>
                             <div class="">
-                                <textarea wire:model="coll_desp" class="form-control" placeholder="description" row=3 id="collection-description"></textarea>
+                                <textarea wire:model="coll_desp" class="form-control" placeholder="{{translate('description')}}" row=3 id="collection-description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -173,11 +173,9 @@
 </main>
 
 <script>
-    function shareme(share_url)
+    function discardSharedCollection(del_id)
     {
-        document.getElementById("copy_sharekey").value=share_url;
-        document.getElementById("copy_sharekey").select();
-        document.execCommand('copy');
-        alert("you can share this collection as following url: \r\n" + document.getElementById("copy_sharekey").value);
+        window.livewire.emit('discardSharedCollection', del_id);
     }
 </script>
+
