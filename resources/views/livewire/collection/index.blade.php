@@ -93,7 +93,7 @@
                                                 </a>
                                                 <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection')}}"
                                                         class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('test', func)">
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', deleteCollection)">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
                                             </td>
@@ -202,5 +202,10 @@
         document.getElementById("copy_sharekey").select();
         document.execCommand('copy');
         alert("you can share this collection as following url: \r\n" + document.getElementById("copy_sharekey").value);
+    }
+        
+    function deleteCollection(del_id)
+    {
+        window.livewire.emit('deleteCollection', del_id);
     }
 </script>

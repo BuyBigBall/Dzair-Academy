@@ -84,7 +84,7 @@
                                             data-bs-original-title="Edit user">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
-                                        <span onclick="ConfirmFunction('test', func)">
+                                        <span onclick="ConfirmFunction('{{ translate('Are you sure to delete this user?')}}', deleteUser)">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                                     </td>
@@ -164,3 +164,9 @@
         </div>
     </div>
 </div>
+<script>
+function deleteUser(del_id)
+{
+    window.livewire.emit('deleteUser', del_id);
+}
+</script>
