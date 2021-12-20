@@ -6,8 +6,8 @@
                     <div class="col-md-4">
                         <h6 class="mb-0">{{ translate('Profile Information') }}</h6>
                     </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div style='width:100%; background:#C2E2CE; min-height:60px;'>
+                    <div class="col-md-8 col-sm-6">
+                        <div style='min-height:60px;'>
                         <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
                                     style="width:100%; height:100%;"
@@ -114,9 +114,14 @@
                                 </div>
                                 @error('user.about') <div class="text-danger">{{ translate($message) }}</div> @enderror
                             </div>
+
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
+                                <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
+                            </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div style='width:100%; background:#C2E2CE; min-height:50vh;'>
+                            <div style='min-height:50vh;'>
                                 <a href="{{ env('ADVERTISE2_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
                                         style="width:100%; height:100%;"
@@ -125,10 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
-                        <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
-                    </div>
+                   
                 </form>
 
             </div>

@@ -23,7 +23,7 @@
                     <div class="table-responsive p-1 row col-12">
                         <div
                             class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start">
-                            <div style='background:#C2E2CE; min-height:50vh;width:100%;'>
+                            <div style='min-height:50vh;width:100%;'>
                                 <a href="{{ env('ADVERTISE2_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
                                         style="width:100%; height:100%;"
@@ -145,7 +145,7 @@
 
                         <div
                             class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start">
-                            <div style='background:#C2E2CE; min-height:50vh;width:100%;'>
+                            <div style='min-height:50vh;width:100%;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
                                         style="width:100%; height:100%;"

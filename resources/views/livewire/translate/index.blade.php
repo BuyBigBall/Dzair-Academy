@@ -9,7 +9,7 @@
                         <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center" >
                             <h5 class="mb-0">{{ translate('Translate') }}</h5>
                         </div>
-                        <div class="col-md-7 col-sm-6  text-center p-1"  >
+                        <div class="col-md-8 col-sm-6  text-center p-1"  >
                             <div style='min-height:60px;'>
                                                                 <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
                                 <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE1_URL'))}}"

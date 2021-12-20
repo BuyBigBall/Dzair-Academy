@@ -83,7 +83,7 @@
                             <!-- #################################### -->
                             
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
-                                <div style='background:#C2E2CE; min-height:50vh;width:100%;'>
+                                <div style='min-height:50vh;width:100%;'>
                                                                     <A HREF="{{ ENV('ADVERTISE3_LINK') }}">
                                 <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE3_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
