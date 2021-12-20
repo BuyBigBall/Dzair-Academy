@@ -8,9 +8,14 @@
                             <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center" >
                                 <h5 class="mb-0">{{ translate('Send Message to the member') }}</h5>
                             </div>
-                            <div class="col-md-7 col-sm-6  text-center" style='display:none;' >
-                                <div style='background:#C2E2CE; min-height:60px;'>
-                                    ADS SPOT EXAMPLE 1
+                            <div class="col-md-7 col-sm-6  text-center p-1" style='display:none;' >
+                                <div style='min-height:60px;'>
+                                                                    <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
+                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE1_URL'))}}"
+                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    />
+                                </A>                                
+
                                 </div>                        
                             </div>
                             <div class="col-md-1 col-sm-6 d-flex justify-content-start align-items-center" >
@@ -21,7 +26,12 @@
                         <div class="table-responsive p-1 row col-12">
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='background:#C2E2CE; min-height:50vh;width:100%;'>
-                                    ADS SPOT EXAMPLE 2
+                                                                    <A HREF="{{ ENV('ADVERTISE2_LINK') }}">
+                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE2_URL'))}}"
+                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    />
+                                </A>                                
+
                                 </div>
                             </div>
 
@@ -81,7 +91,12 @@
                             
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='background:#C2E2CE; min-height:50vh;width:100%;'>
-                                    ADS SPOT EXAMPLE 3
+                                                                    <A HREF="{{ ENV('ADVERTISE3_LINK') }}">
+                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE3_URL'))}}"
+                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    />
+                                </A>                                
+
                                 </div>
                             </div>
                         </div>

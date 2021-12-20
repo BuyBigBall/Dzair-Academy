@@ -8,8 +8,12 @@
                             <div class="col-md-4 col-sm-6">
                                 <h4 class="title">Course Upload</h4>
                             </div>
-                            <div class="col-md-8 col-sm-6" style='background:#C2E2CE; min-height:60px;'>
-                                ADS SPOT EXAMPLE
+                            <div class="col-md-8 col-sm-6 p-1" style='background:#C2E2CE; min-height:60px;'>
+                            <a href="{{ env('ADVERTISE1_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
+                                    style="width:100%; height:100%;"
+                                    />
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -190,7 +194,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 d-none d-md-block" style='background:#C2E2CE;min-height:50vh;'>
-                                    ADS SPOT EXAMPLE
+                                <a href="{{ env('ADVERTISE3_LINK') }}">
+                                    <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
+                                        style="width:100%; height:100%;"
+                                        />
+                                    </a>
                                 </div>
                             </div>
                         </form>

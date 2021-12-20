@@ -11,6 +11,7 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Settings extends Component
 {
@@ -98,38 +99,52 @@ class Settings extends Component
         // dd($request);
         // dd($request->hasFile('ads2_file'));
         //if ($request->hasFile('document')) {
-        if( !empty($_FILE['ads1_file']))
+        //dd($this->ads1_file);
+
+        # please reference config/filesystem/php
+        if( Gettype($this->ads1_file)=='object' && Gettype($this->ads1_file)!='string')
         {
             $origin_filename = $this->ads1_file->getClientOriginalName();
-            $store_result = $this->ads1_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
-            $file_extension = explode('.', $store_result );
-            $file_name = explode('/', $store_result);
-            $file_name = $file_name[ count($file_name)-1];
-            $file_path1 = $store_result;
+            $file_extension = explode('.', $origin_filename );
+            $file_extension = $file_extension[count($file_extension)-1];
+            $save_file_name = md5('ads1'.date('Ynd His').$file_extension) .'.'.$file_extension;
+            $file_path1 = 'attach/' . $save_file_name;
+            $this->ads1_file->storePubliclyAs('attach',  $save_file_name, 'public');
+
+
+            // $file_content   = $this->ads1_file->get();
+            // Storage::disk('public')->put( $file_path1 , $file_content ); 
+            #######################################
+            //$store_result = $this->ads1_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
+            // $file_extension = explode('.', $store_result );
+            // $file_name = explode('/', $store_result);
+            // $file_name = $file_name[ count($file_name)-1];
+            // $file_path1 = $store_result;
             setEnv('ADVERTISE1_URL',  $file_path1 );
         }
 
-        if( !empty($_FILE['ads2_file']))
+        if( Gettype($this->ads2_file)=='object' && Gettype($this->ads2_file)!='string')
         {
             $origin_filename = $this->ads2_file->getClientOriginalName();
-            $store_result = $this->ads2_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
-            $file_extension = explode('.', $store_result );
-            $file_name = explode('/', $store_result);
-            $file_name = $file_name[ count($file_name)-1];
-            $file_path2 = $store_result;
+            $file_extension = explode('.', $origin_filename );
+            $file_extension = $file_extension[count($file_extension)-1];
+            $save_file_name = md5('ads2'.date('Ynd His').$file_extension) .'.'.$file_extension;
+            $file_path2 = 'attach/' . $save_file_name;
+            $this->ads2_file->storePubliclyAs('attach',  $save_file_name, 'public');
             setEnv('ADVERTISE2_URL',  $file_path2 );
         }
 
-        if( !empty($_FILE['ads3_file']))
+        if( Gettype($this->ads3_file)=='object' && Gettype($this->ads3_file)!='string')
         {
             $origin_filename = $this->ads3_file->getClientOriginalName();
-            $store_result = $this->ads3_file->store('ads');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
-            $file_extension = explode('.', $store_result );
-            $file_name = explode('/', $store_result);
-            $file_name = $file_name[ count($file_name)-1];
-            $file_path3 = $store_result;        
+            $file_extension = explode('.', $origin_filename );
+            $file_extension = $file_extension[count($file_extension)-1];
+            $save_file_name = md5('ads3'.date('Ynd His').$file_extension) .'.'.$file_extension;
+            $file_path3 = 'attach/' . $save_file_name;
+            $this->ads3_file->storePubliclyAs('attach',  $save_file_name, 'public');
             setEnv('ADVERTISE3_URL',  $file_path3 );
         }
+
 
         # setEnv
         setEnv('MAIL_USERNAME',   $this->email );

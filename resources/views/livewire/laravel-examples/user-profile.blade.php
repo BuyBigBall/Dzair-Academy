@@ -8,7 +8,11 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div style='width:100%; background:#C2E2CE; min-height:60px;'>
-                            ADS SPOT EXAMPLE 1
+                        <a href="{{ env('ADVERTISE1_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
+                                    style="width:100%; height:100%;"
+                                    />
+                                </a>                                
                         </div>
                     </div>
                 </div>
@@ -113,7 +117,11 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div style='width:100%; background:#C2E2CE; min-height:50vh;'>
-                                ADS SPOT EXAMPLE 2
+                                <a href="{{ env('ADVERTISE2_LINK') }}">
+                                    <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
+                                        style="width:100%; height:100%;"
+                                        />
+                                    </a>                                
                             </div>
                         </div>
                     </div>

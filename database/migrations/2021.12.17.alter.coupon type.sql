@@ -1,1 +1,0 @@
-ALTER TABLE `coupons` ADD COLUMN `coupon_type` TINYINT(1) DEFAULT 0 NOT NULL AFTER `coupon_code`; 

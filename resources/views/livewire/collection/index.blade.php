@@ -8,9 +8,13 @@
                         <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center" >
                             <h5 class="mb-0">{{ translate('User Collection List') }}</h5>
                         </div>
-                        <div class="col-md-9 col-sm-6  text-center"  >
-                            <div style='background:#C2E2CE; min-height:60px;'>
-                                ADS SPOT EXAMPLE 1
+                        <div class="col-md-9 col-sm-6  text-center p-1"  >
+                            <div style='min-height:60px;'>
+                            <a href="{{ env('ADVERTISE1_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
+                                    style="width:100%; height:100%;"
+                                    />
+                                </a>                                
                             </div>                        
                         </div>
                     </div>
@@ -105,7 +109,11 @@
                         
                         <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                             <div style='background:#C2E2CE; min-height:50vh;width:98%;'>
-                                ADS SPOT EXAMPLE 3
+                                <a href="{{ env('ADVERTISE3_LINK') }}">
+                                    <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
+                                        style="width:100%; height:100%;"
+                                        />
+                                    </a>                                
                             </div>
                         </div>
                     </div>

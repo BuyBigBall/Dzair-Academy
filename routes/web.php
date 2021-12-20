@@ -98,3 +98,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
+Route::get('storage/{group}/{file}', 'App\Http\Controllers\SearchController@index')->name('storage');
