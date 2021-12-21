@@ -6,9 +6,11 @@ use Livewire\Component;
 // use Illuminate\Cache\RateLimiting\Limit;
 // use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
+use App\Models\User;
 
 class UserManagement extends Component
 {
@@ -26,13 +28,25 @@ class UserManagement extends Component
     private $course;         
     private $level;          
     public  $word;          //wire:model
-    
+    protected $listeners = [
+        'deleteUser' => 'deleteUser'        ,
+    ];
 
     public function __construct()
     {
         parent::__construct();
         $this->current_route = Route::currentRouteName();
     }
+
+    public function deleteUser($del_id){
+        
+        # dd(Auth::user());
+        if(Auth::user()->role=='admin' && !empty($del_id) )
+        {
+            $dbtable = User::find($del_id)->delete();
+        }
+    }
+
     public function update($field, $newValue)
     {
     }
@@ -60,9 +74,11 @@ class UserManagement extends Component
         //     $this->perPage = Cookie::get("perPage");
         // }
     }
+
     public function render()
     {
         $searchWord = [];
+        //dd($searchWord);
         if( ! empty($this->word))                  
         {
             $searchWord[] =  ['trainings.en' , 'like' , '%'.$this->word.'%']; 

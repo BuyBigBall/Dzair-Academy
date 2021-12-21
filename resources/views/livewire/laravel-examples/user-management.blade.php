@@ -40,7 +40,7 @@
                                         {{ translate('Email') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Course') }}
+                                        {{ translate('Univercity') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('role') }}
@@ -71,7 +71,8 @@
                                         <p class="text-xs font-weight-bold mb-0">{{$user->useremail}}</p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->training}} @if(!empty($user->faculty)) / @endif {{$user->faculty}} @if(!empty($user->specialization)) / @endif {{$user->specialization}} @if(!empty($user->course)) / @endif {{$user->course}}</p>
+                                        <?php /* {{$user->training}} @if(!empty($user->faculty)) / @endif {{$user->faculty}} @if(!empty($user->specialization)) / @endif {{$user->specialization}} @if(!empty($user->course)) / @endif {{$user->course}} */?>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->location }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->userrole}}</p>
@@ -80,11 +81,14 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{$user->email_verified_at}}</span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="javascript:$('#userInformModal').modal('show');" class="mx-3" data-bs-toggle="tooltip"
-                                            data-bs-original-title="Edit user">
+                                        <a href="#" 
+                                            class="mx-3" data-bs-toggle="tooltip"
+                                            data-bs-original-title="Edit user"
+                                            wire:click.prevent="$emit('ShowUserModal', '{{$user->idx}}')"
+                                            >
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
-                                        <span onclick="ConfirmFunction('{{ translate('Are you sure to delete this user?')}}', deleteUser)">
+                                        <span onclick="ConfirmFunction('{{ translate('Are you sure to delete this user?')}}', deleteUser, '{{$user->idx}}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                                     </td>
@@ -101,72 +105,12 @@
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="userInformModal" tabindex="-1" role="dialog" aria-labelledby="userInformModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="userInformModalLabel">{{translate('User Information')}}</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="col-md-12">                        
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user-name" class="form-control-label">Full Name</label>
-                            <div class="">
-                                <input wire:model="user.name" class="form-control" type="text" placeholder="Name" id="user-name">
-                            </div>
-                                                                </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user-email" class="form-control-label">Email</label>
-                            <div class="">
-                                <input wire:model="user.email" class="form-control" type="email" placeholder="@example.com" id="user-email">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user.phone" class="form-control-label">Phone</label>
-                            <div class="">
-                                <input wire:model="user.phone" class="form-control" type="tel" placeholder="40770888444" id="phone">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user.location" class="form-control-label">University Name</label>
-                            <div class="">
-                                <input wire:model="user.location" class="form-control" type="text" placeholder="Location" id="name">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="about">About Me</label>
-                    <div class="">
-                        <textarea wire:model="user.about" class="form-control" id="about" rows="3" placeholder="Say something about yourself"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel' }}</button>
-            <button type="button" class="btn btn-primary">{{ 'Save' }}</button>
-        </div>
-        </div>
-    </div>
-</div>
 <script>
 function deleteUser(del_id)
 {
     window.livewire.emit('deleteUser', del_id);
 }
 </script>
+<!-- Translate Material Modal -->
+@livewire('modal.useredit-modal')
+
