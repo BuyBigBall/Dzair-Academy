@@ -28,7 +28,7 @@ use App\Http\Livewire\Message\MessageInbox;
 use App\Http\Livewire\Message\MessageOutbox;
 
 use App\Http\Livewire\Collection\CollectionManage;
-use App\Http\Livewire\Collection\CollectionFIles;
+use App\Http\Livewire\Collection\CollectionFiles;
 use App\Http\Livewire\Collection\CollectionShared;
 
 use App\Http\Controllers\ApplicationController;
