@@ -11,7 +11,7 @@
                             <div class="col-md-7 col-sm-6  text-center p-1" style='display:none;' >
                                 <div style='min-height:60px;'>
                                                                     <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
-                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE1_URL'))}}"
+                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE1_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
@@ -27,7 +27,7 @@
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='min-height:50vh;width:100%;'>
                                                                     <A HREF="{{ ENV('ADVERTISE2_LINK') }}">
-                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE2_URL'))}}"
+                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE2_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
@@ -92,7 +92,7 @@
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='min-height:50vh;width:100%;'>
                                                                     <A HREF="{{ ENV('ADVERTISE3_LINK') }}">
-                                <IMG SRC="{{ ASSET('UPLOADS/' . ENV('ADVERTISE3_URL'))}}"
+                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE3_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
