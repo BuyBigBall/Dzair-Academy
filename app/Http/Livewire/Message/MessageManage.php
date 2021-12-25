@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Message;
 
 use Livewire\Component;
+use App\Models\User;
 
 class MessageManage extends Component
 {
@@ -24,25 +25,26 @@ class MessageManage extends Component
     {
         $this->email = $email;
     }
-    public function sendMail() { 
+    public function sendMessage() { 
         
             $this->validate();
-
-            $mail_contents = [
-                'recipent' => [$this->email],
-                'content'  => [$this->content],
-                'subject'  => '',
-                'template' => ''
-            ];
-
             $user = User::where('email', $this->email)->first();
+            //dd($user);
             if($user){
-                $this->notify(new ResetPassword($user->id));
-                $this->showSuccesNotification = true;
-                $this->showFailureNotification = false;
+                $mailRequest["recipent"] = [$this->email];
+                $mailRequest["subject"] = sprintf( translate( "Dzair deliver a message from %s."), $user->name );
+                $mailRequest["content"] = [ "content" => $this->content ];
+                $mailRequest["template"] = "deliver";
+                sendMail($mailRequest);
+                // $this->showSuccesNotification = true;
+                // $this->showFailureNotification = false;
+                $this->emit('WireAlert', translate('Your message has been sent successfully.'), '');
             } else {
-                $this->showFailureNotification = true;
+                $this->emit('WireAlert', translate('Your message sending has been failed.'), '');
+                //$this->showFailureNotification = true;
             }
+        $this->email = '';
+        $this->content = '';
     }
     public function render()
     {

@@ -221,8 +221,9 @@ function sendMail(array $request) //[recipent, title, content, template]
     $recipent   = $request['recipent'];
     $content    = $request['content'];
     if ( empty($request['subject']))                $request['subject'] = '';
-    if ( empty($request['content']))                $content = [];
+    if ( empty($request['content']))                $content = '';
     if (!empty($request['template'])) {
+        $activate_link = '';
         if($request['template']=='welcome')
         {
             $url = route('activate');
@@ -238,6 +239,7 @@ function sendMail(array $request) //[recipent, title, content, template]
                         ->with('email',     $user->email )
                         ->with('name',      $user->name )
                         ->with('subject',   $request['subject'] )
+                        ->with('content',   $content )
                         ->with('activate',  $activate_link );
 
             Mail::send('emails.content', ['content' => $template ], 
@@ -245,7 +247,7 @@ function sendMail(array $request) //[recipent, title, content, template]
                 {
                     $mail->to($user->email, $user->name);
                     $mail->subject($request['subject']);
-                    $mail->from( settings::selectSettings('MAIL_FROM_ADDRESS') );
+                    $mail->from( env('MAIL_FROM_ADDRESS') );
                     // if (isset($request['attach']) && $request['attach'] != '') {
                     //     $mail->attach(public_path() . $request['attach']);
                     // }

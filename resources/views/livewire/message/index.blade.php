@@ -8,10 +8,10 @@
                             <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center" >
                                 <h5 class="mb-0">{{ translate('Send Message to the member') }}</h5>
                             </div>
-                            <div class="col-md-7 col-sm-6  text-center p-1" style='display:none;' >
+                            <div class="col-md-8 col-sm-6  text-center p-1" style='display:none;' >
                                 <div style='min-height:60px;'>
-                                                                    <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE1_URL'))}}"
+                                <A HREF="{{ env('ADVERTISE1_LINK') }}">
+                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
@@ -26,8 +26,8 @@
                         <div class="table-responsive p-1 row col-12">
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='min-height:50vh;width:100%;'>
-                                                                    <A HREF="{{ ENV('ADVERTISE2_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE2_URL'))}}"
+                                <A HREF="{{ env('ADVERTISE2_LINK') }}">
+                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
@@ -37,7 +37,7 @@
 
                             <!-- #################################### -->
                             <div class="col-md-6 col-sm-6 d-flex justify-content-center align-items-start" >
-                            <form wire:submit.prevent="sendMail" action="#" method="POST" role="form text-left">
+                            <form wire:submit.prevent="sendMessage" action="#" method="POST" role="form text-left">
                                 <div class="col-md-12 col-sm-6 justify-content-center align-items-start" >
                                     <!-- Target user row -->
                                     <div class="row"> 
@@ -91,8 +91,8 @@
                             
                             <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
                                 <div style='min-height:50vh;width:100%;'>
-                                                                    <A HREF="{{ ENV('ADVERTISE3_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE3_URL'))}}"
+                                                                    <A HREF="{{ env('ADVERTISE3_LINK') }}">
+                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
                                     STYLE="WIDTH:100%; HEIGHT:100%;"
                                     />
                                 </A>                                
