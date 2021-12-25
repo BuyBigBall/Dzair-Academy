@@ -15,7 +15,8 @@ class UserProfile extends Component
     public $user_about;
     public $user_location;
     public $user_photo;
-    
+    public $user_edit_photo;
+
     public $showSuccesNotification  = false;
 
     public $showDemoNotification = false;
@@ -55,6 +56,7 @@ class UserProfile extends Component
         $this->user_about       = $this->user->about;
         $this->user_location    = $this->user->location;
         $this->user_photo       = $this->user->photo;
+        //dd($this->user->photo);
     }
 
     public function save() {
@@ -65,7 +67,18 @@ class UserProfile extends Component
         $this->user->phone       = $this->user_phone;
         $this->user->about       = $this->user_about;
         $this->user->location    = $this->user_location;
-        $this->user->photo       = $this->user_photo;
+        
+        if($this->user_edit_photo)
+        {
+            
+            //$store_result = $this->user_edit_photo->storePublicly( '/assets/img'); //to storage
+            $store_result = $this->user_edit_photo->store('assets/img', 'public');   //to public
+
+            $file_name = explode('/', $store_result);
+            $file_name = $file_name[ count($file_name)-1];
+            $file_path = $store_result;
+            $this->user->photo = $file_path;
+        }
         $this->user->save();
         $this->showSuccesNotification = true;
     }

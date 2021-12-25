@@ -33,11 +33,13 @@
                             <img style='width:180px; height:220px; cursor:pointer;' 
                                     id="user_photo_img"
                                     onclick="$('#photo').trigger('click');"
-                                    @if ($user_photo)
-                                        src="{{ $user_photo->temporaryUrl() }}"
+                                    @if ($user_edit_photo)
+                                        src="{{ $user_edit_photo->temporaryUrl() }}"
+                                    @elseif ($user_photo)
+                                        src="{{ asset('uploads/'. $user_photo) }}"
                                     @endif
                                      />
-                            <input wire:model="user_photo" type='file' name="photo" id="photo" style='display:none;'>
+                            <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
                             @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
                         </div>   
                         <div class="col-md-6">                        

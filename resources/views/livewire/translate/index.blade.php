@@ -32,7 +32,7 @@
                         <div class="col-md-12 col-sm-6 text-right d-flex justify-content-center align-items-start" >
                             
                             <table class="col-md-12 col-sm-6 align-items-center mb-0" 
-                                id='all-words-table' style="display:table;min-height:30vh;">
+                                id='all-words-table' style="display:table;min-height:42vh;">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
