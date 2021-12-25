@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 @endif
-
+                
                 <form wire:submit.prevent="save" action="#" method="POST" role="form text-left">
                     <div class="row">
                         <div class="col-md-3 pt-4 d-flex justify-content-center text-align-center">

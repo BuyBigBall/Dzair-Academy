@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
-                        <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center">
+                        <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center">
                             <h5 class="mb-0">{{ translate('Course Download') }}</h5>
                         </div>
-                        <div class="col-md-7 col-sm-6  text-center p-1">
+                        <div class="col-md-8 col-sm-6  text-center p-1">
                             <div style='min-height:60px;'>
                                 <a href="{{ env('ADVERTISE1_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
@@ -34,7 +34,7 @@
 
                         <!-- #################################### -->
                         <div
-                            class="col-md-6 col-sm-6 text-right d-flex justify-content-center align-items-end">
+                            class="col-md-6 col-sm-6 text-right d-flex justify-content-center align-items-start">
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- Path row -->
@@ -131,10 +131,10 @@
                                     <div class="row">
                                         <div class="col-md-3"></div>
                                         <div class="col-md-3">
-                                            <button type="submit" class="btn btn-primary w-200">{{ translate('Download') }}</button>
+                                            <button wire:click="download" class="btn btn-primary w-200">{{ translate('Download') }}</button>
                                         </div>
                                         <div class="col-md-3">
-                                            <button type="submit" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
+                                            <button type="button" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
                                         </div>
                                         <div class="col-md-3"></div>
                                     </div>

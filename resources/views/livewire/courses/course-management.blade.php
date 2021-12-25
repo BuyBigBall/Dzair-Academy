@@ -142,16 +142,21 @@
                                     </td>
                                     <td class="text-center">
                                       @if( !!empty($row['level']))
-                                        <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                            data-bs-original-title="Edit user">
+                                        <!-- <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                            data-bs-original-title="{{ $const_path_name }}">
                                             <i class="fas fa-edit text-secondary"></i>
-                                        </a>
-                                        <span onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCourse, '{{$row['id']}}')">
+                                        </a> -->
+                                        <span onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCourse, '{{$row['id']}}')"
+                                            data-bs-toggle="tooltip" data-bs-original-title="{{ translate('delete') }}"
+                                            title="{{ translate('delete') }}"
+                                          >
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                                       @else
-                                        <a href="{{route('translate-material', 'id='.$row['id'])}}" class="mx-3" data-bs-toggle="tooltip"
-                                            data-bs-original-title="translate this material">
+                                        <a href="{{route('translate-material', 'id='.$row['id'])}}" class="mx-3" 
+                                            data-bs-toggle="tooltip"
+                                            title="{{translate('translate this material')}}"
+                                            data-bs-original-title="{{translate('translate this material')}}">
                                             <i class="fa fa-edit text-secondary"></i>
                                         </a>
                                       @endif

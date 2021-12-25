@@ -7,7 +7,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Course;
-
+use Illuminate\Http\Request;
 
 class CourseDetail extends Component
 {
@@ -75,6 +75,15 @@ class CourseDetail extends Component
         $this->file_information['filetype'] = $mat->filetype;
         $this->file_information['filesize'] = $mat->filesize;
         //dd($this->selection_string);
+    }
+    public function download(Request $request)
+    {
+        //$myFile = public_path("dummy_pdf.pdf");
+        $myFile = storage_path('app/'.$this->material->filepath);
+    	$headers = []; //['Content-Type: application/pdf'];
+    	$newName = $this->file_information['filename'];
+
+    	return response()->download($myFile, $newName, $headers);
     }
 
     public function render()
