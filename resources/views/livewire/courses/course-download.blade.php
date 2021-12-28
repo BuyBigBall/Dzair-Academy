@@ -41,8 +41,8 @@
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-start ">
                                             <!-- <div class="row form-group d-sm-flex justify-content-start align-items-start"> -->
-                                                <label class="col-md-2 custom-control-label me-3 mt-2  align-items-start">{{ translate('Belongs To : ')}}</label>
-                                                <span  class="col-md-10 text-left form-label mt-1" id="title">{{$selection_string}}</span>
+                                                <label class="col-md-3 custom-control-label mt-2 d-flex align-items-start justify-content-start py-3">{{ translate('Course Branch : ')}}</label>
+                                                <span  class="col-md-9 text-left form-label mt-1 px-2 d-flex justify-content-start py-3" id="title">{{$selection_string}}</span>
                                             <!-- </div> -->
                                         </div>
                                     </div>

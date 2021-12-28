@@ -77,14 +77,14 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <div class="form-group">
-                                                <label class="sm-hide">{{ __('pages.course')}}</label>
-                                                <select class="form-control" wire:model="course" name='course'>
-                                                    <option>{{ __('pages.selcourse')}}</option>
-                                                    @foreach($course_options as $val)
+                                                <label class="sm-hide">{{ translate('Subject')}}</label>
+                                                <select class="form-control" wire:model="subject" name='subject'>
+                                                    <option>{{ translate('Select Subject')}}</option>
+                                                    @foreach($subject_options as $val)
                                                     <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('course') <span class="error">{{ $message }}</span> @enderror
+                                                @error('subject') <span class="error">{{ $message }}</span> @enderror
                                             </div>
                                         </div>
                                     </div>

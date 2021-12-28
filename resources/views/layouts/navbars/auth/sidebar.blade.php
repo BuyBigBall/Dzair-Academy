@@ -52,12 +52,12 @@
 
             @if( Auth::user()->role=='admin' )
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'category-management' ? 'active' : '' }}" href="{{ route('category-management') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'branch-management' ? 'active' : '' }}" href="{{ route('branch-management') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
-                        {{ in_array(request()->route()->getName(),['category-management']) ? 'text-white' : 'text-dark' }}"></i>
+                        {{ in_array(request()->route()->getName(),['branch-management']) ? 'text-white' : 'text-dark' }}"></i>
                     </div>
-                    <span class="nav-link-text ms-1">{{translate('Category Management')}}</span>
+                    <span class="nav-link-text ms-1">{{translate('Branch Management')}}</span>
                 </a>
             </li>
             <li class="nav-item">

@@ -73,9 +73,9 @@
                      </div>
                      <div class="col-md-3 col-sm-6">
                        <div class="form-group">
-                         <label class="sm-hide">{{ __('pages.course')}}</label>
-                         <select class="form-control" wire:model="course" name='course'>
-                           <option value=''>{{ __('pages.selcourse')}}</option>
+                         <label class="sm-hide">{{ translate('Subject')}}</label>
+                         <select class="form-control" wire:model="subject" name='subject'>
+                           <option value=''>{{ translate('Select Subject')}}</option>
                            @foreach($course_options as $val)
                            <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                            @endforeach

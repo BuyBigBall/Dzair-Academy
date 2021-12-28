@@ -30,7 +30,7 @@
         <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:670px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="translateMateralModalLabel">{{translate('Translate')}}</h5>
+                    <h5 class="modal-title" id="translateMateralModalLabel">{{$title}}</h5>
                     <button
                         type="button"
                         class="close"

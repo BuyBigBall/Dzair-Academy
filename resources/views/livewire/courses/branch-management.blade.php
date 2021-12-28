@@ -67,7 +67,7 @@
                             @if($path_level>=3)
                             <a href="{{ route('course-material') }}" 
                                 class="btn bg-gradient-primary btn-sm mb-0" 
-                                wire:click.prevent="$emit('ShowCategoryModal', '{{$path_level}}', 0)"
+                                wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$subject}}', 0)"
                                 type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Subject') : translate('New Course') ) ) ) }}</a>
                             @endif
                         </div>
@@ -143,14 +143,14 @@
                                       @if( !!empty($row['level']))
                                         @if($user_role=='admin' || $user_role=='staff')
                                         <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                            wire:click.prevent="$emit('ShowCategoryModal', '{{$path_level}}', '{{$row['id']}}')"
+                                            wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$subject}}', '{{$row['id']}}')"
                                             data-bs-original-title="{{ $const_path_name }}">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
                                         @endif
 
                                         @if( $user_role=='admin' || $path_level>=3)
-                                        <span onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCourse, '{{$row['id']}}')"
+                                        <span onclick="ConfirmFunction('{{translate('Are you sure to delete?')}}', deleteCourse, '{{$row['id']}}')"
                                             data-bs-toggle="tooltip" data-bs-original-title="{{ translate('delete') }}"
                                             title="{{ translate('delete') }}"
                                           >
@@ -158,7 +158,8 @@
                                         </span>
                                         @endif
                                       @else
-                                        <a href="{{route('translate-course', 'id='.$row['id'])}}" class="mx-3" 
+                                        <a href="#" class="mx-3" 
+                                          onclick="ConfirmFunction('{{translate('Are you sure to edit this course?')}}', editCourse, '{{$row['id']}}')"
                                             data-bs-toggle="tooltip"
                                             title="{{translate('edit this course')}}"
                                             data-bs-original-title="{{translate('edit this course')}}">
@@ -180,10 +181,15 @@
 </main>
 
 <script>
+    function editCourse(edit_id)
+    {
+        window.location.href = "{{route('translate-course')}}" + "?id=" + edit_id;
+    }
+
     function deleteCourse(del_id)
     {
         window.livewire.emit('deleteCourse', del_id);
     }
 </script>
 
-@livewire('modal.category-modal')
+@livewire('modal.branch-modal')

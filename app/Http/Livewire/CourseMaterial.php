@@ -19,7 +19,7 @@ class CourseMaterial extends Component
 
     public $training_options    = [] ;
     public $faculty_options     = [];
-    public $course_options     = [];
+    public $subject_options     = [];
     public $specialization_options = [];
     public $level_options       = [];
     
@@ -27,7 +27,7 @@ class CourseMaterial extends Component
     public $training;       
     public $faculty;        
     public $specialization; 
-    public $course;       
+    public $subject;       
     public $level;          
 
     public $title;          
@@ -43,7 +43,7 @@ class CourseMaterial extends Component
         'training' => 'required',
         'faculty' => 'required',
         'specialization' => 'required',
-        'course' => 'required',
+        'subejct' => 'required',
         'level' => 'required',
         'title' => 'required|max:200',
         'file'  => 'required|max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
@@ -68,7 +68,7 @@ class CourseMaterial extends Component
     }
     public function updatedSpecialization($value)
     {
-        $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
     }
 
     public function updatedFile()

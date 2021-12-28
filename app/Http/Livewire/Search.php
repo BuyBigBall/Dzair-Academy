@@ -20,7 +20,7 @@ class Search extends Component
     public $training;       //wire:model
     public $faculty;        //wire:model
     public $specialization; //wire:model
-    public $course;       //wire:model
+    public $subject;       //wire:model
     public $level;          //wire:model
     public $word;          //wire:model
     

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryManagement extends Component
+class BranchManagement extends Component
 {
     private $const_path_level = ['training'=>1,'faculty'=>2,'specialization'=>3,'course'=>4,'material'=>5];
     public $const_path_name;
@@ -63,10 +63,10 @@ class CategoryManagement extends Component
                 dd([$this->path_level, $del_id]);
             }
             if( $this->path_level==1) $this->mount(); 
-            if( $this->path_level==2) $this->updatedTraining(); 
-            if( $this->path_level==3) $this->updatedFaculty(); 
-            if( $this->path_level==4) $this->updatedSpecialization(); 
-            if( $this->path_level==5) $this->updatedSubject(); 
+            if( $this->path_level==2) $this->updatedTraining($this->training); 
+            if( $this->path_level==3) $this->updatedFaculty($this->faculty); 
+            if( $this->path_level==4) $this->updatedSpecialization($this->specialization); 
+            if( $this->path_level==5) $this->updatedSubject($this->subject); 
         }
     }
     public function mount()
@@ -181,7 +181,7 @@ class CategoryManagement extends Component
     }
     public function render()
     {
-        return view('livewire.courses.category-management');
+        return view('livewire.courses.branch-management');
         //return view('livewire.courses.course-download');
         
     }

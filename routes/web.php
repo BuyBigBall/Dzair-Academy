@@ -21,7 +21,7 @@ use App\Http\Livewire\Welcome;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
-use App\Http\Livewire\Courses\CategoryManagement;
+use App\Http\Livewire\Courses\BranchManagement;
 use App\Http\Livewire\Courses\CourseDetail;
 use App\Http\Livewire\Message\MessageManage;
 use App\Http\Livewire\Message\MessageInbox;
@@ -74,13 +74,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/user-profile', UserProfile::class)->name('user-profile');
     Route::get('/user-management', UserManagement::class)->name('user-management');
-    Route::get('/category-management', CategoryManagement::class)->name('category-management');
+    Route::get('/branch-management', BranchManagement::class)->name('branch-management');
     Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
     Route::get('/message', MessageManage::class)->name('message');
     Route::get('/send-message/{email}', MessageManage::class)->name('send-message');
     
-    // Route::get('/message/inbox', MessageInbox::class)->name('inbox');
-    // Route::get('/message/outbox', MessageOutbox::class)->name('outbox');
     Route::get('/collection', CollectionManage::class)->name('collection');
     Route::get('/collection-shared', CollectionShared::class)->name('collection-shared-forme');
 
