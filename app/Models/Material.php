@@ -26,6 +26,7 @@ class Material extends Model
                         , 'cate_exercise'
                         , 'cate_exam'
                         , 'protected'
+                        , 'status'
             ];
     public function creator() {
         return $this->hasOne('App\Models\User','id', 'created_by');

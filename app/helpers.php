@@ -22,6 +22,20 @@ if( !defined('ARCHIVE_EXTENSIONS')) define('ARCHIVE_EXTENSIONS', [
 if( !defined('MAX_COURSE_UPLOAD_SIZE')) define('MAX_COURSE_UPLOAD_SIZE', 1024);
 //We use this to convert date to new format
 
+
+function agotime($date)
+{
+    $diff = date_diff( new \DateTime( "now" ), new \DateTime( date( 'Y-n-d H:i:s', strtotime($date))) );
+    $ago_time = (($diff->y>=1) ? (($diff->y+1) . ' years ago' ) : 
+                (($diff->m>=1) ? (($diff->m+1) . ' months ago' ) : 
+                (($diff->d>=1) ? (($diff->d+1) . ' days ago' ) : 
+                (($diff->h>=1) ? (($diff->h+1) . ' hours ago' ) : 
+                (($diff->i>=1) ? (($diff->i+1) . ' minutes ago' ) : 
+                date( 'l d M Y H:i:s P (T)', strtotime($date) )   )))));
+    return $ago_time;
+}
+
+
 function userphoto($path)
 {
     //if(!empty($path))     dd(__DIR__ . '/../public/uploads/' . ($path));
