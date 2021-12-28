@@ -18,6 +18,7 @@ use App\Http\Livewire\Translate;
 use App\Http\Livewire\TranslateMaterial;
 use App\Http\Livewire\Settings;
 use App\Http\Livewire\Welcome;
+use App\Http\Livewire\Dashboard;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
@@ -73,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
     # <----------- end 
-
+    Route::get('/dashboard',            Dashboard::class)->name('dashboard');
     Route::get('/search',               Search::class)->name('search');
     Route::get('/course-material',      CourseMaterial::class)->name('course-material');
     Route::get('/user-profile',         UserProfile::class)->name('user-profile');

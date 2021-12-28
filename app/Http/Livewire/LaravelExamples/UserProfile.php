@@ -78,6 +78,7 @@ class UserProfile extends Component
             $file_name = $file_name[ count($file_name)-1];
             $file_path = $store_result;
             $this->user->photo = $file_path;
+            $this->user->photo_agree = 0;
         }
         $this->user->save();
         $this->showSuccesNotification = true;

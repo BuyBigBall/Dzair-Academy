@@ -93,7 +93,7 @@
                                                 </a>
                                                 <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection')}}"
                                                         class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', deleteCollection)">
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', deleteCollection, '{{$row->id}}')">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
                                             </td>
