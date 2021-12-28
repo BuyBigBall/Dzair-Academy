@@ -40,11 +40,26 @@
                                     <!-- Path row -->
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <!-- <div class="row form-group d-sm-flex justify-content-start align-items-start"> -->
-                                                <label class="col-md-3 custom-control-label mt-2 d-flex align-items-start justify-content-start py-3">{{ translate('Course Branch : ')}}</label>
-                                                <span  class="col-md-9 text-left form-label mt-1 px-2 d-flex justify-content-start py-3" id="title">{{$selection_string}}</span>
-                                            <!-- </div> -->
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Training : ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$training_string}}</span>
                                         </div>
+                                        <div class="col-md-12 d-flex justify-content-start ">
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Faculty : ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$faculty_string}}</span>
+                                        </div>
+                                        <div class="col-md-12 d-flex justify-content-start ">
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Specialization : ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$specialization_string}}</span>
+                                        </div>
+                                        <div class="col-md-12 d-flex justify-content-start ">
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Level : ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$level_string}}</span>
+                                        </div>
+                                        <div class="col-md-12 d-flex justify-content-start ">
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Module : ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$module_string}}</span>
+                                        </div>
+                                    
                                     </div>
                                     <!-- End Path row -->
 

@@ -53,9 +53,9 @@
                       </div>
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
-                          <label class="sm-hide">{{ translate('Subject')}}</label>
-                          <select class="form-control" wire:model="subject" name='subject'>
-                                <option value=''>{{ translate('Select Subject')}}</option>
+                          <label class="sm-hide">{{ translate('Module')}}</label>
+                          <select class="form-control" wire:model="module" name='module'>
+                                <option value=''>{{ translate('Select Module')}}</option>
                               @foreach($course_options as $val)
                               <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                               @endforeach
@@ -67,8 +67,8 @@
                             @if($path_level>=3)
                             <a href="{{ route('course-material') }}" 
                                 class="btn bg-gradient-primary btn-sm mb-0" 
-                                wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$subject}}', 0)"
-                                type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Subject') : translate('New Course') ) ) ) }}</a>
+                                wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$module}}', 0)"
+                                type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Module') : translate('New Course') ) ) ) }}</a>
                             @endif
                         </div>
                       </div>
@@ -143,7 +143,7 @@
                                       @if( !!empty($row['level']))
                                         @if($user_role=='admin' || $user_role=='staff')
                                         <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                            wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$subject}}', '{{$row['id']}}')"
+                                            wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$module}}', '{{$row['id']}}')"
                                             data-bs-original-title="{{ $const_path_name }}">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>

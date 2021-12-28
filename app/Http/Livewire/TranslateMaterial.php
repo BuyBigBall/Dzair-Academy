@@ -39,7 +39,7 @@ class TranslateMaterial extends Component
     public $training;       //wire:model
     public $faculty;        //wire:model
     public $specialization; //wire:model
-    public $subject;       //wire:model
+    public $module;       //wire:model
     public $level;          //wire:model
     public $word;          //wire:model
 
@@ -107,7 +107,7 @@ class TranslateMaterial extends Component
             {
                 $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
             }
-            $this->subject = $course->course_id;
+            $this->module = $course->course_id;
             $this->level   = $course->level;
             // if(!empty($this->edit_id))
             // $this->emit('ShowMaterialModal', $request->id);
@@ -140,7 +140,7 @@ class TranslateMaterial extends Component
         if( ! empty($this->faculty))                $searchCond[] = ['materials.faculty_id' , $this->faculty];
         if( ! empty($this->specialization))         $searchCond[] = ['materials.specialization_id' , $this->specialization];
         if( ! empty($this->level))                  $searchCond[] = ['materials.level' , $this->level];
-        if( ! empty($this->subject))                 $searchCond[] = ['materials.course_id' , $this->subject];
+        if( ! empty($this->module))                 $searchCond[] = ['materials.course_id' , $this->module];
 
         if( ! empty($this->word))                  
         {

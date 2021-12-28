@@ -24,7 +24,7 @@ class BranchModal extends Component
     public  $training;       
     public  $faculty;        
     public  $specialization; 
-    public  $subject;         
+    public  $module;         
 
 
     protected $listeners = [
@@ -36,13 +36,13 @@ class BranchModal extends Component
         $this->title = translate("Branch Info");
     }
 
-    public function doShow($path_level, $training,$faculty,$specialization,$subject, $edit_id=0) {
+    public function doShow($path_level, $training,$faculty,$specialization,$module, $edit_id=0) {
         $this->edit_id          = $edit_id;
         $this->path_level       = $path_level;
         $this->training         = $training;
         $this->faculty          = $faculty;
         $this->specialization   = $specialization;
-        $this->subject          = $subject;
+        $this->module          = $module;
 
         if($this->path_level==5)
         {
@@ -73,7 +73,7 @@ class BranchModal extends Component
         }
         if($this->path_level==4)
         {
-            $this->title = translate("Subject Info");
+            $this->title = translate("Module Info");
             $obj = Course::find( $this->edit_id );
         }
         if(!empty($obj))

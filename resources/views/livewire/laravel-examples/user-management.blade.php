@@ -61,7 +61,9 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <img src="{{userphoto($user->photo)}}" class="avatar avatar-sm me-3">
+                                            <div class="avatar avatar-sm me-3">
+                                                <img src="{{userphoto($user->photo)}}" class="avatar avatar-sm">
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="text-center">

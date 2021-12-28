@@ -29,7 +29,11 @@ class CourseDetail extends Component
 
     public $password;
 
-    public $selection_string;
+    public $training_string;
+    public $faculty_string;
+    public $specialization_string;
+    public $level_string;
+    public $module_string;
 
     public function mount($id) {
 
@@ -56,18 +60,16 @@ class CourseDetail extends Component
         $this->specialization   = $mat->specialization_id;
         $this->course           = $mat->course_id;
 
-
-        $this->selection_string = '';
-        if(!empty($this->selection_string) && !empty($this->training))   $this->selection_string .= htmlentities(' / ') ;
-        if(!empty($this->training))          $this->selection_string .= Training::find($this->training)->toArray()[lang()];
-        if(!empty($this->selection_string) && !empty($this->faculty))   $this->selection_string .= htmlentities(' / ');
-        if(!empty($this->faculty))           $this->selection_string .= Faculty::find($this->faculty)->toArray()[lang()];
-        if(!empty($this->selection_string) && !empty($this->specialization))   $this->selection_string .= ' / ';
-        if(!empty($this->specialization))    $this->selection_string .= Specialization::find($this->specialization)->toArray()[lang()];
-        if(!empty($this->selection_string) && !empty($this->level))   $this->selection_string .= ' / ';
-        if(!empty($this->level))             $this->selection_string .= $this->level;
-        if(!empty($this->selection_string) && !empty($this->course))   $this->selection_string .= ' / ';
-        if(!empty($this->course))            $this->selection_string .= Course::find($this->course)->toArray()[lang()];
+        $this->training_string         = '';
+        $this->faculty_string          = '';
+        $this->specialization_string   = '';
+        $this->level_string            = '';
+        $this->module_string           = '';
+        if(!empty($this->training))          $this->training_string = Training::find($this->training)->toArray()[lang()];
+        if(!empty($this->faculty))           $this->faculty_string = Faculty::find($this->faculty)->toArray()[lang()];
+        if(!empty($this->specialization))    $this->specialization_string = Specialization::find($this->specialization)->toArray()[lang()];
+        if(!empty($this->level))             $this->level_string = $this->level;
+        if(!empty($this->course))            $this->module_string = Course::find($this->course)->toArray()[lang()];
 
         $this->file_information = [];
         $this->file_information['filename'] = $mat->filename;

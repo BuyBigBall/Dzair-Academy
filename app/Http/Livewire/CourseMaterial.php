@@ -27,7 +27,7 @@ class CourseMaterial extends Component
     public $training;       
     public $faculty;        
     public $specialization; 
-    public $subject;       
+    public $module;       
     public $level;          
 
     public $title;          
@@ -45,7 +45,7 @@ class CourseMaterial extends Component
         'training' => 'required',
         'faculty' => 'required',
         'specialization' => 'required',
-        'subject' => 'required',
+        'module' => 'required',
         'level' => 'required',
         'title' => 'required|max:200',
         'file'  => 'required|max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
@@ -126,7 +126,7 @@ class CourseMaterial extends Component
                         'level'             => $this->level,
                         'faculty_id'        => $this->faculty,
                         'training_id'       => $this->training,
-                        'course_id'         => $this->subject,
+                        'course_id'         => $this->module,
                         'created_by'        => Auth::id(),
                         'updated_by'        => Auth::id(),
                         'title'             => $this->title,

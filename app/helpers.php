@@ -24,11 +24,12 @@ if( !defined('MAX_COURSE_UPLOAD_SIZE')) define('MAX_COURSE_UPLOAD_SIZE', 1024);
 
 function userphoto($path)
 {
-    if( !!empty($path) || !file_exists(__DIR__ . '/../public' . ($path)))
+    //if(!empty($path))     dd(__DIR__ . '/../public/uploads/' . ($path));
+    if( !!empty($path) || !file_exists(__DIR__ . '/../public/uploads/' . ($path)))
     {
         return '/assets/img/user.png';
     }
-    return asset($path);
+    return asset('uploads/'. $path);
 }
 function GetFile_Type($extension)
 {

@@ -30,7 +30,7 @@ class BranchManagement extends Component
     public $training;       //wire:model
     public $faculty;        //wire:model
     public $specialization; //wire:model
-    public $subject;         //wire:model
+    public $module;         //wire:model
     public $level;          //wire:model
     public $word;           //wire:model
 
@@ -49,7 +49,7 @@ class BranchManagement extends Component
         if( $this->path_level==2) $this->updatedTraining($this->training); 
         if( $this->path_level==3) $this->updatedFaculty($this->faculty); 
         if( $this->path_level==4) $this->updatedSpecialization($this->specialization); 
-        if( $this->path_level==5) $this->updatedSubject($this->subject);         
+        if( $this->path_level==5) $this->updatedModule($this->module);         
     }
 
     public function deleteCourse($del_id){
@@ -76,7 +76,7 @@ class BranchManagement extends Component
             if( $this->path_level==2) $this->updatedTraining($this->training); 
             if( $this->path_level==3) $this->updatedFaculty($this->faculty); 
             if( $this->path_level==4) $this->updatedSpecialization($this->specialization); 
-            if( $this->path_level==5) $this->updatedSubject($this->subject); 
+            if( $this->path_level==5) $this->updatedModule($this->module); 
         }
     }
     public function mount()
@@ -101,7 +101,7 @@ class BranchManagement extends Component
             $this->training = 0;
             $this->faculty = 0;
             $this->specialization = 0;
-            $this->subject = 0;
+            $this->module = 0;
             return $this->mount();
         }
         $this->path_level = $this->const_path_level['faculty'];
@@ -117,7 +117,7 @@ class BranchManagement extends Component
         {
             $this->faculty = 0;
             $this->specialization = 0;
-            $this->subject = 0;
+            $this->module = 0;
             return $this->updatedTraining($this->training);
         }
         $this->path_level = $this->const_path_level['specialization'];
@@ -132,7 +132,7 @@ class BranchManagement extends Component
         if($value==0) 
         {
             $this->specialization = 0;
-            $this->subject = 0;
+            $this->module = 0;
             return $this->updatedFaculty($this->faculty);
         }
         $this->path_level = $this->const_path_level['course'];
@@ -143,11 +143,11 @@ class BranchManagement extends Component
         $this->list_of = Specialization::where('id', $value)->first()->toArray()[lang()];
     }
 
-    public function updatedSubject($value)
+    public function updatedModule($value)
     {
         if($value==0) 
         {
-            $this->subject = 0;
+            $this->module = 0;
             return $this->updatedSpecialization($this->specialization);
         }
         $this->path_level = $this->const_path_level['material'];
