@@ -25,7 +25,7 @@ class TranslateMaterial extends Component
     public  $curPage = 1;
     private $search_result;
     // public  $search_input;
-    public  $current_route = 'translate-material';   //for pagination jump
+    public  $current_route = 'translate-course';   //for pagination jump
 
     public $training_options    = [] ;
     public $faculty_options     = [];
@@ -173,6 +173,6 @@ class TranslateMaterial extends Component
         // $this->perPage = 5;        // $this->curPage = 1;
        
         $this->search_result = $query->paginate( $this->perPage );
-        return view('livewire.translate.translate-material', ['pagination'=>$this->search_result] );
+        return view('livewire.translate.translate-course', ['pagination'=>$this->search_result] );
     }
 }

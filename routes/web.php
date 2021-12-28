@@ -21,7 +21,7 @@ use App\Http\Livewire\Welcome;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
-use App\Http\Livewire\Courses\CourseManagement;
+use App\Http\Livewire\Courses\CategoryManagement;
 use App\Http\Livewire\Courses\CourseDetail;
 use App\Http\Livewire\Message\MessageManage;
 use App\Http\Livewire\Message\MessageInbox;
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/user-profile', UserProfile::class)->name('user-profile');
     Route::get('/user-management', UserManagement::class)->name('user-management');
-    Route::get('/course-management', CourseManagement::class)->name('course-management');
+    Route::get('/category-management', CategoryManagement::class)->name('category-management');
     Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
     Route::get('/message', MessageManage::class)->name('message');
     Route::get('/send-message/{email}', MessageManage::class)->name('send-message');
@@ -88,8 +88,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
 
     Route::get('/translate', Translate::class)->name('translate');
-    Route::get('/translate-material', TranslateMaterial::class)->name('translate-material');
-    Route::post('/translate-material', TranslateMaterial::class)->name('translate-material');
+    Route::get('/translate-course', TranslateMaterial::class)->name('translate-course');
+    Route::post('/translate-course', TranslateMaterial::class)->name('translate-course');
     Route::get('/translate-app', Translate::class)->name('translate-app');
     Route::post('/translate-app', Translate::class)->name('translate-app');
     

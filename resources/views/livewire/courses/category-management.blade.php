@@ -6,7 +6,10 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">{{ translate('All Courses') }}</h5>
+                            <h5 class="mb-0">
+                            {{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong>
+                              <!-- {{ translate('All Courses') }} -->
+                            </h5>
                         </div>
                         <!-- <a href="{{ route('course-material') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">&nbsp; {{ translate('New') }}</a> -->
                     </div>
@@ -52,30 +55,28 @@
                       </div>
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
-                          <label class="sm-hide">{{ translate('Course')}}</label>
-                          <select class="form-control" wire:model="course" name='course'>
-                                <option value=''>{{ translate('Select Course')}}</option>
+                          <label class="sm-hide">{{ translate('Subject')}}</label>
+                          <select class="form-control" wire:model="subject" name='subject'>
+                                <option value=''>{{ translate('Select Subject')}}</option>
                               @foreach($course_options as $val)
                               <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                               @endforeach
                           </select>                        
                         </div>
                       </div>
-                      <div class="col-md-2 col-sm-6 d-flex align-items-end justify-content-between">
+                      <div class="col-md-2 col-sm-6 d-flex align-items-end justify-content-center">
                         <div class="form-group">
-                            <a href="{{ route('course-material') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">&nbsp; {{ translate('New') }}</a>
-                          <!-- <label class="sm-hide">{{ translate('Level')}}</label>
-                          <select class="form-control" wire:model="level" name='level'>
-                            <option value=''>{{ translate('Select Level')}}</option>
-                              @foreach($level_options as $val)
-                              <option value="{{ $val}}">{{ $val }}</option>
-                              @endforeach
-                          </select> -->
+                            @if($path_level>=3)
+                            <a href="{{ route('course-material') }}" 
+                                class="btn bg-gradient-primary btn-sm mb-0" 
+                                wire:click.prevent="$emit('ShowCategoryModal', '{{$path_level}}', 0)"
+                                type="button">&nbsp; {{ translate('New') }}</a>
+                            @endif
                         </div>
                       </div>
                     </div>
                     <!-- End Search Box row -->
-                    <div class="row p-1 ps-3"> <h5><p>{{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong></p></h5></div>
+                    <!-- <div class="row p-1 ps-3"> <h5><p>{{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong></p></h5></div> -->
                     <input type='hidden' id='path_level' name='path_level' value='' wire:model="path_level" />
                     <div class="table-responsive p-0" style='min-height:60vh'>
                         <table class="align-items-center mb-0" id='course-items-table' width="99%">
@@ -142,21 +143,27 @@
                                     </td>
                                     <td class="text-center">
                                       @if( !!empty($row['level']))
-                                        <!-- <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                        @if($user_role=='admin' || $user_role=='staff')
+                                        <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                            wire:click.prevent="$emit('ShowCategoryModal', '{{$path_level}}', '{{$row['id']}}')"
                                             data-bs-original-title="{{ $const_path_name }}">
                                             <i class="fas fa-edit text-secondary"></i>
-                                        </a> -->
+                                        </a>
+                                        @endif
+
+                                        @if( $user_role=='admin' || $path_level>=3)
                                         <span onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCourse, '{{$row['id']}}')"
                                             data-bs-toggle="tooltip" data-bs-original-title="{{ translate('delete') }}"
                                             title="{{ translate('delete') }}"
                                           >
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
+                                        @endif
                                       @else
-                                        <a href="{{route('translate-material', 'id='.$row['id'])}}" class="mx-3" 
+                                        <a href="{{route('translate-course', 'id='.$row['id'])}}" class="mx-3" 
                                             data-bs-toggle="tooltip"
-                                            title="{{translate('translate this material')}}"
-                                            data-bs-original-title="{{translate('translate this material')}}">
+                                            title="{{translate('translate this course')}}"
+                                            data-bs-original-title="{{translate('translate this course')}}">
                                             <i class="fa fa-edit text-secondary"></i>
                                         </a>
                                       @endif
@@ -180,3 +187,5 @@
         window.livewire.emit('deleteCourse', del_id);
     }
 </script>
+
+@livewire('modal.category-modal')

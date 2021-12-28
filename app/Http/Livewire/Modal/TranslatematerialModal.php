@@ -145,7 +145,7 @@ class TranslatematerialModal extends Component
                 }
             }
             
-            return Redirect(route('translate-material'));
+            return Redirect(route('translate-course'));
         }
 
         $this->doClose();

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class CourseManagement extends Component
+class CategoryManagement extends Component
 {
     private $const_path_level = ['training'=>1,'faculty'=>2,'specialization'=>3,'course'=>4,'material'=>5];
     public $const_path_name;
@@ -25,10 +25,12 @@ class CourseManagement extends Component
     public $list_title;       
     public $list_of;
 
+    public $user_role;
+
     public $training;       //wire:model
     public $faculty;        //wire:model
     public $specialization; //wire:model
-    public $course;         //wire:model
+    public $subject;         //wire:model
     public $level;          //wire:model
     public $word;           //wire:model
 
@@ -41,12 +43,10 @@ class CourseManagement extends Component
     // ];
 
     public function deleteCourse($del_id){
-        //$this->validate();
-        //dd($del_id);
-        if(Auth::user()->role=='admin' && !empty($del_id) )
+        if( ($this->user_role=='admin' || 
+             $this->user_role=='staff' && $this->path_level>=3) 
+             && !empty($del_id) )
         {
-            #this->path_level
-            #$del_id
             $dbtable = null;
             if( $this->path_level==1) $dbtable = Training::find($del_id);
             if( $this->path_level==2) $dbtable = Faculty::find($del_id);
@@ -66,11 +66,13 @@ class CourseManagement extends Component
             if( $this->path_level==2) $this->updatedTraining(); 
             if( $this->path_level==3) $this->updatedFaculty(); 
             if( $this->path_level==4) $this->updatedSpecialization(); 
-            if( $this->path_level==5) $this->updatedCourse(); 
+            if( $this->path_level==5) $this->updatedSubject(); 
         }
     }
     public function mount()
     {
+        $this->user_role = Auth::user()->role;
+
         $this->path_level = $this->const_path_level['training'];
         $this->const_path_name = translate("Edit Training");
         $this->list_items = 
@@ -84,7 +86,14 @@ class CourseManagement extends Component
     }
     public function updatedTraining($value)
     {
-        if($value==0) return $this->mount();
+        if($value==0) 
+        {
+            $this->training = 0;
+            $this->faculty = 0;
+            $this->specialization = 0;
+            $this->subject = 0;
+            return $this->mount();
+        }
         $this->path_level = $this->const_path_level['faculty'];
         $this->const_path_name = translate("Edit Faculty");
         $this->list_items = 
@@ -94,7 +103,13 @@ class CourseManagement extends Component
     }
     public function updatedFaculty($value)
     {
-        if($value==0) return $this->updatedTraining($this->training);
+        if($value==0) 
+        {
+            $this->faculty = 0;
+            $this->specialization = 0;
+            $this->subject = 0;
+            return $this->updatedTraining($this->training);
+        }
         $this->path_level = $this->const_path_level['specialization'];
         $this->const_path_name = translate("Edit Specialization");
         $this->list_items = 
@@ -104,18 +119,27 @@ class CourseManagement extends Component
     }
     public function updatedSpecialization($value)
     {
-        if($value==0) return $this->updatedFaculty($this->faculty);
+        if($value==0) 
+        {
+            $this->specialization = 0;
+            $this->subject = 0;
+            return $this->updatedFaculty($this->faculty);
+        }
         $this->path_level = $this->const_path_level['course'];
         $this->const_path_name = translate("Edit Course");
         $this->list_items = 
         $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
-        $this->list_title = translate('All Courses');
+        $this->list_title = translate('All Subjects');
         $this->list_of = Specialization::where('id', $value)->first()->toArray()[lang()];
     }
 
-    public function updatedCourse($value)
+    public function updatedSubject($value)
     {
-        if($value==0) return $this->updatedSpecialization($this->specialization);
+        if($value==0) 
+        {
+            $this->subject = 0;
+            return $this->updatedSpecialization($this->specialization);
+        }
         $this->path_level = $this->const_path_level['material'];
         $this->const_path_name = translate("Edit Material");
         $cols =  "   materials.id as id" 
@@ -126,11 +150,11 @@ class CourseManagement extends Component
 
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
-        $cols .= " , MIN(specializations." . lang() . ") as spacialization";
+        $cols .= " , MIN(specializations." . lang() . ") as specialization";
         $cols .= " , MIN(courses." . lang(). ") as course";
         $cols .= " , MIN(materials.level) as level";
         
-        $this->list_title = translate('All Files');
+        $this->list_title = translate('All Courses');
         $this->list_of = Course::where('id', $value)->first()->toArray()[lang()];
 
         $limit = 10;
@@ -157,7 +181,7 @@ class CourseManagement extends Component
     }
     public function render()
     {
-        return view('livewire.courses.course-management');
+        return view('livewire.courses.category-management');
         //return view('livewire.courses.course-download');
         
     }

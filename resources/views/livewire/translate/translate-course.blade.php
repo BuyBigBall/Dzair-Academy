@@ -155,7 +155,7 @@
                                         <td class="text-center text-xs ">
                                             <a  href='#'
                                                 class="mx-3" data-bs-toggle="tooltip"
-                                                data-bs-original-title="translate this material"
+                                                data-bs-original-title="translate this course"
                                                 data-id='{{$row->id}}'
                                                 wire:click.prevent="$emit('ShowMaterialModal', '{{$row->idx}}')"
                                                 >
