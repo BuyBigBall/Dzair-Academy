@@ -42,24 +42,12 @@
                 </div>
                 <div class="modal-body" style="flex-wrap:nowrap;overflow:auto;">
                     <div class="col-md-12">
-                    <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="default_words" class="form-control-label">default</label>
-                                    <div class="">
-                                    <input type="text" wire:model="main_key" 
-                                            class="form-control" readonly
-                                            id="default_words" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="en_words" class="form-control-label">english</label>
                                     <div class="">
-                                    <input type="text" wire:model="en_words" 
+                                    <input type="text" wire:model="en" 
                                             class="form-control" 
                                             id="en_words" />
                                     </div>
@@ -71,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="fr_words" class="form-control-label">français</label>
                                     <div class="">
-                                        <input type="text" wire:model="fr_words" 
+                                        <input type="text" wire:model="fr" 
                                             class="form-control" 
                                             id="fr_words" />
                                     </div>
@@ -83,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="ar_words" class="form-control-label">عربي</label>
                                     <div class="">
-                                        <input type="text" wire:model="ar_words" 
+                                        <input type="text" wire:model="ar" 
                                             class="form-control" 
                                             id="ar_words" />
                                     </div>

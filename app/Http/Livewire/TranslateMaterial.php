@@ -21,6 +21,9 @@ class TranslateMaterial extends Component
     use WithPagination;
 
     //protected $listeners = ['open' => 'loadGalaxy'];
+
+    public  $edit_id;
+
     public  $perPage = 10;
     public  $curPage = 1;
     private $search_result;
@@ -29,14 +32,14 @@ class TranslateMaterial extends Component
 
     public $training_options    = [] ;
     public $faculty_options     = [];
-    public $course_options     = [];
+    public $subject_options     = [];
     public $specialization_options = [];
     public $level_options       = [];
 
     public $training;       //wire:model
     public $faculty;        //wire:model
     public $specialization; //wire:model
-    public $course;       //wire:model
+    public $subject;       //wire:model
     public $level;          //wire:model
     public $word;          //wire:model
 
@@ -55,7 +58,7 @@ class TranslateMaterial extends Component
     }
     public function updatedSpecialization($value)
     {
-        $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
     }
     public function update($field, $newValue)
     {
@@ -84,7 +87,32 @@ class TranslateMaterial extends Component
     public function mount(Request $request)
     {
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
-        $this->level_options = \Config::get('constants.levels');;
+        $this->level_options = \Config::get('constants.levels');
+
+        if(!empty($request->id) && !empty($course = Material::find($request->id)) )
+        {
+            $this->edit_id = $request->id;
+            $this->training = $course->training_id;
+            if(!empty( ($value=$this->training) ))
+            {
+                $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+            }
+            $this->faculty = $course->faculty_id;
+            if(!empty( ($value=$this->faculty) ))
+            {
+                $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
+            }
+            $this->specialization = $course->specialization_id;
+            if(!empty( ($value=$this->specialization) ))
+            {
+                $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+            }
+            $this->subject = $course->course_id;
+            $this->level   = $course->level;
+            // if(!empty($this->edit_id))
+            // $this->emit('ShowMaterialModal', $request->id);
+            // dd($this);
+        }
 
         if(Cookie::has("perPage"))
         {
@@ -112,7 +140,7 @@ class TranslateMaterial extends Component
         if( ! empty($this->faculty))                $searchCond[] = ['materials.faculty_id' , $this->faculty];
         if( ! empty($this->specialization))         $searchCond[] = ['materials.specialization_id' , $this->specialization];
         if( ! empty($this->level))                  $searchCond[] = ['materials.level' , $this->level];
-        if( ! empty($this->course))                 $searchCond[] = ['materials.course_id' , $this->course];
+        if( ! empty($this->subject))                 $searchCond[] = ['materials.course_id' , $this->subject];
 
         if( ! empty($this->word))                  
         {
@@ -148,30 +176,6 @@ class TranslateMaterial extends Component
                })
              ->groupBy('materials.id')->orderBy('materials.created_at','asc');
 
-
-        // $cols = "   materials.id as idx" .
-        //         " , materials.title as default_title".", materials.description as default_description" .
-        //         " , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en_title  ".
-        //         " , GROUP_CONCAT(IF(language='en', material_languages.description, '') SEPARATOR  '') as en_description  ".
-        //         " , GROUP_CONCAT(IF(language='fr', material_languages.title, '') SEPARATOR  '') as fr_title ".
-        //         " , GROUP_CONCAT(IF(language='fr', material_languages.description, '') SEPARATOR  '') as fr_description  ".
-        //         " , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as ar_title  ".
-        //         " , GROUP_CONCAT(IF(language='ar', material_languages.description, '') SEPARATOR  '') as ar_description ";
-        // $cols .= " , trainings." . lang() . " as training";
-        // $cols .= " , faculties." . lang() . " as faculty";
-        // $cols .= " , specializations." . lang() . " as spacialization";
-        // $cols .= " , materials.level";
-
-        // $query = \App\Models\Material::selectRaw(
-        //     DB::raw($cols))
-        //         ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
-        //         ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
-        //         ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
-        //         ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-        //     ->where($searchCond)->groupBy('materials.id')->orderBy('materials.created_at','asc');
-        // print($query->toSql()); //die;// dd($query->get());
-        // $this->perPage = 5;        // $this->curPage = 1;
-       
         $this->search_result = $query->paginate( $this->perPage );
         return view('livewire.translate.translate-course', ['pagination'=>$this->search_result] );
     }

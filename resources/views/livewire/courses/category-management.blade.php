@@ -8,10 +8,8 @@
                         <div>
                             <h5 class="mb-0">
                             {{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong>
-                              <!-- {{ translate('All Courses') }} -->
                             </h5>
                         </div>
-                        <!-- <a href="{{ route('course-material') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">&nbsp; {{ translate('New') }}</a> -->
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -70,7 +68,7 @@
                             <a href="{{ route('course-material') }}" 
                                 class="btn bg-gradient-primary btn-sm mb-0" 
                                 wire:click.prevent="$emit('ShowCategoryModal', '{{$path_level}}', 0)"
-                                type="button">&nbsp; {{ translate('New') }}</a>
+                                type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Subject') : translate('New Course') ) ) ) }}</a>
                             @endif
                         </div>
                       </div>
@@ -162,8 +160,8 @@
                                       @else
                                         <a href="{{route('translate-course', 'id='.$row['id'])}}" class="mx-3" 
                                             data-bs-toggle="tooltip"
-                                            title="{{translate('translate this course')}}"
-                                            data-bs-original-title="{{translate('translate this course')}}">
+                                            title="{{translate('edit this course')}}"
+                                            data-bs-original-title="{{translate('edit this course')}}">
                                             <i class="fa fa-edit text-secondary"></i>
                                         </a>
                                       @endif

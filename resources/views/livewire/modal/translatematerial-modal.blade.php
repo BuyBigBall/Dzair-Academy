@@ -1,4 +1,5 @@
-<div>
+<div >
+    <!-- wire:init="doShow(1") -->
     <!-- Let's also add the backdrop / overlay here -->
     <div
         class="modal-backdrop fade show"
