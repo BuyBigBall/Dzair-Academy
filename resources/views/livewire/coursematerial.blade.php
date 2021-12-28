@@ -11,7 +11,7 @@
                             <div class="col-md-9 col-sm-6 p-1" style='min-height:60px;'>
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    style="width:100%; height:100%;"
+                                    
                                     />
                                 </a>
                             </div>
@@ -186,7 +186,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3  @if( !!empty($protection)) hidden @endif">
+                                    <div class="row mt-3  @if( !!empty($protection)) d-none @endif">
                                         <div class="col-md-1 col-sm-2"></div>
                                         <div class="col-md-3 col-sm-12">
                                             <div class="form-group px-2">
@@ -195,7 +195,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3  @if( !!empty($protection)) hidden @endif">
+                                    <div class="row mt-3  @if( !!empty($protection)) d-none @endif">
                                         <div class="col-md-1 col-sm-2"></div>
                                         <div class="col-md-3 col-sm-12">
                                             <div class="form-group px-2">
@@ -214,7 +214,7 @@
                                 <div class="col-md-3 d-none d-md-block" style='min-height:50vh;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                        style="width:100%; height:100%;"
+                                        
                                         />
                                     </a>
                                 </div>

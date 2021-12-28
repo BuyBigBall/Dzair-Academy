@@ -13,7 +13,7 @@
                             <div style='min-height:60px;'>
                                                                 <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
                                 <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE1_URL'))}}"
-                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    
                                     />
                                 </A>                                
 

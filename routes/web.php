@@ -65,33 +65,37 @@ Route::get ('/search-result', SearchResult::class)->name('search-result');
 // })->name('search-result');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/search', Search::class)->name('search');
+    # for reference
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');
-    Route::get('/course-material', CourseMaterial::class)->name('course-material');
+    # error
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/user-profile', UserProfile::class)->name('user-profile');
-    Route::get('/user-management', UserManagement::class)->name('user-management');
-    Route::get('/branch-management', BranchManagement::class)->name('branch-management');
+    # <----------- end 
+
+    Route::get('/search',               Search::class)->name('search');
+    Route::get('/course-material',      CourseMaterial::class)->name('course-material');
+    Route::get('/user-profile',         UserProfile::class)->name('user-profile');
+    Route::get('/user-management',      UserManagement::class)->name('user-management');
+    Route::get('/branch-management',    BranchManagement::class)->name('branch-management');
     Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
-    Route::get('/message', MessageManage::class)->name('message');
+    Route::get('/message',              MessageManage::class)->name('message');
     Route::get('/send-message/{email}', MessageManage::class)->name('send-message');
     
-    Route::get('/collection', CollectionManage::class)->name('collection');
-    Route::get('/collection-shared', CollectionShared::class)->name('collection-shared-forme');
+    Route::get('/collection',           CollectionManage::class)->name('collection');
+    Route::get('/collection-shared',    CollectionShared::class)->name('collection-shared-forme');
 
-    Route::get('/collection-files/{id}', CollectionFiles::class)->name('collection-files');
+    Route::get('/collection-files/{id}',        CollectionFiles::class)->name('collection-files');
     Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
 
-    Route::get('/translate', Translate::class)->name('translate');
-    Route::get('/translate-course', TranslateMaterial::class)->name('translate-course');
-    Route::post('/translate-course', TranslateMaterial::class)->name('translate-course');
-    Route::get('/translate-app', Translate::class)->name('translate-app');
-    Route::post('/translate-app', Translate::class)->name('translate-app');
+    Route::get('/translate',            Translate::class)->name('translate');
+    Route::get('/translate-course',     TranslateMaterial::class)->name('translate-course');
+    Route::post('/translate-course',    TranslateMaterial::class)->name('translate-course');
+    Route::get('/translate-app',        Translate::class)->name('translate-app');
+    Route::post('/translate-app',       Translate::class)->name('translate-app');
     
-    Route::get('/settings', Settings::class)->name('settings');
+    Route::get('/settings',             Settings::class)->name('settings');
     
 });
 

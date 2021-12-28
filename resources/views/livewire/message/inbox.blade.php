@@ -12,7 +12,7 @@
                                 <div style='min-height:60px;'>
                                 <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    style="width:100%; height:100%;"
+                                    
                                     />
                                 </a>                                
                                 </div>                        
@@ -85,7 +85,7 @@
                                 <div style='min-height:50vh;width:100%;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    style="width:100%; height:100%;"
+                                    
                                     />
                                 </a>                                
                                 </div>

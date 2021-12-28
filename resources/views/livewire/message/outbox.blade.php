@@ -12,7 +12,7 @@
                                 <div style='min-height:60px;'>
                                                                     <A HREF="{{ ENV('ADVERTISE1_LINK') }}">
                                 <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE1_URL'))}}"
-                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    
                                     />
                                 </A>                                
 
@@ -86,7 +86,7 @@
                                 <div style='min-height:50vh;width:100%;'>
                                                                     <A HREF="{{ ENV('ADVERTISE3_LINK') }}">
                                 <IMG SRC="{{ asset('uploads/' . ENV('ADVERTISE3_URL'))}}"
-                                    STYLE="WIDTH:100%; HEIGHT:100%;"
+                                    
                                     />
                                 </A>                                
 
