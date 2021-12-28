@@ -33,7 +33,9 @@ class CourseMaterial extends Component
     public $title;          
     public $description;          
     public $file;          
-    public $protection;          
+    public $protection;        
+    public $password_code;  
+    public $confirm_code;
     public $cate_course = true;
     public $cate_exercise = true;
     public $cate_exam = true;
@@ -43,7 +45,7 @@ class CourseMaterial extends Component
         'training' => 'required',
         'faculty' => 'required',
         'specialization' => 'required',
-        'subejct' => 'required',
+        'subject' => 'required',
         'level' => 'required',
         'title' => 'required|max:200',
         'file'  => 'required|max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
@@ -88,7 +90,19 @@ class CourseMaterial extends Component
     public function savecourse() {
 
         $validatedData = $this->validate();
-        
+        if(!empty($this->protection))
+        {
+            if( !! empty($this->password_code))
+            {
+                $error['password_empty'] = true;
+                return;
+            }
+            if($this->password_code != $this->confirm_code)
+            {
+                $error['password_nomatch'] = true;
+                return;
+            }
+        }
         //$this->photo->storePubliclyAs('photos', 'avatar', 's3');  # save to S3 service store
         $origin_filename = $this->file->getClientOriginalName();
         $store_result = $this->file->store($this->specialization . '/courses');  # courses/nb6QQA0FZ2e2YA8whGNej3R9KISpIO1tQrJEJhEi.zip
@@ -112,7 +126,7 @@ class CourseMaterial extends Component
                         'level'             => $this->level,
                         'faculty_id'        => $this->faculty,
                         'training_id'       => $this->training,
-                        'course_id'         => $this->course,
+                        'course_id'         => $this->subject,
                         'created_by'        => Auth::id(),
                         'updated_by'        => Auth::id(),
                         'title'             => $this->title,
@@ -121,6 +135,7 @@ class CourseMaterial extends Component
                         'filesize'          => $this->file->getSize(),
                         'filepath'          => $file_path,
                         'filename'          => $origin_filename,
+                        'protected'         => !empty($this->protection) ? md5($this->password_code) : '',
                         'cate_course'       => $this->cate_course,
                         'cate_exercise'     => $this->cate_exercise,
                         'cate_exam'         => $this->cate_exam,
@@ -141,6 +156,8 @@ class CourseMaterial extends Component
         $this->description = null;          
         $this->file = null;          
         $this->protection = null;          
+        $this->password_code = '';    
+        $this->confirm_code = '';
         //wire:click.prevent="$emit('WireAlert', '')"
         $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
 

@@ -27,7 +27,7 @@ class CourseDetail extends Component
     public $encryptPassword;
     public $file_information;
 
-    private $password;
+    public $password;
 
     public $selection_string;
 
@@ -36,7 +36,7 @@ class CourseDetail extends Component
         $this->pid = intval($id);
         $this->material = $mat = Material::find($id);
         $this->material_laanguage = $mat_lang = Material::find($id)->lang()->where('language', lang())->first();
-        
+       // dd($mat);
         $this->password = $mat->protected;
         $this->protected = !empty($mat->protected);
 
@@ -82,6 +82,11 @@ class CourseDetail extends Component
         $myFile = storage_path('app/'.$this->material->filepath);
     	$headers = []; //['Content-Type: application/pdf'];
     	$newName = $this->file_information['filename'];
+        
+        if( !empty($this->password) && $this->password!=md5($this->encryptPassword))
+        {
+            return null;;
+        }
 
     	return response()->download($myFile, $newName, $headers);
     }

@@ -5,10 +5,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-4 col-sm-6">
+                            <div class="col-md-3 col-sm-6">
                                 <h4 class="title">Course Upload</h4>
                             </div>
-                            <div class="col-md-8 col-sm-6 p-1" style='min-height:60px;'>
+                            <div class="col-md-9 col-sm-6 p-1" style='min-height:60px;'>
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
                                     style="width:100%; height:100%;"
@@ -183,6 +183,24 @@
                                                     name="protection" value="" id="encrption">
                                                 <label class="custom-control-label" for="encrption">Password protection
                                                 </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3  @if( !!empty($protection)) hidden @endif">
+                                        <div class="col-md-1 col-sm-2"></div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <div class="form-group px-2">
+                                                <input class="form-control mx-6" type="password" 
+                                                    wire:model="password_code" name="password_code" value="" id="password_code" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3  @if( !!empty($protection)) hidden @endif">
+                                        <div class="col-md-1 col-sm-2"></div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <div class="form-group px-2">
+                                                <input class="form-control mx-6" type="password" 
+                                                    wire:model="confirm_code" name="confirm_code" value="" id="confirm_code" />
                                             </div>
                                         </div>
                                     </div>

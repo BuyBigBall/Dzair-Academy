@@ -131,6 +131,8 @@ class BranchModal extends Component
                 $obj->save();
             }        
         }
+
+        $this->emit("refreshBranchList", null);
         $this->show = false;
     }
     public function doClose() {

@@ -37,10 +37,20 @@ class BranchManagement extends Component
     public $path_level = 1;
     protected $listeners = [
         'deleteCourse' => 'deleteCourse'        ,
+        'refreshBranchList' => 'refreshBranchList'        ,
     ];
     // protected $rules = [
     //     'del_id' => 'required',
     // ];
+    
+    public function refreshBranchList()
+    {
+        if( $this->path_level==1) $this->mount(); 
+        if( $this->path_level==2) $this->updatedTraining($this->training); 
+        if( $this->path_level==3) $this->updatedFaculty($this->faculty); 
+        if( $this->path_level==4) $this->updatedSpecialization($this->specialization); 
+        if( $this->path_level==5) $this->updatedSubject($this->subject);         
+    }
 
     public function deleteCourse($del_id){
         if( ($this->user_role=='admin' || 

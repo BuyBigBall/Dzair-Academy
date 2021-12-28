@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
-                        <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center">
+                        <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center">
                             <h5 class="mb-0">{{ translate('Course Download') }}</h5>
                         </div>
-                        <div class="col-md-8 col-sm-6  text-center p-1">
+                        <div class="col-md-9 col-sm-6  text-center p-1">
                             <div style='min-height:60px;'>
                                 <a href="{{ env('ADVERTISE1_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
@@ -116,7 +116,7 @@
                                     </div>
                                     <!-- End file informations row -->
 
-                                    @if($protected)
+                                    @if( !empty($password) )
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-center">

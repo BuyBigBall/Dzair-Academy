@@ -27,7 +27,7 @@
                    @foreach($pagination as $row)
                    <li class="list-group-item border-0 d-flex p-3 mb-2 bg-gray-100 border-radius-lg w-100">
                      <div class="d-flex flex-column w-100">
-                       <a href="{{ route('course-download', 1)}}">
+                       <a href="{{ route('course-download', $row->id)}}">
                          <span class="text-dark ">{{ count($row->lang)>0 ? $row->lang[0]->title : $row->title }} </span> </a>
                        <div class="mt-2 mb-1 d-flex align-items-center justify-content-between">
                          <div class="d-flex flex-sm-row flex-column  align-items-sm-center align-items-start gx-3">
