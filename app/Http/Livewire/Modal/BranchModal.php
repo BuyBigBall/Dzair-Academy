@@ -119,6 +119,8 @@ class BranchModal extends Component
                 $obj->en = $this->en;
                 $obj->fr = $this->fr;
                 $obj->ar = $this->ar;
+                $obj->created_by = Auth::id();
+                $obj->updated_by = Auth::id();
                 $obj->save();
             }
             if($this->path_level==4)
@@ -128,6 +130,8 @@ class BranchModal extends Component
                 $obj->en = $this->en;
                 $obj->fr = $this->fr;
                 $obj->ar = $this->ar;
+                $obj->created_by = Auth::id();
+                $obj->updated_by = Auth::id();
                 $obj->save();
             }        
         }

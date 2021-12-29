@@ -9,5 +9,13 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['specialization_id', 'en' ,'fr' ,'ar'];
+    protected $fillable = ['specialization_id', 'en' ,'fr' ,'ar', 'created_by', 'updated_by', 'status'];
+
+    public function creator() {
+        return $this->hasOne('App\Models\User','id', 'created_by');
+        //return $this->belongsTo('App\Models\User','id', 'created_by');
+    }
+    public function updater() {
+        return $this->hasOne('App\Models\User','id','updated_by');
+    }
 }
