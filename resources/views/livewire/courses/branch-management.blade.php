@@ -105,7 +105,7 @@
                                     <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                       {{translate('Arabic')}}
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="min-width:80px;"
                                         colspan=2>
                                         {{ translate('Action') }}
                                     </th>
@@ -142,7 +142,7 @@
                                     <td class="text-center">
                                       @if( !!empty($row['level']))
                                         @if($user_role=='admin' || $user_role=='staff')
-                                        <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                        <a href="#" class="mx-1" data-bs-toggle="tooltip"
                                             wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$module}}', '{{$row['id']}}')"
                                             data-bs-original-title="{{ $const_path_name }}">
                                             <i class="fas fa-edit text-secondary"></i>
@@ -158,7 +158,7 @@
                                         </span>
                                         @endif
                                       @else
-                                        <a href="#" class="mx-3" 
+                                        <a href="#" class="mx-1" 
                                           onclick="ConfirmFunction('{{translate('Are you sure to edit this course?')}}', editCourse, '{{$row['id']}}')"
                                             data-bs-toggle="tooltip"
                                             title="{{translate('edit this course')}}"

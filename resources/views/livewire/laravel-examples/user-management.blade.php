@@ -24,10 +24,10 @@
                                 @include('livewire.pagination')
                             </div>
                     <div class="table-responsive p-0" style='min-height:50vh'>
-                        <table class="table align-items-center mb-0">
+                        <table class="align-items-center mb-0 w-100">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('ID') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -48,7 +48,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('Creation Date') }}
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="min-width:80px;">
                                         {{ translate('Action') }}
                                     </th>
                                 </tr>
@@ -56,35 +56,35 @@
                             <tbody>
                                 @foreach($pagination as $user)
                                 <tr>
-                                    <td class="ps-4">
+                                    <td class="text-center pe-1">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->idx}}</p>
                                     </td>
-                                    <td>
+                                    <td class="pe-1">
                                         <div>
                                             <div class="avatar avatar-sm me-3">
                                                 <img src="{{userphoto($user->photo)}}" class="avatar avatar-sm">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1 ">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->username}}</p>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1" style="overflow-wrap: anywhere;">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->useremail}}</p>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1">
                                         <?php /* {{$user->training}} @if(!empty($user->faculty)) / @endif {{$user->faculty}} @if(!empty($user->specialization)) / @endif {{$user->specialization}} @if(!empty($user->course)) / @endif {{$user->course}} */?>
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->location }}</p>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->userrole}}</p>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1">
                                         <span class="text-secondary text-xs font-weight-bold">{{$user->email_verified_at}}</span>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center pe-1">
                                         <a href="#" 
-                                            class="mx-3" data-bs-toggle="tooltip"
+                                            class="mx-1" data-bs-toggle="tooltip"
                                             data-bs-original-title="Edit user"
                                             wire:click.prevent="$emit('ShowUserModal', '{{$user->idx}}')"
                                             >

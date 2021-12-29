@@ -1,7 +1,7 @@
 <div class="row">
     @foreach($newPhoto_users as $user)
-    <div class="col-md-2">
-        <div class="card">
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <div class="card mb-2">
             <div class="card-header mx-4 p-3 text-center">
                 <div
                     class="icon icon-shape icon-lg text-center">

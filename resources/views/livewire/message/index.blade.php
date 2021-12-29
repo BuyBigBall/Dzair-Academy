@@ -10,8 +10,8 @@
                             </div>
                             <div class="col-md-8 col-sm-6  text-center p-1" style='display:none;' >
                                 <div style='min-height:60px;'>
-                                <A HREF="{{ env('ADVERTISE1_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
+                                <a href="{{ env('ADVERTISE1_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
                                     
                                     />
                                 </A>                                
@@ -23,12 +23,12 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-1 row col-12">
-                            <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
-                                <div style='min-height:50vh;width:100%;'>
-                                <A HREF="{{ env('ADVERTISE2_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                    
+                        <div class="table-responsive p-1 row col-12 mx-0">
+                            <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block" >
+                                <div class="w-100" style='min-height:50vh;'>
+                                <a href="{{ env('ADVERTISE2_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
+                                    class="w-100"
                                     />
                                 </A>                                
 
@@ -36,7 +36,7 @@
                             </div>
 
                             <!-- #################################### -->
-                            <div class="col-md-6 col-sm-6 d-flex justify-content-center align-items-start" >
+                            <div class="col-sm-12 col-md-9 col-lg-6 d-flex justify-content-center align-items-start" >
                             <form wire:submit.prevent="sendMessage" action="#" method="POST" 
                                 role="form text-left" class="w-100">
                                 <div class="justify-content-center align-items-start" >
@@ -94,12 +94,11 @@
                             <!-- #################################### -->
 
 
-                            
-                            <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
-                                <div style='min-height:50vh;width:100%;'>
-                                                                    <A HREF="{{ env('ADVERTISE3_LINK') }}">
-                                <IMG SRC="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    
+                            <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-md-block" >
+                                <div class="w-100" style='min-height:50vh;'>
+                                        <a href="{{ env('ADVERTISE3_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
+                                    class="w-100"
                                     />
                                 </A>                                
 

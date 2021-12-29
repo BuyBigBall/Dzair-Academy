@@ -5,9 +5,9 @@
     <div class="card-body pt-4 p-3">
         <ul class="list-group">
         @foreach($new_courses as $course)
-            <li class="list-group-item border-0 d-flex  flex-column p-4 mb-2 bg-gray-100 border-radius-lg">
-            <div class="d-flex">
-                <div class="d-flex flex-column">
+            <li class="list-group-item border-0 d-flex  flex-column p-md-3 p-lg-4 p-2 mb-2 bg-gray-100 border-radius-lg">
+            <div class="row">
+                <div class="col-8 d-flex flex-column">
                     <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
                     <span class="mb-2 text-xs">{{ translate('User Name:' )}}<span
                             class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
@@ -16,19 +16,19 @@
                     <span class="mb-2 text-xs">{{ translate('Univercity:' )}} <span
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
                 </div>
-                <div class="ms-auto">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" 
+                <div class="col-4 text-right">
+                    <a class="btn btn-link text-danger text-gradient px-1 mb-0" 
                         onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
                                 href="javascript:;"><i
                             class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" 
+                    <a class="btn btn-link text-dark px-1 mb-0" 
                         onclick="ConfirmFunction('{{ translate('Are you sure to agree this uploaded course?')}}', agreeUploadedCourse, '{{$course->id}}')"
                         ><i
                             class="fas fa-check text-dark me-2" aria-hidden="true"></i>Agree</a>
                 </div>
                 </div>
-                <div class="d-flex align-items-center">
-                <div class="d-flex">
+                <div class="row d-flex align-items-center">
+                <div class="col-9">
                     <span class="mb-2 text-xs">File: <span
                             class="text-dark font-weight-bold me-3">{{ filetypename($course->filetype) }}</span></span>
                     <span class="mb-2 text-xs">size: <span
@@ -36,11 +36,11 @@
                     <span class="mb-2 text-xs">uploaded date: <span
                             class="text-dark me-3 font-weight-bold"> {{ agotime($course->created_at) }}</span></span>
                 </div>
-                <div class="ms-auto">
-                        <a class="btn btn-link text-dark px-3 mb-0" 
+                <div class="col-3 d-flex justify-content-end">
+                    <a class="btn btn-link text-dark px-2 px-md-3 px-lg-4 mb-0" 
                                 href="{{asset('course-download').'/'.$course->id}}"><i
                                 class="fa fa-eye"></i></a>
-                    <a class="btn btn-link text-dark px-3 mb-0" 
+                    <a class="btn btn-link text-dark px-2 px-md-3 px-lg-4 mb-0" 
                         wire:click.prevent="$emit('download', {{$course->id}})"
                         href="javascript:;"><i
                             class="fa fa-download"></i></a>

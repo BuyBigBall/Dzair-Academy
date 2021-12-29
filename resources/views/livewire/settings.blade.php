@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 d-flex justify-content-center py-3">
+                        <div class="col-md-12 d-flex justify-content-center py-3">
                             <button class="btn btn-primary btn-sm mb-1" type="submit">{{translate('Save')}}</button>
                         </div>
                     </div>

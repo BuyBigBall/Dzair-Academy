@@ -5,14 +5,17 @@
          <div class="card">
            <div class="card-header">
              <div class="row">
-               <div class="col-md-4 col-sm-6">
+               <div class="col-md-3 col-sm-6">
                  <h4 class="title">{{ translate('Search Results')}}</h4>
                  <div>Previous filters : {{$filter}} </div>
                </div>
-               <div class="col-md-8 col-sm-6 p-0" style='min-height:60px; overflow:hidden'>
-                 <img src="../assets/img/top1.png" style='width:100%; height:92px;' />
-
-               </div>
+               <div class="col-md-9 col-sm-6 p-1 d-none d-md-block" >
+                      <a href="{{ env('ADVERTISE1_LINK') }}">
+                          <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
+                              class="w-100"        
+                              />
+                          </a>
+                      </div>
              </div>
            </div>
            <div class="card-body">
@@ -61,9 +64,13 @@
                    <button class="btn btn-secondary px-5" onclick="history.back(-1);">{{translate('Back')}}</button>
                  </div>
                </div>
-               <div class="col-md-3 d-none d-md-block p-0" style='min-height:50vh; overflow:hidden;'>
-                 <img src='../assets/img/Campaign-banner-image2.png' />
-               </div>
+               <div class="col-md-3 d-none d-lg-block">
+                        <a href="{{ env('ADVERTISE3_LINK') }}">
+                            <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
+                                class="w-100"
+                                />
+                            </a>
+                        </div>
              </div>
            </div>
 

@@ -8,12 +8,12 @@
                 <div class="card-body pt-3">
                 <form wire:submit.prevent="search" action="#" method="POST" role="form text-left">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-12 col-sm-6">
+                    <!-- <div class="row">
+                        <div class="col-md-12 col-sm-6"> -->
                             
                             <!-- Search Box row -->
                             <div class="row"> 
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                                 <div class="form-group">
                                 <label class="sm-hide">{{ translate('Traning')}}</label>
                                 <select class="form-control"   wire:model="training" name='training'>
@@ -27,7 +27,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-2 col-sm-6">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2">
                                 <div class="form-group">
                                 <label class="sm-hide">{{ translate('Faculty')}}</label>
                                 <select class="form-control"  wire:model="faculty" name='faculty'>
@@ -38,7 +38,7 @@
                                 </select>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-6">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2">
                                 <div class="form-group">
                                 <label class="sm-hide">{{ translate('Specialization')}}</label>
                                 <select class="form-control" wire:model="specialization" name='specialization'>
@@ -49,7 +49,7 @@
                                 </select>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-6">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-2">
                                 <div class="form-group">
                                 <label class="sm-hide">{{ translate('Level')}}</label>
                                 <select class="form-control" wire:model="level" name='level'>
@@ -60,7 +60,7 @@
                                 </select>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                                 <div class="form-group">
                                 <label class="sm-hide">{{ translate('Module')}}</label>
                                 <select class="form-control" wire:model="module" name='module'>
@@ -89,9 +89,9 @@
                                 </div>
                             </div>
                             <!-- End TextBox Box row -->
-                        </div>
+                        <!-- </div>
                         
-                    </div>
+                    </div> -->
                     </form>
                         
                     <div class="d-flex justify-content-between align-items-center">
@@ -100,15 +100,8 @@
                     <div class="table-responsive row">
 
                         <!-- #################################### -->
-                        <div class="col-md-12 col-sm-6 text-right d-flex justify-content-center align-items-start" >
-                            <?php /* <livewire:user-datatables 
-                                searchable="name, email"
-                                exportable
-                            />
-                            // */ ?>
-                            
-
-                            <table class="col-md-12 col-sm-6 align-items-center mb-0" 
+                        <div class="w-100 px-0 text-right d-flex justify-content-center align-items-start" >
+                            <table class="align-items-center mb-0 w-100" 
                                 id='all-words-table' style="display:table;min-height:42vh;">
                                 <thead>
                                     <tr>
@@ -124,9 +117,9 @@
                                         <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">
                                             عربي
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ translate('Action')}}
-                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                            style="width:80px;"
+                                            >{{ translate('Action')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

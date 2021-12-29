@@ -8,10 +8,10 @@
                             <div class="col-md-3 col-sm-6">
                                 <h4 class="title">Course Upload</h4>
                             </div>
-                            <div class="col-md-9 col-sm-6 p-1" style='min-height:60px;'>
+                            <div class="col-md-9 col-sm-6 p-1 d-none d-md-block" >
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
+                                    class="w-100"        
                                     />
                                 </a>
                             </div>
@@ -146,7 +146,7 @@
                                     <!-- End Title TextBox row -->
 
 
-                                    <div class="row mt-3">
+                                    <div class="row">
                                         <div class="col-md-9 col-sm-12">
                                             <div class="form-group d-sm-flex align-items-center">
                                                 <label class="custom-control-label me-3 w-25"
@@ -159,7 +159,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mt-3">
+                                    <div class="row">
                                         <div class="col-md-9 col-sm-12">
                                             <div class="form-group d-sm-flex align-items-center">
                                                 <label for="formFile"
@@ -176,7 +176,7 @@
                                     </div>
 
 
-                                    <div class="row mt-3">
+                                    <div class="row">
                                         <div class="col-md-9 col-sm-12">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" wire:model="protection"
@@ -186,35 +186,43 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3  @if( !!empty($protection)) d-none @endif">
-                                        <div class="col-md-1 col-sm-2"></div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group px-2">
-                                                <input class="form-control mx-6" type="password" 
+                                   
+                                    <div class="row @if( !!empty($protection)) d-none @endif">
+                                        <div class="col-md-9 col-sm-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <label for="formFile"
+                                                    class="custom-control-label me-3 w-25 d-none d-sm-block"></label>
+                                                    <!-- ms-0 ms-md-5 ms-lg-6 -->
+                                                <input class="form-control" type="password" 
                                                     wire:model="password_code" name="password_code" value="" id="password_code" />
+                                                    @error('password') <span class="error">{{ $message }}</span> @enderror
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3  @if( !!empty($protection)) d-none @endif">
-                                        <div class="col-md-1 col-sm-2"></div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group px-2">
-                                                <input class="form-control mx-6" type="password" 
+                                   
+                                    <div class="row @if( !!empty($protection)) d-none @endif">
+                                        <div class="col-md-9 col-sm-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <label for="formFile"
+                                                    class="custom-control-label me-3 w-25 d-none d-sm-block"></label>
+                                                    <!-- ms-0 ms-md-5 ms-lg-6 -->
+                                                    <input class="form-control" type="password" 
                                                     wire:model="confirm_code" name="confirm_code" value="" id="confirm_code" />
+                                                    @error('password') <span class="error">{{ $message }}</span> @enderror
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3">
+                                    <div class="row">
                                         <div class="col-md-12 text-right">
                                             <button type="submit"
                                                 class="btn bg-primary">Upload</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 d-none d-md-block" style='min-height:50vh;'>
+                                <div class="col-md-3 d-none d-lg-block" >
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                        
+                                        class="w-100"
                                         />
                                     </a>
                                 </div>

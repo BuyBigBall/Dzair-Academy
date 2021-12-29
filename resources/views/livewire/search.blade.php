@@ -8,10 +8,10 @@
                <div class="col-md-4 col-sm-6">
                  <h4 class="title">{{ __('pages.Find A Course')}}</h4>
                </div>
-               <div class="col-md-8 col-sm-6 p-1" style='min-height:60px;'>
+               <div class="col-md-8 col-sm-6 p-1 d-none d-md-block" style='min-height:60px;'>
                  <a href="{{ env('ADVERTISE1_LINK') }}">
                    <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                    
+                      class="w-100"
                      /></a>
                      </div>
              </div>
@@ -166,10 +166,10 @@
                      </div>
                    </div>
                  </div>
-                 <div class="col-md-3 d-none d-md-block" style='min-height:50vh;'>
+                 <div class="col-md-3 d-none d-lg-block">
                     <a href="{{ env('ADVERTISE3_LINK') }}">
                       <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                        
+                          class="w-100"
                         />
                     </a>
                  </div>

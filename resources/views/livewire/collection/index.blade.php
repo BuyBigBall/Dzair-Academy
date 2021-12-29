@@ -8,7 +8,7 @@
                         <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center" >
                             <h5 class="mb-0">{{ translate('User Collection List') }}</h5>
                         </div>
-                        <div class="col-md-9 col-sm-6  text-center p-1"  >
+                        <div class="col-md-9 col-sm-6 text-center p-1 d-none d-lg-block"  >
                             <div style='min-height:60px;'>
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
@@ -25,8 +25,10 @@
                                 @include('livewire.pagination')
                             </div>
                         <!-- #################################### -->
-                        <div class="col-md-9 col-sm-6 text-right d-flex justify-content-center align-items-start" >
-                                <table class="table align-items-center mb-0" id='all-course-table'>
+                        <div class="col-sm-12 col-md-12 col-lg-9 text-right d-flex justify-content-center align-items-start" 
+                            style="min-height:30vh;"
+                            >
+                                <table class="align-items-center mb-0 w-100" id='all-course-table'>
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -107,7 +109,7 @@
 
 
                         
-                        <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
+                        <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start d-none d-lg-block" >
                             <div style='min-height:50vh;width:98%;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"

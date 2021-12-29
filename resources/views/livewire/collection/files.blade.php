@@ -8,32 +8,30 @@
                         <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center" >
                             <h5 class="mb-0">{{ translate('Collection Files') }}</h5>
                         </div>
-                        <div class="col-md-9 col-sm-6  text-center p-1"  >
-                            <div style='min-height:60px;'>
+                        <div class="col-md-9 d-none d-lg-block"  >
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
+                                    class="w-100"
                                     />
                                 </a>
-                            </div>                        
                         </div>
                     </div>
                 </div>
-                <div class="card-body pt-3">
+                <div class="card-body pt-3 px-0 px-sm-1 px-md-2 px-lg-3">
                     <div class="row">
                         <!-- #################################### -->
-                        <div class="col-md-9 col-sm-6 text-right d-flex justify-content-start flex-column align-items-start" >
+                        <div class="col-lg-9 col-sm-12 text-right d-flex justify-content-start flex-column align-items-start tx-0 tx-sm-1 tx-md-2" >
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="pe-3 text-muted">
+                                <div class="px-2 px-sm-3 px-md-3 px-lg-3 text-muted">
                                     {{ translate('Collection Name') }}
                                 </div>
-                                <div class="pe-3 text-gray-700">
-                                    {{ $collection->collection_name }}
+                                <div class="px-2 px-sm-3 px-md-3 px-lg-3 text-gray-700 text-dark pt-2">
+                                    <h6>{{ $collection->collection_name }}</h6>
                                 </div>
                             </div>
-                            <div class="row table-responsive w-100">
+                            <div class="row table-responsive w-100 mx-0 mx-sm-1 mx-md-2">
                             <div class="col-md-12">
-                            <table class="table align-items-center mb-0" id='all-course-table'>
+                            <table class="align-items-center mb-0 w-100" id='all-course-table'>
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -57,7 +55,7 @@
                                     <?php $i=1 ?>
                                     @foreach($search_result as $row)
                                     <tr>
-                                        <td class="ps-4 text-center">
+                                        <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{$i++}}</p>
                                         </td>
                                         <td>
@@ -67,7 +65,8 @@
                                         </td>
                                         <td class="text-left">
                                             <p class="text-xs font-weight-bold mb-0">
-                                            {{ ln($row->mat->training)}} <br> {{ ln($row->mat->faculty) }} <br> {{  ln($row->mat->specialization) }} <br> {{  ln($row->mat->course) }}
+                                            <!-- {{ ln($row->mat->training)}} <br> {{ ln($row->mat->faculty) }} <br> {{  ln($row->mat->specialization) }} <br>  -->
+                                            {{  ln($row->mat->course) }}
                                             </p>
                                         </td>
                                         <td class="text-center">
@@ -90,17 +89,13 @@
                             </div>
                         </div>
                         <!-- #################################### -->
-
-
                         
-                        <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
-                            <div style='min-height:50vh;width:98%;'>
+                        <div class="col-lg-3 d-none d-lg-block" >
                             <a href="{{ env('ADVERTISE3_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    
+                                    class="w-100"                                    
                                     />
                                 </a>                                
-                            </div>
                         </div>
                     </div>
                     <div class="row">

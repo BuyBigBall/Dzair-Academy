@@ -6,11 +6,11 @@
                     <div class="col-md-4">
                         <h6 class="mb-0">{{ translate('Profile Information') }}</h6>
                     </div>
-                    <div class="col-md-8 col-sm-6">
+                    <div class="col-md-8 col-sm-12 d-none d-md-block">
                         <div style='min-height:60px;'>
                         <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
+                                    class="w-100"
                                     />
                                 </a>   
                         </div>
@@ -87,22 +87,6 @@
                                         @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="course" class="form-control-label">Course Name</label>
-                                        <div class="@error('course') border border-danger rounded-3 @enderror">
-                                            <input wire:model="user_course_id" type="hidden" id="course_id" name="course_id"
-                                                value="{{$user->course_id}}"
-                                                 />
-                                            <input class="form-control" 
-                                                type="text" placeholder="translate('Select Course')}}" id="course"
-                                                readonly
-                                                value="{{ ln($user->course) }}"
-                                                >
-                                        </div>
-                                        @error('course') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="form-group">
                                 <label for="about">{{ 'About Me' }}</label>
@@ -117,11 +101,11 @@
                                 <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6">
+                        <div class="col-md-3 col-sm-6 d-none d-md-block">
                             <div style='min-height:50vh;'>
                                 <a href="{{ env('ADVERTISE2_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                        
+                                        class="w-100"
                                         />
                                     </a>                                
                             </div>
@@ -129,8 +113,8 @@
 
                                       
                 <!-- #################################### -->
-                <div class="col-md-9 col-sm-12 d-flex justify-content-center align-items-start me-5" >
-                        <table class="table align-items-center mb-0" id='all-course-table'>
+                <div class="table-responsive col-md-9 col-sm-12 d-flex justify-content-center align-items-start mb-5" >
+                        <table class="align-items-center mb-0 w-100" id='all-course-table'>
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" >
@@ -185,17 +169,7 @@
                                             class="mx-1" >
                                             <i class="cursor-pointer fa fa-copy text-secondary"></i>
                                         </span>
-                                        <!-- <a href="javascript:$('#collectionModal').modal('show');" 
-                                            class="mx-1" 
-                                            data-bs-toggle="tooltip"
-                                            data-bs-original-title="edit collection"
-                                            data-id='{{$row->id}}' 
-                                            >
-                                            <i class="fa fa-edit text-secondary"></i>
-                                        </a> -->
-                                        <!-- <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('collection files')}}"
-                                            class="mx-1" 
-                                            data-id='{{$row->id}}' > -->
+                                       
                                         <a href="{{route('collection-files', $row->coll->id)}}" 
                                             class="mx-1" 
                                             data-bs-toggle="tooltip"
