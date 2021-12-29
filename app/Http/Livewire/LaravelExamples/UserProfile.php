@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\LaravelExamples;
 use App\Models\User;
-
+use App\Models\CollectionShare;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfile extends Component
 {
@@ -21,6 +22,9 @@ class UserProfile extends Component
 
     public $showDemoNotification = false;
     
+    public $listeners = [
+        'stopShareCollection' => 'stopShareCollection'
+    ];
     protected $rules = [
         'user_name'     => 'max:40|min:3',
         'user_email'    => 'email:rfc,dns',
@@ -39,6 +43,11 @@ class UserProfile extends Component
         'user_location.min' =>  ('The user univercity name length cannot be less than 3 characters.'),
         'user_photo.min'    =>  ('The user photo file size cannot be over than '.MAX_COURSE_UPLOAD_SIZE.' bytes.'),
     ];
+
+    public function stopShareCollection($share_id)
+    {
+        CollectionShare::find($share_id)->delete();
+    }
 
     public function updatedUserPhoto($value) { 
         //dd($value);
@@ -70,7 +79,6 @@ class UserProfile extends Component
         
         if($this->user_edit_photo)
         {
-            
             //$store_result = $this->user_edit_photo->storePublicly( '/assets/img'); //to storage
             $store_result = $this->user_edit_photo->store('assets/img', 'public');   //to public
 
@@ -85,7 +93,10 @@ class UserProfile extends Component
     }
     public function render()
     {
-        //dd($this->user);
-        return view('livewire.laravel-examples.user-profile');
+        $query = CollectionShare::where('to_user', Auth::id())
+                ->orderBy('created_at', 'ASC');
+        $this->search_result = $query->get(); //paginate( $this->perPage );
+
+        return view('livewire.laravel-examples.user-profile')->with('pagination', $this->search_result);
     }
 }
