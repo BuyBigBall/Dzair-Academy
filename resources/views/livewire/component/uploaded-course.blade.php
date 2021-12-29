@@ -15,8 +15,6 @@
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
                     <span class="mb-2 text-xs">{{ translate('Univercity:' )}} <span
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
-                    <!-- <span class="text-xs">File: <span
-                            class="text-dark ms-2 font-weight-bold">zip 12.3K  uploaded date : 2021-12-5 12:32</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">download</a></span> -->
                 </div>
                 <div class="ms-auto">
                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" 
@@ -39,7 +37,10 @@
                             class="text-dark me-3 font-weight-bold"> {{ agotime($course->created_at) }}</span></span>
                 </div>
                 <div class="ms-auto">
-                    <a class="btn btn-link text-secondary px-3 mb-0" 
+                        <a class="btn btn-link text-dark px-3 mb-0" 
+                                href="{{asset('course-download').'/'.$course->id}}"><i
+                                class="fa fa-eye"></i></a>
+                    <a class="btn btn-link text-dark px-3 mb-0" 
                         wire:click.prevent="$emit('download', {{$course->id}})"
                         href="javascript:;"><i
                             class="fa fa-download"></i></a>

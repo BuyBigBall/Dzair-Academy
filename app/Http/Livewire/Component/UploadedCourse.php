@@ -19,7 +19,7 @@ class UploadedCourse extends Component
 
     public function mount()
     {
-        $query = Material::where('status', '0')->orderBy('created_at', 'DESC');
+        $query = Material::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
         $this->new_courses = $query->get();
     }
     public function agree_course($course_id)
