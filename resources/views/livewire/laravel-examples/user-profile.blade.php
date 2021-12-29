@@ -153,7 +153,7 @@
                             <tbody>
                                 @if(count($pagination)<=0)
                                 <tr>
-                                <td colspan="20" class="ps-3 pt-2 text-center">
+                                <td colspan="20" class="text-xs ps-3 pt-2 text-center">
                                     {{ translate('no collections shared for me.') }}
                                 </td>
                                 </tr>
