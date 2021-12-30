@@ -11,7 +11,6 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Auth;
 
 class SearchResult extends Component
 {
@@ -79,6 +78,8 @@ class SearchResult extends Component
         if( !empty($this->search_input['doc']))             $this->doc = filetypename(1);
         if( !empty($this->search_input['img']))             $this->img = filetypename(2);
         if( !empty($this->search_input['zip']))             $this->zip = filetypename(3);
+        
+        //dd($this->search_input);
         if( !empty($this->search_input['word']))            $this->word = $this->search_input['word'];
     
         $this->filter = $this->training;
@@ -129,12 +130,20 @@ class SearchResult extends Component
             $searchWord[] =  ['title' , 'like' , '%'.$this->search_input['word'].'%']; 
             $searchWord[] =  ['description' , 'like' , '%'.$this->search_input['word'].'%'];
         } 
-        $searchOr[] = ['filetype' , 0];
+
+        if( ! empty($this->search_input['filetype_docs']) ||
+            ! empty($this->search_input['filetype_archives']) ||
+            ! empty($this->search_input['filetype_images']) )
+            $searchOr[] = ['filetype' , 0];
         if( ! empty($this->search_input['filetype_docs']))          $searchOr[] = ['filetype' , 1];
         if( ! empty($this->search_input['filetype_archives']))      $searchOr[] = ['filetype' , 2];
         if( ! empty($this->search_input['filetype_images']))        $searchOr[] = ['filetype' , 3];
 
-        //print_r($searchCond); die;
+        //dd($searchCond);
+        //dd($searchWord);
+        //dd($searchOr);
+        //dd($searchOr1);
+
         $query = Material::where($searchCond)
                          ->where( function($query1) use ($searchWord) {
                              if(count($searchWord)>0)
@@ -161,10 +170,9 @@ class SearchResult extends Component
                             }])
                             ->orderBy('created_at','desc');
                            
-        // print($query->toSql()); die;
         $this->search_result = $query->paginate( $this->perPage );
         $this->curPage = $this->search_result->currentPage();
-       // dd($this->search_result );
+
         return view('livewire.search-result', ['pagination'=>$this->search_result] );
     }
 }

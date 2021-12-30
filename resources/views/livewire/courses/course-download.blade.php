@@ -7,11 +7,11 @@
                         <div class="col-md-3 col-sm-6 d-flex justify-content-start align-items-center">
                             <h5 class="mb-0">{{ translate('Course Download') }}</h5>
                         </div>
-                        <div class="col-md-9 col-sm-6  text-center p-1">
+                        <div class="col-md-9 col-sm-6  text-center p-1 d-none d-md-block">
                             <div style='min-height:60px;'>
                                 <a href="{{ env('ADVERTISE1_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                        
+                                        class="w-100"
                                         />
                                     </a>                                
                             </div>
@@ -20,13 +20,13 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-1 row col-12">
+                    <div class="table-responsive p-1 row col-12 mx-0 mx-sm-1 mx-md-2 mx-lg-3">
                         <div
-                            class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start">
+                            class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start  d-none d-md-block">
                             <div style='min-height:50vh;width:100%;'>
                                 <a href="{{ env('ADVERTISE2_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                        
+                                        class="w-100"
                                         />
                                     </a>                                
                             </div>
@@ -34,30 +34,30 @@
 
                         <!-- #################################### -->
                         <div
-                            class="col-md-6 col-sm-6 text-right d-flex justify-content-center align-items-start">
+                            class="col-md-6 col-sm-12 text-right d-flex justify-content-center align-items-start">
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- Path row -->
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Training : ')}}</label>
-                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$training_string}}</span>
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Training: ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start pt-1" id="title">{{$training_string}}</span>
                                         </div>
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Faculty : ')}}</label>
-                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$faculty_string}}</span>
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Faculty: ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start pt-1" id="title">{{$faculty_string}}</span>
                                         </div>
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Specialization : ')}}</label>
-                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$specialization_string}}</span>
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Specialization: ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start pt-1" id="title">{{$specialization_string}}</span>
                                         </div>
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Level : ')}}</label>
-                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$level_string}}</span>
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Level: ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start pt-1" id="title">{{$level_string}}</span>
                                         </div>
                                         <div class="col-md-12 d-flex justify-content-start ">
-                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Module : ')}}</label>
-                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start " id="title">{{$module_string}}</span>
+                                            <label class="col-md-3 custom-control-label mt-1 d-flex align-items-start justify-content-end ">{{ translate('Module: ')}}</label>
+                                            <span  class="col-md-9 text-left form-label mt-0 px-2 d-flex justify-content-start pt-1" id="title">{{$module_string}}</span>
                                         </div>
                                     
                                     </div>
@@ -66,8 +66,8 @@
                                     <!-- Title TextBox row -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group d-sm-flex align-items-center">
-                                                <label class="custom-control-label me-3 w-25">{{ __('pages.Title')}}</label>
+                                            <div class="form-group d-sm-flex align-items-center justify-content-start text-left">
+                                                <label class="custom-control-label me-3 w-25">{{ translate('Title')}}</label>
                                                 <div
                                                     class="form-control d-flex justify-content-start align-items-start"
                                                     id="title">{{$title}}</div>
@@ -80,8 +80,8 @@
                                     <!-- Start Description TextBox row -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group d-sm-flex align-items-left">
-                                                <label class="custom-control-label me-3 w-25" for="description">{{translate('Description:')}}
+                                            <div class="form-group d-sm-flex align-items-cnter justify-content-start text-left">
+                                                <label class="custom-control-label me-3 w-25" for="description">{{translate('Description')}}
                                                 </label>
                                                 <div
                                                     class="form-control d-flex justify-content-start align-items-start"
@@ -95,7 +95,7 @@
                                     <!-- categories row -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group d-sm-flex align-items-center">
+                                            <div class="form-group d-sm-flex align-items-center justify-content-start text-left">
                                                 <label class="custom-control-label me-3 w-25">{{ translate('Categories')}}</label>
                                                 <div class="form-control d-flex justify-content-start align-items-start border-0 pt-0"
                                                     id="category">{{$category_string}}</div>
@@ -107,7 +107,7 @@
                                     <!-- file informations row -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group d-sm-flex align-items-center">
+                                            <div class="form-group d-sm-flex align-items-center justify-content-start text-left">
                                                 <label class="custom-control-label me-3 w-25">{{ translate('File')}}</label>
                                                 <div class="form-control d-flex justify-content-start align-items-start border-0 pt-0"
                                                     id="category">
@@ -143,15 +143,13 @@
                                     </div>
                                     @endif
 
-                                    <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-3">
+                                    <div class="row d-flex">
+                                        <div class="col-md-3 d-flex"></div>
+                                        <div class="col-md-6 d-flex justify-content-around">
                                             <button wire:click="download" class="btn btn-primary w-200">{{ translate('Download') }}</button>
-                                        </div>
-                                        <div class="col-md-3">
                                             <button type="button" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
                                         </div>
-                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3 d-flex"></div>
                                     </div>
                                 </div>
                             </div>
@@ -159,11 +157,11 @@
                         <!-- #################################### -->
 
                         <div
-                            class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start">
-                            <div style='min-height:50vh;width:100%;'>
+                            class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start d-none d-md-block">
+                            <div style='min-height:50vh;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                        
+                                        class="w-100"
                                         />
                                     </a>                                
                             </div>

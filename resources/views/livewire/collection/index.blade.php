@@ -75,8 +75,9 @@
                                                     class="mx-1" >
                                                     <i class="cursor-pointer fa fa-copy text-secondary"></i>
                                                 </span>
-                                                <a href="javascript:$('#collectionModal').modal('show');" 
+                                                <a href="javascript:" 
                                                     class="mx-1" 
+                                                    wire:click.prevent="$emit('editCollection', '{{$row->id}}')"
                                                     data-bs-toggle="tooltip"
                                                     data-bs-original-title="edit collection"
                                                     data-id='{{$row->id}}' 
@@ -132,69 +133,7 @@
     </div>
 </div>
 <input id='copy_sharekey' type='text' value='' style='position:absolute;left:-100px; top:-100px;' />
-<!-- Modal -->
-<div class="modal fade" id="collectionModal" tabindex="-1" role="dialog" aria-labelledby="collectionModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="collectionModalLabel">{{translate('Collection Information')}}</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="col-md-12">                        
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="user-name" class="form-control-label">{{translate('Collection Name')}}</label>
-                            <div class="">
-                                <input wire:model="coll_name" class="form-control" type="text" placeholder="Name" id="collection-name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="user-email" class="form-control-label">{{translate('Description')}}</label>
-                            <div class="">
-                                <textarea wire:model="coll_desp" class="form-control" placeholder="description" row=3 id="collection-description"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user.phone" class="form-control-label">Phone</label>
-                            <div class="">
-                                <input wire:model="user.phone" class="form-control" type="tel" placeholder="40770888444" id="phone">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="user.location" class="form-control-label">University Name</label>
-                            <div class="">
-                                <input wire:model="user.location" class="form-control" type="text" placeholder="Location" id="name">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="about">About Me</label>
-                    <div class="">
-                        <textarea wire:model="user.about" class="form-control" id="about" rows="3" placeholder="Say something about yourself"></textarea>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-        
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel' }}</button>
-            <button type="button" class="btn btn-primary">{{ 'Save' }}</button>
-        </div>
-        </div>
-    </div>
+    @livewire('modal.editcollection-modal') 
 </main>
 
 <script>

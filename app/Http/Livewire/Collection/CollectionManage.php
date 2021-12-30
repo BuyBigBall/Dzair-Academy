@@ -18,9 +18,16 @@ class CollectionManage extends Component
     public  $current_route = 'collection';   //for pagination jump
     public  $word;          //wire:model
 
+
+    public  $coll_name;
+    public  $coll_desp;
+
     private $search_result;
     
-    protected $listeners = ['share_url' => 'share_collection'];
+    protected $listeners = [
+            'share_url'     => 'share_collection' ,
+            'refresh_list'  => 'refresh_collection_list' ,
+                ];
 
     public function __construct()
     {
@@ -45,7 +52,10 @@ class CollectionManage extends Component
         $coll = Collection::find($collection_id);
         $coll->update(['is_publish'=>1, 'publish_key'=>$share_key]);
     }
-
+    public function refresh_collection_list()
+    {
+        
+    }
     public function render()
     {
         $searchWord = [];

@@ -14,10 +14,20 @@
                 <div class="collapse navbar-collapse justify-content-sm-end" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto collapse-navbar pt-3">
                         <li class="nav-item d-flex align-items-center">
-                            <div class="input-group">
-                                <input type="text" class="form-control " placeholder="Search...">
-                                <span class="input-group-text text-body"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            </div>
+                            <form action="{{ route('search-result') }}" method="post">
+                                <div class="input-group">
+                                    <input type="text" class="form-control " 
+                                        wire:model="word" name="word"
+                                        placeholder="{{ translate('Search...')}}">
+                                    <span class="input-group-text text-body"
+                                        onclick="javascript:forms[0].submit();"
+                                        ><i class="fa fa-search" aria-hidden="true"></i></span>
+                                </div>
+                                @csrf
+                            </form>
+                            
+                            <!-- <input type="text" class="form-control " placeholder="Search...">
+                            <span class="input-group-text text-body"><i class="fa fa-search" aria-hidden="true"></i></span> -->
                         </li>
                         <li class="nav-item"> 
                             <a class="nav-link" href="{{ route('login') }}">Signin</a>

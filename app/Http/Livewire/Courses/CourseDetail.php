@@ -40,12 +40,12 @@ class CourseDetail extends Component
         $this->pid = intval($id);
         $this->material = $mat = Material::find($id);
         $this->material_laanguage = $mat_lang = Material::find($id)->lang()->where('language', lang())->first();
-       // dd($mat);
+        
         $this->password = $mat->protected;
         $this->protected = !empty($mat->protected);
 
-        $this->title        = $mat_lang->title;
-        $this->description  = $mat_lang->description;
+        $this->title        = $mat_lang!=null ? $mat_lang->title : $mat->title;
+        $this->description  = $mat_lang!=null ? $mat_lang->description : $mat->description;
 
         $this->category_string = '';
         if(!empty($this->category_string) && !empty($mat->cate_exercise))   $this->category_string .= ',';
