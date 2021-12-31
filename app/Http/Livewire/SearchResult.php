@@ -11,6 +11,7 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class SearchResult extends Component
 {
