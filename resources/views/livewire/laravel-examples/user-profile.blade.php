@@ -26,174 +26,218 @@
                     </button>
                 </div>
                 @endif
-                
-                <form wire:submit.prevent="save" action="#" method="POST" role="form text-left">
-                    <div class="row">
-                        <div class="col-md-3 pt-4 d-flex justify-content-center text-align-center">
-                            <img style='width:180px; height:220px; cursor:pointer;' 
-                                    id="user_photo_img"
-                                    onclick="$('#photo').trigger('click');"
-                                    @if ($user_edit_photo)
-                                        src="{{ $user_edit_photo->temporaryUrl() }}"
-                                    @elseif ($user_photo)
-                                        src="{{ asset('uploads/'. $user_photo) }}"
-                                    @endif
-                                     />
-                            <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
-                            @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
-                        </div>   
-                        <div class="col-md-6">                        
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
-                                        <div class="@error('user_name')border border-danger rounded-3 @enderror">
-                                            <input wire:model="user_name" class="form-control" 
-                                                type="text" placeholder="{{translate('Name')}}" id="user-name">
-                                        </div>
-                                        @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
-                                        <div class="@error('user_email')border border-danger rounded-3 @enderror">
-                                            <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
-                                                >
-                                        </div>
-                                        @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link {{$tabs_id == 1 ? 'active' : ''}}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ translate('My Profile')}}</button>
+                                <button class="nav-link {{$tabs_id == 2 ? 'active' : ''}}" id="share-tab" data-bs-toggle="tab" data-bs-target="#share" type="button" role="tab" aria-controls="share" aria-selected="false">{{ translate('Share')}}</button>
+                                <button class="nav-link {{$tabs_id == 3 ? 'active' : ''}}" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="false">{{ translate('Uploaded course')}}</button>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
-                                        <div class="@error('user_phone')border border-danger rounded-3 @enderror">
-                                            <input wire:model="user_phone" class="form-control" 
-                                                type="tel" placeholder="40770888444" id="phone">
-                                        </div>
-                                        @error('user_phone') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="user_location" class="form-control-label">{{ translate('Univercity')}}</label>
-                                        <div class="@error('user_location') border border-danger rounded-3 @enderror">
-                                            <input wire:model="user_location" class="form-control" 
-                                                type="text" placeholder="{{ translate('univercity name') }}" id="location"
-                                                />
-                                        </div>
-                                        @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="about">{{ 'About Me' }}</label>
-                                <div class="@error('user_about')border border-danger rounded-3 @enderror">
-                                    <textarea wire:model="user_about" class="form-control" id="about" rows="3" placeholder="{{translate('Say something about yourself')}}"></textarea>
-                                </div>
-                                @error('user_about') <div class="text-danger">{{ translate($message) }}</div> @enderror
-                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade {{$tabs_id == 1 ? 'show active' : ''}} pt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <form wire:submit.prevent="save" action="#" method="POST" role="form text-left">
+                                    <div class="row">
+                                        <div class="col-md-4 pt-4 d-flex justify-content-center text-align-center">
+                                            <img style='width:180px; height:220px; cursor:pointer;' 
+                                                    id="user_photo_img"
+                                                    onclick="$('#photo').trigger('click');"
+                                                    @if ($user_edit_photo)
+                                                        src="{{ $user_edit_photo->temporaryUrl() }}"
+                                                    @elseif ($user_photo)
+                                                        src="{{ asset('uploads/'. $user_photo) }}"
+                                                    @endif
+                                                    />
+                                            <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
+                                            @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
+                                        </div>   
+                                        <div class="col-md-8">                        
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
+                                                        <div class="@error('user_name')border border-danger rounded-3 @enderror">
+                                                            <input wire:model="user_name" class="form-control" 
+                                                                type="text" placeholder="{{translate('Name')}}" id="user-name">
+                                                        </div>
+                                                        @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
+                                                        <div class="@error('user_email')border border-danger rounded-3 @enderror">
+                                                            <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
+                                                                >
+                                                        </div>
+                                                        @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
+                                                        <div class="@error('user_phone')border border-danger rounded-3 @enderror">
+                                                            <input wire:model="user_phone" class="form-control" 
+                                                                type="tel" placeholder="40770888444" id="phone">
+                                                        </div>
+                                                        @error('user_phone') <div class="text-danger">{{ translate($message) }}</div> @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="user_location" class="form-control-label">{{ translate('Univercity')}}</label>
+                                                        <div class="@error('user_location') border border-danger rounded-3 @enderror">
+                                                            <input wire:model="user_location" class="form-control" 
+                                                                type="text" placeholder="{{ translate('univercity name') }}" id="location"
+                                                                />
+                                                        </div>
+                                                        @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="about">{{ 'About Me' }}</label>
+                                                <div class="@error('user_about')border border-danger rounded-3 @enderror">
+                                                    <textarea wire:model="user_about" class="form-control" id="about" rows="3" placeholder="{{translate('Say something about yourself')}}"></textarea>
+                                                </div>
+                                                @error('user_about') <div class="text-danger">{{ translate($message) }}</div> @enderror
+                                            </div>
 
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
-                                <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
+                                            <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
+                                                <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade {{$tabs_id == 2 ? 'show active' : ''}} pt-3" id="share" role="tabpanel" aria-labelledby="share-tab">
+                                <table class="align-items-center mb-0 w-100" id='all-course-table'>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" >
+                                                {{ translate('ID')}}
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                                {{ translate('Collection Name')}}
+                                            </th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                {{ translate('Number of Files')}}
+                                            </th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                {{ translate('Added Date')}}
+                                            </th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                {{ translate('Action')}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(count($pagination)<=0)
+                                        <tr>
+                                        <td colspan="20" class="text-xs ps-3 pt-2 text-center">
+                                            {{ translate('no collections shared for me.') }}
+                                        </td>
+                                        </tr>
+                                        @endif
+
+                                        @foreach($pagination as $row)
+                                        <tr>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0 ">{{$row->id}}</p>
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0">{{$row->coll->collection_name}}</p>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                {{ $row->coll->mat!=null ? count($row->coll->mat) : 0}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
+                                            </td>
+                                            <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
+                                            <td class="text-center">
+                                                <span  data-bs-toggle="tooltip" 
+                                                    wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
+                                                    onclick="shareme( '{{route('collection-shares', $skey )}}' )"
+                                                    data-bs-original-title="{{translate('copy shared url')}}"
+                                                    class="mx-1" >
+                                                    <i class="cursor-pointer fa fa-copy text-secondary"></i>
+                                                </span>
+                                            
+                                                <a href="{{route('collection-files', $row->coll->id)}}" 
+                                                    class="mx-1" 
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-original-title="collection files"
+                                                    >
+                                                    <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
+                                                </a>
+                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection share')}}"
+                                                        class="mx-1" 
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', stopShareCollection, '{{$row->id}}')">
+                                                    <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>  
+                            </div>
+                            <div class="tab-pane fade {{$tabs_id == 3 ? 'show active' : ''}} pt-3" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+                                <ul class="list-group">
+                                    @foreach($myUpload_courses as $course)
+                                    <li class="list-group-item border-0 d-flex  flex-column p-md-3 p-lg-4 p-2 mb-2 bg-gray-100 border-radius-lg">
+                                        <div class="row">
+                                            <div class="col-8 d-flex flex-column">
+                                                <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
+                                                <span class="mb-2 text-xs">{{ translate('User Name:' )}}<span
+                                                        class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
+                                                <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
+                                                        class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
+                                                <span class="mb-2 text-xs">{{ translate('Univercity:' )}} <span
+                                                        class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <a class="btn btn-link text-danger text-gradient px-1 mb-0" 
+                                                    onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
+                                                            href="javascript:;"><i
+                                                        class="far fa-trash-alt me-2"></i>Delete</a>
+                                                
+                                            </div>
+                                            </div>
+                                            <div class="row d-flex align-items-center">
+                                            <div class="col-9">
+                                                <span class="mb-2 text-xs">File: <span
+                                                        class="text-dark font-weight-bold me-3">{{ filetypename($course->filetype) }}</span></span>
+                                                <span class="mb-2 text-xs">size: <span
+                                                        class="text-dark me-3 font-weight-bold">{{size($course->filesize)}}</span></span>
+                                                <span class="mb-2 text-xs">uploaded date: <span
+                                                        class="text-dark me-3 font-weight-bold"> {{ agotime($course->created_at) }}</span></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 d-none d-md-block">
-                            <div style='min-height:50vh;'>
-                                <a href="{{ env('ADVERTISE2_LINK') }}">
-                                    <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                        class="w-100"
-                                        />
-                                    </a>                                
-                            </div>
-                        </div>
-
-                                      
-                <!-- #################################### -->
-                <div class="table-responsive col-md-9 col-sm-12 d-flex justify-content-center align-items-start mb-5" >
-                        <table class="align-items-center mb-0 w-100" id='all-course-table'>
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" >
-                                        {{ translate('ID')}}
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                        {{ translate('Collection Name')}}
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Number of Files')}}
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Added Date')}}
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Action')}}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(count($pagination)<=0)
-                                <tr>
-                                <td colspan="20" class="text-xs ps-3 pt-2 text-center">
-                                    {{ translate('no collections shared for me.') }}
-                                </td>
-                                </tr>
-                                @endif
-
-                                @foreach($pagination as $row)
-                                <tr>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0 ">{{$row->id}}</p>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{$row->coll->collection_name}}</p>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">
-                                        {{ $row->coll->mat!=null ? count($row->coll->mat) : 0}}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
-                                    </td>
-                                    <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
-                                    <td class="text-center">
-                                        <span  data-bs-toggle="tooltip" 
-                                            wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
-                                            onclick="shareme( '{{route('collection-shares', $skey )}}' )"
-                                            data-bs-original-title="{{translate('copy shared url')}}"
-                                            class="mx-1" >
-                                            <i class="cursor-pointer fa fa-copy text-secondary"></i>
-                                        </span>
-                                       
-                                        <a href="{{route('collection-files', $row->coll->id)}}" 
-                                            class="mx-1" 
-                                            data-bs-toggle="tooltip"
-                                            data-bs-original-title="collection files"
-                                            >
-                                            <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
-                                        </a>
-                                        <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection share')}}"
-                                                class="mx-1" 
-                                                data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', stopShareCollection, '{{$row->id}}')">
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>    
-                </div>
-                <!-- #################################### -->
-
-
                     </div>
-                   
-                </form>
+                    <div class="col-md-3 d-none d-md-block">
+                        <div style='min-height:50vh;'>
+                            <a href="{{ env('ADVERTISE2_LINK') }}">
+                                <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
+                                    class="w-100"
+                                    />
+                                </a>                                
+                        </div>
+                    </div>
+                </div>
   
             </div>
         </div>
@@ -220,5 +264,10 @@
     function stopShareCollection(del_id)
     {
         window.livewire.emit('stopShareCollection', del_id);
+    }
+
+    function deleteUploadedCourse(course_id)
+    {
+        window.livewire.emit('delete_course', course_id);
     }
 </script>

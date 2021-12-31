@@ -10,13 +10,14 @@ use Illuminate\Http\Request;
 class EditcollectionModal extends Component
 {
     public  $show;
-    public  $collection_id;
+    public  $collection_id = 0;
     public  $coll_name;
     public  $coll_disp;
     
     private $modal;
     protected $listeners = [
         'editCollection' => 'editCollection' ,
+        'doShow' => 'doShow'
         
     ];
     protected $rules = [
@@ -34,7 +35,7 @@ class EditcollectionModal extends Component
         {
             $this->collection_id = $request->collection_id;
         }
-        $this->show = false;
+        // $this->show = false;
     }
 
     public function editCollection($coll_id) {
@@ -48,6 +49,13 @@ class EditcollectionModal extends Component
         $this->show = true;
     }
 
+    public function doShow() {
+        $this->show = true;
+        $this->collection_id = 0;
+        $this->coll_name = '';
+        $this->coll_disp = '';
+    }
+
     public function doClose() {
         $this->show = false;
     }
@@ -59,15 +67,23 @@ class EditcollectionModal extends Component
         {
             return Redirect('login');
         }
-
-        $coll = Collection::find( $this->collection_id);
-        Collection::updateOrCreate(
-            ['id' => $this->collection_id ],
-            [
-                'collection_name'   => $this->coll_name,
-                'description'       => $this->coll_disp,
-            ]
-        );
+        if($this->collection_id != 0){
+            $coll = Collection::find( $this->collection_id);
+            Collection::updateOrCreate(
+                ['id' => $this->collection_id ],
+                [
+                    'collection_name'   => $this->coll_name,
+                    'description'       => $this->coll_disp,
+                ]
+            );
+        }
+        else{
+            Collection::create([
+                'user_id' => Auth::user()->id,
+                'collection_name' => $this->coll_name,
+                'description' => $this->coll_disp
+            ]);
+        }
         $this->emit('refresh_list', '');
         $this->doClose();
     } 

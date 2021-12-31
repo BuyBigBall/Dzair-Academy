@@ -27,6 +27,7 @@ class CollectionManage extends Component
     protected $listeners = [
             'share_url'     => 'share_collection' ,
             'refresh_list'  => 'refresh_collection_list' ,
+            'deleteCollection'  => 'deleteCollection' ,
                 ];
 
     public function __construct()
@@ -55,6 +56,10 @@ class CollectionManage extends Component
     public function refresh_collection_list()
     {
         
+    }
+    public function deleteCollection($collection_id)
+    {
+        Collection::find($collection_id)->delete();
     }
     public function render()
     {

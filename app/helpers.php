@@ -254,7 +254,7 @@ function sendMail(array $request) //[recipent, title, content, template]
                         ->with('email',     $user->email )
                         ->with('name',      $user->name )
                         ->with('subject',   $request['subject'] )
-                        ->with('content',   nl2br($content) )
+                        ->with('content',   nl2br($content['content']) )
                         ->with('activate',  $activate_link );
 
             Mail::send('emails.content', ['content' => $template ], 

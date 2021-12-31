@@ -47,7 +47,7 @@
                                             <td>
                                                 <hr />
                                                 <div style='padding:3rem;'>
-                                                    {{$content['content']}}
+                                                    {{$content}}
                                                 </div>                                                
                                             </td>
                                         </tr>

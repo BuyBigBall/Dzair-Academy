@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\LaravelExamples;
 use App\Models\User;
 use App\Models\CollectionShare;
+use App\Models\Material;
+use App\Models\MaterialLanguage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +19,17 @@ class UserProfile extends Component
     public $user_location;
     public $user_photo;
     public $user_edit_photo;
+    public $tabs_id = 1;
+
+    public $myUpload_courses;
 
     public $showSuccesNotification  = false;
 
     public $showDemoNotification = false;
     
     public $listeners = [
-        'stopShareCollection' => 'stopShareCollection'
+        'stopShareCollection' => 'stopShareCollection',
+        'delete_course' => 'delete_course'
     ];
     protected $rules = [
         'user_name'     => 'max:40|min:3',
@@ -65,7 +71,9 @@ class UserProfile extends Component
         $this->user_about       = $this->user->about;
         $this->user_location    = $this->user->location;
         $this->user_photo       = $this->user->photo;
-        //dd($this->user->photo);
+        
+        $this->myUpload_courses = Material::where('status', '0')->where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
+        // dd($this->myUpload_courses);
     }
 
     public function save() {
@@ -90,6 +98,13 @@ class UserProfile extends Component
         }
         $this->user->save();
         $this->showSuccesNotification = true;
+    }
+    public function delete_course($course_id)
+    {
+        $this->tabs_id = 3;
+        MaterialLanguage::where('material_id', $course_id)->delete();
+        Material::find($course_id)->delete();
+        $this->mount();
     }
     public function render()
     {

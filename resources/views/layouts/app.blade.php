@@ -25,11 +25,11 @@
             {{ $slot }}
             <main>
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
+                    <!-- <div class="row">
+                        <div class="col-md-12"> -->
                             @include('layouts.footers.auth.footer')
-                        </div>
-                    </div>
+                        <!-- </div>
+                    </div> -->
                 </div>
             </main>
         @endif

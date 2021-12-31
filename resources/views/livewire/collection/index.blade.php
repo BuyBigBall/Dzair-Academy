@@ -12,7 +12,7 @@
                             <div style='min-height:60px;'>
                             <a href="{{ env('ADVERTISE1_LINK') }}">
                                 <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
+                                    class="w-100"   
                                     />
                                 </a>                                
                             </div>                        
@@ -20,21 +20,21 @@
                     </div>
                 </div>
                 <div class="card-body pt-3">
-                    <div class="table-responsive row">
+                    <div class="row">
                         <div class="d-flex justify-content-between align-items-center">
-                                @include('livewire.pagination')
-                            </div>
+                            @include('livewire.pagination')
+                        </div>
                         <!-- #################################### -->
-                        <div class="col-sm-12 col-md-12 col-lg-9 text-right d-flex justify-content-center align-items-start" 
+                        <div class="table-responsive  col-md-12 col-lg-9 text-right d-flex justify-content-center align-items-start" 
                             style="min-height:30vh;"
                             >
-                                <table class="align-items-center mb-0 w-100" id='all-course-table'>
+                                <table class="align-items-center mt-3 w-100" id='all-course-table'>
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 {{ translate('ID')}}
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 {{ translate('Collection Name')}}
                                             </th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -51,7 +51,7 @@
                                     <tbody>
                                         @foreach($pagination as $row)
                                         <tr>
-                                            <td class="ps-4 text-center">
+                                            <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{$row->id}}</p>
                                             </td>
                                             <td>
@@ -107,14 +107,12 @@
                             
                         </div>
                         <!-- #################################### -->
-
-
                         
                         <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start d-none d-lg-block" >
                             <div style='min-height:50vh;width:98%;'>
                                 <a href="{{ env('ADVERTISE3_LINK') }}">
                                     <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                        
+                                    class="w-100"
                                         />
                                     </a>                                
                             </div>
@@ -122,8 +120,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">
-                            <button onclick="$('#collectionModal').modal('show');" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button>
-                            <button onclick="javascript:history.back(01);" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
+                            <!-- <button onclick="$('#collectionModal').modal('show');" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button> -->
+                            <button wire:click.prevent="$emit('doShow')" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button>
+                            <button onclick="javascript:history.back(01);" class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
                         </div>
                     </div>
 

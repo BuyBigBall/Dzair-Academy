@@ -42,7 +42,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="order-md-1 order-last text-white opacity-5">
+            <div class="order-md-1 order-last text-white opacity-5 text-center">
                 {{ translate('© 2022 - 2021 Dzair Academy - All Rights Reserved.')}}
             </div>
             <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">

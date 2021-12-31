@@ -1,7 +1,7 @@
 <!-- Footer Starts Here -->
 
 <footer class="card blur">
-    <div class="container">
+    <!-- <div class="container"> -->
         <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
             <div class="order-first">
                 <div class="nav-item dropup pe-2 d-flex align-items-center">
@@ -56,6 +56,6 @@
                 </li>
                 <li class=""><a href="#" class="text-white">Privacy Policy</a></li>
             </ul>
-        </div>
+        <!-- </div> -->
     </div>
 </footer>
