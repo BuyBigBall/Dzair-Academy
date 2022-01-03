@@ -24,7 +24,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navigation">
                 <ul class="navbar-nav ml-auto custom-collapse" style="">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sign-up') }}">Sign Up</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{translate('Sign In')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sign-up') }}">{{translate('Sign Up')}}</a>
                     </li>
                 </ul>
             </div>

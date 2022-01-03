@@ -49,8 +49,8 @@
                             <h6>we are ready to help you</h6>
                             <h4>courses & collections<br>&amp; management</h4>
                             <p>Users can search courses and download and report.
-                                <a href="index.html">Multiple-page version</a> with different HTML pages are also available.</p>
-                            <a href="#contactus" class="filled-button">uopload</a>
+                                <a href="#" class="text-success">Multiple-page version</a> with different HTML pages are also available.</p>
+                            <a href="{{route('search')}}" class="filled-button">search</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <h4>LTR &amp; RTL <br />translate</h4>
                             <p>You are allowed to use this functions for your teach materials. 
                                 </p>
-                            <a href="#" class="filled-button">Signin</a>
+                            <a href="{{route('login')}}" class="filled-button">Signin</a>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                             <h4>Do you know <br> to use this website.</h4>
                             <p>You can download, edit and use the Documents, Images, Videos, Archives for your training course. 
                                 You can just get the Trainings, Exercises, Exams if you wish those to in this website.</p>
-                            <a href="#about" class="filled-button">learn more</a>
+                            <a href="emit('contactus')" class="filled-button">Contact us</a>
                         </div>
                     </div>
                 </div>

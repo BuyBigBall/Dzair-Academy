@@ -69,10 +69,10 @@ class UserManagement extends Component
         // $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
         // $this->level_options = \Config::get('constants.levels');;
 
-        // if(Cookie::has("perPage"))
-        // {
-        //     $this->perPage = Cookie::get("perPage");
-        // }
+        if(Cookie::has("perPage"))  // it is need for the pagination perPage
+        {
+            $this->perPage = Cookie::get("perPage");
+        }
     }
 
     public function render()

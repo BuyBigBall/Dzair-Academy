@@ -1,5 +1,5 @@
  <main class="body-content">
-   <div class="container-fluid py-4">
+   <div class="{{ !empty(Auth::user()) ? 'container-fluid' : 'container' }} py-4">
      <div class="row mt-4">
        <div class="col-md-12 mb-lg-0 mb-4">
          <div class="card">
