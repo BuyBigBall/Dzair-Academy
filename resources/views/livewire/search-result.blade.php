@@ -38,10 +38,22 @@
                            <span class="text-xs pe-3">Date: <span class="text-dark font-weight-bold">{{ date('d/m/Y', strtotime($row->created_at)) }}</span></span>
                            <span class="text-xs pe-3">File: <span class="text-dark font-weight-bold"> {{ filetypename($row->filetype) }} {{size($row->filesize)}}</span></span>
                          </div>
-                         <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('add this file to a collection')}}" class="mx-1" data-id='{{$row->id}}' 
-			 	wire:click.prevent="$emit('ShowModal', '{{$row->id}}')">
-                           <i class="cursor-pointer fas fa-bookmark text-secondary"></i>
-                         </span>
+                         <div class="d-flex flex-sm-row flex-column  align-items-sm-center align-items-start gx-3">
+                           @if($row->created_by==Auth::id())
+                          <span data-bs-toggle="tooltip" data-bs-original-title="{{translate('add this file to a collection')}}" 
+                              class="mx-1" data-id='{{$row->id}}' 
+                              wire:click.prevent="$emit('ShowModal', '{{$row->id}}')">
+                            <i class="cursor-pointer fas fa-bookmark text-secondary"></i>
+                          </span>
+                          @endif
+                          <span data-bs-toggle="tooltip" 
+                              data-bs-original-title="{{translate('view this user profile.')}}" 
+                              class="mx-1" data-id='{{$row->id}}' 
+                              onclick="javascript:location.href='{{route('user-profile', 'user_id='.$row->created_by)}}'"
+                              >
+                            <i class="cursor-pointer fa fa-user text-secondary"></i>
+                          </span>
+                         </div>
                        </div>
                      </div>
                    </li>

@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Modal;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Collection;
+use App\Models\CollectionItem;
 use Illuminate\Http\Request;
 
 class EditcollectionModal extends Component
 {
     public  $show;
     public  $collection_id = 0;
+    public  $mat_id = 0;
     public  $coll_name;
     public  $coll_disp;
     
@@ -49,7 +51,8 @@ class EditcollectionModal extends Component
         $this->show = true;
     }
 
-    public function doShow() {
+    public function doShow($mat_id = null) {
+        $this->mat_id = $mat_id;
         $this->show = true;
         $this->collection_id = 0;
         $this->coll_name = '';
@@ -78,12 +81,22 @@ class EditcollectionModal extends Component
             );
         }
         else{
-            Collection::create([
+            $coll = Collection::create([
                 'user_id' => Auth::user()->id,
                 'collection_name' => $this->coll_name,
                 'description' => $this->coll_disp
             ]);
+            if(!empty($this->mat_id))
+            {
+                CollectionItem::updateOrCreate(
+                    ['collection_id' => $coll->id,
+                     'material_id'=>$this->mat_id],
+                    []
+                );
+                return Redirect(route('collection-files', $coll->id));
+            }
         }
+
         $this->emit('refresh_list', '');
         $this->doClose();
     } 

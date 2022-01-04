@@ -65,7 +65,15 @@ class SearchResult extends Component
 
     public function mount(Request $request, $flag=null)
     {
-        //if($flag==null)
+        if( !empty($request->collection_id))
+        {
+            if(Auth::user()==null)                              
+            {
+                redirect(route('login'));
+            }
+            $this->collection_id = $request->collection_id;
+        }
+        
 
         if(Cookie::has("perPage"))
         {
@@ -144,7 +152,11 @@ class SearchResult extends Component
         //dd($searchWord);
         //dd($searchOr);
         //dd($searchOr1);
-
+        if( !empty($this->collection_id))
+        {
+            $searchCond[] = ['created_by', Auth::id()];
+        }
+        $searchCond[] = ['status', 1];
         $query = Material::where($searchCond)
                          ->where( function($query1) use ($searchWord) {
                              if(count($searchWord)>0)

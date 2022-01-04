@@ -212,6 +212,44 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <input class="" type="radio" 
+                                                    wire:model="add_coll_type" name="add_coll_type" value="1" id="add_coll_type_existing" />
+                                                <label for="add_coll_type_existing"
+                                                    class="custom-control-label me-3 mt-2 p-2">
+                                                    Add to the existing collection.
+                                                </label>
+                                                    @error('add_coll_type') <span class="error">{{ $message }}</span> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <input class="" type="radio" 
+                                                    wire:model="add_coll_type" name="add_coll_type" value="2" id="add_coll_type_creating" />
+                                                <label for="add_coll_type_creating"
+                                                    class="custom-control-label me-3 mt-2 p-2">
+                                                    Add to a new creating collection.
+                                                </label>
+                                                    @error('add_coll_type') <span class="error">{{ $message }}</span> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group d-sm-flex align-items-center">
+                                                <input class="" type="radio" checked
+                                                    wire:model="add_coll_type" name="add_coll_type" value="0" id="add_coll_type_ignore" />
+                                                <label for="add_coll_type_ignore"
+                                                    class="custom-control-label me-3 mt-2 p-2">
+                                                    Ignore this for now.
+                                                </label>
+                                                    @error('add_coll_type') <span class="error">{{ $message }}</span> @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col-md-12 text-right">
                                             <button type="submit"
@@ -245,4 +283,7 @@
 
         </div> -->
     </div>
+
+    @livewire('modal.collectionadd-modal')
+    @livewire('modal.editcollection-modal') 
 </main>

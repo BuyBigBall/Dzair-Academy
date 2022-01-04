@@ -38,10 +38,10 @@
                                             {{ translate('ID')}}
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            {{ translate('File Title')}}
+                                            {{ translate('Course')}}
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ translate('Course')}}
+                                            {{ translate('Description')}}
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ translate('Added Date')}}
@@ -66,13 +66,22 @@
                                         <td class="text-left">
                                             <p class="text-xs font-weight-bold mb-0">
                                             <!-- {{ ln($row->mat->training)}} <br> {{ ln($row->mat->faculty) }} <br> {{  ln($row->mat->specialization) }} <br>  -->
-                                            {{  ln($row->mat->course) }}
+                                            <!-- {{  ln($row->mat->course) }} -->
+                                            {{mat_lang($row->mat)!=null ? mat_lang($row->mat)->description : $row->mat->description}}
                                             </p>
                                         </td>
                                         <td class="text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
                                         </td>
                                         <td class="text-center">
+                                            <a  data-bs-toggle="tooltip" 
+                                                    data-bs-original-title="{{translate('download this course file.')}}"
+                                                    class="mx-1" 
+                                                    href="{{route('course-download', $row->mat->id)}}"
+                                                    >
+                                                <i class="cursor-pointer fa fa-download text-secondary"></i>
+                                            </a>
+                                            @if($collection->user_id==Auth::id())
                                             <span  data-bs-toggle="tooltip" 
                                                     data-bs-original-title="{{translate('delete this course file')}}"
                                                     class="mx-1" 
@@ -80,6 +89,7 @@
                                                     onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCollectionFile, '{{$row->id}}')">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </span>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -101,8 +111,10 @@
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">
                             <!-- onclick="$('#collectionModal').modal('show');"  -->
+                            @if($collection->user_id==Auth::id())
                             <button onclick="location.href='{{route('search', 'collection_id='.$collection->id)}}'"
                                     class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button>
+                            @endif
                             <button onclick="history.back(-1);" 
                                     class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
                         </div>

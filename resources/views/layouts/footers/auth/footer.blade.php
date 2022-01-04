@@ -2,7 +2,7 @@
 
 <footer class="card blur">
     <!-- <div class="container"> -->
-        <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+        <div class="d-flex flex-md-row flex-column align-items-center justify-content-between  px-3">
             <div class="order-first">
                 <div class="nav-item dropup pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

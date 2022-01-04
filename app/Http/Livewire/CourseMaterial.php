@@ -29,6 +29,9 @@ class CourseMaterial extends Component
     public $specialization; 
     public $module;       
     public $level;          
+    
+    public $add_coll_type;       
+
 
     public $title;          
     public $description;          
@@ -58,8 +61,15 @@ class CourseMaterial extends Component
     public function mount()
     {
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
-        $this->level_options = \Config::get('constants.levels');;
+        $this->level_options = \Config::get('constants.levels');
+        $this->add_coll_type = 0;
+
+    } 
+    public function updatedAddCollType($value)
+    {
+        //dd($value);
     }
+
     public function updatedTraining($value)
     {
         $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
@@ -75,6 +85,7 @@ class CourseMaterial extends Component
 
     public function updatedFile()
     {
+        //dd( $this->file);
         $this->validate([
             'file' => 'max:'.MAX_COURSE_UPLOAD_SIZE.       // Max 1MB =1024K
                      '|mimes:'.env('ALLOW_COURSE_UPLOAD_EXTENSIONS')
@@ -90,6 +101,8 @@ class CourseMaterial extends Component
     public function savecourse() {
 
         $validatedData = $this->validate();
+
+       //dd($this->add_coll_type);
         if(!empty($this->protection))
         {
             if( !! empty($this->password_code))
@@ -158,8 +171,13 @@ class CourseMaterial extends Component
         $this->protection = null;          
         $this->password_code = '';    
         $this->confirm_code = '';
-        //wire:click.prevent="$emit('WireAlert', '')"
-        $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
+        
+        if($this->add_coll_type==1)
+            $this->emit('ShowModal', $new_course_Material_id);
+        elseif($this->add_coll_type==2)
+            $this->emit('doShow', $new_course_Material_id);
+        else
+            $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
 
     }
 

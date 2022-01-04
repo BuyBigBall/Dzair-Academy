@@ -6,7 +6,12 @@
            <div class="card-header">
              <div class="row">
                <div class="col-md-4 col-sm-6">
-                 <h4 class="title">{{ __('pages.Find A Course')}}</h4>
+                 @if(!empty($collection_id))
+                 <h4 class="title">{{ translate('Find My Course File')}}</h4>
+                  <h6 class="title text-secondary">{{ translate('for add the course file to the collection.')}}</h6>
+                 @else
+                 <h4 class="title">{{ translate('Find A Course')}}</h4>
+                 @endif
                </div>
                <div class="col-md-8 col-sm-6 p-1 d-none d-md-block" style='min-height:60px;'>
                  <a href="{{ env('ADVERTISE1_LINK') }}">

@@ -20,12 +20,12 @@
                     </div>
                 </div>
                 <div class="card-body pt-3">
-                    <div class="table-responsive row">
+                    <div class="row">
                         <div class="d-flex justify-content-between align-items-center">
                                 @include('livewire.pagination')
                             </div>
                         <!-- #################################### -->
-                        <div class="col-md-9 col-sm-6 text-right d-flex justify-content-center align-items-start" >
+                        <div class="table-responsive col-md-9 col-sm-6 text-right d-flex justify-content-center align-items-start" >
                                 <table class="table align-items-center mb-0" id='all-course-table'>
                                     <thead>
                                         <tr>

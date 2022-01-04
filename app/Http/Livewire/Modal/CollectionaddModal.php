@@ -73,7 +73,7 @@ class CollectionaddModal extends Component
 
         if ( Auth::user() )
         {
-            if( !empty($request->collection_id) ) $this->collection_id = 1;//$request->collection_id;
+            if( !empty($request->collection_id) ) $this->collection_id = $request->collection_id;
             $query = Collection::where('user_id', Auth::id() );
             $collection_options = $query->get();
         }

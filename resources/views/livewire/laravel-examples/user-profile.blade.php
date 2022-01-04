@@ -42,11 +42,13 @@
                                         <div class="col-md-4 pt-4 d-flex justify-content-center text-align-center">
                                             <img style='width:180px; height:220px; cursor:pointer;' 
                                                     id="user_photo_img"
-                                                    onclick="$('#photo').trigger('click');"
+                                                    @if($user->id==Auth::id())
+                                                        onclick="$('#photo').trigger('click');"
+                                                    @endif
                                                     @if ($user_edit_photo)
                                                         src="{{ $user_edit_photo->temporaryUrl() }}"
                                                     @elseif ($user_photo)
-                                                        src="{{ asset('uploads/'. $user_photo) }}"
+                                                        src="{{ userphoto($user_photo) }}"
                                                     @endif
                                                     />
                                             <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
@@ -59,6 +61,9 @@
                                                         <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
                                                         <div class="@error('user_name')border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_name" class="form-control" 
+                                                                @if($user->id!=Auth::id())
+                                                                    readonly
+                                                                @endif
                                                                 type="text" placeholder="{{translate('Name')}}" id="user-name">
                                                         </div>
                                                         @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
@@ -69,6 +74,9 @@
                                                         <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
                                                         <div class="@error('user_email')border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
+                                                                @if($user->id!=Auth::id())
+                                                                    readonly
+                                                                @endif
                                                                 >
                                                         </div>
                                                         @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
@@ -81,6 +89,9 @@
                                                         <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
                                                         <div class="@error('user_phone')border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_phone" class="form-control" 
+                                                                @if($user->id!=Auth::id())
+                                                                    readonly
+                                                                @endif
                                                                 type="tel" placeholder="40770888444" id="phone">
                                                         </div>
                                                         @error('user_phone') <div class="text-danger">{{ translate($message) }}</div> @enderror
@@ -88,9 +99,12 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="user_location" class="form-control-label">{{ translate('Univercity')}}</label>
+                                                        <label for="user_location" class="form-control-label">{{ translate('University')}}</label>
                                                         <div class="@error('user_location') border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_location" class="form-control" 
+                                                                @if($user->id!=Auth::id())
+                                                                    readonly
+                                                                @endif
                                                                 type="text" placeholder="{{ translate('univercity name') }}" id="location"
                                                                 />
                                                         </div>
@@ -101,14 +115,22 @@
                                             <div class="form-group">
                                                 <label for="about">{{ 'About Me' }}</label>
                                                 <div class="@error('user_about')border border-danger rounded-3 @enderror">
-                                                    <textarea wire:model="user_about" class="form-control" id="about" rows="3" placeholder="{{translate('Say something about yourself')}}"></textarea>
+                                                    <textarea wire:model="user_about" class="form-control" id="about" rows="3" 
+                                                        @if($user->id!=Auth::id())
+                                                            readonly
+                                                        @endif
+                                                        placeholder="{{translate('Say something about yourself')}}"></textarea>
                                                 </div>
                                                 @error('user_about') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                             </div>
 
                                             <div class="d-flex justify-content-center">
-                                                <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
-                                                <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a>
+                                                @if($user->id==Auth::id())
+                                                    <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
+                                                @else
+                                                    <!-- <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a> -->
+                                                    <a href="{{ route('send-message', $user_email) }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Send Message') }}</a>
+                                                @endif
                                             </div>
                                         </div>
                                         
@@ -201,7 +223,7 @@
                                                         class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
                                                 <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
                                                         class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
-                                                <span class="mb-2 text-xs">{{ translate('Univercity:' )}} <span
+                                                <span class="mb-2 text-xs">{{ translate('University:' )}} <span
                                                         class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
                                             </div>
                                             <div class="col-4 text-right">
@@ -209,6 +231,10 @@
                                                     onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
                                                             href="javascript:;"><i
                                                         class="far fa-trash-alt me-2"></i>Delete</a>
+                                                @if($course->status==0)
+                                                <br>
+                                                <span class="text-info">waiting for approval</span>
+                                                @endif
                                                 
                                             </div>
                                             </div>

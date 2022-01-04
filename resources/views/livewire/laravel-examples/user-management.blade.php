@@ -40,7 +40,7 @@
                                         {{ translate('Email') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Univercity') }}
+                                        {{ translate('University') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('role') }}

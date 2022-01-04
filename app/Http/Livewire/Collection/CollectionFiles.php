@@ -53,7 +53,7 @@ class CollectionFiles extends Component
 
         if($this->current_route=='collection-shares')
         {
-            //$sharekey=$id;
+            //$sharekey=$id;http://127.0.0.1:8000/collection-shares/21y10nvBPi6mDa.Lh.i5YNLmGem5S3Sm20Qk3kErxzvlZ1HDcIexwnbVi
             //dd($sharekey);
             if( !!empty($sharekey))         $id = null;
             else if( !!empty( ( $coll = Collection::where('publish_key', $sharekey)->first() ) ))    $id = null;
@@ -93,7 +93,7 @@ class CollectionFiles extends Component
 
         $query = \App\Models\CollectionItem::selectRaw(DB::raw("collection_items.id, collection_items.collection_id, collection_items.material_id, collection_items.created_at"))
                 ->leftjoin('collections', 'collections.id', '=', 'collection_items.collection_id')
-                ->where('collections.user_id', Auth::id())
+        //        ->where('collections.user_id', Auth::id())
                 ->where('collections.id', $this->collection->id)
                 ->where( function($query1) use ($searchWord) {
                         if(count($searchWord)>0)

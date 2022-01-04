@@ -50,7 +50,8 @@
                                                 id="collections">
                                                 @foreach($collection_options as $row)
                                                 <option value='{{ $row->id }}' 
-                                                    @if($collection_id==$row->id) selected @endif >
+                                                    >
+                                                    <!-- @ i f($collection_id==$row->id) selected @ e ndif  -->
                                                     {{ $row->collection_name }}</option>
                                                 @endforeach
                                             </select>

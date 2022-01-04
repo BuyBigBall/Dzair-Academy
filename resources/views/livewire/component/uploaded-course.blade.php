@@ -13,7 +13,7 @@
                             class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
                     <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
-                    <span class="mb-2 text-xs">{{ translate('Univercity:' )}} <span
+                    <span class="mb-2 text-xs">{{ translate('University:' )}} <span
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
                 </div>
                 <div class="col-4 text-right">

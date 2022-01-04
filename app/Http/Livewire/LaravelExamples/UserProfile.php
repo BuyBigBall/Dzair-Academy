@@ -8,6 +8,7 @@ use App\Models\MaterialLanguage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UserProfile extends Component
 {
@@ -62,8 +63,15 @@ class UserProfile extends Component
                      '|mimes:'.env('ALLOW_PHOTO_EXTENSIONS')
         ]);
     }
-    public function mount() { 
-        $this->user = auth()->user();
+    public function mount(Request $request) { 
+        if(!empty($request->user_id))
+        {
+            $this->user = User::find($request->user_id);
+        }
+        else
+        {
+            $this->user = auth()->user();
+        }
         $this->user_email       = $this->user->email;
         $this->user_name        = $this->user->name;
         $this->user_email       = $this->user->email;
@@ -71,8 +79,15 @@ class UserProfile extends Component
         $this->user_about       = $this->user->about;
         $this->user_location    = $this->user->location;
         $this->user_photo       = $this->user->photo;
-        
-        $this->myUpload_courses = Material::where('status', '0')->where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
+
+        if($this->user->photo_agree!=1 && $this->user->id!=Auth::id())
+        {
+            $this->user_photo= "no-image";
+        }
+        if(!empty($request->user_id))
+            $this->myUpload_courses = Material::where('created_by', $this->user->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
+        else
+        $this->myUpload_courses = Material::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
         // dd($this->myUpload_courses);
     }
 
