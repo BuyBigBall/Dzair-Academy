@@ -41,28 +41,41 @@ class CollectionaddModal extends Component
 
 
     public function doAdd() {
+        $request = Request::capture();
+        
+        // dd($_SERVER['HTTP_REFERER']);
+        // dd($request->headers->get('referer'));  //http://127.0.0.1:8000/course-material
+        
         $this->validate();
         if ( !!empty(Auth::user() ))
         {
             return Redirect('login');
         }
 
-        # into his own collection
-        $coll = Collection::where([ 
-                'user_id'=>Auth::id(), 
-                'id'=>$this->collection_id
-            ])->first();
-        if($coll!=null)
-        {
-            CollectionItem::updateOrCreate(
-                ['collection_id' => $this->collection_id,
-                 'material_id'=>$this->material_id],
-                []
-            );
-            
-            return Redirect(route('collection-files', $this->collection_id));
+        if(stripos($request->headers->get('referer'), 'course-material')!==false)
+        { # this come from course file uploading.
+            //dd($this->collection_id);
+            $this->emit('SelectedCollection', $this->collection_id);
         }
-        #<---
+        else
+        {
+            # into his own collection
+            $coll = Collection::where([ 
+                                'user_id'=>Auth::id(), 
+                                'id'=>$this->collection_id
+                            ])->first();
+            // if($coll!=null)
+            // {
+            //     CollectionItem::updateOrCreate(
+            //         ['collection_id' => $this->collection_id,
+            //         'material_id'=>$this->material_id],
+            //         []
+            //     );
+                
+            //     return Redirect(route('collection-files', $this->collection_id));
+            // }
+            #<---
+        }
 
         $this->doClose();
     } 

@@ -31,7 +31,9 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link {{$tabs_id == 1 ? 'active' : ''}}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ translate('My Profile')}}</button>
+                                @if($user->id==Auth::id())
                                 <button class="nav-link {{$tabs_id == 2 ? 'active' : ''}}" id="share-tab" data-bs-toggle="tab" data-bs-target="#share" type="button" role="tab" aria-controls="share" aria-selected="false">{{ translate('Share')}}</button>
+                                @endif
                                 <button class="nav-link {{$tabs_id == 3 ? 'active' : ''}}" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="false">{{ translate('Uploaded course')}}</button>
                             </div>
                         </nav>
@@ -137,12 +139,18 @@
                                     </div>
                                 </form>
                             </div>
+
+                            @if($user->id==Auth::id())
+                            <!-- #################### shared for Me ######################## -->
                             <div class="tab-pane fade {{$tabs_id == 2 ? 'show active' : ''}} pt-3" id="share" role="tabpanel" aria-labelledby="share-tab">
                                 <table class="align-items-center mb-0 w-100" id='all-course-table'>
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" >
                                                 {{ translate('ID')}}
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                                {{ translate('User Name')}}
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                                 {{ translate('Collection Name')}}
@@ -174,6 +182,11 @@
                                             </td>
                                             <td>
                                                 <div class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0">{{$row->coll->owner->name}}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
                                                     <p class="text-xs font-weight-bold mb-0">{{$row->coll->collection_name}}</p>
                                                 </div>
                                             </td>
@@ -186,13 +199,20 @@
                                             </td>
                                             <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
                                             <td class="text-center">
-                                                <span  data-bs-toggle="tooltip" 
+                                            <span  data-bs-toggle="tooltip" 
                                                     wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
                                                     onclick="shareme( '{{route('collection-shares', $skey )}}' )"
                                                     data-bs-original-title="{{translate('copy shared url')}}"
                                                     class="mx-1" >
                                                     <i class="cursor-pointer fa fa-copy text-secondary"></i>
                                                 </span>
+                                            
+                                                <a  data-bs-toggle="tooltip" 
+                                                    href="{{route('send-message', $row->coll->owner->email)}}"
+                                                    data-bs-original-title="{{translate('send message to this user.')}}"
+                                                    class="mx-1" >
+                                                    <i class="cursor-pointer fa fa-envelope text-secondary"></i>
+                                                </a>
                                             
                                                 <a href="{{route('collection-files', $row->coll->id)}}" 
                                                     class="mx-1" 
@@ -211,7 +231,16 @@
                                         @endforeach
                                     </tbody>
                                 </table>  
+                                <div class="align-items-center justify-content-center mt-5 mb-0 w-100 text-center" >
+                                    <button type="button" class="btn btn-primary" onclick="location.href='{{route('message')}}'">
+                                                    {{ translate("Send Message") }}
+                                                </button>
+                                                </div>
                             </div>
+                            @endif
+
+
+                            <!-- #################### My Upload courses ######################## -->
                             <div class="tab-pane fade {{$tabs_id == 3 ? 'show active' : ''}} pt-3" id="upload" role="tabpanel" aria-labelledby="upload-tab">
                                 <ul class="list-group">
                                     @foreach($myUpload_courses as $course)
@@ -251,6 +280,11 @@
                                     </li>
                                     @endforeach
                                 </ul>
+                                <div class="align-items-center justify-content-center mt-5 mb-0 w-100 text-center" >
+                                    <button type="button" class="btn btn-primary" onclick="location.href='{{route('course-material')}}'">
+                                                    {{ translate("Uplaod File") }}
+                                                </button>
+                                                </div>
                             </div>
                         </div>
                     </div>

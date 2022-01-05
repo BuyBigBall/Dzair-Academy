@@ -10,6 +10,8 @@ use App\Models\Course;
 use Livewire\WithFileUploads;
 use App\Models\MaterialLanguage;
 use App\Models\Material;
+use App\Models\Collection;
+use App\Models\CollectionItem;
 use Illuminate\Support\Facades\Auth;
 
 class CourseMaterial extends Component
@@ -31,7 +33,10 @@ class CourseMaterial extends Component
     public $level;          
     
     public $add_coll_type;       
-
+    public $add_coll_id;       
+    public $new_coll_title;       
+    public $new_coll_desc;
+    public $coll_name;
 
     public $title;          
     public $description;          
@@ -43,7 +48,7 @@ class CourseMaterial extends Component
     public $cate_exercise = true;
     public $cate_exam = true;
     // <--- ######## wire:model
-
+    
     protected $rules = [
         'training' => 'required',
         'faculty' => 'required',
@@ -53,11 +58,36 @@ class CourseMaterial extends Component
         'title' => 'required|max:200',
         'file'  => 'required|max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
     ];
+
+    protected $listeners = [
+        'SelectedCollection' => 'SelectedCollection'        ,   # from modal
+        'ShouldAddCollection' => 'ShouldAddCollection'      ,   # from modal
+        'NoSelectedCollection' => 'NoSelectedCollection'    ,   # from option
+    ];
+
     public function __construct()
     {
         parent::__construct();
     }
     
+    public function NoSelectedCollection()
+    {
+        $this->add_coll_type    = 0;
+    }
+    public function SelectedCollection($coll_id)
+    {
+        $coll = Collection::find($coll_id);
+        if(!empty($coll))       $this->coll_name = $coll->collection_name;
+        $this->add_coll_id      = $coll_id;
+        $this->add_coll_type    = 1;
+    }
+    public function ShouldAddCollection($coll_title, $coll_desc)
+    {
+        $this->new_coll_title   = $coll_title;
+        $this->new_coll_desc    = $coll_desc;
+        $this->coll_name        = $coll_title;
+        $this->add_coll_type    = 2;
+    }
     public function mount()
     {
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
@@ -165,19 +195,69 @@ class CourseMaterial extends Component
                     ]);
         $materal_language_id = $materal_language->id;
 
+        // if($this->add_coll_type==1)
+        //     $this->emit('ShowModal', $new_course_Material_id);
+        // elseif($this->add_coll_type==2)
+        //     $this->emit('doShow', $new_course_Material_id);
+        // else
+        if(!empty($this->add_coll_id) && $this->add_coll_type==1)
+        {
+            # into his own collection
+            $coll = Collection::where([ 
+                'user_id'=>Auth::id(), 
+                'id'=>$this->add_coll_id
+            ])->first();
+            if($coll!=null)
+            {
+                CollectionItem::updateOrCreate(
+                                    [   'collection_id' => $this->add_coll_id,
+                                        'material_id'   => $new_course_Material_id
+                                    ],
+                                    []
+                                );
+
+            
+            }
+        }
+        if(!empty($this->new_coll_title) && $this->add_coll_type==2)
+        {
+            # into his own collection
+            $coll = Collection::create([
+                'user_id'           => Auth::user()->id,
+                'collection_name'   => $this->new_coll_title,
+                'description'       => $this->new_coll_desc
+            ]);
+            if($coll!=null)
+            {
+                $this->add_coll_id = $coll->id;
+                CollectionItem::updateOrCreate(
+                                    [   'collection_id' => $this->add_coll_id,
+                                        'material_id'   => $new_course_Material_id
+                                    ],
+                                    []
+                                );
+            }
+        }
+
         $this->title = null;          
         $this->description = null;          
         $this->file = null;          
         $this->protection = null;          
         $this->password_code = '';    
         $this->confirm_code = '';
+
+        if(!empty($this->add_coll_id) && (
+            $this->add_coll_type==1 || $this->add_coll_type==2
+        ))
+        {
+            return Redirect(route('collection-files', $this->add_coll_id));
+        }
+
+        $this->add_coll_id = 0;
+        $this->new_coll_title = '';
+        $this->new_coll_desc = '';
         
-        if($this->add_coll_type==1)
-            $this->emit('ShowModal', $new_course_Material_id);
-        elseif($this->add_coll_type==2)
-            $this->emit('doShow', $new_course_Material_id);
-        else
-            $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
+        $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
 
     }
 

@@ -48,7 +48,11 @@ class CollectionFiles extends Component
         if($this->current_route=='collection-files')
         {
             if(!!empty( ( $coll = Collection::find($id) ) ))    $id = null;
-            if($coll->user_id!=Auth::id())                      $id = null;
+            if($coll->user_id!=Auth::id())        
+            {
+                $coll_share = CollectionShare::where('collection_id', $id)->where('to_user', Auth::id())->first();
+                if( !!empty($coll_share) )                $id = null;
+            }              
         }
 
         if($this->current_route=='collection-shares')

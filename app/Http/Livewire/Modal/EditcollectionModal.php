@@ -81,20 +81,31 @@ class EditcollectionModal extends Component
             );
         }
         else{
-            $coll = Collection::create([
-                'user_id' => Auth::user()->id,
-                'collection_name' => $this->coll_name,
-                'description' => $this->coll_disp
-            ]);
-            if(!empty($this->mat_id))
-            {
-                CollectionItem::updateOrCreate(
-                    ['collection_id' => $coll->id,
-                     'material_id'=>$this->mat_id],
-                    []
-                );
-                return Redirect(route('collection-files', $coll->id));
+            $request = Request::capture();
+            if(stripos($request->headers->get('referer'), 'course-material')!==false)
+            { # this come from course file uploading.
+                //dd($this->collection_id);
+                $this->emit('ShouldAddCollection', $this->coll_name, $this->coll_disp);
+                $this->doClose();
+                return;
             }
+            else
+            {
+                $coll = Collection::create([
+                    'user_id' => Auth::user()->id,
+                    'collection_name' => $this->coll_name,
+                    'description' => $this->coll_disp
+                ]);
+                // if(!empty($this->mat_id))
+                // {
+                //     CollectionItem::updateOrCreate(
+                //         ['collection_id' => $coll->id,
+                //          'material_id'=>$this->mat_id],
+                //         []
+                //     );
+                //     return Redirect(route('collection-files', $coll->id));
+                // }
+            }            
         }
 
         $this->emit('refresh_list', '');
