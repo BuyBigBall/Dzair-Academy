@@ -87,7 +87,7 @@ class CourseDetail extends Component
         
         if( !empty($this->password) && $this->password!=md5($this->encryptPassword))
         {
-            return null;;
+            return $this->emit('WireAlert', translate('Download password no matched.'), '');
         }
 
     	return response()->download($myFile, $newName, $headers);
