@@ -41,8 +41,10 @@
                             <div class="tab-pane fade {{$tabs_id == 1 ? 'show active' : ''}} pt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <form wire:submit.prevent="save" action="#" method="POST" role="form text-left">
                                     <div class="row">
-                                        <div class="col-md-4 pt-4 d-flex justify-content-center text-align-center">
-                                            <img style='width:180px; height:220px; cursor:pointer;' 
+                                        <div class="col-md-4 pt-4 text-center">
+                                            <div class="row d-flex justify-content-center">
+                                                <img style='width:180px; cursor:pointer;' 
+                                                    class="d-flex justify-content-center"
                                                     id="user_photo_img"
                                                     @if($user->id==Auth::id())
                                                         onclick="$('#photo').trigger('click');"
@@ -53,8 +55,14 @@
                                                         src="{{ userphoto($user_photo) }}"
                                                     @endif
                                                     />
-                                            <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
-                                            @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
+                                                <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
+                                                @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
+                                            </div>    
+                                            @if($user->id!=Auth::id())
+                                            <div class="row pt-3 text-primary">
+                                                <a href="{{ route('send-message', $user_email) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
+                                            </div>    
+                                            @endif
                                         </div>   
                                         <div class="col-md-8">                        
                                             <div class="row">
@@ -131,7 +139,7 @@
                                                     <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
                                                 @else
                                                     <!-- <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a> -->
-                                                    <a href="{{ route('send-message', $user_email) }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Send Message') }}</a>
+                                                    <!-- <a href="{{ route('send-message', $user_email) }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Send Message') }}</a> -->
                                                 @endif
                                             </div>
                                         </div>
