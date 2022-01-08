@@ -154,8 +154,8 @@
                 <span id='notice'></span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel' }}</button>
-                <button type="button" class="btn btn-primary">{{ 'Ok' }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translate('Cancel') }}</button>
+                <button type="button" class="btn btn-primary">{{ translate('Ok')}}</button>
             </div>
             </div>
         </div>
@@ -175,7 +175,7 @@
                 <span id='notice_content'></span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">{{ 'Ok' }}</button>
+                <button type="button" class="btn btn-primary">{{ translate('Ok') }}</button>
             </div>
             </div>
         </div>

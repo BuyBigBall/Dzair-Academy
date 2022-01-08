@@ -54,10 +54,10 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" 
                 wire:click.prevent="doClose()"
-                data-bs-dismiss="modal">{{ 'Cancel' }}</button>
+                data-bs-dismiss="modal">{{ translate('Cancel') }}</button>
             <button type="button" class="btn btn-primary"
                 wire:click.prevent="save()"
-                >{{ 'Save' }}</button>
+                >{{ translate('Save') }}</button>
         </div>
         </div>
     </div>

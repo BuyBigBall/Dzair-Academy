@@ -43,12 +43,49 @@
                 <div class="modal-body" style="flex-wrap:nowrap;overflow:auto;">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="en_words" class="form-control-label">english</label>
+                                    <label for="en_words" class="form-control-label sm-hide">select training</label>
+                                    <div class="">
+                                    <select class="form-control" wire:model="training" name='training'>
+                                                    <option>{{ __('pages.seltraining')}}</option>
+                                                    @foreach($training_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="en_words" class="form-control-label sm-hide">select faculty</label>
+                                    <div class="">
+                                        <select class="form-control" wire:model="faculty" name='faculty'>
+                                                    <option>{{ __('pages.selfaculty')}}</option>
+                                                    @foreach($faculty_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pt-3 pt-sm-2">
+                            adding
+                                only in one language is required
+                                other languages are optional
+                            </div>
+                            <hr class="mb-3 mb-sm-2" />
+                        </div>    
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-2 mb-sm-1">
+                                    <label for="en_words" class="form-control-label sm-hide mb-1">english</label>
                                     <div class="">
                                     <input type="text" wire:model="en" 
                                             class="form-control" 
+                                            placeholder="english"
                                             id="en_words" />
                                     </div>
                                 </div>
@@ -56,11 +93,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="fr_words" class="form-control-label">français</label>
+                                <div class="form-group mb-2 mb-sm-1">
+                                    <label for="fr_words" class="form-control-label sm-hide mb-1">français</label>
                                     <div class="">
                                         <input type="text" wire:model="fr" 
                                             class="form-control" 
+                                            placeholder="français"
                                             id="fr_words" />
                                     </div>
                                 </div>
@@ -68,11 +106,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="ar_words" class="form-control-label">عربي</label>
+                                <div class="form-group mb-2 mb-sm-1">
+                                    <label for="ar_words" class="form-control-label sm-hide mb-1">عربي</label>
                                     <div class="">
                                         <input type="text" wire:model="ar" 
                                             class="form-control" 
+                                            placeholder="عربي"
                                             id="ar_words" />
                                     </div>
                                 </div>

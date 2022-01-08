@@ -45,6 +45,66 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="en_words" class="form-control-label sm-hide">select training</label>
+                                    <div class="">
+                                    <select class="form-control" wire:model="training" name='training'>
+                                                    <option>{{ __('pages.seltraining')}}</option>
+                                                    @foreach($training_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="en_words" class="form-control-label sm-hide">select faculty</label>
+                                    <div class="">
+                                        <select class="form-control" wire:model="faculty" name='faculty'>
+                                                    <option>{{ __('pages.selfaculty')}}</option>
+                                                    @foreach($faculty_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="en_words" class="form-control-label sm-hide">select faculty</label>
+                                    <div class="">
+                                        <select class="form-control" wire:model="faculty" name='faculty'>
+                                                    <option>{{ __('pages.selspecialization')}}</option>
+                                                    @foreach($specialization_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="en_words" class="form-control-label sm-hide">select faculty</label>
+                                    <div class="">
+                                        <select class="form-control" wire:model="faculty" name='faculty'>
+                                                    <option>{{ __('pages.sellevel')}}</option>
+                                                    @foreach($level_options as $val)
+                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    @endforeach
+                                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="en_words" class="form-control-label">english</label>
                                     <div class="">
                                     <input type="text" wire:model="en" 

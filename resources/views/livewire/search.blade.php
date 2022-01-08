@@ -23,6 +23,15 @@
              </div>
            </div>
            <div class="card-body p-3">
+             <div class="row">
+              <div class="col-md-9 col-sm-12 p-3">
+               didn’t
+                find your modules specialization, please
+                help us by providing more information
+                about them so other members can submit
+                files, <a href="#">click here to add them</a>
+                </div>
+              </div>
              <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">
                @csrf
                <div class="row">

@@ -75,7 +75,7 @@
                                         </td>
                                         <td class="text-center text-xs">
                                             <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                                data-bs-original-title="mark as read"
+                                                data-bs-original-title="register translate for this words"
                                                 data-id='{{$row->strkey}}'
                                                 wire:click.prevent="$emit('ShowTranslateModal', '{{$row->strkey}}')"
                                                 >

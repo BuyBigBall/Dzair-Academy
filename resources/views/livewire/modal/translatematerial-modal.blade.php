@@ -143,10 +143,10 @@
                         type="button"
                         class="btn btn-secondary"
                         data-bs-dismiss="modal"
-                        wire:click.prevent="doClose()">{{ 'Cancel' }}</button>
+                        wire:click.prevent="doClose()">{{ translate('Cancel') }}</button>
                     <button type="button" class="btn btn-primary" 
                         wire:click.prevent="save()"
-                        >{{ 'Save' }}</button>
+                        >{{ translate('Save') }}</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,8 @@
 <?php return array (
+  
+  'modal.addspec-modal' => 'App\\Http\\Livewire\\Modal\\AddSpecializationModal',
+  'modal.selectway-modal' => 'App\\Http\\Livewire\\Modal\\SelectWayModal',
+  
   'auth.forgot-password' => 'App\\Http\\Livewire\\Auth\\ForgotPassword',
   'auth.login' => 'App\\Http\\Livewire\\Auth\\Login',
   'auth.logout' => 'App\\Http\\Livewire\\Auth\\Logout',
