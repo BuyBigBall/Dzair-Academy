@@ -107,7 +107,7 @@ class BranchManagement extends Component
         $this->path_level = $this->const_path_level['faculty'];
         $this->const_path_name = translate("Edit Faculty");
         $this->list_items = 
-        $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Faculties');
         $this->list_of = Training::where('id', $value)->first()->toArray()[lang()];
     }
@@ -123,7 +123,7 @@ class BranchManagement extends Component
         $this->path_level = $this->const_path_level['specialization'];
         $this->const_path_name = translate("Edit Specialization");
         $this->list_items = 
-        $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
+        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Specializations');
         $this->list_of = Faculty::where('id', $value)->first()->toArray()[lang()];
     }
@@ -138,7 +138,7 @@ class BranchManagement extends Component
         $this->path_level = $this->const_path_level['course'];
         $this->const_path_name = translate("Edit Course");
         $this->list_items = 
-        $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        $this->course_options = Course::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Subjects');
         $this->list_of = Specialization::where('id', $value)->first()->toArray()[lang()];
     }

@@ -14,6 +14,7 @@
   'collection.collection-shared' => 'App\\Http\\Livewire\\Collection\\CollectionShared',
   'component.added-module' => 'App\\Http\\Livewire\\Component\\AddedModule',
   'component.added-specialization' => 'App\\Http\\Livewire\\Component\\AddedSpecialization',
+  'component.added-faculty' => 'App\\Http\\Livewire\\Component\\AddedFaculty',
   'component.translated-course' => 'App\\Http\\Livewire\\Component\\TranslatedCourse',
   'component.uploaded-course' => 'App\\Http\\Livewire\\Component\\UploadedCourse',
   'component.user-photo' => 'App\\Http\\Livewire\\Component\\UserPhoto',

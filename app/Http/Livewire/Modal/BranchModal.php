@@ -8,6 +8,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 
 class BranchModal extends Component
 {

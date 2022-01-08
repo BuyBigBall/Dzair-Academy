@@ -50,11 +50,11 @@ class TranslateMaterial extends Component
     
     public function updatedTraining($value)
     {
-        $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function updatedFaculty($value)
     {
-        $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
+        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function updatedSpecialization($value)
     {
@@ -95,12 +95,12 @@ class TranslateMaterial extends Component
             $this->training = $course->training_id;
             if(!empty( ($value=$this->training) ))
             {
-                $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+                $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
             }
             $this->faculty = $course->faculty_id;
             if(!empty( ($value=$this->faculty) ))
             {
-                $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
+                $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
             }
             $this->specialization = $course->specialization_id;
             if(!empty( ($value=$this->specialization) ))

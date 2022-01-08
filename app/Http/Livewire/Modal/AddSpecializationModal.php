@@ -8,6 +8,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 
 class AddSpecializationModal extends Component
 {
@@ -40,7 +41,7 @@ class AddSpecializationModal extends Component
 
     public function updatedTraining($value)
     {
-        $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         if( !!empty($value) || !is_numeric($value)) $this->title = translate("Add specialization or faculty");
         else                 $this->title = translate("Add faculty");
     }

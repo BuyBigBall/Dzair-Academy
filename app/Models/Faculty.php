@@ -9,5 +9,5 @@ class Faculty extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['training_id', 'en' ,'fr' ,'ar'];
+    protected $fillable = ['training_id', 'en' ,'fr' ,'ar', 'created_by', 'updated_by', 'status'];
 }

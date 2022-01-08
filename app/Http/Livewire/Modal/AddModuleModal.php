@@ -38,7 +38,7 @@ class AddModuleModal extends Component
         $this->show = false;
         $this->title = translate("Add specialization or faculty");
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
-        $this->faculty_options  = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+        $this->faculty_options  = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
 
     public function ShowAddModuleModal() {

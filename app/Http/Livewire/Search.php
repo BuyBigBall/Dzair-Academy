@@ -41,15 +41,15 @@ class Search extends Component
     }
     public function updatedTraining($value)
     {
-        $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function updatedFaculty($value)
     {
-        $this->specialization_options = Specialization::where('faculty_id', $value)->orderBy('id')->get()->toArray();
+        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function updatedSpecialization($value)
     {
-        $this->course_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        $this->course_options = Course::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function updated($field, $newValue)
     {
