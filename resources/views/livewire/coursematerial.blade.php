@@ -313,4 +313,6 @@
     @livewire('modal.editcollection-modal') 
     @livewire('modal.selectway-modal') 
     @livewire('modal.addspec-modal') 
+    @livewire('modal.addmodule-modal') 
+    
 </main>

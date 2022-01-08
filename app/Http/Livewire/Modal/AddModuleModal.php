@@ -23,6 +23,7 @@ class AddModuleModal extends Component
     public  $training;       
     public  $faculty;        
     public  $specialization; 
+    public  $level;   
     public  $module;         
 
     public  $training_options = [];
@@ -35,31 +36,32 @@ class AddModuleModal extends Component
     ];
 
     public function mount(Request $request) {
+        
         $this->show = false;
-        $this->title = translate("Add specialization or faculty");
+        $this->title = translate("Add module");
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
-        $this->faculty_options  = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+        $this->level_options = \Config::get('constants.levels');
     }
+
+    public function updatedTraining($value)
+    {
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+    }
+    public function updatedFaculty($value)
+    {
+        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+    }
+    // public function updatedSpecialization($value)
+    // {
+
+    // }
 
     public function ShowAddModuleModal() {
         
-        $this->training         = $training;
-        $this->faculty          = $faculty;
-        $this->specialization   = $specialization;
-        $this->module          = $module;
-
         $this->en = "";
         $this->fr = "";
         $this->ar = "";
 
-        $obj = null;
-        if(!empty($obj))
-        {
-            $this->en = $obj->en;
-            $this->fr = $obj->fr;
-            $this->ar = $obj->ar;
-        }
-            
         $this->show = true;
     }
     public function save() {
@@ -67,21 +69,20 @@ class AddModuleModal extends Component
         $fldArray = [
             'en' => $this->en,'fr' => $this->fr,'ar' => $this->ar,
         ];
-        // {
-           
-        //     {
-        //         $obj = new Specialization();
-        //         $obj->faculty_id = $this->faculty;
-        //         $obj->en = $this->en;
-        //         $obj->fr = $this->fr;
-        //         $obj->ar = $this->ar;
-        //         $obj->created_by = Auth::id();
-        //         $obj->updated_by = Auth::id();
-        //         $obj->save();
-        //     }
-        // }
 
-        $this->show = false;
+        if( !empty($this->training) && !empty($this->faculty) && !empty($this->specialization) && !empty($this->level))
+        {
+            $obj = new Course();    // this is the module
+            $obj->specialization_id = $this->specialization;
+            $obj->en = $this->en;
+            $obj->fr = $this->fr;
+            $obj->ar = $this->ar;
+            $obj->created_by = Auth::id();
+            $obj->updated_by = Auth::id();
+            $obj->save();
+            $this->show = false;
+        }
+
     }
     public function doClose() {
         $this->show = false;

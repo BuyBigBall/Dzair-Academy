@@ -1,5 +1,6 @@
 <?php return array (
   
+  'modal.addmodule-modal' => 'App\\Http\\Livewire\\Modal\\AddModuleModal',
   'modal.addspec-modal' => 'App\\Http\\Livewire\\Modal\\AddSpecializationModal',
   'modal.selectway-modal' => 'App\\Http\\Livewire\\Modal\\SelectWayModal',
   
