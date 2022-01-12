@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\CollectionShare;
 use App\Models\Material;
 use App\Models\MaterialLanguage;
+use App\Models\University;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,12 @@ class UserProfile extends Component
     public $user_about;
     public $user_location;
     public $user_photo;
+    public $user_university;
     public $user_edit_photo;
     public $tabs_id = 1;
 
     public $myUpload_courses;
+    public $university_options;
 
     public $showSuccesNotification  = false;
 
@@ -37,7 +40,8 @@ class UserProfile extends Component
         'user_email'    => 'email:rfc,dns',
         'user_phone'    => 'numeric|digits_between:6,12',
         'user_about'    => 'max:200',
-        'user_location' => 'min:3',
+        //'user_location' => 'min:3',
+        'user_university'=> 'required',
         'user_photo'    => 'max:'.MAX_COURSE_UPLOAD_SIZE,  
     ];
     protected $messages = [
@@ -47,8 +51,9 @@ class UserProfile extends Component
         'user_phone.digits_between'    =>  ('The user phone length must be between 6 and 12 digits.'),
         'user_phone.numeric'=>  ('The user phone can be allow only numeric.'),
         'user_about.max'    =>  ('The user description length cannot be over than 200 characters.'),
-        'user_location.min' =>  ('The user univercity name length cannot be less than 3 characters.'),
+        //'user_location.min' =>  ('The user univercity name length cannot be less than 3 characters.'),
         'user_photo.min'    =>  ('The user photo file size cannot be over than '.MAX_COURSE_UPLOAD_SIZE.' bytes.'),
+        'user_university.required'=> ('The user university cannot be empty'),
     ];
 
     public function stopShareCollection($share_id)
@@ -72,12 +77,13 @@ class UserProfile extends Component
         {
             $this->user = auth()->user();
         }
-        $this->user_email       = $this->user->email;
+
         $this->user_name        = $this->user->name;
         $this->user_email       = $this->user->email;
         $this->user_phone       = $this->user->phone;
         $this->user_about       = $this->user->about;
         $this->user_location    = $this->user->location;
+        $this->user_university    = $this->user->university_id;
         $this->user_photo       = $this->user->photo;
 
         if($this->user->photo_agree!=1 && $this->user->id!=Auth::id())
@@ -87,8 +93,12 @@ class UserProfile extends Component
         if(!empty($request->user_id))
             $this->myUpload_courses = Material::where('created_by', $this->user->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
         else
-        $this->myUpload_courses = Material::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
-        // dd($this->myUpload_courses);
+            $this->myUpload_courses = Material::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
+        
+        
+        $this->university_options = University::orderBy('mainname')->get();//->toArray();
+
+        // dd($this->university_options);
     }
 
     public function save() {
@@ -98,7 +108,13 @@ class UserProfile extends Component
         $this->user->email       = $this->user_email;
         $this->user->phone       = $this->user_phone;
         $this->user->about       = $this->user_about;
-        $this->user->location    = $this->user_location;
+
+
+        if( ($univ=University::find($this->user_university)) )
+        {
+            $this->user->university_id  = $univ->id;
+            $this->user->location       = $univ->town;
+        }
         
         if($this->user_edit_photo)
         {

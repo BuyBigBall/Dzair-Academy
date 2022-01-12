@@ -23,6 +23,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                                 @include('livewire.pagination')
                             </div>
+                    <hr />
                     <div class="table-responsive p-0" style='min-height:50vh'>
                         <table class="align-items-center mb-0 w-100">
                             <thead>
@@ -100,6 +101,8 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <hr />
                 </div>
             </div>
         </div>

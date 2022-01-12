@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-management',      UserManagement::class)->name('user-management');
     Route::get('/branch-management',    BranchManagement::class)->name('branch-management');
     Route::get('/message',              MessageManage::class)->name('message');
-    Route::get('/send-message/{email}', MessageManage::class)->name('send-message');
+    Route::get('/send-message/{username}', MessageManage::class)->name('send-message');
     
     Route::get('/collection',           CollectionManage::class)->name('collection');
     Route::get('/collection-shared',    CollectionShared::class)->name('collection-shared-forme');

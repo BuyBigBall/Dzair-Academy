@@ -89,7 +89,7 @@
                                                 <label class="sm-hide">{{ translate('Module')}}</label>
                                                 <select class="form-control" wire:model="module" name='module'>
                                                     <option>{{ translate('Select Module')}}</option>
-                                                    @foreach($subject_options as $val)
+                                                    @foreach($module_options as $val)
                                                     <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                                                     @endforeach
                                                 </select>

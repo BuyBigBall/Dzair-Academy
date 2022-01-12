@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use Livewire\Component;
-use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class AddedModule extends Component
@@ -16,17 +16,17 @@ class AddedModule extends Component
 
     public function mount()
     {
-        $query = Course::where('status', '0')->orderBy('created_at', 'DESC');
+        $query = Module::where('status', '0')->orderBy('created_at', 'DESC');
         $this->new_modules = $query->get();
     }
     public function agree_module($module_id)
     {
-        Course::find($module_id)->update(['status'=>1]);
+        Module::find($module_id)->update(['status'=>1]);
         $this->mount();
     }
     public function delete_module($module_id)
     {
-        Course::find($module_id)->update(['status'=>-1]);
+        Module::find($module_id)->update(['status'=>-1]);
         $this->mount();
     }
 

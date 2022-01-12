@@ -45,8 +45,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group d-sm-flex align-items-center">
                                                 <label class="custom-control-label me-3 w-25">{{ translate('To')}}</label>
-                                                <input wire:model="email" name='email' 
-                                                    type="email" Placeholder="user@example.com"
+                                                <input wire:model="username" name='username' 
+                                                    type="text" Placeholder="Jhon Smith"
                                                     class="form-control"  
                                                     />                                        
 

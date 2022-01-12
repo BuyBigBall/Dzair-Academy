@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Module extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['specialization_id', 'en' ,'fr' ,'ar', 'created_by', 'updated_by', 'status'];
+    protected $fillable = ['level', 'specialization_id', 'en' ,'fr' ,'ar', 'created_by', 'updated_by', 'status'];
 
     public function creator() {
         return $this->hasOne('App\Models\User','id', 'created_by');

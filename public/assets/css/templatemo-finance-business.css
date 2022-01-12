@@ -389,6 +389,7 @@ header .navbar .navbar-toggler-icon:after {
 
 .Modern-Slider .item-1 .img-fill {
 	background-image: url(../img/slide_01.jpg);
+	/* background-color: #BADFE7; */
 }
 
 .Modern-Slider .item-2 .img-fill {

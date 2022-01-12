@@ -1,6 +1,10 @@
   <section class="h-100-vh mb-8">
-      <div class="page-header align-items-start section-height-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../assets/img/curved-images/curved14.jpg');">
-          <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="page-header align-items-start section-height-50 pt-5 pb-11 m-3 border-radius-lg" 
+        style="background-color: "
+        >
+        <!-- #6fb3B8 -->
+        <!-- style="background-image: url('../assets/img/curved-images/curved14.jpg');" -->
+          <span class="mask bg-gradient-dark opacity-0"></span>
           <!-- <div class="container">
               <div class="row justify-content-center">
                   <div class="col-lg-5 text-center mx-auto">
@@ -18,7 +22,7 @@
               <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                   <div class="card z-index-0">
                       <div class="card-header text-center pt-4">
-                          <h5>{{ __('Login') }}</h5>
+                          <h5>{{ translate('Sign In') }}</h5>
                       </div>
                       <!-- <div class="row px-xl-5 px-sm-4 px-3">
                           <div class="col-3 ms-auto px-1">

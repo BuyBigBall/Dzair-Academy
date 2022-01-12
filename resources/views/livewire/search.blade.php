@@ -29,7 +29,7 @@
                 find your modules specialization, please
                 help us by providing more information
                 about them so other members can submit
-                files, <a href="#">click here to add them</a>
+                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" >click here to add them</a>
                 </div>
               </div>
              <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">
@@ -91,7 +91,7 @@
                          <label class="sm-hide">{{ translate('Module')}}</label>
                          <select class="form-control" wire:model="module" name='module'>
                            <option value=''>{{ translate('Select Module')}}</option>
-                           @foreach($course_options as $val)
+                           @foreach($module_options as $val)
                            <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                            @endforeach
                          </select>
@@ -196,3 +196,7 @@
      </div>
    </div>
  </main>
+
+ @livewire('modal.selectway-modal') 
+ @livewire('modal.addspec-modal') 
+ @livewire('modal.addmodule-modal')  

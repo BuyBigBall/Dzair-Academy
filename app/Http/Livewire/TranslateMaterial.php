@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use App\Models\Material;
 use App\Models\MaterialLanguage;
 use Livewire\Component;
@@ -32,7 +32,7 @@ class TranslateMaterial extends Component
 
     public $training_options    = [] ;
     public $faculty_options     = [];
-    public $subject_options     = [];
+    public $module_options     = [];
     public $specialization_options = [];
     public $level_options       = [];
 
@@ -58,7 +58,17 @@ class TranslateMaterial extends Component
     }
     public function updatedSpecialization($value)
     {
-        $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        if(!empty($this->level))
+            $this->module_options = Module::where('specialization_id', $value)->where('level', $this->level)->where('status', 1)->orderBy('id')->get()->toArray();
+        else
+            $this->module_options = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+    }
+    public function updatedLevel($value)
+    {
+        if(!empty($this->specialization))
+            $this->module_options = Module::where('level', $value)->where('specialization_id', $this->specialization)->where('status', 1)->orderBy('id')->get()->toArray();
+        else
+            $this->module_options = Module::where('level', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
     public function update($field, $newValue)
     {
@@ -105,7 +115,7 @@ class TranslateMaterial extends Component
             $this->specialization = $course->specialization_id;
             if(!empty( ($value=$this->specialization) ))
             {
-                $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+                $this->module_options = Module::where('specialization_id', $value)->orderBy('id')->get()->toArray();
             }
             $this->module = $course->course_id;
             $this->level   = $course->level;
@@ -159,7 +169,7 @@ class TranslateMaterial extends Component
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as spacialization";
-        $cols .= " , MIN(courses." . lang(). ") as course";
+        $cols .= " , MIN(modules." . lang(). ") as course";
         $cols .= " , MIN(materials.level) as level";
         //dd($cols);
         $query = \App\Models\Material::selectRaw(
@@ -168,7 +178,7 @@ class TranslateMaterial extends Component
                 ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
                 ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-                ->leftJoin('courses' , 'courses.id', '=', 'materials.course_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'materials.course_id')
              ->where($searchCond)
              ->where( function($query1) use ($searchWord) {
                 if(count($searchWord)>0)

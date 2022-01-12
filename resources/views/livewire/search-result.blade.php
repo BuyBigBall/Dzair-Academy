@@ -26,6 +26,7 @@
                  <div class="d-flex justify-content-between align-items-center">
                    @include('livewire.pagination')
                  </div> 
+                 <hr />
                  <ul class="list-group">
                    @foreach($pagination as $row)
                    <li class="list-group-item border-0 d-flex p-3 mb-2 bg-gray-100 border-radius-lg w-100">
@@ -62,7 +63,7 @@
 
                  <!-- {{ $pagination->links() }}
                   {{ $pagination->nextPageUrl() }} -->
-
+                 <hr />
                  <!-- select page show & pagenation -->
                  <div class="d-sm-flex justify-content-between align-items-center">
                    @include('livewire.pagination')

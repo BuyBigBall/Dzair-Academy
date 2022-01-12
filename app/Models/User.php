@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     protected $guarded = [];
     protected $fillable = ['role', 'status' ,'name' ,'email' ,'email_verified_at' ,
-            'photo_agree', 
+            'photo_agree', 'university_id', 
             'password', 'photo', 'phone', 'location', 'course_id', 'about', 
         ];
     /**
@@ -48,7 +48,7 @@ class User extends Authenticatable
         return $this->hasMany([['App\Models\Material','created_by'], ['App\Models\Material','updated_by']]);
     }
     public function course() {
-        return $this->hasOne('App\Models\Course', 'id', 'course_id');
+        return $this->hasOne('App\Models\Module', 'id', 'course_id');
     }
     public function collection() {
         return $this->hasMany('App\Models\Collection', 'user_id', 'id');

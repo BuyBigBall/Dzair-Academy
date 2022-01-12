@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class BranchManagement extends Component
     public $const_path_name;
     public $training_options    = [] ;
     public $faculty_options     = [];
-    public $course_options      = [];
+    public $module_options      = [];
     public $specialization_options = [];
     public $level_options       = [];
     public $list_items          = [];
@@ -61,7 +61,7 @@ class BranchManagement extends Component
             if( $this->path_level==1) $dbtable = Training::find($del_id);
             if( $this->path_level==2) $dbtable = Faculty::find($del_id);
             if( $this->path_level==3) $dbtable = Specialization::find($del_id);
-            if( $this->path_level==4) $dbtable = Course::find($del_id);
+            if( $this->path_level==4) $dbtable = Module::find($del_id);
             if( $this->path_level==5) $dbtable = Material::find($del_id);
             
             if(  $dbtable!=null )
@@ -92,7 +92,7 @@ class BranchManagement extends Component
         $this->list_of = '';
         $this->faculty_options = [];
         $this->specialization_options = [];
-        $this->course_options = [];
+        $this->module_options = [];
     }
     public function updatedTraining($value)
     {
@@ -138,7 +138,7 @@ class BranchManagement extends Component
         $this->path_level = $this->const_path_level['course'];
         $this->const_path_name = translate("Edit Course");
         $this->list_items = 
-        $this->course_options = Course::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+        $this->module_options = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Subjects');
         $this->list_of = Specialization::where('id', $value)->first()->toArray()[lang()];
     }
@@ -161,11 +161,11 @@ class BranchManagement extends Component
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as specialization";
-        $cols .= " , MIN(courses." . lang(). ") as course";
+        $cols .= " , MIN(modules." . lang(). ") as course";
         $cols .= " , MIN(materials.level) as level";
         
         $this->list_title = translate('All Courses');
-        $this->list_of = Course::where('id', $value)->first()->toArray()[lang()];
+        $this->list_of = Module::where('id', $value)->first()->toArray()[lang()];
 
         $limit = 10;
         if(Cookie::has("perPage"))
@@ -178,7 +178,7 @@ class BranchManagement extends Component
                 ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
                 ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-                ->leftJoin('courses' , 'courses.id', '=', 'materials.course_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'materials.course_id')
                 ->where('course_id', $value)
                 ->groupBy('materials.id')->orderBy('materials.created_at','asc');
         $this->list_items = $query->limit( $limit )->get();

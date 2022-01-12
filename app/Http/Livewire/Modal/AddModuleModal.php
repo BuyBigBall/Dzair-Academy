@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
+use Illuminate\Support\Facades\Auth;
 
 class AddModuleModal extends Component
 {
@@ -70,10 +71,12 @@ class AddModuleModal extends Component
             'en' => $this->en,'fr' => $this->fr,'ar' => $this->ar,
         ];
 
+        // dd($this);
         if( !empty($this->training) && !empty($this->faculty) && !empty($this->specialization) && !empty($this->level))
         {
-            $obj = new Course();    // this is the module
+            $obj = new Module();    // this is the module
             $obj->specialization_id = $this->specialization;
+            $obj->level = $this->level;
             $obj->en = $this->en;
             $obj->fr = $this->fr;
             $obj->ar = $this->ar;

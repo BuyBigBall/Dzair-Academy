@@ -56,7 +56,7 @@
                           <label class="sm-hide">{{ translate('Module')}}</label>
                           <select class="form-control" wire:model="module" name='module'>
                                 <option value=''>{{ translate('Select Module')}}</option>
-                              @foreach($course_options as $val)
+                              @foreach($module_options as $val)
                               <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
                               @endforeach
                           </select>                        
@@ -64,12 +64,12 @@
                       </div>
                       <div class="col-md-2 col-sm-6 d-flex align-items-end justify-content-center">
                         <div class="form-group">
-                            @if($path_level>=3)
+                            <!-- @if($path_level>=3)
                             <a href="{{ route('course-material') }}" 
                                 class="btn bg-gradient-primary btn-sm mb-0" 
                                 wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$module}}', 0)"
                                 type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Module') : translate('New Course') ) ) ) }}</a>
-                            @endif
+                            @endif -->
                         </div>
                       </div>
                     </div>
@@ -126,6 +126,8 @@
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{$row['level']}}</p>
                                     </td>
+                                    @endif
+                                    @if(!empty($row['strkey']))
                                     <td class="text-left">
                                         <p class="text-xs font-weight-bold mb-0">{{$row['strkey']}}</p>
                                     </td>

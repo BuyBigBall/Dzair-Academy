@@ -90,9 +90,9 @@ class UserManagement extends Component
             $searchWord[] =  ['specializations.en' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['specializations.fr' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['specializations.ar' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['courses.en' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['courses.fr' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['courses.ar' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['modules.en' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['modules.fr' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['modules.ar' , 'like' , '%'.$this->word.'%']; 
 
             $searchWord[] =  ['users.name' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['users.email' , 'like' , '%'.$this->word.'%']; 
@@ -113,13 +113,13 @@ class UserManagement extends Component
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as spacialization";
-        $cols .= " , MIN(courses." . lang(). ") as course";
+        $cols .= " , MIN(modules." . lang(). ") as course";
 
 
         $query = \App\Models\User::selectRaw(
             DB::raw($cols))
-                ->leftJoin('courses' , 'courses.id', '=', 'users.course_id')
-                ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'users.course_id')
+                ->leftJoin('specializations' , 'specializations.id', '=', 'modules.specialization_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'specializations.faculty_id')
                 ->leftJoin('trainings' , 'trainings.id', '=', 'faculties.training_id')
              ->where( function($query1) use ($searchWord) {

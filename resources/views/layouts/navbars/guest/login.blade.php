@@ -10,11 +10,13 @@
         }
     }
 </style>
-<header class="background-header">
-    <nav class="navbar navbar-expand-lg shadow-none">
+<header class="background-header" style="height:108px;background-color:#badfe7 !important;">
+    <nav class="navbar navbar-expand-lg shadow-none mt-3">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <h2 class="text-success text-gradient">Dzair Academy
+                <h2 class="text-success text-gradient">
+                    <!-- Dzair Academy -->
+                    <img src="assets/img/SITE.png" style="width:182px; height:33px;" />
                 </h2>
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">

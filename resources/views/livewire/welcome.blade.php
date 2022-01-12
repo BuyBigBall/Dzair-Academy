@@ -5,7 +5,9 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand " href="/">
-                    <h2 class="text-success text-gradient">Dzair Academy
+                    <h2 class="text-success text-gradient">
+                        <!-- Dzair Academy -->
+                        <img src="assets/img/SITE.png" style="width:182px; height:33px;" />
                     </h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item item item-2">
+                <!-- <div class="carousel-item item item-2">
                     <div class="img-fill">
                         <div class="text-content">
                             <h6>we are here to support you</h6>
@@ -75,16 +77,16 @@
                             <a href="emit('contactus')" class="filled-button">Contact us</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </button> -->
         </div>
     </div>
     <!-- <script src="assets/js/custom.js"></script> -->

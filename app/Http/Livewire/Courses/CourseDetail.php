@@ -6,7 +6,7 @@ use App\Models\Material;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class CourseDetail extends Component
@@ -22,7 +22,7 @@ class CourseDetail extends Component
     public $faculty;
     public $specialization;
     public $level;
-    public $course;
+    public $module;
     public $protected;
     public $encryptPassword;
     public $file_information;
@@ -58,7 +58,7 @@ class CourseDetail extends Component
         $this->training         = $mat->training_id;
         $this->faculty          = $mat->faculty_id;
         $this->specialization   = $mat->specialization_id;
-        $this->course           = $mat->course_id;
+        $this->module           = $mat->course_id;
 
         $this->training_string         = '';
         $this->faculty_string          = '';
@@ -69,7 +69,7 @@ class CourseDetail extends Component
         if(!empty($this->faculty))           $this->faculty_string = Faculty::find($this->faculty)->toArray()[lang()];
         if(!empty($this->specialization))    $this->specialization_string = Specialization::find($this->specialization)->toArray()[lang()];
         if(!empty($this->level))             $this->level_string = $this->level;
-        if(!empty($this->course))            $this->module_string = Course::find($this->course)->toArray()[lang()];
+        if(!empty($this->module))            $this->module_string = Module::find($this->module)->toArray()[lang()];
 
         $this->file_information = [];
         $this->file_information['filename'] = $mat->filename;

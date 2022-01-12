@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use Livewire\WithFileUploads;
 use App\Models\MaterialLanguage;
 use App\Models\Material;
@@ -21,7 +21,7 @@ class CourseMaterial extends Component
 
     public $training_options    = [] ;
     public $faculty_options     = [];
-    public $subject_options     = [];
+    public $module_options     = [];
     public $specialization_options = [];
     public $level_options       = [];
     
@@ -110,7 +110,17 @@ class CourseMaterial extends Component
     }
     public function updatedSpecialization($value)
     {
-        $this->subject_options = Course::where('specialization_id', $value)->orderBy('id')->get()->toArray();
+        if(!empty($this->level))
+            $this->module_options = Module::where('specialization_id', $value)->where('level', $this->level)->where('status', 1)->orderBy('id')->get()->toArray();
+        else
+            $this->module_options = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+    }
+    public function updatedLevel($value)
+    {
+        if(!empty($this->specialization))
+            $this->module_options = Module::where('level', $value)->where('specialization_id', $this->specialization)->where('status', 1)->orderBy('id')->get()->toArray();
+        else
+            $this->module_options = Module::where('level', $value)->where('status', 1)->orderBy('id')->get()->toArray();
     }
 
     public function updatedFile()
@@ -257,7 +267,7 @@ class CourseMaterial extends Component
         $this->new_coll_title = '';
         $this->new_coll_desc = '';
         
-        $this->emit('WireAlert', translate('Course file registration has been successed.'), '');
+        $this->emit('WireAlert', translate('Module file registration has been successed.'), '');
 
     }
 

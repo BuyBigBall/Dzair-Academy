@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use App\Models\Material;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;

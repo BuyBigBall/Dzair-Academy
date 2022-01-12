@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-1">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center" >
                             <h5 class="mb-0">{{ translate('Translate') }}</h5>
@@ -23,8 +23,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body pt-3">
+                <div class="card-body py-0">
                     <div class="table-responsive row">
+                        <hr class="my-2" />
                         <!-- #################################### -->
                         <div class="col-12 text-right d-flex justify-content-center align-items-start t-lg-0" >
                             
@@ -88,6 +89,7 @@
                             </table>    
                            
                         </div>
+                        <hr class="my-2" />
                         <!-- #################################### -->
                         <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-3">
                                 @include('livewire.pagination')

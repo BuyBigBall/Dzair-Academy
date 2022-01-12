@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Support\Facades\Auth;
 
 class BranchModal extends Component
@@ -75,7 +75,7 @@ class BranchModal extends Component
         if($this->path_level==4)
         {
             $this->title = translate("Module Info");
-            $obj = Course::find( $this->edit_id );
+            $obj = Module::find( $this->edit_id );
         }
         if(!empty($obj))
         {
@@ -107,7 +107,7 @@ class BranchModal extends Component
             }
             if($this->path_level==4)
             {
-                $obj = Course::find( $this->edit_id )->update($fldArray);
+                $obj = Module::find( $this->edit_id )->update($fldArray);
             }        
         }
         else
@@ -126,7 +126,7 @@ class BranchModal extends Component
             }
             if($this->path_level==4)
             {
-                $obj = new Course();
+                $obj = new Module();
                 $obj->specialization_id = $this->specialization;
                 $obj->en = $this->en;
                 $obj->fr = $this->fr;

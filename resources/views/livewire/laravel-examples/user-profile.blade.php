@@ -30,11 +30,14 @@
                     <div class="col-md-9">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link {{$tabs_id == 1 ? 'active' : ''}}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ translate('My Profile')}}</button>
+                                <button class="nav-link {{$tabs_id == 1 ? 'active' : ''}}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" 
+                                    aria-selected="true">{{ translate('My Profile')}}</button>
                                 @if($user->id==Auth::id())
-                                <button class="nav-link {{$tabs_id == 2 ? 'active' : ''}}" id="share-tab" data-bs-toggle="tab" data-bs-target="#share" type="button" role="tab" aria-controls="share" aria-selected="false">{{ translate('Share')}}</button>
+                                <button class="nav-link {{$tabs_id == 2 ? 'active' : ''}}" id="share-tab" data-bs-toggle="tab" data-bs-target="#share" type="button" role="tab" aria-controls="share" 
+                                    aria-selected="false">{{ translate('Share')}}</button>
                                 @endif
-                                <button class="nav-link {{$tabs_id == 3 ? 'active' : ''}}" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="false">{{ translate('Uploaded course')}}</button>
+                                <button class="nav-link {{$tabs_id == 3 ? 'active' : ''}}" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" 
+                                    aria-selected="false">{{ ($user->id==Auth::id()) ? translate('My Courses') : translate('Uploaded course')}}</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -60,13 +63,13 @@
                                             </div>    
                                             @if($user->id!=Auth::id())
                                             <div class="row pt-3 text-primary">
-                                                <a href="{{ route('send-message', $user_email) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
+                                                <a href="{{ route('send-message', $user_name) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
                                             </div>    
                                             @endif
                                         </div>   
                                         <div class="col-md-8">                        
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="{{($user->id==Auth::id()) ? 'col-md-6 ' : 'col-md-12'}}">
                                                     <div class="form-group">
                                                         <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
                                                         <div class="@error('user_name')border border-danger rounded-3 @enderror">
@@ -79,6 +82,7 @@
                                                         @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
+                                                @if($user->id==Auth::id())
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
@@ -92,6 +96,7 @@
                                                         @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
+                                                @endif
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -111,12 +116,18 @@
                                                     <div class="form-group">
                                                         <label for="user_location" class="form-control-label">{{ translate('University')}}</label>
                                                         <div class="@error('user_location') border border-danger rounded-3 @enderror">
-                                                            <input wire:model="user_location" class="form-control" 
+                                                            <select wire:model="user_university" class="form-control" name="user_university" id="user_university">
+                                                            <option value=''>{{translate('Select the university')}}</option>
+                                                            @foreach($university_options as $univ)
+                                                            <option value="{{ $univ->id }}">{{ ln($univ)??$univ->mainname }}</option>
+                                                            @endforeach
+                                                            </select>
+                                                            <!-- <input wire:model="user_location" class="form-control" 
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
                                                                 @endif
                                                                 type="text" placeholder="{{ translate('univercity name') }}" id="location"
-                                                                />
+                                                                /> -->
                                                         </div>
                                                         @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
@@ -338,4 +349,10 @@
     {
         window.livewire.emit('delete_course', course_id);
     }
+
+    $(document).ready( function() {
+        setTimeout(function() {
+            $('#user-name').focus();$('#user-name').select();
+        }, 100);
+    });
 </script>

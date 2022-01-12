@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Course;
+use App\Models\Module;
 
 class SelectWayModal extends Component
 {
