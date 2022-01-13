@@ -31,7 +31,7 @@ class MessageManage extends Component
     public function sendMessage() { 
         
             $this->validate();
-            $query = User::whereRaw("UPPER(name)='" . strtoupper($this->username) . "'" );
+            $query = User::whereRaw("UPPER(name) LIKE '%" . strtoupper($this->username) . "%'" );
             //dd($query->toSql());
             $user = $query->first();
             

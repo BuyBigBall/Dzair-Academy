@@ -26,8 +26,9 @@
 
                         <div class="col-4 d-flex">
                             <a class="btn btn-link text-dark px-1 px-md-2 px-lg-3 mb-0" 
-                                href="{{route('translate-course') . '?id=' . $course->course->id}}"><i
-                                    class="far fa-eye me-2"></i>View</a>
+                                wire:click.prevent="$emit('ShowMaterialModal', {{$course->course->id}})"
+                                ><i class="far fa-eye me-2"></i>View</a>
+                <!-- href="{{route('translate-course') . '?id=' . $course->course->id}}" -->
                             <a class="btn btn-link text-dark px-1 px-md-2 px-lg-3 mb-0" 
                                 onclick="ConfirmFunction('{{ translate('Are you sure to agree this course translation?')}}', agreeTranslatedCourse, '{{$course->id}}')"
                                 ><i

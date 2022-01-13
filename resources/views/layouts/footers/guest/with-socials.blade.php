@@ -28,12 +28,12 @@
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">How We Work</a></li>
                     <li><a href="#">Quick Support</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">{{ translate('Contact Us') }}</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="col-md-3 footer-item last-item">
-                <h4>Contact Us</h4>
+                <h4>{{ translate('Contact Us') }}</h4>
                 <div class="contact-form">
                     <form id="contact footer-contact" action="" method="post">
                         <div class="row">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                                    <button type="submit" id="form-submit" class="filled-button">{{ translate('Send Message') }}</button>
                                 </fieldset>
                             </div>
                         </div>

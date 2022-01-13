@@ -92,60 +92,45 @@ class TranslatematerialModal extends Component
         $coll = Course::where([ 
                 'id'=>$this->course_id
             ])->first();
+        //dd($coll);
         if($coll!=null)
         {
-            if(!empty($this->lang_id_en)){
-                DB::table('course_languages')
-                    ->where('id', $this->lang_id_en)
-                    ->update(['title' => $this->lang_title_en]);
-            }else if(empty($this->lang_id_en)){
-                if(!empty($this->lang_title_en) && !empty($this->lang_desc_en)){
-                    $materal_language = CourseLanguage::create([
-                        'course_id'      => $this->course_id,
-                        'language'         => 'en',
-                        'created_by'       => Auth::id(),
-                        'updated_by'       => Auth::id(),
-                        'title'            => $this->lang_title_en,
-                        'description'      => $this->lang_desc_en,
-                    ]);
-                }
-            }
-
-            if(!empty($this->lang_id_fr)){
-                DB::table('course_languages')
-                    ->where('id', $this->lang_id_fr)
-                    ->update(['title' => $this->lang_title_fr]);
-            }else if(empty($this->lang_id_fr)){
-                if(!empty($this->lang_title_fr) && !empty($this->lang_desc_fr)){
-                    $materal_language = CourseLanguage::create([
-                        'course_id'      => $this->course_id,
-                        'language'         => 'fr',
-                        'created_by'       => Auth::id(),
-                        'updated_by'       => Auth::id(),
-                        'title'            => $this->lang_title_fr,
-                        'description'      => $this->lang_desc_fr,
-                    ]);
-                }
-            }
-
-            if(!empty($this->lang_id_ar)){
-                DB::table('course_languages')
-                    ->where('id', $this->lang_id_ar)
-                    ->update(['title' => $this->lang_title_ar]);
-            }else if(empty($this->lang_id_ar)){
-                if(!empty($this->lang_title_ar) && !empty($this->lang_desc_ar)){
-                    $materal_language = CourseLanguage::create([
-                        'course_id'      => $this->course_id,
-                        'language'         => 'ar',
-                        'created_by'       => Auth::id(),
-                        'updated_by'       => Auth::id(),
-                        'title'            => $this->lang_title_ar,
-                        'description'      => $this->lang_desc_ar,
-                    ]);
-                }
-            }
+            if( !empty($this->lang_title_en) || !empty($this->lang_desc_en) )
+            CourseLanguage::updateOrCreate(
+                ['course_id'=>$this->course_id, 'language'=>'en'],
+                [
+                    'created_by'       => Auth::id(),
+                    'updated_by'       => Auth::id(),
+                    'title'            => $this->lang_title_en,
+                    'description'      => $this->lang_desc_en,
+                    'status'           => 0
+                ]
+            );
+            if( !empty($this->lang_title_fr) || !empty($this->lang_desc_fr) )
+            CourseLanguage::updateOrCreate(
+                ['course_id'=>$this->course_id, 'language'=>'fr'],
+                [
+                    'created_by'       => Auth::id(),
+                    'updated_by'       => Auth::id(),
+                    'title'            => $this->lang_title_fr,
+                    'description'      => $this->lang_desc_fr,
+                    'status'           => 0
+                ]
+            );
+            if( !empty($this->lang_title_ar) || !empty($this->lang_desc_ar) )
+            CourseLanguage::updateOrCreate(
+                ['course_id'=>$this->course_id, 'language'=>'ar'],
+                [
+                    'created_by'       => Auth::id(),
+                    'updated_by'       => Auth::id(),
+                    'title'            => $this->lang_title_ar,
+                    'description'      => $this->lang_desc_ar,
+                    'status'           => 0
+                ]
+            );
             
-            return Redirect(route('translate-course'));
+            
+            $this->emit('refreshList', 'param');
         }
 
         $this->doClose();

@@ -27,7 +27,6 @@ class TranslateMaterial extends Component
     public  $perPage = 10;
     public  $curPage = 1;
     private $search_result;
-    // public  $search_input;
     public  $current_route = 'translate-course';   //for pagination jump
 
     public $training_options    = [] ;
@@ -47,7 +46,10 @@ class TranslateMaterial extends Component
     {
         parent::__construct();
     }
-    
+    public $listeners  = [
+        'deleteTranslateCourse' => 'deleteTranslateCourse',
+        'refreshList'           => 'refreshList',
+    ];
     public function updatedTraining($value)
     {
         $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
@@ -72,30 +74,44 @@ class TranslateMaterial extends Component
     }
     public function update($field, $newValue)
     {
-        // $this->faculty_options = $newValue;
-        // if($field=='training')
-        // {
-        //     $this->faculty_options = Faculty::where('training_id', $value)->orderBy('id')->get()->toArray();    
-        // }
     }
-    public function index(Request $request)
-    {
-    }
+    
     public function updatedCurPage($value)
     {
         $this->curPage = $value;
-        //dd($this->curPage);
     }
     public function updatedPerPage($value)
     {
         $this->perPage = $value; $this->curPage=1;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
-        //$this->mount( ($request=Request::capture()) );
-        //$this->emit('renderPerPage');
     }
 
+    public function refreshList($param)
+    {
+    }
+    public function updatedWord($value)
+    {
+        Cookie::queue("searchWord", $value, env('COOKIE_EXPIRE_SECONDS'));
+        $this->search_input = $value;
+        $this->curPage = 1;
+        $this->resetPage();
+    }
+    public function deleteTranslateCourse($del_id)
+    {
+        \App\Models\CourseLanguage::where('course_id', $del_id)->delete();
+    }
     public function mount(Request $request)
     {
+        if(!empty($request->page) )
+        {
+            if(Cookie::has("searchWord"))
+                $this->word = Cookie::get("searchWord");
+        }
+        else
+        {
+            Cookie::queue(Cookie::forget('searchWord'));
+        }
+
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');
 
@@ -119,9 +135,6 @@ class TranslateMaterial extends Component
             }
             $this->module  = $course->module_id;
             $this->level   = $course->level;
-            // if(!empty($this->edit_id))
-            // $this->emit('ShowMaterialModal', $request->id);
-            // dd($this);
         }
 
         if(Cookie::has("perPage"))
@@ -136,10 +149,6 @@ class TranslateMaterial extends Component
 
     public function search(Request $request)
     {
-        //$this->emit('renderPerPage');
-        //$request=Request::capture()
-        //$this->search_input = $request->input();
-        //dd($this->search_input);
         return $this->render();
     }
     public function render()

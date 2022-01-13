@@ -46,17 +46,16 @@
                 {{ translate('© 2022 - 2021 Dzair Academy - All Rights Reserved.')}}
             </div>
             <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">
-                <li class=""><a href="#" class="text-white">About Us</a></li>
+                <li class=""><a href="#" class="text-white">{{ translate('About Us') }}</a></li>
                 <!-- <li class=""><a href="#">How We Work</a></li> -->
                 <li class="px-3">
                     <a class="cursor-pointer text-white"
                     data-bs-toggle="modal" data-bs-target="#dialogContactus"
-                        >Contact Us</a>
+                        >{{ translate('Contact Us') }}</a>
                         <!-- wire:click.prevent="$emit('showContactus', '')" -->
                 </li>
-                <li class=""><a href="#" 
-                        
-                        class="text-white">Privacy Policy</a></li>
+                <!-- <li class=""><a href="#" 
+                        class="text-white">Privacy Policy</a></li> -->
             </ul>
         </div>
     </div>
@@ -68,7 +67,7 @@
         <div class="modal-dialog" role="document" style="margin-top:6rem;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ translate('Contact Us') }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,7 +92,7 @@
                             </div>
                             <div class="col-lg-12 py-1">
                                 <fieldset>
-                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                    <button type="submit" class="btn btn-primary">{{ translate('Send Message') }}</button>
                                 </fieldset>
                             </div>
                         </div>

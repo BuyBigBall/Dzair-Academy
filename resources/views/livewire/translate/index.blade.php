@@ -6,20 +6,13 @@
             <div class="card">
                 <div class="card-header p-1">
                     <div class="d-flex flex-row justify-content-between">
-                        <div class="col-md-4 col-sm-6 d-flex justify-content-start align-items-center" >
-                            <h5 class="mb-0">{{ translate('Translate') }}</h5>
+                        <div class="col-md-4 col-sm-12 d-flex justify-content-start align-items-center" >
+                            <h5 class="mb-0 ps-4">{{ translate('Translate Webpages') }}</h5>
                         </div>
-                        <div class="col-md-8 col-sm-6  text-center p-1 d-none d-lg-block"  >
-                            <div style='min-height:60px;'>
-                                <a href="{{ ENV('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . ENV('ADVERTISE1_URL'))}}"
-                                    
-                                    />
-                                </A>                                
-
-                            </div>                        
-                        </div>
-                        <div class="col-md-1 col-sm-6 d-flex justify-content-start align-items-center" >
+                        <div class="col-md-8 col-sm-12 text-center p-1 pe-4 "  >
+                            <input class="col-md-5 form-control" id='word'  wire:model="word" name='word' 
+                                        Placeholder="{{ __('pages.SearchPlaceholder')}}"
+                                        />              
                         </div>
                     </div>
                 </div>
@@ -75,12 +68,20 @@
                                             </div>
                                         </td>
                                         <td class="text-center text-xs">
-                                            <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                            <a href="#" class="mx-1 ms-2" data-bs-toggle="tooltip"
                                                 data-bs-original-title="register translate for this words"
                                                 data-id='{{$row->strkey}}'
                                                 wire:click.prevent="$emit('ShowTranslateModal', '{{$row->strkey}}')"
                                                 >
                                                 <i class="fa fa-edit text-secondary"></i>
+                                            </a>
+
+                                            <a href="#" class="mx-1 me-2" data-bs-toggle="tooltip"
+                                                data-bs-original-title="delete this words"
+                                                data-id='{{$row->strkey}}'
+                                                onclick="ConfirmFunction('{{ translate('Are you sure to delete this word?')}}', deleteAppWord, '{{$row->strkey}}')"
+                                                >
+                                                <i class="fa fa-trash text-secondary"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -103,5 +104,10 @@
 </div>
 <!-- Translate Course Modal -->
 @livewire('modal.translateapp-modal')
-
+<script>
+    function deleteAppWord(del_strkey)
+    {
+        window.livewire.emit('deleteAppWord', del_strkey);
+    }
+</script>
 </main>

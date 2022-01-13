@@ -85,7 +85,8 @@ class TranslateappModal extends Component
                 Translate::updateOrCreate(['key'=>$this->main_key,'lang'=>'fr'],['value' => $this->fr_words]);
                 Translate::updateOrCreate(['key'=>$this->main_key,'lang'=>'ar'],['value' => $this->ar_words]);
             }
-            return Redirect(route('translate-app'));
+            //return Redirect(route('translate-app'));
+            $this->emit('refreshList', '');
         }
 
         $this->doClose();

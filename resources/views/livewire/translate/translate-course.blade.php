@@ -94,10 +94,7 @@
                     </div> -->
                     </form>
                         
-                    <div class="d-flex justify-content-between align-items-center">
-                                @include('livewire.pagination')
-                            </div>
-                            <hr class="my-2" />
+                    <hr class="my-2" />
                     <div class="table-responsive row">
 
                         <!-- #################################### -->
@@ -148,13 +145,22 @@
                                         </td>
                                         <td class="text-center text-xs ">
                                             <a  href='#'
-                                                class="mx-3" data-bs-toggle="tooltip"
+                                                class="mx-1 ms-2" data-bs-toggle="tooltip"
                                                 data-bs-original-title="translate this course"
-                                                data-id='{{$row->id}}'
+                                                data-id='{{$row->idx}}'
                                                 wire:click.prevent="$emit('ShowMaterialModal', '{{$row->idx}}')"
                                                 >
                                                 <i class="fa fa-edit text-secondary"></i>
                                             </a>
+                                            @if(Auth::user()->role=='admin')
+                                            <a href="#" class="mx-1 me-2" data-bs-toggle="tooltip"
+                                                data-bs-original-title="delete this words"
+                                                data-id='{{$row->strkey}}'
+                                                onclick="ConfirmFunction('{{ translate('Are you sure to delete this translate?')}}', deleteTranslateCourse, '{{$row->idx}}')"
+                                                >
+                                                <i class="fa fa-trash text-secondary"></i>
+                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -166,6 +172,9 @@
                         <!-- #################################### -->
                     </div>
                     <hr class="my-2" />
+                    <div class="d-flex justify-content-between align-items-center">
+                        @include('livewire.pagination')
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,12 +182,15 @@
 </div>
 <!-- Translate Material Modal -->
 @livewire('modal.translatematerial-modal')
-
-@if($edit_id)
 <script>
+    function deleteTranslateCourse(del_id)
+    {
+        window.livewire.emit('deleteTranslateCourse', del_id);
+    }
+    @if($edit_id)
     $(document).ready(function () {
             window.livewire.emit('ShowMaterialModal', '{{$edit_id}}');
         });
+    @endif
 </script>
-@endif
 </main>

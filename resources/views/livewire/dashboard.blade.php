@@ -30,3 +30,5 @@
         </div>
     </div>
 </main>
+
+@livewire('modal.translatematerial-modal')

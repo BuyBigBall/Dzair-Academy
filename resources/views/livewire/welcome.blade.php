@@ -32,10 +32,10 @@
                             <span class="input-group-text text-body"><i class="fa fa-search" aria-hidden="true"></i></span> -->
                         </li>
                         <li class="nav-item"> 
-                            <a class="nav-link" href="{{ route('login') }}">Signin</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ translate('Signin') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sign-up') }}">signup</a>
+                            <a class="nav-link" href="{{ route('sign-up') }}">{{ translate('signup') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -48,11 +48,12 @@
                 <div class="carousel-item active item item-1">
                     <div class="img-fill">
                         <div class="text-content">
-                            <h6>we are ready to help you</h6>
-                            <h4>courses & collections<br>&amp; management</h4>
-                            <p>Users can search courses and download and report.
-                                <a href="#" class="text-success">Multiple-page version</a> with different HTML pages are also available.</p>
-                            <a href="{{route('search')}}" class="filled-button">search</a>
+                            <h6>{{translate('we are ready to help you')}}</h6>
+                            <h4>{!! sprintf(translate('courses & collections %s management'), '<br>&amp;') !!}</h4>
+                            <p>{{translate('Users can search courses and download and report.')}}
+                                <a href="#" class="text-success">{{translate('Multiple-page version')}}</a> 
+                                {{translate('with different HTML pages are also available.')}}</p>
+                            <a href="{{route('search')}}" class="filled-button">{{translate('search')}}</a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +75,7 @@
                             <h4>Do you know <br> to use this website.</h4>
                             <p>You can download, edit and use the Documents, Images, Videos, Archives for your training course. 
                                 You can just get the Trainings, Exercises, Exams if you wish those to in this website.</p>
-                            <a href="emit('contactus')" class="filled-button">Contact us</a>
+                            <a href="emit('contactus')" class="filled-button">{{ translate('Contact Us') }}</a>
                         </div>
                     </div>
                 </div> -->

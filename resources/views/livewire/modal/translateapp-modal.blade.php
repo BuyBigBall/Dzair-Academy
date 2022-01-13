@@ -42,7 +42,7 @@
                 </div>
                 <div class="modal-body" style="flex-wrap:nowrap;overflow:auto;">
                     <div class="col-md-12">
-                    <div class="row">
+                        <div class="row d-none">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="default_words" class="form-control-label">default</label>
