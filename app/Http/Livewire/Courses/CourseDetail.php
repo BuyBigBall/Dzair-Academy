@@ -7,7 +7,9 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseDetail extends Component
 {
@@ -34,6 +36,8 @@ class CourseDetail extends Component
     public $specialization_string;
     public $level_string;
     public $module_string;
+
+    public $review;
 
     public function mount($id) {
 
@@ -100,6 +104,11 @@ class CourseDetail extends Component
         $this->specialization = 'specialization';
         $this->level = 'level';
     
+        if(!empty(Auth::id()))
+        {
+            $this->review = Review::where(["user_id"=>Auth::id(), "course_id"=>$this->pid])->first();
+        }
+        
         return view('livewire.courses.course-download');
     }
 }

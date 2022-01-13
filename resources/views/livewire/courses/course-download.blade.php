@@ -1,5 +1,5 @@
-<main class=" body-content">
-    <div class="{{ !empty(Auth::user()) ? 'container-fluid' : 'container' }} py-5">
+<main class="body-content"  style="margin-top:{{ empty(Auth::id()) ? '6rem !important;' : '' }}">
+    <div class="{{ !empty(Auth::user()) ? 'container-fluid' : 'container' }} py-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -150,8 +150,10 @@
                                                 <button wire:click="download" class="btn btn-primary w-200">{{ translate('Download') }}</button>
                                                 <button type="button" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
                                             </div>
-                                            <div class="col-md-3 d-flex align-items-center text-dark">
-                                                <span><a>review to this</a></span>
+                                            <div class="col-md-3 col-sm-12 d-flex align-items-center justify-content-center text-dark">
+                                                @if( !empty(Auth::id()) )
+                                                <span><a wire:click.prevent="$emit('reviewModal', {{$pid}})" class="{{ !empty($review) ? 'text-muted' : '' }} cursor-pointer" >report for this</a></span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -176,3 +178,5 @@
         </div>
     </div>
 </main>
+
+@livewire('modal.review-modal')
