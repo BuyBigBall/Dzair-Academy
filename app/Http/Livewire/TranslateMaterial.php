@@ -117,7 +117,7 @@ class TranslateMaterial extends Component
             {
                 $this->module_options = Module::where('specialization_id', $value)->orderBy('id')->get()->toArray();
             }
-            $this->module = $course->course_id;
+            $this->module  = $course->module_id;
             $this->level   = $course->level;
             // if(!empty($this->edit_id))
             // $this->emit('ShowMaterialModal', $request->id);
@@ -146,11 +146,11 @@ class TranslateMaterial extends Component
     {
         $searchCond = [];        $searchWord = [];        $searchOr = []; $searchOr1 = [];
 
-        if( ! empty($this->training))               $searchCond[] = ['courses.training_id' , $this->training];
-        if( ! empty($this->faculty))                $searchCond[] = ['courses.faculty_id' , $this->faculty];
-        if( ! empty($this->specialization))         $searchCond[] = ['courses.specialization_id' , $this->specialization];
-        if( ! empty($this->level))                  $searchCond[] = ['courses.level' , $this->level];
-        if( ! empty($this->module))                 $searchCond[] = ['courses.course_id' , $this->module];
+        if( ! empty($this->training))               $searchCond[] = ['courses.training_id' ,        $this->training];
+        if( ! empty($this->faculty))                $searchCond[] = ['courses.faculty_id' ,         $this->faculty];
+        if( ! empty($this->specialization))         $searchCond[] = ['courses.specialization_id' ,  $this->specialization];
+        if( ! empty($this->level))                  $searchCond[] = ['courses.level' ,              $this->level];
+        if( ! empty($this->module))                 $searchCond[] = ['courses.module_id' ,          $this->module];
 
         if( ! empty($this->word))                  
         {
@@ -178,7 +178,7 @@ class TranslateMaterial extends Component
                 ->leftJoin('trainings' , 'trainings.id', '=', 'courses.training_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'courses.faculty_id')
                 ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
-                ->leftJoin('modules' , 'modules.id', '=', 'courses.course_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'courses.module_id')
              ->where($searchCond)
              ->where( function($query1) use ($searchWord) {
                 if(count($searchWord)>0)

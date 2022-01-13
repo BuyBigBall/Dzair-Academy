@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Report extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class Review extends Model
         return $this->hasOne('App\Models\User','id','user_id');
     }
     public function course() {
-        return $this->hasOne('App\Models\Course','course_id','id');
+        return $this->hasOne('App\Models\Course','id','course_id');
     }
 }

@@ -14,7 +14,7 @@ class Collection extends Model
     public function owner() {
         return $this->hasOne('App\Models\User','id','user_id');
     }
-    public function mat() {
+    public function courses() {
         return $this->hasMany('App\Models\CollectionItem','collection_id','id');
     }
 }

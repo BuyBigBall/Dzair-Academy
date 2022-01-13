@@ -9,7 +9,7 @@
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex mb-3 justify-content-between w-100">
                         <span class="text-sm text-dark ">{{ translate('Course Title:') }}</span>
-                        <span class="text-sm ">{{$course->mat->title}}</span>
+                        <span class="text-sm ">{{$course->course->title}}</span>
                         <span class="text-sm ">{{$course->title}}</span>
                     </div>
                     <div class="row align-items-end">
@@ -26,7 +26,7 @@
 
                         <div class="col-4 d-flex">
                             <a class="btn btn-link text-dark px-1 px-md-2 px-lg-3 mb-0" 
-                                href="{{asset('translate-course') . '?id=' . $course->mat->id}}"><i
+                                href="{{route('translate-course') . '?id=' . $course->course->id}}"><i
                                     class="far fa-eye me-2"></i>View</a>
                             <a class="btn btn-link text-dark px-1 px-md-2 px-lg-3 mb-0" 
                                 onclick="ConfirmFunction('{{ translate('Are you sure to agree this course translation?')}}', agreeTranslatedCourse, '{{$course->id}}')"

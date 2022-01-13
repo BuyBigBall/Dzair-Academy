@@ -29,6 +29,7 @@ class SearchResult extends Component
     public  $faculty;
     public  $specialization;
     public  $level;
+    public  $module;
     public  $doc;
     public  $img;
     public  $zip;
@@ -84,6 +85,7 @@ class SearchResult extends Component
         if( !empty($this->search_input['faculty']))         $this->faculty = Faculty::find($this->search_input['faculty'])->name;
         if( !empty($this->search_input['specialization']))  $this->specialization = Specialization::find($this->search_input['specialization'])->name;
         if( !empty($this->search_input['level']))           $this->level = $this->search_input['level'];
+        if( !empty($this->search_input['module']))          $this->module = $this->search_input['module'];
         if( !empty($this->search_input['doc']))             $this->doc = filetypename(1);
         if( !empty($this->search_input['img']))             $this->img = filetypename(2);
         if( !empty($this->search_input['zip']))             $this->zip = filetypename(3);
@@ -128,7 +130,7 @@ class SearchResult extends Component
         if( ! empty($this->search_input['faculty']))                $searchCond[] = ['faculty_id' , $this->search_input['faculty']];
         if( ! empty($this->search_input['specialization']))         $searchCond[] = ['specialization_id' , $this->search_input['specialization']];
         if( ! empty($this->search_input['level']))                  $searchCond[] = ['level' , $this->search_input['level']];
-        if( ! empty($this->search_input['course']))                 $searchCond[] = ['course_id' , $this->search_input['course']];
+        if( ! empty($this->search_input['module']))                 $searchCond[] = ['module_id' , $this->search_input['module']];
 
         if( ! empty($this->search_input['cate_course']))            $searchOr1[] = ['cate_course' , $this->search_input['cate_course']];
         if( ! empty($this->search_input['cate_exercise']))          $searchOr1[] = ['cate_exercise' , $this->search_input['cate_exercise']];

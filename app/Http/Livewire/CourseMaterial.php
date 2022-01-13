@@ -179,7 +179,7 @@ class CourseMaterial extends Component
                         'level'             => $this->level,
                         'faculty_id'        => $this->faculty,
                         'training_id'       => $this->training,
-                        'course_id'         => $this->module,
+                        'module_id'         => $this->module,
                         'created_by'        => Auth::id(),
                         'updated_by'        => Auth::id(),
                         'title'             => $this->title,

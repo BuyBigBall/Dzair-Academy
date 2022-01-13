@@ -24,7 +24,7 @@ class CourseLanguage extends Model
     public function updater() {
         return $this->hasOne('App\Models\User','id','updated_by');
     }
-    public function mat() {
+    public function course() {
         return $this->belongsTo('App\Models\Course', 'course_id');
     }
 }

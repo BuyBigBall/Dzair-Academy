@@ -73,10 +73,9 @@ class CollectionShared extends Component
                             
                     })
                 ->orderBy('created_at', 'ASC');
-             //dd($query.toSql());
-             //dd($query->getQuery()->toSql());
+        
         $this->search_result = $query->paginate( $this->perPage );
-        //dd($this->search_result[0]->coll->mat);
+        
         return view('livewire.collection.shared', ['pagination'=>$this->search_result]);
     }
 }

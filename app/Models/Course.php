@@ -14,6 +14,7 @@ class Course extends Model
                         , 'level' 
                         , 'faculty_id' 
                         , 'training_id'
+                        , 'module_id'
                         , 'created_by'
                         , 'updated_by'
                         , 'title'
@@ -38,8 +39,8 @@ class Course extends Model
     public function lang() {
         return $this->hasMany(CourseLanguage::class);
     }
-    public function course() {
-        return $this->belongsTo('App\Models\Module', 'course_id');
+    public function module() {
+        return $this->belongsTo('App\Models\Module', 'module_id');
     }
     public function faculty() {
         return $this->belongsTo('App\Models\Faculty', 'faculty_id');
@@ -51,6 +52,6 @@ class Course extends Model
         return $this->belongsTo('App\Models\Specialization', 'specialization_id');
     }
     public function reviews() {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Report::class);
     }
 }

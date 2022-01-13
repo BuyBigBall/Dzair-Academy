@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Modal;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
-use App\Models\Review;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReviewModal extends Component
@@ -33,7 +33,7 @@ class ReviewModal extends Component
     public function reviewModal($course_id) {
         $this->course_id = $course_id;
         $course = Course::find( $this->course_id);
-        $review = Review::where( "course_id" , $course_id )->first();
+        $review = Report::where( "course_id" , $course_id )->first();
         
         if(!empty($course))
         {
@@ -56,7 +56,7 @@ class ReviewModal extends Component
         if( !empty($this->course_id))
         {
             $course = Course::find( $this->course_id);
-            Review::updateOrCreate(
+            Report::updateOrCreate(
                 ['course_id' => $this->course_id, 'user_id' => $this->user_id ],
                 [
                     'content'       => $this->review_disp,

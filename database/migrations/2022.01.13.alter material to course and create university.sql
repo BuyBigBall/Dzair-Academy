@@ -7,3 +7,5 @@ ALTER  TABLE `course_languages` CHANGE `course_id` `course_id` INT(10) UNSIGNED 
 CREATE TABLE `reviews` ( `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `user_id` INT UNSIGNED NOT NULL, `course_id` INT UNSIGNED NOT NULL, `marks` TINYINT DEFAULT 0, `content` TEXT CHARSET utf8 NOT NULL, `created_at` DATETIME NOT NULL DEFAULT NOW(), `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP, `verified_at` DATETIME, PRIMARY KEY (`id`) ) CHARSET=utf8; 
 ALTER  TABLE `reviews` ADD INDEX (`user_id`), ADD INDEX (`course_id`), ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE, ADD FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE; 
 ALTER TABLE  `collection_items` CHANGE `course_id` `course_id` INT(10) UNSIGNED NOT NULL; 
+ALTER TABLE  `courses` CHANGE `course_id` `module_id` INT(10) UNSIGNED NOT NULL; 
+RENAME TABLE `reviews` TO `reports`;

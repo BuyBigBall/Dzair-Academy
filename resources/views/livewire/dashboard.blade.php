@@ -16,7 +16,7 @@
                 @livewire("component.added-module")
             </div>
             <div class="col-md-6 mt-4">
-                
+                @livewire("component.course-report")
             </div>
         </div>
 

@@ -107,7 +107,7 @@ class CollectionFiles extends Component
                 ->orderBy('collection_items.created_at', 'ASC');
 
         $this->search_result = $query->get( ); 
-        //dd($this->search_result[0]->mat);
+        
         $i=0;
         
         return view('livewire.collection.files', 

@@ -7,7 +7,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
-use App\Models\Review;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,7 +62,7 @@ class CourseDetail extends Component
         $this->training         = $mat->training_id;
         $this->faculty          = $mat->faculty_id;
         $this->specialization   = $mat->specialization_id;
-        $this->module           = $mat->course_id;
+        $this->module           = $mat->module_id;
 
         $this->training_string         = '';
         $this->faculty_string          = '';
@@ -106,7 +106,7 @@ class CourseDetail extends Component
     
         if(!empty(Auth::id()))
         {
-            $this->review = Review::where(["user_id"=>Auth::id(), "course_id"=>$this->pid])->first();
+            $this->review = Report::where(["user_id"=>Auth::id(), "course_id"=>$this->pid])->first();
         }
         
         return view('livewire.courses.course-download');

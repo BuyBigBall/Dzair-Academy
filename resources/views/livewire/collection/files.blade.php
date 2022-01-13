@@ -60,14 +60,12 @@
                                         </td>
                                         <td>
                                             <div class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{mat_lang($row->mat)!=null ? mat_lang($row->mat)->title : $row->mat->title}}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{mat_lang($row->course)!=null ? mat_lang($row->course)->title : $row->course->title}}</p>
                                             </div>
                                         </td>
                                         <td class="text-left">
                                             <p class="text-xs font-weight-bold mb-0">
-                                            <!-- {{ ln($row->mat->training)}} <br> {{ ln($row->mat->faculty) }} <br> {{  ln($row->mat->specialization) }} <br>  -->
-                                            <!-- {{  ln($row->mat->course) }} -->
-                                            {{mat_lang($row->mat)!=null ? mat_lang($row->mat)->description : $row->mat->description}}
+                                            {{mat_lang($row->course)!=null ? mat_lang($row->course)->description : $row->course->description}}
                                             </p>
                                         </td>
                                         <td class="text-center">
@@ -77,7 +75,7 @@
                                             <a  data-bs-toggle="tooltip" 
                                                     data-bs-original-title="{{translate('download this course file.')}}"
                                                     class="mx-1" 
-                                                    href="{{route('course-download', $row->mat->id)}}"
+                                                    href="{{route('course-download', $row->course->id)}}"
                                                     >
                                                 <i class="cursor-pointer fa fa-download text-secondary"></i>
                                             </a>
@@ -85,7 +83,7 @@
                                             <span  data-bs-toggle="tooltip" 
                                                     data-bs-original-title="{{translate('delete this course file')}}"
                                                     class="mx-1" 
-                                                    collection-id='{{$collection->id}}' mat-id='{{$row->mat->id}}'
+                                                    collection-id='{{$collection->id}}' mat-id='{{$row->course->id}}'
                                                     onclick="ConfirmFunction('{{translate('Are you sure?')}}', deleteCollectionFile, '{{$row->id}}')">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </span>

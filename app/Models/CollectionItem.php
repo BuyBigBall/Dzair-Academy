@@ -14,7 +14,7 @@ class CollectionItem extends Model
     public function coll() {
         return $this->belongsTo('App\Models\Collection','collection_id');
     }
-    public function mat() {
+    public function course() {
         return $this->hasOne('App\Models\Course','id','course_id');
     }
 }

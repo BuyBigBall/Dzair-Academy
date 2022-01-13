@@ -201,8 +201,8 @@ class BranchManagement extends Component
                 ->leftJoin('trainings' , 'trainings.id', '=', 'courses.training_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'courses.faculty_id')
                 ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
-                ->leftJoin('modules' , 'modules.id', '=', 'courses.course_id')
-                ->where('course_id', $value)
+                ->leftJoin('modules' , 'modules.id', '=', 'courses.module_id')
+                ->where('module_id', $value)
                 ->groupBy('courses.id')->orderBy('courses.created_at','asc');
         $this->list_items = $query->limit( $limit )->get();
 

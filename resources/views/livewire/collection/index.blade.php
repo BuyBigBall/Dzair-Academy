@@ -61,7 +61,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                {{ $row->mat!=null ? count($row->mat) : 0}}</p>
+                                                {{ $row->course!=null ? count($row->course) : 0}}</p>
                                             </td>
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
