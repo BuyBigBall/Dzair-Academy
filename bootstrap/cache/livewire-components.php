@@ -34,7 +34,7 @@
   'modal.bootstrap-modal' => 'App\\Http\\Livewire\\Modal\\BootstrapModal',
   'modal.branch-modal' => 'App\\Http\\Livewire\\Modal\\BranchModal',
   'modal.collectionadd-modal' => 'App\\Http\\Livewire\\Modal\\CollectionaddModal',
-  'modal.courseselect-modal' => 'App\\Http\\Livewire\\Modal\\CourseselectModal',
+  //'modal.courseselect-modal' => 'App\\Http\\Livewire\\Modal\\CourseselectModal',
   'modal.editcollection-modal' => 'App\\Http\\Livewire\\Modal\\EditcollectionModal',
   'modal.translateapp-modal' => 'App\\Http\\Livewire\\Modal\\TranslateappModal',
   'modal.translatematerial-modal' => 'App\\Http\\Livewire\\Modal\\TranslatematerialModal',

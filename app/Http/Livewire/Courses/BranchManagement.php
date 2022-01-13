@@ -135,12 +135,35 @@ class BranchManagement extends Component
             $this->module = 0;
             return $this->updatedFaculty($this->faculty);
         }
-        $this->path_level = $this->const_path_level['course'];
-        $this->const_path_name = translate("Edit Course");
-        $this->list_items = 
-        $this->module_options = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
-        $this->list_title = translate('All Subjects');
-        $this->list_of = Specialization::where('id', $value)->first()->toArray()[lang()];
+        $this->path_level       = $this->const_path_level['course'];
+        $this->const_path_name  = translate("Edit Course");
+        $this->list_title       = translate('All Subjects');
+        $this->list_of          = Specialization::where('id', $value)->first()->toArray()[lang()];
+        
+        //dd($this->level);
+        if(!empty($this->level) && is_numeric($this->level))
+        {
+            $query = Module::where('specialization_id', $value)->where('level', $this->level)->where('status', 1)->orderBy('id');
+        }
+        else
+        {
+            $query = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id');
+        }
+        //dd($query->toSql());
+        $this->list_items = $this->module_options = $query->get()->toArray();    
+    }
+    public function updatedLevel($value)
+    {
+        if(!empty($this->specialization))
+        {
+            $this->list_items = 
+            $this->module_options = Module::where('level', $value)->where('specialization_id', $this->specialization)->where('status', 1)->orderBy('id')->get()->toArray();
+        }
+        else
+        {
+            $this->list_items = 
+            $this->module_options = Module::where('level', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+        }
     }
 
     public function updatedModule($value)

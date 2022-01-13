@@ -71,13 +71,18 @@
                                 <div class="form-group">
                                     <label for="user.location" class="form-control-label">{{ translate('University Name')}}</label>
                                     <div class="">
-                                        <input
+                                        <!-- <input
                                             wire:model="user.location"
                                             class="form-control"
                                             type="text"
                                             placeholder="{{ translate('univercity')}}"
-                                            id="name"/>
-                                       
+                                            id="name"/> -->
+                                        <select wire:model="user.university_id" class="form-control" name="user_university" id="user_university">
+                                            <option value=''>{{translate('Select the university')}}</option>
+                                            @foreach($university_options as $univ)
+                                            <option value="{{ $univ->id }}">{{ ln($univ)??$univ->mainname }}</option>
+                                            @endforeach
+                                            </select>
                                     </div>
                                 </div>
                             </div>

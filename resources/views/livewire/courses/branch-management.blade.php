@@ -51,6 +51,18 @@
                           </select>
                         </div>
                       </div>
+                      <div class="col-md-2 col-sm-6">
+                          <div class="form-group">
+                              <label class="sm-hide">{{ __('pages.Level')}}</label>
+                              <select class="form-control" wire:model="level" name='level'>
+                                  <option>{{ __('pages.sellevel')}}</option>
+                                  @foreach($level_options as $val)
+                                  <option value="{{ $val}}">{{ $val }}</option>
+                                  @endforeach
+                              </select>
+                              @error('level') <span class="error">{{ $message }}</span> @enderror
+                          </div>
+                      </div>
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Module')}}</label>
@@ -92,6 +104,8 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                       {{translate('Level')}}
                                     </th>
+                                    @endif
+                                    @if( !empty($list_items[0]['strkey']))
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-left">
                                       {{translate('Title')}}
                                     </th>

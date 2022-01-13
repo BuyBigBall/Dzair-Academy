@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Modal;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\University;
 use Illuminate\Http\Request;
 use App\Models\MaterialLanguage;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class UsereditModal extends Component
     public  $err_msg;
     public User $user;
     public  $edit_user_id;
+    public  $university_options;
 
     protected $listeners = [
         'ShowUserModal' => 'doShow'        ,
@@ -26,12 +28,15 @@ class UsereditModal extends Component
         'user.email'    => 'email:rfc,dns',
         'user.phone'    => 'max:10',
         'user.about'    => 'max:200',
-        'user.location' => 'min:3',
         'user.role'     => 'required',  
+        'user.university_id'=>'required',  
+        //'user.location' => 'min:3',
         //'user.photo'    => 'max:'.MAX_COURSE_UPLOAD_SIZE,  
     ];
     public function mount(Request $request) {
         $this->show = false;
+
+        $this->university_options = University::orderBy('mainname')->get();
     }
 
     public function doShow($user_id) {
@@ -54,6 +59,13 @@ class UsereditModal extends Component
         
         {
             if(!empty($this->edit_user_id)){
+
+                if(!empty($this->user->university_id))
+                {
+                    $univ = University::find($this->user->university_id);
+                    $this->user->location = $univ->town;
+                }
+
                 User::updateOrCreate(['id'=>$this->edit_user_id],
                     [
                         'role' => $this->user->role,
@@ -62,6 +74,7 @@ class UsereditModal extends Component
                         'phone' => $this->user->phone,
                         'location' => $this->user->location,
                         'about' => $this->user->about,
+                        'university_id' => $this->user->university_id,
                     ]);
             }
             return Redirect(route('user-management'));
