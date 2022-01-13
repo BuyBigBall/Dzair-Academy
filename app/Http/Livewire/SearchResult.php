@@ -59,7 +59,7 @@ class SearchResult extends Component
     }
     public function updatedPerPage($value)
     {
-        $this->perPage = $value;
+        $this->perPage = $value; $this->curPage=1;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
         // $this->emit('renderPerPage');
     }

@@ -9,3 +9,4 @@ ALTER  TABLE `reviews` ADD INDEX (`user_id`), ADD INDEX (`course_id`), ADD FOREI
 ALTER TABLE  `collection_items` CHANGE `course_id` `course_id` INT(10) UNSIGNED NOT NULL; 
 ALTER TABLE  `courses` CHANGE `course_id` `module_id` INT(10) UNSIGNED NOT NULL; 
 RENAME TABLE `reviews` TO `reports`;
+ALTER TABLE  `universities` CHANGE `en` `en` VARCHAR(80) CHARSET utf8 NULL; 

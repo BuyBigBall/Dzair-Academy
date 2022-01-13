@@ -5,7 +5,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Users</h5>
+                            <h5 class="mb-0">Universities</h5>
                         </div>
                          <!-- Search TextBox row -->
                         <div class="col-md-6 col-sm-6">
@@ -31,20 +31,17 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('ID') }}
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        {{ translate('Photo') }}
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ENGLISH
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Name') }}
+                                        FRANÇAIS'
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Email') }}
+                                        عربي	
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('University') }}
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('role') }}
+                                        {{ translate('town') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('Creation Date') }}
@@ -55,43 +52,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pagination as $user)
+                                @foreach($pagination as $university)
                                 <tr>
                                     <td class="text-center pe-1">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->idx}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{$university->id}}</p>
                                     </td>
-                                    <td class="pe-1">
-                                        <div>
-                                            <div class="avatar avatar-sm me-3">
-                                                <img src="{{userphoto($user->photo)}}" class="avatar avatar-sm">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center pe-1 ">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->username}}</p>
+                                    <td class="text-left pe-1 ">
+                                        <p class="text-xs font-weight-bold mb-0">{{$university->en}}</p>
                                     </td>
                                     <td class="text-center pe-1" style="overflow-wrap: anywhere;">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->useremail}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{$university->fr}}</p>
+                                    </td>
+                                    <td class="text-right pe-1">
+                                        <p class="text-xs font-weight-bold mb-0">{{$university->ar}}</p>
                                     </td>
                                     <td class="text-center pe-1">
-                                        <?php /* !empty($user->university) ? $user->university->id : '' */?>
-                                        <p class="text-xs font-weight-bold mb-0">{{ empty($user->university) ? "" : ln($user->university)??$user->university->mainname }}</p>
+                                        <span class="text-secondary text-xs font-weight-bold">{{$university->town}}</span>
                                     </td>
                                     <td class="text-center pe-1">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->userrole}}</p>
-                                    </td>
-                                    <td class="text-center pe-1">
-                                        <span class="text-secondary text-xs font-weight-bold">{{$user->email_verified_at}}</span>
+                                        <span class="text-secondary text-xs font-weight-bold">{{ agotime($university->created_at) }}</span>
                                     </td>
                                     <td class="text-center pe-1">
                                         <a href="#" 
                                             class="mx-1" data-bs-toggle="tooltip"
-                                            data-bs-original-title="Edit user"
-                                            wire:click.prevent="$emit('ShowUserModal', '{{$user->idx}}')"
+                                            data-bs-original-title="Edit University"
+                                            wire:click.prevent="$emit('ShowUniversity', '{{$university->id}}')"
                                             >
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                            <i class="fas fa-school text-secondary"></i>
                                         </a>
-                                        <span onclick="ConfirmFunction('{{ translate('Are you sure to delete this user?')}}', deleteUser, '{{$user->idx}}')">
+                                        <span onclick="ConfirmFunction('{{ translate('Are you sure to delete this university?')}}', deleteUniversity, '{{$university->id}}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                                     </td>
@@ -101,8 +90,13 @@
                             </tbody>
                         </table>
                     </div>
-
                     <hr />
+                    <div class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-primary"
+                                    wire:click.prevent="$emit('ShowUniversity', 0)"
+                                    >New University &nbsp;
+                                    <i class="fas fa-school text-secondary text-white"></i></button>
+                            </div>
                 </div>
             </div>
         </div>
@@ -111,11 +105,10 @@
 </div>
 
 <script>
-function deleteUser(del_id)
+function deleteUniversity(del_id)
 {
-    window.livewire.emit('deleteUser', del_id);
+    window.livewire.emit('deleteUniversity', del_id);
 }
 </script>
-<!-- Translate Course Modal -->
-@livewire('modal.useredit-modal')
+@livewire('modal.universityedit-modal')
 

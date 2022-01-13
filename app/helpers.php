@@ -72,7 +72,7 @@ function ToDate($date)
 function mat_lang($mat)
 {
     $lang = App::getLocale();
-    env('DEFAULT_LANGUAGE', $lang);
+    $lang = env('DEFAULT_LANGUAGE', $lang);
     
     foreach($mat->lang as $matlang)
     {
@@ -88,7 +88,7 @@ function mat_lang($mat)
 function ln($obj)
 {
     $lang = App::getLocale();
-    env('DEFAULT_LANGUAGE', $lang);
+    $lang = env('DEFAULT_LANGUAGE', $lang);
     if($obj!=null)
     {
         if($lang=='en')    return $obj->en;

@@ -32,7 +32,7 @@ use App\Http\Livewire\Collection\CollectionManage;
 use App\Http\Livewire\Collection\CollectionFiles;
 use App\Http\Livewire\Collection\CollectionShared;
 use App\Http\Livewire\Admin\ReportView;
-
+use App\Http\Livewire\Admin\UniversityManage;
 
 use App\Http\Controllers\ApplicationController;
 
@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/settings',             Settings::class)->name('settings');
     Route::get('/report-view',          ReportView::class)->name('report-view');
+    Route::get('/university-manage',    UniversityManage::class)->name('university-manage');
 });
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);

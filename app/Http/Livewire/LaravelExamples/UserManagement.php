@@ -60,7 +60,7 @@ class UserManagement extends Component
     }
     public function updatedPerPage($value)
     {
-        $this->perPage = $value;
+        $this->perPage = $value; $this->curPage=1;
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
     }
 
@@ -81,6 +81,7 @@ class UserManagement extends Component
         //dd($searchWord);
         if( ! empty($this->word))                  
         {
+            $this->word = trim($this->word);
             $searchWord[] =  ['trainings.en' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['trainings.fr' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['trainings.ar' , 'like' , '%'.$this->word.'%']; 
@@ -108,6 +109,8 @@ class UserManagement extends Component
                 ." , MIN(users.Phone) as Phone"."" 
                 ." , MIN(users.location) as location".""
                 ." , MIN(users.photo) as photo".""
+                ." , MIN(users.university_id) as university_id".""
+                
                 ." , MIN(users.email_verified_at) as email_verified_at"."";
                             
         $cols .= " , MIN(trainings." . lang() . ") as training";
