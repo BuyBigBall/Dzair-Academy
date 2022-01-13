@@ -146,45 +146,45 @@ class TranslateMaterial extends Component
     {
         $searchCond = [];        $searchWord = [];        $searchOr = []; $searchOr1 = [];
 
-        if( ! empty($this->training))               $searchCond[] = ['materials.training_id' , $this->training];
-        if( ! empty($this->faculty))                $searchCond[] = ['materials.faculty_id' , $this->faculty];
-        if( ! empty($this->specialization))         $searchCond[] = ['materials.specialization_id' , $this->specialization];
-        if( ! empty($this->level))                  $searchCond[] = ['materials.level' , $this->level];
-        if( ! empty($this->module))                 $searchCond[] = ['materials.course_id' , $this->module];
+        if( ! empty($this->training))               $searchCond[] = ['courses.training_id' , $this->training];
+        if( ! empty($this->faculty))                $searchCond[] = ['courses.faculty_id' , $this->faculty];
+        if( ! empty($this->specialization))         $searchCond[] = ['courses.specialization_id' , $this->specialization];
+        if( ! empty($this->level))                  $searchCond[] = ['courses.level' , $this->level];
+        if( ! empty($this->module))                 $searchCond[] = ['courses.course_id' , $this->module];
 
         if( ! empty($this->word))                  
         {
-            $searchWord[] =  ['material_languages.title' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['material_languages.description' , 'like' , '%'.$this->word.'%'];
-            $searchWord[] =  ['materials.title' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['materials.description' , 'like' , '%'.$this->word.'%'];
+            $searchWord[] =  ['course_languages.title' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['course_languages.description' , 'like' , '%'.$this->word.'%'];
+            $searchWord[] =  ['courses.title' , 'like' , '%'.$this->word.'%']; 
+            $searchWord[] =  ['courses.description' , 'like' , '%'.$this->word.'%'];
         } 
 
-        $cols =  "   materials.id as idx" 
-                ." , MIN(materials.title) as strkey"."" 
-                ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en "
-                ." , GROUP_CONCAT(IF(language='fr', material_languages.title, '') SEPARATOR  '') as fr "
-                ." , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as ar ";
+        $cols =  "   courses.id as idx" 
+                ." , MIN(courses.title) as strkey"."" 
+                ." , GROUP_CONCAT(IF(language='en', course_languages.title, '') SEPARATOR  '') as en "
+                ." , GROUP_CONCAT(IF(language='fr', course_languages.title, '') SEPARATOR  '') as fr "
+                ." , GROUP_CONCAT(IF(language='ar', course_languages.title, '') SEPARATOR  '') as ar ";
 
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as spacialization";
         $cols .= " , MIN(modules." . lang(). ") as course";
-        $cols .= " , MIN(materials.level) as level";
+        $cols .= " , MIN(courses.level) as level";
         //dd($cols);
         $query = \App\Models\Course::selectRaw(
             DB::raw($cols))
-                ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
-                ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
-                ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
-                ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-                ->leftJoin('modules' , 'modules.id', '=', 'materials.course_id')
+                ->leftJoin('course_languages' , 'courses.id', '=', 'course_languages.course_id')
+                ->leftJoin('trainings' , 'trainings.id', '=', 'courses.training_id')
+                ->leftJoin('faculties' , 'faculties.id', '=', 'courses.faculty_id')
+                ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'courses.course_id')
              ->where($searchCond)
              ->where( function($query1) use ($searchWord) {
                 if(count($searchWord)>0)
                     $query1->orWhere([$searchWord[0]])->orWhere([$searchWord[1]])->orWhere([$searchWord[2]])->orWhere([$searchWord[3]]);
                })
-             ->groupBy('materials.id')->orderBy('materials.created_at','asc');
+             ->groupBy('courses.id')->orderBy('courses.created_at','asc');
 
         $this->search_result = $query->paginate( $this->perPage );
         return view('livewire.translate.translate-course', ['pagination'=>$this->search_result] );

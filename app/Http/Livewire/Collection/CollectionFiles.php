@@ -95,7 +95,7 @@ class CollectionFiles extends Component
             $searchWord[] =  ['collections.description' , 'like' , '%'.$this->word.'%']; 
         } 
 
-        $query = \App\Models\CollectionItem::selectRaw(DB::raw("collection_items.id, collection_items.collection_id, collection_items.material_id, collection_items.created_at"))
+        $query = \App\Models\CollectionItem::selectRaw(DB::raw("collection_items.id, collection_items.collection_id, collection_items.course_id, collection_items.created_at"))
                 ->leftjoin('collections', 'collections.id', '=', 'collection_items.collection_id')
         //        ->where('collections.user_id', Auth::id())
                 ->where('collections.id', $this->collection->id)

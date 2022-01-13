@@ -175,17 +175,17 @@ class BranchManagement extends Component
         }
         $this->path_level = $this->const_path_level['material'];
         $this->const_path_name = translate("Edit Course");
-        $cols =  "   materials.id as id" 
-                ." , MIN(materials.title) as strkey"."" 
-                ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en "
-                ." , GROUP_CONCAT(IF(language='fr', material_languages.title, '') SEPARATOR  '') as fr "
-                ." , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as ar ";
+        $cols =  "   courses.id as id" 
+                ." , MIN(courses.title) as strkey"."" 
+                ." , GROUP_CONCAT(IF(language='en', course_languages.title, '') SEPARATOR  '') as en "
+                ." , GROUP_CONCAT(IF(language='fr', course_languages.title, '') SEPARATOR  '') as fr "
+                ." , GROUP_CONCAT(IF(language='ar', course_languages.title, '') SEPARATOR  '') as ar ";
 
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
         $cols .= " , MIN(specializations." . lang() . ") as specialization";
         $cols .= " , MIN(modules." . lang(). ") as course";
-        $cols .= " , MIN(materials.level) as level";
+        $cols .= " , MIN(courses.level) as level";
         
         $this->list_title = translate('All Courses');
         $this->list_of = Module::where('id', $value)->first()->toArray()[lang()];
@@ -197,13 +197,13 @@ class BranchManagement extends Component
         }
 
         $query = \App\Models\Course::selectRaw( DB::raw($cols) )
-                ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
-                ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
-                ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')
-                ->leftJoin('specializations' , 'specializations.id', '=', 'materials.specialization_id')
-                ->leftJoin('modules' , 'modules.id', '=', 'materials.course_id')
+                ->leftJoin('course_languages' , 'courses.id', '=', 'course_languages.course_id')
+                ->leftJoin('trainings' , 'trainings.id', '=', 'courses.training_id')
+                ->leftJoin('faculties' , 'faculties.id', '=', 'courses.faculty_id')
+                ->leftJoin('specializations' , 'specializations.id', '=', 'courses.specialization_id')
+                ->leftJoin('modules' , 'modules.id', '=', 'courses.course_id')
                 ->where('course_id', $value)
-                ->groupBy('materials.id')->orderBy('materials.created_at','asc');
+                ->groupBy('courses.id')->orderBy('courses.created_at','asc');
         $this->list_items = $query->limit( $limit )->get();
 
 

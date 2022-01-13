@@ -61,7 +61,7 @@
                         <div class="text-content">
                             <h6>we are here to support you</h6>
                             <h4>LTR &amp; RTL <br />translate</h4>
-                            <p>You are allowed to use this functions for your teach materials. 
+                            <p>You are allowed to use this functions for your teach courses. 
                                 </p>
                             <a href="{{route('login')}}" class="filled-button">Signin</a>
                         </div>

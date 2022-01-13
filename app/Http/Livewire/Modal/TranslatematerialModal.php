@@ -15,7 +15,7 @@ class TranslatematerialModal extends Component
     public  $show;
     private $modal;
 
-    public  $material_id;
+    public  $course_id;
     public  $mat_title;
     public  $mat_description;
     public  $lang_id_en;
@@ -32,37 +32,37 @@ class TranslatematerialModal extends Component
         'ShowMaterialModal' => 'doShow'        ,
     ];
     protected $rules = [
-        'material_id' => 'required',
+        'course_id' => 'required',
     ];
 
     public function mount(Request $request) {
-        if( !empty($request->material_id) ) {
-            $this->material_id = $request->material_id;
+        if( !empty($request->course_id) ) {
+            $this->course_id = $request->course_id;
         }
 
         $this->show = false;
     }
 
-    public function doShow($mat_id) {
-        $this->material_id = $mat_id;
-        $cols =  "   materials.id as idx" 
-            ." , MIN(materials.title) as mat_title"."" 
-            ." , MIN(materials.description) as mat_description "
-            ." , GROUP_CONCAT(IF(language='en', material_languages.id, '') SEPARATOR  '') as lang_id_en "
-            ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as lang_title_en "
-            ." , GROUP_CONCAT(IF(language='en', material_languages.description, '') SEPARATOR  '') as lang_desc_en "
-            ." , GROUP_CONCAT(IF(language='fr', material_languages.id, '') SEPARATOR  '') as lang_id_fr "
-            ." , GROUP_CONCAT(IF(language='fr', material_languages.title, '') SEPARATOR  '') as lang_title_fr "
-            ." , GROUP_CONCAT(IF(language='fr', material_languages.description, '') SEPARATOR  '') as lang_desc_fr "
-            ." , GROUP_CONCAT(IF(language='ar', material_languages.id, '') SEPARATOR  '') as lang_id_ar "
-            ." , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as lang_title_ar "
-            ." , GROUP_CONCAT(IF(language='ar', material_languages.description, '') SEPARATOR  '') as lang_desc_ar ";
+    public function doShow($course_id) {
+        $this->course_id = $course_id;
+        $cols =  "   courses.id as idx" 
+            ." , MIN(courses.title) as mat_title"."" 
+            ." , MIN(courses.description) as mat_description "
+            ." , GROUP_CONCAT(IF(language='en', course_languages.id, '') SEPARATOR  '') as lang_id_en "
+            ." , GROUP_CONCAT(IF(language='en', course_languages.title, '') SEPARATOR  '') as lang_title_en "
+            ." , GROUP_CONCAT(IF(language='en', course_languages.description, '') SEPARATOR  '') as lang_desc_en "
+            ." , GROUP_CONCAT(IF(language='fr', course_languages.id, '') SEPARATOR  '') as lang_id_fr "
+            ." , GROUP_CONCAT(IF(language='fr', course_languages.title, '') SEPARATOR  '') as lang_title_fr "
+            ." , GROUP_CONCAT(IF(language='fr', course_languages.description, '') SEPARATOR  '') as lang_desc_fr "
+            ." , GROUP_CONCAT(IF(language='ar', course_languages.id, '') SEPARATOR  '') as lang_id_ar "
+            ." , GROUP_CONCAT(IF(language='ar', course_languages.title, '') SEPARATOR  '') as lang_title_ar "
+            ." , GROUP_CONCAT(IF(language='ar', course_languages.description, '') SEPARATOR  '') as lang_desc_ar ";
         $query = \App\Models\Course::selectRaw(DB::raw($cols))
-                ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
+                ->leftJoin('course_languages' , 'courses.id', '=', 'course_languages.course_id')
                 ->where([ 
-                    'materials.id'=>$this->material_id
+                    'courses.id'=>$this->course_id
                 ])
-                ->groupBy('materials.id');
+                ->groupBy('courses.id');
         $mat_data = $query->first();
         $this->mat_title = $mat_data->mat_title;
         $this->mat_description = $mat_data->mat_description;
@@ -90,18 +90,18 @@ class TranslatematerialModal extends Component
         }
 
         $coll = Course::where([ 
-                'id'=>$this->material_id
+                'id'=>$this->course_id
             ])->first();
         if($coll!=null)
         {
             if(!empty($this->lang_id_en)){
-                DB::table('material_languages')
+                DB::table('course_languages')
                     ->where('id', $this->lang_id_en)
                     ->update(['title' => $this->lang_title_en]);
             }else if(empty($this->lang_id_en)){
                 if(!empty($this->lang_title_en) && !empty($this->lang_desc_en)){
                     $materal_language = CourseLanguage::create([
-                        'material_id'      => $this->material_id,
+                        'course_id'      => $this->course_id,
                         'language'         => 'en',
                         'created_by'       => Auth::id(),
                         'updated_by'       => Auth::id(),
@@ -112,13 +112,13 @@ class TranslatematerialModal extends Component
             }
 
             if(!empty($this->lang_id_fr)){
-                DB::table('material_languages')
+                DB::table('course_languages')
                     ->where('id', $this->lang_id_fr)
                     ->update(['title' => $this->lang_title_fr]);
             }else if(empty($this->lang_id_fr)){
                 if(!empty($this->lang_title_fr) && !empty($this->lang_desc_fr)){
                     $materal_language = CourseLanguage::create([
-                        'material_id'      => $this->material_id,
+                        'course_id'      => $this->course_id,
                         'language'         => 'fr',
                         'created_by'       => Auth::id(),
                         'updated_by'       => Auth::id(),
@@ -129,13 +129,13 @@ class TranslatematerialModal extends Component
             }
 
             if(!empty($this->lang_id_ar)){
-                DB::table('material_languages')
+                DB::table('course_languages')
                     ->where('id', $this->lang_id_ar)
                     ->update(['title' => $this->lang_title_ar]);
             }else if(empty($this->lang_id_ar)){
                 if(!empty($this->lang_title_ar) && !empty($this->lang_desc_ar)){
                     $materal_language = CourseLanguage::create([
-                        'material_id'      => $this->material_id,
+                        'course_id'      => $this->course_id,
                         'language'         => 'ar',
                         'created_by'       => Auth::id(),
                         'updated_by'       => Auth::id(),

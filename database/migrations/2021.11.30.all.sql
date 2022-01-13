@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS `material_languages`;
 
 CREATE TABLE `material_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `material_id` int(10) unsigned NOT NULL,
+  `course_id` int(10) unsigned NOT NULL,
   `language` enum('en','fr','ar') DEFAULT NULL,
   `created_by` int(10) unsigned NOT NULL,
   `updated_by` int(10) unsigned NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `material_languages` (
 
 /*Data for the table `material_languages` */
 
-insert  into `material_languages`(`id`,`material_id`,`language`,`created_by`,`updated_by`,`title`,`description`,`created_at`,`updated_at`) values 
+insert  into `material_languages`(`id`,`course_id`,`language`,`created_by`,`updated_by`,`title`,`description`,`created_at`,`updated_at`) values 
 (1,1,'en',1,1,'wwwwwwwww','wwwwwwwwwwwww','2021-11-27 05:18:30','2021-11-27 05:18:30');
 
 /*Table structure for table `materials` */

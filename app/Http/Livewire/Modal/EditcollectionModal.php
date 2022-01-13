@@ -100,7 +100,7 @@ class EditcollectionModal extends Component
                 // {
                 //     CollectionItem::updateOrCreate(
                 //         ['collection_id' => $coll->id,
-                //          'material_id'=>$this->mat_id],
+                //          'course_id'=>$this->mat_id],
                 //         []
                 //     );
                 //     return Redirect(route('collection-files', $coll->id));

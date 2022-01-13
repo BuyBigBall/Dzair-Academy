@@ -12,7 +12,7 @@ class CollectionaddModal extends Component
 {
     public  $show;
     public  $collection_id;
-    public  $material_id;
+    public  $course_id;
     
     private $modal;
     protected $listeners = [
@@ -30,8 +30,8 @@ class CollectionaddModal extends Component
         $this->show = false;
     }
 
-    public function doShow($mat_id) {
-        $this->material_id = $mat_id;
+    public function doShow($course_id) {
+        $this->course_id = $course_id;
         $this->show = true;
     }
 
@@ -68,7 +68,7 @@ class CollectionaddModal extends Component
             // {
             //     CollectionItem::updateOrCreate(
             //         ['collection_id' => $this->collection_id,
-            //         'material_id'=>$this->material_id],
+            //         'course_id'=>$this->course_id],
             //         []
             //     );
                 

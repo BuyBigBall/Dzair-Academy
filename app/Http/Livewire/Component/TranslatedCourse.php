@@ -14,8 +14,11 @@ class TranslatedCourse extends Component
 
     public function mount()
     {
+        //dd($this);
         $query = CourseLanguage::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
+        //dd($query->toSql());
         $this->new_courses = $query->get();
+        //dd($this->new_courses);
     }
     public function agree_translate($course_id)
     {

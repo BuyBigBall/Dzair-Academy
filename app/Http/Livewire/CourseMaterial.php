@@ -193,10 +193,10 @@ class CourseMaterial extends Component
                         'cate_exercise'     => $this->cate_exercise,
                         'cate_exam'         => $this->cate_exam,
                     ]);
-        $new_course_Material_id = $course_material->id;
+        $new_course_course_id = $course_material->id;
         
         $materal_language = CourseLanguage::create([
-                        'material_id'      => $new_course_Material_id,
+                        'course_id'      => $new_course_course_id,
                         'language'         => lang(),
                         'created_by'       => Auth::id(),
                         'updated_by'       => Auth::id(),
@@ -205,11 +205,6 @@ class CourseMaterial extends Component
                     ]);
         $materal_language_id = $materal_language->id;
 
-        // if($this->add_coll_type==1)
-        //     $this->emit('ShowModal', $new_course_Material_id);
-        // elseif($this->add_coll_type==2)
-        //     $this->emit('doShow', $new_course_Material_id);
-        // else
         if(!empty($this->add_coll_id) && $this->add_coll_type==1)
         {
             # into his own collection
@@ -221,7 +216,7 @@ class CourseMaterial extends Component
             {
                 CollectionItem::updateOrCreate(
                                     [   'collection_id' => $this->add_coll_id,
-                                        'material_id'   => $new_course_Material_id
+                                        'course_id'   => $new_course_course_id
                                     ],
                                     []
                                 );
@@ -242,7 +237,7 @@ class CourseMaterial extends Component
                 $this->add_coll_id = $coll->id;
                 CollectionItem::updateOrCreate(
                                     [   'collection_id' => $this->add_coll_id,
-                                        'material_id'   => $new_course_Material_id
+                                        'course_id'   => $new_course_course_id
                                     ],
                                     []
                                 );

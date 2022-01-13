@@ -9,12 +9,12 @@ class CollectionItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['collection_id', 'material_id'];
+    protected $fillable = ['collection_id', 'course_id'];
 
     public function coll() {
         return $this->belongsTo('App\Models\Collection','collection_id');
     }
     public function mat() {
-        return $this->hasOne('App\Models\Course','id','material_id');
+        return $this->hasOne('App\Models\Course','id','course_id');
     }
 }

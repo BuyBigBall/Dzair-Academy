@@ -23,19 +23,19 @@ DROP TABLE IF EXISTS `collection_items`;
 CREATE TABLE `collection_items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `collection_id` int(10) unsigned NOT NULL,
-  `material_id` int(10) unsigned NOT NULL,
+  `course_id` int(10) unsigned NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `collection_id` (`collection_id`),
-  KEY `material_id` (`material_id`),
+  KEY `course_id` (`course_id`),
   CONSTRAINT `collection_items_ibfk_1` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `collection_items_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE
+  CONSTRAINT `collection_items_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `collection_items` */
 
-insert  into `collection_items`(`id`,`collection_id`,`material_id`,`created_at`,`updated_at`) values 
+insert  into `collection_items`(`id`,`collection_id`,`course_id`,`created_at`,`updated_at`) values 
 (1,1,1,'2021-12-13 09:29:12','2021-12-13 09:29:12'),
 (2,1,2,'2021-12-13 09:29:18','2021-12-13 09:29:18'),
 (3,1,3,'2021-12-14 18:10:27','2021-12-14 18:10:27'),
@@ -203,15 +203,15 @@ DROP TABLE IF EXISTS `material_files`;
 
 CREATE TABLE `material_files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `material_id` int(10) unsigned NOT NULL,
+  `course_id` int(10) unsigned NOT NULL,
   `filename` varchar(100) NOT NULL,
   `file_path` varchar(255) CHARACTER SET ascii NOT NULL,
   `preview_path` varchar(255) CHARACTER SET ascii DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `material_id` (`material_id`),
-  CONSTRAINT `material_files_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `material_files_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `material_files` */
@@ -222,7 +222,7 @@ DROP TABLE IF EXISTS `material_languages`;
 
 CREATE TABLE `material_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `material_id` int(10) unsigned NOT NULL,
+  `course_id` int(10) unsigned NOT NULL,
   `language` enum('en','fr','ar') DEFAULT NULL,
   `created_by` int(10) unsigned NOT NULL,
   `updated_by` int(10) unsigned NOT NULL,
@@ -231,13 +231,13 @@ CREATE TABLE `material_languages` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `material_id` (`material_id`),
-  CONSTRAINT `material_languages_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`)
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `material_languages_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `materials` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `material_languages` */
 
-insert  into `material_languages`(`id`,`material_id`,`language`,`created_by`,`updated_by`,`title`,`description`,`created_at`,`updated_at`) values 
+insert  into `material_languages`(`id`,`course_id`,`language`,`created_by`,`updated_by`,`title`,`description`,`created_at`,`updated_at`) values 
 (1,1,'en',1,1,'test','wwwwwwwwwwwww','2021-11-27 05:18:30','2021-12-16 16:23:26'),
 (2,1,'fr',1,1,'eeeeeeeeee','','2021-12-03 11:43:29','2021-12-03 11:43:48'),
 (4,4,'en',1,1,'file upload example1','file upload description\nfile size = 56Kb\ndesc : lin 4\nextension','2021-12-10 04:28:23','2021-12-16 16:50:37'),
