@@ -75,7 +75,7 @@ class CollectionFiles extends Component
 
         if( !!empty($id) )
         {
-            return redirect(route('collection'));
+            return Redirect(route('collection'));
         }
         $this->collection = $coll;
 

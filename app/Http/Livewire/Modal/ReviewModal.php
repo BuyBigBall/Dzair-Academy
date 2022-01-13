@@ -14,6 +14,7 @@ class ReviewModal extends Component
     public  $course_id = 0;
     public  $user_id = 0;
     public  $review_disp;
+    public  $registerd_review;
 
     protected $listeners = [
         'reviewModal' => 'reviewModal'         
@@ -38,7 +39,7 @@ class ReviewModal extends Component
         if(!empty($course))
         {
             if( !empty($review))
-                $this->review_disp = $review->content;
+                $this->registerd_review = $this->review_disp = $review->content;
         }        
         $this->show = true;
     }

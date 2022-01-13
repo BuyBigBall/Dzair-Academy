@@ -34,12 +34,13 @@ function seo_friendly_url($string){
 
 function agotime($date)
 {
+    if(!! empty($date)) return "";
     $diff = date_diff( new \DateTime( "now" ), new \DateTime( date( 'Y-n-d H:i:s', strtotime($date))) );
-    $ago_time = (($diff->y>=1) ? (($diff->y+1) . ' years ago' ) : 
-                (($diff->m>=1) ? (($diff->m+1) . ' months ago' ) : 
-                (($diff->d>=1) ? (($diff->d+1) . ' days ago' ) : 
-                (($diff->h>=1) ? (($diff->h+1) . ' hours ago' ) : 
-                (($diff->i>=1) ? (($diff->i+1) . ' minutes ago' ) : 
+    $ago_time = (($diff->y>=1) ? (($diff->y+1) . __(' years ago') ) : 
+                (($diff->m>=1) ? (($diff->m+1) . __(' months ago') ) : 
+                (($diff->d>=1) ? (($diff->d+1) . __(' days ago') ) : 
+                (($diff->h>=1) ? (($diff->h+1) . __(' hours ago') ) : 
+                (($diff->i>=1) ? (($diff->i+1) . __(' minutes ago') ) : 
                 date( 'l d M Y H:i:s P (T)', strtotime($date) )   )))));
     return $ago_time;
 }

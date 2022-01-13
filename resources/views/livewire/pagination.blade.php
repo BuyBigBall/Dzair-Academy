@@ -1,6 +1,6 @@
 
-<div class="d-flex align-items-end d-none d-sm-flex  justify-content-between">
-    <div class="d-flex align-items-center ">
+<div class="d-flex align-items-end d-none d-sm-flex justify-content-between py-1">
+    <div class="d-flex align-items-center ps-3">
         <label class="d-inline me-0 me-sm-1 me-md-2 me-lg-3">Views</label>
         <select class="form-control me-1 me-sm-2 me-md-3" wire:model="perPage" >
             <option wire:key="2"   @if($perPage===2)   selected @endif >2</option>
@@ -21,8 +21,8 @@
 </div>
 
 @if( $pagination->lastPage()>1)
-    <nav aria-label="Page navigation example  justify-content-center">
-    <ul class="pagination justify-content-end">
+    <nav aria-label="Page navigation example" class="align-items-center pe-4">
+    <ul class="pagination justify-content-end m-0">
         <li class="page-item px-3  d-none d-sm-block">
             <!-- {{ translate('go to : ') }} -->
             <select wire:model="curPage" class="form-control" onchange="location.href='{{route($current_route).'?page='}}' + this.value;">

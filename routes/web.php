@@ -31,6 +31,8 @@ use App\Http\Livewire\Message\MessageOutbox;
 use App\Http\Livewire\Collection\CollectionManage;
 use App\Http\Livewire\Collection\CollectionFiles;
 use App\Http\Livewire\Collection\CollectionShared;
+use App\Http\Livewire\Admin\ReportView;
+
 
 use App\Http\Controllers\ApplicationController;
 
@@ -98,7 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/translate-app',       Translate::class)->name('translate-app');
     
     Route::get('/settings',             Settings::class)->name('settings');
-    
+    Route::get('/report-view',          ReportView::class)->name('report-view');
 });
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);

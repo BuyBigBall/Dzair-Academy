@@ -112,7 +112,7 @@ class UserManagement extends Component
                             
         $cols .= " , MIN(trainings." . lang() . ") as training";
         $cols .= " , MIN(faculties." . lang() . ") as faculty";
-        $cols .= " , MIN(specializations." . lang() . ") as spacialization";
+        $cols .= " , MIN(specializations." . lang() . ") as specialization";
         $cols .= " , MIN(modules." . lang(). ") as course";
 
 

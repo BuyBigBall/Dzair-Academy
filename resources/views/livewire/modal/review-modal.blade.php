@@ -43,7 +43,7 @@
                             <label for="user-email" class="form-control-label">{{translate('Report Content')}}</label>
                             <div class="">
                                 <textarea wire:model="review_disp" class="form-control" placeholder="report desciption" 
-                                @if( ! empty($review_disp))
+                                @if( ! empty($registerd_review))
                                     READONLY    
                                 @endif
                                         row=3 id="review-disp"></textarea>
@@ -59,7 +59,7 @@
             <button type="button" class="btn btn-secondary" 
                 wire:click.prevent="doClose()"
                 data-bs-dismiss="modal">{{ translate('Cancel') }}</button>
-            @if( !!empty($review_disp))
+            @if( !!empty($registerd_review))
             <button type="button" class="btn btn-primary"
                 wire:click.prevent="save()"
                 >{{ translate('Save') }}</button>
