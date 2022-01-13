@@ -14,17 +14,17 @@ class TranslatedCourse extends Component
 
     public function mount()
     {
-        $query = CourselLanguage::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
+        $query = CourseLanguage::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
         $this->new_courses = $query->get();
     }
     public function agree_translate($course_id)
     {
-        CourselLanguage::find($course_id)->update(['status'=>1]);
+        CourseLanguage::find($course_id)->update(['status'=>1]);
         $this->mount();
     }
     // public function delete_course($course_id)
     // {
-    //     CourselLanguage::find($course_id)->delete();
+    //     CourseLanguage::find($course_id)->delete();
     //     $this->mount();
     // }
 

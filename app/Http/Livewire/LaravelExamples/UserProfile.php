@@ -133,7 +133,7 @@ class UserProfile extends Component
     public function delete_course($course_id)
     {
         $this->tabs_id = 3;
-        CourselLanguage::where('material_id', $course_id)->delete();
+        CourseLanguage::where('material_id', $course_id)->delete();
         Course::find($course_id)->delete();
         $this->mount();
     }

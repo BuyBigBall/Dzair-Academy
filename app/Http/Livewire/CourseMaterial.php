@@ -195,7 +195,7 @@ class CourseMaterial extends Component
                     ]);
         $new_course_Material_id = $course_material->id;
         
-        $materal_language = CourselLanguage::create([
+        $materal_language = CourseLanguage::create([
                         'material_id'      => $new_course_Material_id,
                         'language'         => lang(),
                         'created_by'       => Auth::id(),

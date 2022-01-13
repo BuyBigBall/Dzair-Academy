@@ -36,7 +36,7 @@ class Course extends Model
         return $this->hasOne('App\Models\User','id','updated_by');
     }
     public function lang() {
-        return $this->hasMany(CourselLanguage::class);
+        return $this->hasMany(CourseLanguage::class);
     }
     public function course() {
         return $this->belongsTo('App\Models\Module', 'course_id');

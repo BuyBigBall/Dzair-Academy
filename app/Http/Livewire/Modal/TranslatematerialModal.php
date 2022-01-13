@@ -100,7 +100,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_en]);
             }else if(empty($this->lang_id_en)){
                 if(!empty($this->lang_title_en) && !empty($this->lang_desc_en)){
-                    $materal_language = CourselLanguage::create([
+                    $materal_language = CourseLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'en',
                         'created_by'       => Auth::id(),
@@ -117,7 +117,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_fr]);
             }else if(empty($this->lang_id_fr)){
                 if(!empty($this->lang_title_fr) && !empty($this->lang_desc_fr)){
-                    $materal_language = CourselLanguage::create([
+                    $materal_language = CourseLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'fr',
                         'created_by'       => Auth::id(),
@@ -134,7 +134,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_ar]);
             }else if(empty($this->lang_id_ar)){
                 if(!empty($this->lang_title_ar) && !empty($this->lang_desc_ar)){
-                    $materal_language = CourselLanguage::create([
+                    $materal_language = CourseLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'ar',
                         'created_by'       => Auth::id(),
