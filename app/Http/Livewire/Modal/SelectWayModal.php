@@ -40,6 +40,6 @@ class SelectWayModal extends Component
     }
     public function render()
     {
-        return view('livewire.modal.selectway-modal');
+        return view('livewire.modal.select-way-modal');
     }
 }

@@ -24,6 +24,9 @@ class UserProfile extends Component
     public $user_edit_photo;
     public $tabs_id = 1;
 
+    public $hide_email = 0;
+    public $hide_phone = 0;
+
     public $myUpload_courses;
     public $university_options;
 
@@ -60,6 +63,15 @@ class UserProfile extends Component
     {
         CollectionShare::find($share_id)->delete();
     }
+    
+    public function updatedHideEmail($value) { 
+        $this->user->hide_email = $this->hide_email ? 1 : 0;
+        $this->user->save();
+    }
+    public function updatedHidePhone($value) { 
+        $this->user->hide_phone = $this->hide_phone ? 1 : 0;
+        $this->user->save();
+    }
 
     public function updatedUserPhoto($value) { 
         //dd($value);
@@ -85,6 +97,9 @@ class UserProfile extends Component
         $this->user_location    = $this->user->location;
         $this->user_university    = $this->user->university_id;
         $this->user_photo       = $this->user->photo;
+
+        $this->hide_email       = $this->user->hide_email;
+        $this->hide_phone       = $this->user->hide_phone;
 
         if($this->user->photo_agree!=1 && $this->user->id!=Auth::id())
         {

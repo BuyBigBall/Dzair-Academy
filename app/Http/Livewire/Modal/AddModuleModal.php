@@ -92,6 +92,6 @@ class AddModuleModal extends Component
     }
     public function render()
     {
-        return view('livewire.modal.addmodule-modal');
+        return view('livewire.modal.add-module-modal');
     }
 }

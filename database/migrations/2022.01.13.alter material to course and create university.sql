@@ -10,3 +10,4 @@ ALTER TABLE  `collection_items` CHANGE `course_id` `course_id` INT(10) UNSIGNED 
 ALTER TABLE  `courses` CHANGE `course_id` `module_id` INT(10) UNSIGNED NOT NULL; 
 RENAME TABLE `reviews` TO `reports`;
 ALTER TABLE  `universities` CHANGE `en` `en` VARCHAR(80) CHARSET utf8 NULL; 
+ALTER TABLE  `users` ADD COLUMN `hide_email` TINYINT DEFAULT 0 NOT NULL AFTER `email`, ADD COLUMN `hide_phone` TINYINT DEFAULT 0 NOT NULL AFTER `phone`; 

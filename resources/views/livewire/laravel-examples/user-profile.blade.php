@@ -69,7 +69,7 @@
                                         </div>   
                                         <div class="col-md-8">                        
                                             <div class="row">
-                                                <div class="{{($user->id==Auth::id()) ? 'col-md-6 ' : 'col-md-12'}}">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
                                                         <div class="@error('user_name')border border-danger rounded-3 @enderror">
@@ -82,37 +82,48 @@
                                                         @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
-                                                @if($user->id==Auth::id())
-                                                <div class="col-md-6">
+
+                                                @if( ($user->id==Auth::id()) || (Auth::user()->role=='admin') || !empty($hide_email) )
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
-                                                        <div class="@error('user_email')border border-danger rounded-3 @enderror">
+                                                        <div class="@error('user_email') border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
                                                                 @endif
                                                                 >
                                                         </div>
+                                                        <label class="form-control-label cursor-pointer" >
+                                                            <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_email" value='1' /></span>
+                                                            <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
+                                                        </label>
                                                         @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
                                                 @endif
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
+                                           
+                                                @if( ($user->id==Auth::id()) || (Auth::user()->role=='admin') || !empty($hide_phone) )
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
-                                                        <div class="@error('user_phone')border border-danger rounded-3 @enderror">
+                                                        <div class="@error('user_phone') border border-danger rounded-3 @enderror">
                                                             <input wire:model="user_phone" class="form-control" 
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
                                                                 @endif
                                                                 type="tel" placeholder="40770888444" id="phone">
                                                         </div>
+                                                        <label class="form-control-label cursor-pointer" >
+                                                            <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_phone" value='1' /></span>
+                                                            <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
+                                                        </label>
                                                         @error('user_phone') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                @endif
+
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user_location" class="form-control-label">{{ translate('University')}}</label>
                                                         <div class="@error('user_location') border border-danger rounded-3 @enderror">
@@ -122,17 +133,12 @@
                                                             <option value="{{ $univ->id }}">{{ ln($univ)??$univ->mainname }}</option>
                                                             @endforeach
                                                             </select>
-                                                            <!-- <input wire:model="user_location" class="form-control" 
-                                                                @if($user->id!=Auth::id())
-                                                                    readonly
-                                                                @endif
-                                                                type="text" placeholder="{{ translate('univercity name') }}" id="location"
-                                                                /> -->
                                                         </div>
                                                         @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label for="about">{{ 'About Me' }}</label>
                                                 <div class="@error('user_about')border border-danger rounded-3 @enderror">

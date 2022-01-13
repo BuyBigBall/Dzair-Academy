@@ -311,8 +311,8 @@
 
     @livewire('modal.collectionadd-modal')
     @livewire('modal.editcollection-modal') 
-    @livewire('modal.selectway-modal') 
-    @livewire('modal.addspec-modal') 
-    @livewire('modal.addmodule-modal') 
+    @livewire('modal.select-way-modal') 
+    @livewire('modal.add-specialization-modal') 
+    @livewire('modal.add-module-modal') 
     
 </main>

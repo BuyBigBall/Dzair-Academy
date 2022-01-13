@@ -28,8 +28,6 @@
   'message.message-manage' => 'App\\Http\\Livewire\\Message\\MessageManage',
   'message.message-outbox' => 'App\\Http\\Livewire\\Message\\MessageOutbox',
   'modal' => 'App\\Http\\Livewire\\Modal',
-  'modal.add-module-modal' => 'App\\Http\\Livewire\\Modal\\AddModuleModal',
-  'modal.add-specialization-modal' => 'App\\Http\\Livewire\\Modal\\AddSpecializationModal',
   'modal.alert-modal' => 'App\\Http\\Livewire\\Modal\\AlertModal',
   'modal.bootstrap-modal' => 'App\\Http\\Livewire\\Modal\\BootstrapModal',
   'modal.branch-modal' => 'App\\Http\\Livewire\\Modal\\BranchModal',
@@ -37,7 +35,11 @@
   'modal.courseselect-modal' => 'App\\Http\\Livewire\\Modal\\CourseselectModal',
   'modal.editcollection-modal' => 'App\\Http\\Livewire\\Modal\\EditcollectionModal',
   'modal.review-modal' => 'App\\Http\\Livewire\\Modal\\ReviewModal',
+
   'modal.select-way-modal' => 'App\\Http\\Livewire\\Modal\\SelectWayModal',
+  'modal.add-module-modal' => 'App\\Http\\Livewire\\Modal\\AddModuleModal',
+  'modal.add-specialization-modal' => 'App\\Http\\Livewire\\Modal\\AddSpecializationModal',
+
   'modal.translateapp-modal' => 'App\\Http\\Livewire\\Modal\\TranslateappModal',
   'modal.translatematerial-modal' => 'App\\Http\\Livewire\\Modal\\TranslatematerialModal',
   'modal.universityedit-modal' => 'App\\Http\\Livewire\\Modal\\UniversityeditModal',

@@ -103,6 +103,6 @@ class AddSpecializationModal extends Component
     }
     public function render()
     {
-        return view('livewire.modal.addspec-modal');
+        return view('livewire.modal.add-specialization-modal');
     }
 }
