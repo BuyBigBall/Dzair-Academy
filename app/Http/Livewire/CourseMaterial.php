@@ -8,8 +8,8 @@ use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
 use Livewire\WithFileUploads;
-use App\Models\MaterialLanguage;
-use App\Models\Material;
+use App\Models\CourseLanguage;
+use App\Models\Course;
 use App\Models\Collection;
 use App\Models\CollectionItem;
 use Illuminate\Support\Facades\Auth;
@@ -173,7 +173,7 @@ class CourseMaterial extends Component
         // dd( $validatedData );
         // dd($file_extension);
         // dd(GetFile_Type( $file_extension));
-        $course_material = Material::create(
+        $course_material = Course::create(
                     [
                         'specialization_id' => $this->specialization,
                         'level'             => $this->level,
@@ -195,7 +195,7 @@ class CourseMaterial extends Component
                     ]);
         $new_course_Material_id = $course_material->id;
         
-        $materal_language = MaterialLanguage::create([
+        $materal_language = CourselLanguage::create([
                         'material_id'      => $new_course_Material_id,
                         'language'         => lang(),
                         'created_by'       => Auth::id(),

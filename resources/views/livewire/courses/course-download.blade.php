@@ -150,7 +150,9 @@
                                                 <button wire:click="download" class="btn btn-primary w-200">{{ translate('Download') }}</button>
                                                 <button type="button" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
                                             </div>
-                                            <div class="col-md-3 d-flex"></div>
+                                            <div class="col-md-3 d-flex align-items-center text-dark">
+                                                <span><a>review to this</a></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

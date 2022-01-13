@@ -62,7 +62,7 @@ class BranchManagement extends Component
             if( $this->path_level==2) $dbtable = Faculty::find($del_id);
             if( $this->path_level==3) $dbtable = Specialization::find($del_id);
             if( $this->path_level==4) $dbtable = Module::find($del_id);
-            if( $this->path_level==5) $dbtable = Material::find($del_id);
+            if( $this->path_level==5) $dbtable = Course::find($del_id);
             
             if(  $dbtable!=null )
             {
@@ -174,7 +174,7 @@ class BranchManagement extends Component
             return $this->updatedSpecialization($this->specialization);
         }
         $this->path_level = $this->const_path_level['material'];
-        $this->const_path_name = translate("Edit Material");
+        $this->const_path_name = translate("Edit Course");
         $cols =  "   materials.id as id" 
                 ." , MIN(materials.title) as strkey"."" 
                 ." , GROUP_CONCAT(IF(language='en', material_languages.title, '') SEPARATOR  '') as en "
@@ -196,7 +196,7 @@ class BranchManagement extends Component
             $limit = Cookie::get("perPage");
         }
 
-        $query = \App\Models\Material::selectRaw( DB::raw($cols) )
+        $query = \App\Models\Course::selectRaw( DB::raw($cols) )
                 ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
                 ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')
                 ->leftJoin('faculties' , 'faculties.id', '=', 'materials.faculty_id')

@@ -101,7 +101,7 @@
         </div>
     </div>
 </div>
-<!-- Translate Material Modal -->
+<!-- Translate Course Modal -->
 @livewire('modal.translateapp-modal')
 
 </main>

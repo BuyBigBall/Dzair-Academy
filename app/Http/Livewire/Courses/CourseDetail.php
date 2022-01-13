@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Courses;
 use Livewire\Component;
-use App\Models\Material;
+use App\Models\Course;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
@@ -38,8 +38,8 @@ class CourseDetail extends Component
     public function mount($id) {
 
         $this->pid = intval($id);
-        $this->material = $mat = Material::find($id);
-        $this->material_laanguage = $mat_lang = Material::find($id)->lang()->where('language', lang())->first();
+        $this->material = $mat = Course::find($id);
+        $this->material_laanguage = $mat_lang = Course::find($id)->lang()->where('language', lang())->first();
         
         $this->password = $mat->protected;
         $this->protected = !empty($mat->protected);

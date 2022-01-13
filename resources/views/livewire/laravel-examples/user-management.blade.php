@@ -116,6 +116,6 @@ function deleteUser(del_id)
     window.livewire.emit('deleteUser', del_id);
 }
 </script>
-<!-- Translate Material Modal -->
+<!-- Translate Course Modal -->
 @livewire('modal.useredit-modal')
 

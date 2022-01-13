@@ -7,7 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Translate;
 use Illuminate\Http\Request;
-use App\Models\MaterialLanguage;
+use App\Models\CourseLanguage;
 use Illuminate\Support\Facades\DB;
 
 class TranslateappModal extends Component

@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="mat_title" class="form-control-label">{{translate('Material Title')}}</label>
+                                            <label for="mat_title" class="form-control-label">{{translate('Course Title')}}</label>
                                             <div class="">
                                                 <input wire:model="mat_title" readonly="true" class="form-control" type="text" placeholder="Title" id="mat_title">
                                             </div>
@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="mat_description" class="form-control-label">{{translate('Material Description')}}</label>
+                                            <label for="mat_description" class="form-control-label">{{translate('Course Description')}}</label>
                                             <div class="">
                                                 <textarea wire:model="mat_description" readonly="true" 
                                                     class="form-control" placeholder="Description" 

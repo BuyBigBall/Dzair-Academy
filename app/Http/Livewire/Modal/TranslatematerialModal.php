@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Modal;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Material;
+use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Models\MaterialLanguage;
+use App\Models\CourseLanguage;
 use Illuminate\Support\Facades\DB;
 
 class TranslatematerialModal extends Component
@@ -57,7 +57,7 @@ class TranslatematerialModal extends Component
             ." , GROUP_CONCAT(IF(language='ar', material_languages.id, '') SEPARATOR  '') as lang_id_ar "
             ." , GROUP_CONCAT(IF(language='ar', material_languages.title, '') SEPARATOR  '') as lang_title_ar "
             ." , GROUP_CONCAT(IF(language='ar', material_languages.description, '') SEPARATOR  '') as lang_desc_ar ";
-        $query = \App\Models\Material::selectRaw(DB::raw($cols))
+        $query = \App\Models\Course::selectRaw(DB::raw($cols))
                 ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
                 ->where([ 
                     'materials.id'=>$this->material_id
@@ -89,7 +89,7 @@ class TranslatematerialModal extends Component
             return Redirect('login');
         }
 
-        $coll = Material::where([ 
+        $coll = Course::where([ 
                 'id'=>$this->material_id
             ])->first();
         if($coll!=null)
@@ -100,7 +100,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_en]);
             }else if(empty($this->lang_id_en)){
                 if(!empty($this->lang_title_en) && !empty($this->lang_desc_en)){
-                    $materal_language = MaterialLanguage::create([
+                    $materal_language = CourselLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'en',
                         'created_by'       => Auth::id(),
@@ -117,7 +117,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_fr]);
             }else if(empty($this->lang_id_fr)){
                 if(!empty($this->lang_title_fr) && !empty($this->lang_desc_fr)){
-                    $materal_language = MaterialLanguage::create([
+                    $materal_language = CourselLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'fr',
                         'created_by'       => Auth::id(),
@@ -134,7 +134,7 @@ class TranslatematerialModal extends Component
                     ->update(['title' => $this->lang_title_ar]);
             }else if(empty($this->lang_id_ar)){
                 if(!empty($this->lang_title_ar) && !empty($this->lang_desc_ar)){
-                    $materal_language = MaterialLanguage::create([
+                    $materal_language = CourselLanguage::create([
                         'material_id'      => $this->material_id,
                         'language'         => 'ar',
                         'created_by'       => Auth::id(),

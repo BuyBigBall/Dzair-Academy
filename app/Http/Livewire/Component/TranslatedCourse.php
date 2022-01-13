@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use Livewire\Component;
-use App\Models\MaterialLanguage;
+use App\Models\CourseLanguage;
 use Illuminate\Http\Request;
 class TranslatedCourse extends Component
 {
@@ -14,17 +14,17 @@ class TranslatedCourse extends Component
 
     public function mount()
     {
-        $query = MaterialLanguage::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
+        $query = CourselLanguage::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
         $this->new_courses = $query->get();
     }
     public function agree_translate($course_id)
     {
-        MaterialLanguage::find($course_id)->update(['status'=>1]);
+        CourselLanguage::find($course_id)->update(['status'=>1]);
         $this->mount();
     }
     // public function delete_course($course_id)
     // {
-    //     MaterialLanguage::find($course_id)->delete();
+    //     CourselLanguage::find($course_id)->delete();
     //     $this->mount();
     // }
 

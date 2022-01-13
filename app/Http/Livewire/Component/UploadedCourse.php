@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use Livewire\Component;
-use App\Models\Material;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 
@@ -19,23 +19,23 @@ class UploadedCourse extends Component
 
     public function mount()
     {
-        $query = Material::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
+        $query = Course::where('status', '0')->orderBy('created_at', 'DESC')->limit(10);
         $this->new_courses = $query->get();
     }
     public function agree_course($course_id)
     {
-        Material::find($course_id)->update(['status'=>1]);
+        Course::find($course_id)->update(['status'=>1]);
         $this->mount();
     }
     public function delete_course($course_id)
     {
-        Material::find($course_id)->delete();
+        Course::find($course_id)->delete();
         $this->mount();
     }
 
     public function download($course_id)
     {
-        $mat = Material::find($course_id);
+        $mat = Course::find($course_id);
         $myFile = storage_path('app/'. $mat->filepath);
     	$headers = []; //['Content-Type: application/pdf'];
     	$newName = $mat->filename;

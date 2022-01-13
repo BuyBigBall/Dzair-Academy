@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MaterialLanguage extends Model
+class CourseLanguage extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'material_id'
+          'course_id'
         , 'language' 
         , 'created_by'
         , 'updated_by'
@@ -25,6 +25,6 @@ class MaterialLanguage extends Model
         return $this->hasOne('App\Models\User','id','updated_by');
     }
     public function mat() {
-        return $this->belongsTo('App\Models\Material', 'material_id');
+        return $this->belongsTo('App\Models\Course', 'course_id');
     }
 }

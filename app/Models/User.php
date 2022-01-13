@@ -45,7 +45,7 @@ class User extends Authenticatable
     ];
 
     public function userRelations() {
-        return $this->hasMany([['App\Models\Material','created_by'], ['App\Models\Material','updated_by']]);
+        return $this->hasMany([['App\Models\Course','created_by'], ['App\Models\Course','updated_by']]);
     }
     public function course() {
         return $this->hasOne('App\Models\Module', 'id', 'course_id');

@@ -4,7 +4,7 @@
         <a class="navbar-brand m-0" href="/">
             <h4 class="ms-1 font-weight-bold text-success text-gradient">
                 <!-- {{__('pages.siteName')}} -->
-                <img src="assets/img/SITE.png" style="width:182px; height:33px;" />
+                <img src="{{asset('assets/img/SITE.png')}}" style="width:182px; height:33px;" />
             </h4>
         </a>
     </div>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\University;
 use Illuminate\Http\Request;
-use App\Models\MaterialLanguage;
+use App\Models\CourseLanguage;
 use Illuminate\Support\Facades\DB;
 
 class UsereditModal extends Component

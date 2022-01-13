@@ -5,7 +5,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
-use App\Models\Material;
+use App\Models\Course;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
@@ -157,7 +157,7 @@ class SearchResult extends Component
             $searchCond[] = ['created_by', Auth::id()];
         }
         $searchCond[] = ['status', 1];
-        $query = Material::where($searchCond)
+        $query = Course::where($searchCond)
                          ->where( function($query1) use ($searchWord) {
                              if(count($searchWord)>0)
                              $query1->orWhere([$searchWord[0]])->orWhere([$searchWord[1]]);

@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\LaravelExamples;
 use App\Models\User;
 use App\Models\CollectionShare;
-use App\Models\Material;
-use App\Models\MaterialLanguage;
+use App\Models\Course;
+use App\Models\CourseLanguage;
 use App\Models\University;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -91,9 +91,9 @@ class UserProfile extends Component
             $this->user_photo= "no-image";
         }
         if(!empty($request->user_id))
-            $this->myUpload_courses = Material::where('created_by', $this->user->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
+            $this->myUpload_courses = Course::where('created_by', $this->user->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
         else
-            $this->myUpload_courses = Material::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
+            $this->myUpload_courses = Course::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
         
         
         $this->university_options = University::orderBy('mainname')->get();//->toArray();
@@ -133,8 +133,8 @@ class UserProfile extends Component
     public function delete_course($course_id)
     {
         $this->tabs_id = 3;
-        MaterialLanguage::where('material_id', $course_id)->delete();
-        Material::find($course_id)->delete();
+        CourselLanguage::where('material_id', $course_id)->delete();
+        Course::find($course_id)->delete();
         $this->mount();
     }
     public function render()

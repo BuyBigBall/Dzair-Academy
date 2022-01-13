@@ -5,7 +5,7 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
-use App\Models\Material;
+use App\Models\Course;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;

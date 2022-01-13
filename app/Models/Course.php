@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Material extends Model
+class Course extends Model
 {
     use HasFactory;
 
@@ -36,7 +36,7 @@ class Material extends Model
         return $this->hasOne('App\Models\User','id','updated_by');
     }
     public function lang() {
-        return $this->hasMany(MaterialLanguage::class);
+        return $this->hasMany(CourselLanguage::class);
     }
     public function course() {
         return $this->belongsTo('App\Models\Module', 'course_id');

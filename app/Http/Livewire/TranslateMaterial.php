@@ -5,8 +5,8 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
-use App\Models\Material;
-use App\Models\MaterialLanguage;
+use App\Models\Course;
+use App\Models\CourseLanguage;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
@@ -99,7 +99,7 @@ class TranslateMaterial extends Component
         $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');
 
-        if(!empty($request->id) && !empty($course = Material::find($request->id)) )
+        if(!empty($request->id) && !empty($course = Course::find($request->id)) )
         {
             $this->edit_id = $request->id;
             $this->training = $course->training_id;
@@ -172,7 +172,7 @@ class TranslateMaterial extends Component
         $cols .= " , MIN(modules." . lang(). ") as course";
         $cols .= " , MIN(materials.level) as level";
         //dd($cols);
-        $query = \App\Models\Material::selectRaw(
+        $query = \App\Models\Course::selectRaw(
             DB::raw($cols))
                 ->leftJoin('material_languages' , 'materials.id', '=', 'material_languages.material_id')
                 ->leftJoin('trainings' , 'trainings.id', '=', 'materials.training_id')

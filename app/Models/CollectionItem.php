@@ -15,6 +15,6 @@ class CollectionItem extends Model
         return $this->belongsTo('App\Models\Collection','collection_id');
     }
     public function mat() {
-        return $this->hasOne('App\Models\Material','id','material_id');
+        return $this->hasOne('App\Models\Course','id','material_id');
     }
 }
