@@ -35,17 +35,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="flex-wrap:nowrap;overflow:auto;">
+                <div class="modal-body" style="flex-wrap:nowrap;overflow:auto; padding:0.5rem 1rem;">
                     <div class="col-md-12">
                         <div class="row">
                             <!-- main title and description -->
-                            <div class="col-md-5 col-sm-6">
+                            <div class="col-md-5 col-sm-6 d-flex d-none">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="mat_title" class="form-control-label">{{translate('Course Title')}}</label>
+                                        <div class="form-group" style="margin-bottom:0.4rem;">
+                                            <label for="mat_title" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('Course Title')}}</label>
                                             <div class="">
-                                                <input wire:model="mat_title" readonly="true" class="form-control" type="text" placeholder="Title" id="mat_title">
+                                                <input wire:model="mat_title" readonly="true" 
+                                                    style="padding:0.2rem 0.7rem;"
+                                                    class="form-control" type="text" placeholder="Title" id="mat_title">
                                             </div>
                                         </div>
                                     </div>
@@ -53,9 +57,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="mat_description" class="form-control-label">{{translate('Course Description')}}</label>
+                                            <label for="mat_description" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('Course Description')}}</label>
                                             <div class="">
                                                 <textarea wire:model="mat_description" readonly="true" 
+                                                    style="padding:0.2rem 0.7rem;"
                                                     class="form-control" placeholder="Description" 
                                                     row=6 id="mat_description"></textarea>
                                             </div>
@@ -67,15 +74,20 @@
 
                             <!-- translated title and description -->
                             <!-- style='height:60vh; overflow-y:scroll;' -->
-                            <div class="col-md-7 col-sm-6"   >
+                            <div class="col-md-12 col-sm-12"   >
                                 <!-- English -->
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="lang_title_en" class="form-control-label">{{translate('EN Title')}}</label>
+                                        <div class="form-group" style="margin-bottom:0.4rem;">
+                                            <label for="lang_title_en" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('EN Title')}}</label>
                                             <div class="">
-                                                <input wire:model="lang_id_en" class="form-control" type="hidden" id="lang_id_en">
-                                                <input wire:model="lang_title_en" class="form-control" type="text" placeholder="Title" id="lang_title_en">
+                                                <input wire:model="lang_id_en" 
+                                                    type="hidden" id="lang_id_en">
+                                                <input wire:model="lang_title_en" 
+                                                    style="padding:0.2rem 0.7rem;"
+                                                    class="form-control" type="text" placeholder="Title" id="lang_title_en">
                                             </div>
                                         </div>
                                     </div>
@@ -83,9 +95,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="lang_desc_en" class="form-control-label">{{translate('EN Description')}}</label>
+                                            <label for="lang_desc_en" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('EN Description')}}</label>
                                             <div class="">
-                                                <textarea wire:model="lang_desc_en" class="form-control" placeholder="Description" row=3 id="lang_desc_en"></textarea>
+                                                <textarea wire:model="lang_desc_en" 
+                                                    style="padding:0.2rem 0.7rem;"
+                                                    class="form-control" placeholder="Description" row=3 id="lang_desc_en"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -93,11 +109,15 @@
                                 <!-- Franch -->
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="lang_title_fr" class="form-control-label">{{translate('FR Title')}}</label>
+                                        <div class="form-group" style="margin-bottom:0.4rem;">
+                                            <label for="lang_title_fr" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('FR Title')}}</label>
                                             <div class="">
-                                                <input wire:model="lang_id_fr" class="form-control" type="hidden" id="lang_id_fr">
-                                                <input wire:model="lang_title_fr" class="form-control" type="text" placeholder="Title" id="lang_title_fr">
+                                                <input wire:model="lang_id_fr" type="hidden" id="lang_id_fr">
+                                                <input wire:model="lang_title_fr" 
+                                                    style="padding:0.2rem 0.7rem;"
+                                                    class="form-control" type="text" placeholder="Title" id="lang_title_fr">
                                             </div>
                                         </div>
                                     </div>
@@ -105,9 +125,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="lang_desc_fr" class="form-control-label">{{translate('FR Description')}}</label>
+                                            <label for="lang_desc_fr" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('FR Description')}}</label>
                                             <div class="">
-                                            <textarea wire:model="lang_desc_fr" class="form-control" placeholder="Description" row=3 id="lang_desc_fr"></textarea>
+                                            <textarea wire:model="lang_desc_fr" 
+                                                style="padding:0.2rem 0.7rem;"
+                                                class="form-control" placeholder="Description" row=3 id="lang_desc_fr"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -115,11 +139,15 @@
                                 <!-- Arbic -->
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="lang_title_ar" class="form-control-label">{{translate('AR Title')}}</label>
+                                        <div class="form-group" style="margin-bottom:0.4rem;">
+                                            <label for="lang_title_ar" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('AR Title')}}</label>
                                             <div class="">
-                                                <input wire:model="lang_id_ar" class="form-control" type="hidden" id="lang_id_ar">
-                                                <input wire:model="lang_title_ar" class="form-control" type="text" placeholder="Title" id="lang_title_ar">
+                                                <input wire:model="lang_id_ar" type="hidden" id="lang_id_ar">
+                                                <input wire:model="lang_title_ar" 
+                                                    style="padding:0.2rem 0.7rem;"
+                                                    class="form-control" type="text" placeholder="Title" id="lang_title_ar">
                                             </div>
                                         </div>
                                     </div>
@@ -127,9 +155,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="lang_desc_ar" class="form-control-label">{{translate('AR Description')}}</label>
+                                            <label for="lang_desc_ar" 
+                                                style="margin-bottom:0.2rem;"
+                                                class="form-control-label">{{translate('AR Description')}}</label>
                                             <div class="">
-                                            <textarea wire:model="lang_desc_ar" class="form-control" placeholder="Description" row=3 id="lang_desc_ar"></textarea>
+                                            <textarea wire:model="lang_desc_ar" 
+                                                style="padding:0.2rem 0.7rem;"
+                                                class="form-control" placeholder="Description" row=3 id="lang_desc_ar"></textarea>
                                             </div>
                                         </div>
                                     </div>

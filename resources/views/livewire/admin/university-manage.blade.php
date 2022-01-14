@@ -20,9 +20,7 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                                @include('livewire.pagination')
-                            </div>
+                    
                     <hr />
                     <div class="table-responsive p-0" style='min-height:50vh'>
                         <table class="align-items-center mb-0 w-100">
@@ -90,7 +88,11 @@
                             </tbody>
                         </table>
                     </div>
+                   
                     <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-1">
+                                @include('livewire.pagination')
+                            </div>
                     <div class="d-flex justify-content-center align-items-center">
                                 <button class="btn btn-primary"
                                     wire:click.prevent="$emit('ShowUniversity', 0)"

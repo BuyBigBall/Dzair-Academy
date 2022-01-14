@@ -32,6 +32,7 @@ class Settings extends Component
     }
 
     protected $rules = [
+        'toemail'     => 'required',
         'email'     => 'required',
         'password'  => 'required',
         'ads1_link' => 'required',
@@ -44,6 +45,7 @@ class Settings extends Component
         'ads3_file'  => 'max:'.MAX_COURSE_UPLOAD_SIZE,     // max 1M=1024K
     ];
     protected $messages = [
+        'toemail.required'   => ('The administrator email cannot be empty.'),
         'password.required'  => ('The password cannot be empty.'),
         'ads1_link.required' => ('The link address for advertise 1 cannot be empty.'),
         'ads2_link.required' => ('The link address for advertise 2 cannot be empty.'),
@@ -60,6 +62,7 @@ class Settings extends Component
 
     public function mount(Request $request, $flag=null)
     {
+        $this->toemail = env('MAIL_TO_ADDRESS');
         $this->email = env('MAIL_USERNAME');
         $this->password = env('MAIL_PASSWORD');
         $this->ads1_file = env('ADVERTISE1_URL');
@@ -149,7 +152,8 @@ class Settings extends Component
         # setEnv
         setEnv('MAIL_USERNAME',   $this->email );
         setEnv('MAIL_PASSWORD',   $this->password );
-
+        setEnv('MAIL_TO_ADDRESS',   $this->toemail );
+        
         setEnv('ADVERTISE1_LINK', $this->ads1_link );
         setEnv('ADVERTISE2_LINK', $this->ads2_link );
         setEnv('ADVERTISE3_LINK', $this->ads3_link );

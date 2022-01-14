@@ -19,6 +19,8 @@ use App\Http\Livewire\TranslateMaterial;
 use App\Http\Livewire\Settings;
 use App\Http\Livewire\Welcome;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Contact;
+use App\Http\Livewire\Aboutus;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
@@ -104,5 +106,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/university-manage',    UniversityManage::class)->name('university-manage');
 });
 
+Route::post('/save-contact',            Contact::class)->name('save-contact');
+Route::get('/aboutus',                  Aboutus::class)->name('aboutus');
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 Route::get('storage/{group}/{file}', 'App\Http\Controllers\SearchController@index')->name('storage');

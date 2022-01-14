@@ -46,15 +46,24 @@
             {{ translate('© 2022 - 2021 Dzair Academy - All Rights Reserved.')}}
         </div>
         <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">
-            <li class=""><a href="#" class="text-white">{{translate('About Us')}}</a></li>
+            <li class=""><a href="{{ route('aboutus') }}" target="_blank" class="text-white">{{ translate('About Us') }}</a></li>
             <!-- <li class=""><a href="#">How We Work</a></li> -->
             <li class="px-3">
                 <a class="cursor-pointer text-white"
-                    data-bs-toggle="modal" data-bs-target="#dialogContactus"
+                    onclick="showContact()"
                     >{{ translate('Contact Us') }}</a>
+                    <!-- data-bs-toggle="modal" data-bs-target="#dialogContactus" -->
+                    <!-- wire:click.prevent="$emit('WireAlert', '')" -->
             </li>
             <!-- <li class=""><a href="#" class="text-white">Privacy Policy</a></li> -->
         </ul>
         
     </div>
 </footer>
+<script>
+    function showContact()
+    {
+        //console.log("showContactus");
+        window.livewire.emit('showContactus', '');
+    }
+</script>

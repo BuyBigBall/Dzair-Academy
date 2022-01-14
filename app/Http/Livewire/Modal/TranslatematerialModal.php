@@ -64,17 +64,34 @@ class TranslatematerialModal extends Component
                 ])
                 ->groupBy('courses.id');
         $mat_data = $query->first();
+        
         $this->mat_title = $mat_data->mat_title;
         $this->mat_description = $mat_data->mat_description;
+        
         $this->lang_id_en = $mat_data->lang_id_en;
         $this->lang_title_en = $mat_data->lang_title_en;
         $this->lang_desc_en = $mat_data->lang_desc_en;
+        
         $this->lang_id_fr = $mat_data->lang_id_fr;
         $this->lang_title_fr = $mat_data->lang_title_fr;
         $this->lang_desc_fr = $mat_data->lang_desc_fr;
+
         $this->lang_id_ar = $mat_data->lang_id_ar;
         $this->lang_title_ar = $mat_data->lang_title_ar;
         $this->lang_desc_ar = $mat_data->lang_desc_ar;
+
+        if(empty($this->lang_title_en) && empty($this->lang_title_fr) && empty($this->lang_title_ar))
+        {
+            if(env('DEFAULT_LANGUAGE', 'en')=='en')           $this->lang_title_en = $this->mat_title;
+            if(env('DEFAULT_LANGUAGE', 'en')=='fr')           $this->lang_title_fr = $this->mat_title;
+            if(env('DEFAULT_LANGUAGE', 'en')=='ar')           $this->lang_title_ar = $this->mat_title;
+        }
+        if(empty($this->lang_title_en) && empty($this->lang_title_fr) && empty($this->lang_title_ar))
+        {
+            if(env('DEFAULT_LANGUAGE', 'en')=='en')           $this->lang_desc_en = $this->mat_description;
+            if(env('DEFAULT_LANGUAGE', 'en')=='fr')           $this->lang_desc_fr = $this->mat_description;
+            if(env('DEFAULT_LANGUAGE', 'en')=='ar')           $this->lang_desc_ar = $this->mat_description;
+        }
         $this->show = true;
     }
 

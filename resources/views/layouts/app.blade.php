@@ -3,9 +3,12 @@
     
     {{-- If the user is authenticated --}}
     @auth()
-        {{-- If the user is authenticated on the static sign up or the sign up page --}}
-        @if (in_array(request()->route()->getName(),['sign-up'],))
-            @include('layouts.navbars.guest.sign-up')
+        @if (in_array(request()->route()->getName(),['aboutus'],))
+            {{ $slot }}
+            
+            {{-- If the user is authenticated on the static sign up or the sign up page --}}
+        @elseif (in_array(request()->route()->getName(),['sign-up'],))
+            @include('layouts.navbars.guest.login')
             {{ $slot }}
             @include('layouts.footers.guest.description')
 
@@ -16,6 +19,7 @@
             @include('layouts.footers.guest.description')
 
         @elseif (in_array(request()->route()->getName(),['welcome'],))
+            @include('layouts.navbars.guest.login')
             {{ $slot }}
             @include('layouts.footers.guest.description')
             
@@ -25,11 +29,7 @@
             {{ $slot }}
             <main>
                 <div class="container-fluid">
-                    <!-- <div class="row">
-                        <div class="col-md-12"> -->
-                            @include('layouts.footers.auth.footer')
-                        <!-- </div>
-                    </div> -->
+                    @include('layouts.footers.auth.footer')
                 </div>
             </main>
         @endif
@@ -37,8 +37,10 @@
 
     {{-- If the user is not authenticated (if the user is a guest) --}}
     @guest
+    @if (in_array(request()->route()->getName(),['aboutus'],))
+        {{ $slot }}
     {{-- If the user is on the login page --}}
-    @if (!auth()->check() && in_array(request()->route()->getName(),['login'],))
+    @elseif (!auth()->check() && in_array(request()->route()->getName(),['login'],))
         @include('layouts.navbars.guest.login')
         {{ $slot }}
         <div class="mt-5">
@@ -48,12 +50,13 @@
     {{-- If the user is on the sign up page --}}
     @elseif (!auth()->check() && in_array(request()->route()->getName(),['sign-up'],))
         <div>
-            @include('layouts.navbars.guest.sign-up')
+            @include('layouts.navbars.guest.login')
             {{ $slot }}
             @include('layouts.footers.guest.description')
         </div>
 
     @elseif (in_array(request()->route()->getName(),['welcome'],))
+        @include('layouts.navbars.guest.login')
         {{ $slot }}
         @include('layouts.footers.guest.description')
 
@@ -66,5 +69,9 @@
 
     @endif
     @endguest
-
+    
+    <!-- @ in clude('layouts.footers.contactus ') -->
+    
+    @livewire('modal.contactus')
+    
 </x-layouts.base>

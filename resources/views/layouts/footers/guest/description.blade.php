@@ -46,13 +46,13 @@
                 {{ translate('© 2022 - 2021 Dzair Academy - All Rights Reserved.')}}
             </div>
             <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">
-                <li class=""><a href="#" class="text-white">{{ translate('About Us') }}</a></li>
+                <li class=""><a  href="{{ route('aboutus') }}" target="_blank"  class="text-white">{{ translate('About Us') }}</a></li>
                 <!-- <li class=""><a href="#">How We Work</a></li> -->
                 <li class="px-3">
                     <a class="cursor-pointer text-white"
                     data-bs-toggle="modal" data-bs-target="#dialogContactus"
+                        wire:click.prevent="$emit('showContactus', '')"
                         >{{ translate('Contact Us') }}</a>
-                        <!-- wire:click.prevent="$emit('showContactus', '')" -->
                 </li>
                 <!-- <li class=""><a href="#" 
                         class="text-white">Privacy Policy</a></li> -->
@@ -60,48 +60,3 @@
         </div>
     </div>
 </footer>
-<div class="modal fade"
-            id="dialogContactus" tabindex="-1" role="dialog" 
-            aria-labelledby="exampleModalLabel" 
-            aria-hidden="true">
-        <div class="modal-dialog" role="document" style="margin-top:6rem;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ translate('Contact Us') }}</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="contact" action="" method="post">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 py-1">
-                                <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 py-1">
-                                <fieldset>
-                                    <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12 py-1">
-                                <fieldset>
-                                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12 py-1">
-                                <fieldset>
-                                    <button type="submit" class="btn btn-primary">{{ translate('Send Message') }}</button>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
-            </div>
-        </div>
-    </div>
