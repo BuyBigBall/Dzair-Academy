@@ -12,8 +12,8 @@
                             <p>{{translate('Users can search courses and download and report.')}}
                                 <a href="#" class="text-success">{{translate('Multiple-page version')}}</a> 
                                 {{translate('with different HTML pages are also available.')}}</p>
-                            <a href="{{route('search')}}" class="filled-button">{{translate('search')}}</a>
-			    <a href="{{route('course-material')}}" class="filled-button">Upload</a>
+                            <a href="{{route('search')}}" class="filled-button">{{ translate('search') }}</a>
+			    <a href="{{route('course-material')}}" class="filled-button"> {{ translate('upload') }} </a>
                         </div>
                     </div>
                 </div>

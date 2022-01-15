@@ -31,7 +31,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 py-1">
                                 <fieldset>
                                     <input name="name" 
-                                        wire:model="fulllname"
+                                        wire:model="fullname"
                                         type="text" class="form-control" id="name" placeholder="Full Name" required="">
                                 </fieldset>
                             </div>

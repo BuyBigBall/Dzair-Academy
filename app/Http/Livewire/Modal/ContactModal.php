@@ -22,8 +22,8 @@ class ContactModal extends Component
     }
     public function save() {
         $mailRequest["recipent"] = [env('MAIL_TO_ADDRESS')];
-        $mailRequest["subject"] = sprintf( translate( "Dzair deliver's client send a message %s. <br> email address is %s"), $this->fullname, $this->email );
-        $mailRequest["content"] = [ "content" => $this->msg ];
+        $mailRequest["subject"] = sprintf( translate( "Dzair Academy has been received the message from the client %s."), $this->fullname );
+        $mailRequest["content"] = [ "content" => $this->msg . '<br>' . sprintf( 'the client\'s email address is %s', $this->email) ];
         $mailRequest["template"] = "contactus";
         sendMail($mailRequest);
         $this->show = false;
