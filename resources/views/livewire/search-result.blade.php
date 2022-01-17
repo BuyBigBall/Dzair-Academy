@@ -35,7 +35,9 @@
                          <span class="text-dark ">{{ count($row->lang)>0 ? $row->lang[0]->title : $row->title }} </span> </a>
                        <div class="mt-2 mb-1 d-flex align-items-center justify-content-between">
                          <div class="d-flex flex-sm-row flex-column  align-items-sm-center align-items-start gx-3">
-                           <span class="text-xs pe-3">By: <a href="#" class="text-dark font-weight-bold">{{ $row->creator->name }}</a></span>
+                           <span class="text-xs pe-3">By: 
+                             <a href="{{route('user-profile', 'user_id='.$row->created_by)}}" class="text-dark font-weight-bold">{{ $row->creator->name }}</a>
+                            </span>
                            <span class="text-xs pe-3">Date: <span class="text-dark font-weight-bold">{{ date('d/m/Y', strtotime($row->created_at)) }}</span></span>
                            <span class="text-xs pe-3">File: <span class="text-dark font-weight-bold"> {{ filetypename($row->filetype) }} {{size($row->filesize)}}</span></span>
                          </div>
@@ -47,13 +49,13 @@
                             <i class="cursor-pointer fas fa-bookmark text-secondary"></i>
                           </span>
                           @endif
-                          <span data-bs-toggle="tooltip" 
+                          <!-- <span data-bs-toggle="tooltip" 
                               data-bs-original-title="{{translate('view this user profile.')}}" 
                               class="mx-1" data-id='{{$row->id}}' 
                               onclick="javascript:location.href='{{route('user-profile', 'user_id='.$row->created_by)}}'"
                               >
                             <i class="cursor-pointer fa fa-user text-secondary"></i>
-                          </span>
+                          </span> -->
                          </div>
                        </div>
                      </div>

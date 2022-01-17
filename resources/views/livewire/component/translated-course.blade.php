@@ -15,7 +15,9 @@
                     <div class="row align-items-end">
                         <div class="col-8 d-flex flex-column">
                             <span class="mb-2 text-xs">Translator Name: <span
-                                    class="text-dark font-weight-bold ms-2">{{$course->creator->name}}</span></span>
+                                    class="text-dark font-weight-bold ms-2">
+                                    <a href="{{route('user-profile', 'user_id='.$course->created_by)}}">
+                                    {{$course->creator->name}}</a></span></span>
                             <span class="mb-2 text-xs">Email Address: <span
                                     class="text-dark ms-2 font-weight-bold">{{$course->creator->email}}</span></span>
                             <span class="text-xs">Translated date: <span

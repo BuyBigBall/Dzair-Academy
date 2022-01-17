@@ -10,7 +10,11 @@
                 <div class="col-8 d-flex flex-column">
                     <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
                     <span class="mb-2 text-xs">{{ translate('User Name:' )}}<span
-                            class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
+                            class="text-dark font-weight-bold ms-2">
+                            <a href="{{route('user-profile', 'user_id='.$course->created_by)}}">
+                            {{ $course->creator->name }}
+                            </a>
+                        </span></span>
                     <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
                             class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
                     <span class="mb-2 text-xs">{{ translate('University:' )}} <span

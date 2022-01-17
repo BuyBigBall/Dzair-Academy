@@ -21,6 +21,7 @@ use App\Http\Livewire\Welcome;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Aboutus;
+use App\Http\Livewire\HowToUse;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
@@ -108,5 +109,6 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/save-contact',            Contact::class)->name('save-contact');
 Route::get('/aboutus',                  Aboutus::class)->name('aboutus');
+Route::get('/how-to-use',               HowToUse::class)->name('how-to-use');
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 Route::get('storage/{group}/{file}', 'App\Http\Controllers\SearchController@index')->name('storage');

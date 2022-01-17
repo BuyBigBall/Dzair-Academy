@@ -11,7 +11,11 @@
                 </div>
             </div>
             <div class="card-body pt-0 p-3 text-center">
-                <h6 class="text-center mb-0">{{ $user->name }}</h6>
+                <h6 class="text-center mb-0">
+                    <a href="{{route('user-profile', 'user_id='.$user->id)}}">
+                    {{ $user->name }}
+                    </a>
+                </h6>
                 <!-- <span class="text-xs">Belong Interactive</span> -->
                 <hr class="horizontal dark my-3">
                 <div class="d-flex justify-content-center">

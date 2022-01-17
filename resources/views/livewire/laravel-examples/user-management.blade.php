@@ -68,7 +68,9 @@
                                         </div>
                                     </td>
                                     <td class="text-center pe-1 ">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->username}}</p>
+                                        <a href="{{route('user-profile', 'user_id='.$user->idx)}}" class="text-dark font-weight-bold">
+                                            <p class="text-xs font-weight-bold mb-0">{{$user->username}}</p>
+                                        </a>
                                     </td>
                                     <td class="text-center pe-1" style="overflow-wrap: anywhere;">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->useremail}}</p>

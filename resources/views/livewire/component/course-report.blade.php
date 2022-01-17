@@ -21,10 +21,20 @@
                     </div>
                     <div class="row align-items-end">
                         <div class="col-8 d-flex flex-column">
-                            <span class="mb-2 text-xs">{{ translate('Course Creator:') }} <span
-                                    class="text-dark font-weight-bold ms-2">{{$course_reports->course->creator->name}}</span></span>
+                            <span class="mb-2 text-xs">
+                                {{ translate('Course Creator:') }} 
+                                <span
+                                    class="text-dark font-weight-bold ms-2">
+                                    <a href="{{route('user-profile', 'user_id='.$course_reports->course->created_by)}}">
+                                    {{$course_reports->course->creator->name}}
+                                    </a>
+                                </span></span>
                             <span class="mb-2 text-xs">{{ translate('Course Repoter:') }} <span
-                                class="text-dark font-weight-bold ms-2">{{$course_reports->user->name}}</span></span>
+                                class="text-dark font-weight-bold ms-2">
+                                <a href="{{route('user-profile', 'user_id='.$course_reports->user->id)}}">
+                                    {{$course_reports->user->name}}
+                                </a>
+                                </span></span>
                             <span class="mb-2 text-xs">{{ translate('Repoter Email:') }} <span
                                     class="text-dark ms-2 font-weight-bold">{{$course_reports->user->email}}</span></span>
                             <span class="text-xs">{{ translate('Reported date:') }} <span

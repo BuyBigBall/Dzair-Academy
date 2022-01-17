@@ -1562,7 +1562,7 @@
   <body class="u-body">
 <header class="u-clearfix u-header u-header" id="sec-b0b2" style="height:100px;">
   <div class="u-clearfix u-sheet u-valign-middle u-sheet-1" >
-        <a href="#" class="u-image u-logo u-image-1">
+        <a href="{{ route('welcome') }}" class="u-image u-logo u-image-1">
           <img src="{{ asset('assets/img/SITE.png') }}" 
             style="width:200px; height:35px;"
             class="u-logo-image u-logo-image-1">

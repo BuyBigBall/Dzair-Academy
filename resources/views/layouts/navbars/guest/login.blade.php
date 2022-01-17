@@ -9,7 +9,7 @@
             <a class="navbar-brand " href="/">
                 <h2 class="text-success text-gradient">
                     <!-- Dzair Academy -->
-                    <img src="{{asset(assets/img/SITE.png)}}" style="width:182px; height:33px;" />
+                    <img src="{{asset('assets/img/SITE.png')}}" style="width:182px; height:33px;" />
                 </h2>
             </a>
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

@@ -73,11 +73,13 @@
                                                     <div class="form-group">
                                                         <label for="user-name" class="form-control-label">{{ translate('Full Name') }}</label>
                                                         <div class="@error('user_name')border border-danger rounded-3 @enderror">
-                                                            <input wire:model="user_name" class="form-control" 
-                                                                @if($user->id!=Auth::id())
-                                                                    readonly
-                                                                @endif
-                                                                type="text" placeholder="{{translate('Name')}}" id="user-name">
+                                                            @if($user->id!=Auth::id())
+                                                                <span wire:model="user_name" class="form-control" 
+                                                                    type="text" placeholder="{{translate('Name')}}" id="user-name" >{{ $user_name }}</span>
+                                                            @else
+                                                                <input wire:model="user_name" class="form-control" 
+                                                                    type="text" placeholder="{{translate('Name')}}" id="user-name" />
+                                                            @endif
                                                         </div>
                                                         @error('user_name') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
@@ -88,16 +90,23 @@
                                                     <div class="form-group">
                                                         <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
                                                         <div class="@error('user_email') border border-danger rounded-3 @enderror">
+                                                        @if( $user->id==Auth::id())
                                                             <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
                                                                 @endif
-                                                                >
+                                                                 />
+                                                        @else
+                                                            <span wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
+                                                                    >{{ $user_email }}</span>
+                                                        @endif
                                                         </div>
+                                                        @if($user->id==Auth::id())
                                                         <label class="form-control-label cursor-pointer" >
                                                             <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_email" value='1' /></span>
                                                             <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
                                                         </label>
+                                                        @endif
                                                         @error('user_email') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
@@ -108,16 +117,24 @@
                                                     <div class="form-group">
                                                         <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
                                                         <div class="@error('user_phone') border border-danger rounded-3 @enderror">
+                                                        @if( $user->id==Auth::id())
                                                             <input wire:model="user_phone" class="form-control" 
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
                                                                 @endif
-                                                                type="tel" placeholder="40770888444" id="phone">
+                                                                type="tel" placeholder="40770888444" id="phone" />
+                                                        @else
+                                                            <span wire:model="user_phone" class="form-control" 
+                                                                    type="tel" placeholder="40770888444" id="phone" >
+                                                                    {{ $user_phone }}</span>
+                                                        @endif
                                                         </div>
+                                                        @if($user->id==Auth::id())
                                                         <label class="form-control-label cursor-pointer" >
                                                             <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_phone" value='1' /></span>
                                                             <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
                                                         </label>
+                                                        @endif
                                                         @error('user_phone') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
                                                 </div>
@@ -127,12 +144,23 @@
                                                     <div class="form-group">
                                                         <label for="user_location" class="form-control-label">{{ translate('University')}}</label>
                                                         <div class="@error('user_location') border border-danger rounded-3 @enderror">
+                                                        @if( $user->id==Auth::id())
                                                             <select wire:model="user_university" class="form-control" name="user_university" id="user_university">
                                                             <option value=''>{{translate('Select the university')}}</option>
                                                             @foreach($university_options as $univ)
                                                             <option value="{{ $univ->id }}">{{ ln($univ)??$univ->mainname }}</option>
                                                             @endforeach
                                                             </select>
+                                                        @else
+                                                        <span wire:model="user_university" class="form-control" name="user_university" id="user_university"
+                                                            style='min-height:1.3rem;'
+                                                            >
+                                                            {{ !empty($user->university) ? $user->university->mainname : '' }}
+                                                            <!-- @foreach($university_options as $univ)
+                                                                {{ $user_university==$univ->id ? (ln($univ)??$univ->mainname) : '' }}
+                                                            @endforeach -->
+                                                            </span>
+                                                        @endif
                                                         </div>
                                                         @error('user_location') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                                     </div>
@@ -142,11 +170,20 @@
                                             <div class="form-group">
                                                 <label for="about">{{ 'About Me' }}</label>
                                                 <div class="@error('user_about')border border-danger rounded-3 @enderror">
+                                                @if( $user->id==Auth::id())
                                                     <textarea wire:model="user_about" class="form-control" id="about" rows="3" 
                                                         @if($user->id!=Auth::id())
                                                             readonly
                                                         @endif
                                                         placeholder="{{translate('Say something about yourself')}}"></textarea>
+                                                @else
+                                                <span wire:model="user_about" class="form-control" id="about" rows="3" 
+                                                        placeholder="{{translate('Say something about yourself')}}"
+                                                        style='min-height:4rem;'
+                                                        >
+                                                        {{  $user_about  }}
+                                                    </span>
+                                                @endif
                                                 </div>
                                                 @error('user_about') <div class="text-danger">{{ translate($message) }}</div> @enderror
                                             </div>

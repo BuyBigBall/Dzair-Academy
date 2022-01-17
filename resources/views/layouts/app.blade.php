@@ -3,7 +3,7 @@
     
     {{-- If the user is authenticated --}}
     @auth()
-        @if (in_array(request()->route()->getName(),['aboutus'],))
+        @if (in_array(request()->route()->getName(),['aboutus', 'how-to-use'],))
             {{ $slot }}
             
             {{-- If the user is authenticated on the static sign up or the sign up page --}}
@@ -37,7 +37,7 @@
 
     {{-- If the user is not authenticated (if the user is a guest) --}}
     @guest
-    @if (in_array(request()->route()->getName(),['aboutus'],))
+    @if (in_array(request()->route()->getName(),['aboutus', 'how-to-use'],))
         {{ $slot }}
     {{-- If the user is on the login page --}}
     @elseif (!auth()->check() && in_array(request()->route()->getName(),['login'],))
