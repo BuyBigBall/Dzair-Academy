@@ -63,7 +63,7 @@
                                             </div>    
                                             @if($user->id!=Auth::id())
                                             <div class="row pt-3 text-primary">
-                                                <a href="{{ route('send-message', $user_name) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
+                                                <a href="{{ route('send-message', ) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
                                             </div>    
                                             @endif
                                         </div>   

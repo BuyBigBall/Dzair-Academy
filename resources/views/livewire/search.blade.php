@@ -21,6 +21,12 @@
                      </div>
              </div>
            </div>
+           <style>
+             .click-here
+             {
+               color:#000099;
+             }
+           </style>
            <div class="card-body p-3">
              <div class="row">
               <div class="col-md-9 col-sm-12 p-3">
@@ -28,7 +34,7 @@
                 find your modules specialization, please
                 help us by providing more information
                 about them so other members can submit
-                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" >click here to add them</a>
+                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >click here</a> to add them
                 </div>
               </div>
              <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">

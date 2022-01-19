@@ -144,16 +144,16 @@
                                         </div>
                                         @endif
 
-                                        <div class="row d-flex">
-                                            <div class="col-md-3 d-flex"></div>
-                                            <div class="col-md-6 d-flex justify-content-around">
-                                                <button wire:click="download" class="btn btn-primary w-200">{{ translate('Download') }}</button>
-                                                <button type="button" class="btn btn-secondary w-200" onclick='history.back(-1);'>{{ translate('Back') }}</button>
+                                        <div class="row align-items-center justify-content-start  py-2 ps-0 text-dark mb-2 text-xs" style="background-color:#C2EDCE;">
+                                                <span><a wire:click.prevent="$emit('reportModalview', {{$pid}}, '{{url()->current()}}')" 
+                                                    class="cursor-pointer" >{{ translate('Report for this') }}</a></span>
                                             </div>
-                                            <div class="col-md-3 col-sm-12 d-flex align-items-center justify-content-center text-dark">
-                                                @if( !empty(Auth::id()) )
-                                                <span><a wire:click.prevent="$emit('reviewModal', {{$pid}})" class="{{ !empty($review) ? 'text-muted' : '' }} cursor-pointer" >report for this</a></span>
-                                                @endif
+                                        <div class="row d-flex">
+                                            <div class="col-md-12 d-flex justify-content-around">
+                                                <div class="col-md-6 d-flex justify-content-center">
+                                                    <button wire:click="download" class="btn btn-primary w-200 mx-2">{{ translate('Download') }}</button>
+                                                    <button type="button" class="btn btn-secondary w-200 mx-2" onclick='history.back(-1);'>{{ translate('Back') }}</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -178,5 +178,4 @@
         </div>
     </div>
 </main>
-
-@livewire('modal.review-modal')
+@livewire('modal.report-modal')

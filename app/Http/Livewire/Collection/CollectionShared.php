@@ -56,7 +56,7 @@ class CollectionShared extends Component
         Cookie::queue("perPage", $value, env('COOKIE_EXPIRE_SECONDS'));
     }
     
-      public function render()
+    public function render()
     {
         $searchWord = [];
         if( ! empty($this->word))                  

@@ -37,7 +37,7 @@ class CourseDetail extends Component
     public $level_string;
     public $module_string;
 
-    public $review;
+    public $first_report;
 
     public function mount($id) {
 
@@ -106,7 +106,7 @@ class CourseDetail extends Component
     
         if(!empty(Auth::id()))
         {
-            $this->review = Report::where(["user_id"=>Auth::id(), "course_id"=>$this->pid])->first();
+            $this->first_report = Report::where(["user_id"=>Auth::id(), "course_id"=>$this->pid])->first();
         }
         
         return view('livewire.courses.course-download');

@@ -17,6 +17,12 @@
                             </div>
                         </div>
                     </div>
+                    <style>
+                         .click-here
+                        {
+                            color:#000099;
+                        }
+                    </style>
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-md-9 col-sm-12 p-2 p-sm-1 mx-3 mx-sm-1">
@@ -24,7 +30,7 @@
                                 find your modules specialization, please
                                 help us by providing more information
                                 about them so other members can submit
-                                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" >click here to add them</a>
+                                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >click here</a> to add them
                                 </div>
                             </div>
                         <form wire:submit.prevent="savecourse" methos="post">

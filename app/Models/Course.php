@@ -51,7 +51,7 @@ class Course extends Model
     public function specialization() {
         return $this->belongsTo('App\Models\Specialization', 'specialization_id');
     }
-    public function reviews() {
+    public function reports() {
         return $this->hasMany(Report::class);
     }
 }

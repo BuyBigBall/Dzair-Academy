@@ -66,7 +66,7 @@
                                             </td>
                                             <?php $surl = $row->shre_url; ?>
                                             <td class="text-center">
-                                                <a href="{{ route('send-message', !empty($row->coll) && !empty($row->coll->owner) ? $row->coll->owner->email : '')}}" data-bs-toggle="tooltip" 
+                                                <a href="{{ route('send-message'}}?username={{ !empty($row->coll) && !empty($row->coll->owner) ? $row->coll->owner->name : '')}}" data-bs-toggle="tooltip" 
                                                     data-bs-original-title="{{translate('send message')}}"
                                                     class="mx-1" >
                                                     <i class="cursor-pointer fa fa-copy text-secondary"></i>

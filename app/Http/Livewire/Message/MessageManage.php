@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Message;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class MessageManage extends Component
 {
@@ -24,8 +25,14 @@ class MessageManage extends Component
         'username.max'  => ('The user name could not be over 40 characters.'),
         'username.min'  => ('The user name cannot be less 3 characters.'),
     ];
-    public function mount($username=null) 
+    public function mount(Request $request, $username=null) 
     {
+        if(!empty($request->username))
+            $username = $request->username;
+        // if(!!empty($username))
+        // {
+        //     return redirect(route("/"));
+        // }
         $this->username = urldecode( $username );
     }
     public function sendMessage() { 
@@ -50,8 +57,8 @@ class MessageManage extends Component
                 $this->emit('WireAlert', translate('could not be found a user to send the message'), '');
                 //$this->showFailureNotification = true;
             }
-        $this->email = '';
-        $this->username = '';
+        //$this->email = '';
+        //$this->username = '';
         $this->content = '';
     }
     public function render()

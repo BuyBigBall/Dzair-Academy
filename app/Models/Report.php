@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'course_id' ,'marks' , 'content', 'verified_at'];
+    protected $fillable = ['user_id', 'course_id' ,'marks' , 'content', 'link', 'verified_at'];
 
     public function user() {
         return $this->hasOne('App\Models\User','id','user_id');
