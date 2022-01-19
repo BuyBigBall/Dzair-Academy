@@ -1,4 +1,10 @@
 <div class="body-content" style="margin-top:{{ empty(Auth::id()) ? '6rem !important;' : '' }}"  >
+    <style>
+        .form-control
+        {
+            min-height:2.5rem;
+        }
+    </style>
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
@@ -26,6 +32,7 @@
                     </button>
                 </div>
                 @endif
+                
                 <div class="row">
                     <div class="col-md-9">
                         <nav>
@@ -63,7 +70,7 @@
                                             </div>    
                                             @if( !empty(Auth::id()) && $user->id!=Auth::id())
                                             <div class="row pt-3 text-primary">
-                                                <a href="{{ route('send-message', ) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
+                                                <a href="{{ route('send-message') }}?username={{ $user->name }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
                                             </div>    
                                             @endif
                                         </div>   
@@ -157,7 +164,6 @@
                                                             </select>
                                                         @else
                                                         <span wire:model="user_university" class="form-control" name="user_university" id="user_university"
-                                                            style='min-height:1.3rem;'
                                                             >
                                                             {{ !empty($user->university) ? $user->university->mainname : '' }}
                                                             <!-- @foreach($university_options as $univ)
