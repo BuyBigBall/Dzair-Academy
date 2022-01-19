@@ -60,7 +60,12 @@
         {{ $slot }}
         @include('layouts.footers.guest.description')
 
-    @elseif (in_array(request()->route()->getName(),['search-result', 'search', 'course-download']))
+    @elseif (in_array(request()->route()->getName(),
+                [   'search-result', 
+                    'search', 
+                    'course-download',
+                    'user-profile'
+                    ]))
         @include('layouts.navbars.guest.login')
         <div class="mt-5">
         {{ $slot }}

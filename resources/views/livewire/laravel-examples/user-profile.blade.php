@@ -1,4 +1,4 @@
-<div class="body-content">
+<div class="body-content" style="margin-top:{{ empty(Auth::id()) ? '6rem !important;' : '' }}"  >
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
@@ -61,7 +61,7 @@
                                                 <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
                                                 @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
                                             </div>    
-                                            @if($user->id!=Auth::id())
+                                            @if( !empty(Auth::id()) && $user->id!=Auth::id())
                                             <div class="row pt-3 text-primary">
                                                 <a href="{{ route('send-message', ) }}" class="text-xs">{{ sprintf(translate( 'Send Message to %s'), $user->name) }}</a>
                                             </div>    
@@ -85,12 +85,14 @@
                                                     </div>
                                                 </div>
 
-                                                @if( ($user->id==Auth::id()) || (Auth::user()->role=='admin') || !empty($hide_email) )
+                                                @if( !empty(Auth::id()) && ($user->id==Auth::id() || Auth::user()->role=='admin') 
+                                                    || 
+                                                     !!empty($hide_email) )
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user-email" class="form-control-label">{{ translate('Email') }}</label>
                                                         <div class="@error('user_email') border border-danger rounded-3 @enderror">
-                                                        @if( $user->id==Auth::id())
+                                                        @if( !empty(Auth::id()) && $user->id==Auth::id())
                                                             <input wire:model="user_email" class="form-control" type="email" placeholder="you@example.com" id="user-email"
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
@@ -101,7 +103,7 @@
                                                                     >{{ $user_email }}</span>
                                                         @endif
                                                         </div>
-                                                        @if($user->id==Auth::id())
+                                                        @if(!empty(Auth::id()) && $user->id==Auth::id())
                                                         <label class="form-control-label cursor-pointer" >
                                                             <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_email" value='1' /></span>
                                                             <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
@@ -112,12 +114,14 @@
                                                 </div>
                                                 @endif
                                            
-                                                @if( ($user->id==Auth::id()) || (Auth::user()->role=='admin') || !empty($hide_phone) )
+                                                @if( !empty(Auth::id()) && ($user->id==Auth::id() || Auth::user()->role=='admin') 
+                                                    || 
+                                                    !!empty($hide_phone) )
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="user_phone" class="form-control-label">{{ translate('Phone') }}</label>
                                                         <div class="@error('user_phone') border border-danger rounded-3 @enderror">
-                                                        @if( $user->id==Auth::id())
+                                                        @if( !empty(Auth::id()) && $user->id==Auth::id())
                                                             <input wire:model="user_phone" class="form-control" 
                                                                 @if($user->id!=Auth::id())
                                                                     readonly
@@ -129,7 +133,7 @@
                                                                     {{ $user_phone }}</span>
                                                         @endif
                                                         </div>
-                                                        @if($user->id==Auth::id())
+                                                        @if( !empty(Auth::id()) && $user->id==Auth::id())
                                                         <label class="form-control-label cursor-pointer" >
                                                             <span class="mt-1 px-1"><input type="checkbox" wire:model="hide_phone" value='1' /></span>
                                                             <span class="mt-1 px-1">{{ translate('Hide to another users.') }}</span>
@@ -144,7 +148,7 @@
                                                     <div class="form-group">
                                                         <label for="user_location" class="form-control-label">{{ translate('University')}}</label>
                                                         <div class="@error('user_location') border border-danger rounded-3 @enderror">
-                                                        @if( $user->id==Auth::id())
+                                                        @if( !empty(Auth::id()) && $user->id==Auth::id())
                                                             <select wire:model="user_university" class="form-control" name="user_university" id="user_university">
                                                             <option value=''>{{translate('Select the university')}}</option>
                                                             @foreach($university_options as $univ)
@@ -170,7 +174,7 @@
                                             <div class="form-group">
                                                 <label for="about">{{ 'About Me' }}</label>
                                                 <div class="@error('user_about')border border-danger rounded-3 @enderror">
-                                                @if( $user->id==Auth::id())
+                                                @if( !empty(Auth::id()) && $user->id==Auth::id())
                                                     <textarea wire:model="user_about" class="form-control" id="about" rows="3" 
                                                         @if($user->id!=Auth::id())
                                                             readonly
@@ -189,7 +193,7 @@
                                             </div>
 
                                             <div class="d-flex justify-content-center">
-                                                @if($user->id==Auth::id())
+                                                @if(!empty(Auth::id()) && $user->id==Auth::id())
                                                     <button type="submit" class="btn btn-primary mt-4 mb-4 mx-2">{{ translate('Save') }}</button>
                                                 @else
                                                     <!-- <a href="{{ route('collection-shared-forme') }}" class="btn btn-secondary mt-4 mb-4 mx-2">{{ translate('Shared Collections for me') }}</a> -->
@@ -202,7 +206,7 @@
                                 </form>
                             </div>
 
-                            @if($user->id==Auth::id())
+                            @if(!empty(Auth::id()) && $user->id==Auth::id())
                             <!-- #################### shared for Me ######################## -->
                             <div class="tab-pane fade {{$tabs_id == 2 ? 'show active' : ''}} pt-3" id="share" role="tabpanel" aria-labelledby="share-tab">
                                 <table class="align-items-center mb-0 w-100" id='all-course-table'>
@@ -283,11 +287,13 @@
                                                     >
                                                     <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
                                                 </a>
+                                                @if( !empty(Auth::id()) && Auth::user()->role=='admin' )
                                                 <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection share')}}"
                                                         class="mx-1" 
                                                         data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', stopShareCollection, '{{$row->id}}')">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -312,11 +318,17 @@
                                                 <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
                                                 <span class="mb-2 text-xs">{{ translate('User Name:' )}}<span
                                                         class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
+                                            @if( !empty(Auth::id()) && ($user->id==Auth::id() || Auth::user()->role=='admin') 
+                                                || 
+                                                !!empty($hide_email) )
                                                 <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
                                                         class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
+                                            @endif
                                                 <span class="mb-2 text-xs">{{ translate('University:' )}} <span
                                                         class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
                                             </div>
+
+                                            @if( !empty(Auth::id()) && Auth::user()->role=='admin' )
                                             <div class="col-4 text-right">
                                                 <a class="btn btn-link text-danger text-gradient px-1 mb-0" 
                                                     onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
@@ -328,6 +340,7 @@
                                                 @endif
                                                 
                                             </div>
+                                            @endif
                                             </div>
                                             <div class="row d-flex align-items-center">
                                             <div class="col-9">

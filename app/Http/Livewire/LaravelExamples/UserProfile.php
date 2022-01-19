@@ -101,7 +101,7 @@ class UserProfile extends Component
         $this->hide_email       = $this->user->hide_email;
         $this->hide_phone       = $this->user->hide_phone;
 
-        if($this->user->photo_agree!=1 && $this->user->id!=Auth::id())
+        if( !!empty(Auth::id()) || $this->user->photo_agree!=1 && $this->user->id!=Auth::id())
         {
             $this->user_photo= "no-image";
         }
@@ -150,12 +150,15 @@ class UserProfile extends Component
         $this->tabs_id = 3;
         CourseLanguage::where('course_id', $course_id)->delete();
         Course::find($course_id)->delete();
-        $this->mount();
+        //$this->mount();
     }
     public function render()
     {
+        
         $query = CollectionShare::where('to_user', Auth::id())
                 ->orderBy('created_at', 'ASC');
+
+        
         $this->search_result = $query->get(); //paginate( $this->perPage );
 
         return view('livewire.laravel-examples.user-profile')->with('pagination', $this->search_result);

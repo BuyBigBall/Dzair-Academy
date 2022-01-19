@@ -98,9 +98,11 @@ class ReportView extends Component
             // $searchWord[] =  ['specializations.en' , 'like' , '%'.$this->word.'%']; 
             // $searchWord[] =  ['specializations.fr' , 'like' , '%'.$this->word.'%']; 
             // $searchWord[] =  ['specializations.ar' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['modules.en' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['modules.fr' , 'like' , '%'.$this->word.'%']; 
-            $searchWord[] =  ['modules.ar' , 'like' , '%'.$this->word.'%']; 
+            // $searchWord[] =  ['modules.en' , 'like' , '%'.$this->word.'%']; 
+            // $searchWord[] =  ['modules.fr' , 'like' , '%'.$this->word.'%']; 
+            // $searchWord[] =  ['modules.ar' , 'like' , '%'.$this->word.'%']; 
+
+            $searchWord[] =  ['reports.link' , 'like' , '%'.$this->word.'%']; 
 
             $searchWord[] =  ['creator.name' , 'like' , '%'.$this->word.'%']; 
             $searchWord[] =  ['creator.email' , 'like' , '%'.$this->word.'%']; 
@@ -116,6 +118,7 @@ class ReportView extends Component
         } 
 
         $cols =  "   reports.id as id" 
+                ." , reports.link       as link"."" 
                 ." , (courses.title)     as title"."" 
                 ." , (reports.content)   as report"."" 
                 ." , (creator.name)      as username"."" 

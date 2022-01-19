@@ -18,7 +18,8 @@ class CourseReport extends Component
 
     public function mount()
     {
-        $query = Report::whereNull('verified_at')->orderBy('created_at', 'DESC');
+        //$query = Report::whereNull('verified_at')->orderBy('created_at', 'DESC');
+        $query = Report::limit(10)->orderBy('created_at', 'DESC');
         $this->reports = $query->get();
     }
     public function agree_report($report_id)

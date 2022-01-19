@@ -68,6 +68,8 @@ Route::get ('/search-result', SearchResult::class)->name('search-result');
 Route::get('/search',               Search::class)->name('search');
 Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
 
+Route::get('/user-profile',         UserProfile::class)->name('user-profile');
+
 //Route::view('search-result','livewire.search-result'); 
 // Route::get('/search-result', function() {
 //     return view('livewire.search-result');
@@ -84,7 +86,6 @@ Route::middleware('auth')->group(function () {
     # <----------- end 
     Route::get('/dashboard',            Dashboard::class)->name('dashboard');
     Route::get('/course-material',      CourseMaterial::class)->name('course-material');
-    Route::get('/user-profile',         UserProfile::class)->name('user-profile');
     Route::get('/user-management',      UserManagement::class)->name('user-management');
     Route::get('/branch-management',    BranchManagement::class)->name('branch-management');
     Route::get('/message',              MessageManage::class)->name('message');

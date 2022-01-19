@@ -44,7 +44,7 @@
                                         {{ translate('Level') }}
                                     </th> -->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ translate('Module') }}
+                                        {{ translate('link') }}
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('Course Title') }}
@@ -55,9 +55,9 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('Reported Date') }}
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ translate('Confirmed Date') }}
-                                    </th>
+                                    </th> -->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="min-width:80px;">
                                         {{ translate('Action') }}
                                     </th>
@@ -67,7 +67,7 @@
                                 @foreach($pagination as $report)
                                 <tr>
                                     <td class="text-center pe-1">
-                                        <p class="text-xs font-weight-bold mb-0">{{$report->id}}</p>
+                                        <p class="text-xs font-weight-bold mb-0 px-1">{{$report->id}}</p>
                                     </td>
                                     <!-- <td class="text-center pe-1 ">
                                         <p class="text-xs font-weight-bold mb-0">{{$report->training}}</p>
@@ -82,33 +82,33 @@
                                         <p class="text-xs font-weight-bold mb-0">{{$report->level}}</p>
                                     </td> -->
                                     <td class="text-center pe-1">
-                                        <p class="text-xs font-weight-bold mb-0">{{$report->module}}</p>
+                                        <p class="text-xs font-weight-bold mb-0"><a href="{{$report->link}}" class="text-primary">{{$report->link}}</a></p>
                                     </td>
                                     <td class="text-center pe-1">
                                         <p class="text-xs font-weight-bold mb-0">{{$report->title}}</p>
                                     </td>
                                     <td class="text-center pe-1">
-                                        <p class="text-xs font-weight-bold mb-0">{!! nl2br(substr($report->report,0, 20) ) !!} {{ strlen($report->report)>20 ? "..." : "" }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{!! nl2br($report->report) !!} </p>
                                     </td>
                                     <td class="text-center pe-1">
                                         <span class="text-secondary text-xs font-weight-bold">{{ agotime($report->reported_at)}}</span>
                                     </td>
-                                    <td class="text-center pe-1">
+                                    <!-- <td class="text-center pe-1">
                                         <span class="text-secondary text-xs font-weight-bold">{{ agotime($report->verified_at) }}</span>
-                                    </td>
+                                    </td> -->
                                     <td class="text-center pe-1">
-                                        <a href="#" 
+                                        <!-- <a href="#" 
                                             class="mx-1" data-bs-toggle="tooltip"
                                             data-bs-original-title="agree this report"
                                             wire:click.prevent="$emit('agree_report', '{{$report->id}}')"
                                             >
                                             <i class="fas fa-user-edit text-secondary"></i>
-                                        </a>
+                                        </a> -->
                                         <span 
                                             data-bs-toggle="tooltip"
                                             data-bs-original-title="delete this report"
                                             onclick="ConfirmFunction('{{ translate('Are you sure to delete this report?')}}', delete_report, '{{$report->id}}')">
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                            <i class="cursor-pointer fas fa-trash text-secondary text-xs"></i>
                                         </span>
                                     </td>
                                 </tr>

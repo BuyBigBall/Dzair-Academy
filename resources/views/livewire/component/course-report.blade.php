@@ -10,39 +10,44 @@
             <li class="list-group-item border-0 d-flex p-md-3 p-lg-4 p-2 mb-2 bg-gray-100 border-radius-lg">
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex mb-0 justify-content-between w-100">
+                        <span class="text-sm text-dark ">{{ translate('Course url:') }}</span>
+                        <span class="text-sm text-dark ">
+                            <a class="text-xs" href="{!! $course_reports->link !!}">{!! $course_reports->link !!} </a>
+                        </span>
+                    </div>
+                    <div class="d-flex mb-0 justify-content-between w-100">
                         <span class="text-sm text-dark ">{{ translate('Course Title:') }}</span>
-                        <span class="text-sm  text-secondary">{{$course_reports->course->title}}</span>
+                        <span class="text-sm text-dark">{{$course_reports->course->title}}</span>
                     </div>
                     <div class="d-flex mb-0 justify-content-between w-100">
                         <span class="text-sm text-dark ">{{ translate('Report Content:') }}</span>
-                        <span class="text-sm text-primary">{!! nl2br(substr($course_reports->content,0,20)) !!} 
-                                                {{ strlen($course_reports->content)>20 ? "..." : "" }}
-                        </span>
+                        <span class="text-sm text-primary">{!! nl2br($course_reports->content) !!} </span>
                     </div>
-                    <div class="row align-items-end">
-                        <div class="col-8 d-flex flex-column">
-                            <span class="mb-2 text-xs">
+                    
+                    <div class="d-flex mb-0 justify-content-between w-100">
+                        <!-- <div class="col-8 d-flex flex-column w-100 justify-content-between"> -->
+                            <!-- <span class="mb-2 text-xs">
                                 {{ translate('Course Creator:') }} 
                                 <span
                                     class="text-dark font-weight-bold ms-2">
                                     <a href="{{route('user-profile', 'user_id='.$course_reports->course->created_by)}}">
                                     {{$course_reports->course->creator->name}}
                                     </a>
-                                </span></span>
-                            <span class="mb-2 text-xs">{{ translate('Course Repoter:') }} <span
+                                </span></span> -->
+                            <!-- <span class="mb-2 text-xs">{{ translate('Course Repoter:') }} <span
                                 class="text-dark font-weight-bold ms-2">
                                 <a href="{{route('user-profile', 'user_id='.$course_reports->user->id)}}">
                                     {{$course_reports->user->name}}
                                 </a>
-                                </span></span>
-                            <span class="mb-2 text-xs">{{ translate('Repoter Email:') }} <span
-                                    class="text-dark ms-2 font-weight-bold">{{$course_reports->user->email}}</span></span>
-                            <span class="text-xs">{{ translate('Reported date:') }} <span
-                                    class="text-dark ms-2 font-weight-bold">{{agotime($course_reports->created_at)}}</span></span>
+                                </span></span> -->
+                            <!-- <span class="mb-2 text-xs">{{ translate('Repoter Email:') }} <span
+                                    class="text-dark ms-2 font-weight-bold">{{$course_reports->user->email}}</span></span> -->
+                            <span class="col-3 text-sm text-dark ">{{ translate('Reported date:') }} </span>
+                            <span class="col-5 text-xs text-dark text-right ms-2 font-weight-bold">{{agotime($course_reports->created_at)}}</span>
 
-                        </div>
+                        <!-- </div> -->
 
-                        <div class="col-4 d-flex">
+                        <!-- <div class="col-4 d-flex">
                             <a class="btn btn-link text-dark px-1 px-md-2 px-lg-3 mb-0" 
                                 onclick="ConfirmFunction('{{ translate('Are you sure delete this report?')}}', delete_report, '{{$course_reports->id}}')"
                                 ><i class="far fa-trash-alt me-2"></i>{{ translate('delete') }}</a>
@@ -50,7 +55,7 @@
                                 onclick="ConfirmFunction('{{ translate('Are you sure?')}}', markAsSeen, '{{$course_reports->id}}')"
                                 ><i
                                     class="fas fa-check text-dark me-2" aria-hidden="true"></i>{{ translate('agree') }}</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </li>
