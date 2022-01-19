@@ -64,7 +64,8 @@
                 [   'search-result', 
                     'search', 
                     'course-download',
-                    'user-profile'
+                    'user-profile',
+                    'collection-shares'
                     ]))
         @include('layouts.navbars.guest.login')
         <div class="mt-5">
@@ -75,6 +76,6 @@
     @endif
     @endguest
     
-    @livewire('modal.contactus')
+    @livewire('modal.contact-modal')
     
 </x-layouts.base>

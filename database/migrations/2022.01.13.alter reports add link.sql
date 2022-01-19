@@ -1,1 +1,0 @@
-ALTER TABLE `reports` ADD COLUMN `link` VARCHAR(255) CHARSET utf8 NOT NULL AFTER `content`; 

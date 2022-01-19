@@ -37,8 +37,9 @@ use App\Http\Livewire\Collection\CollectionShared;
 use App\Http\Livewire\Admin\ReportView;
 use App\Http\Livewire\Admin\UniversityManage;
 
-use App\Http\Controllers\ApplicationController;
+use App\Http\Livewire\Component\MyCourses;
 
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Http\Request;
 
 /*
@@ -69,6 +70,8 @@ Route::get('/search',               Search::class)->name('search');
 Route::get('/course-download/{id}', CourseDetail::class)->name('course-download');
 
 Route::get('/user-profile',         UserProfile::class)->name('user-profile');
+Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
+
 
 //Route::view('search-result','livewire.search-result'); 
 // Route::get('/search-result', function() {
@@ -91,11 +94,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/message',              MessageManage::class)->name('message');
     Route::get('/send-message',         MessageManage::class)->name('send-message');
     
+    Route::get('/my-courses',           MyCourses::class)->name('my-courses');
     Route::get('/collection',           CollectionManage::class)->name('collection');
     Route::get('/collection-shared',    CollectionShared::class)->name('collection-shared-forme');
-
     Route::get('/collection-files/{id}',        CollectionFiles::class)->name('collection-files');
-    Route::get('/collection-shares/{sharekey}', CollectionFiles::class)->name('collection-shares');
 
     Route::get('/translate',            Translate::class)->name('translate');
     Route::get('/translate-course',     TranslateMaterial::class)->name('translate-course');

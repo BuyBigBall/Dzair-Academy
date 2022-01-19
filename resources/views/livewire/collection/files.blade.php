@@ -1,4 +1,4 @@
-<main class="body-content">
+<main class="body-content" style="margin-top:{{ empty(Auth::id()) ? '6rem !important;' : '' }}" >
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-12">

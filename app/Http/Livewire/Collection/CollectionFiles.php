@@ -26,7 +26,7 @@ class CollectionFiles extends Component
 
     public function __construct()
     {
-        if(Auth::user()==null)                              redirect(route('login'));
+        //if(Auth::user()==null)                              redirect(route('login'));
         parent::__construct();
     }
 
@@ -48,11 +48,13 @@ class CollectionFiles extends Component
         if($this->current_route=='collection-files')
         {
             if(!!empty( ( $coll = Collection::find($id) ) ))    $id = null;
-            if($coll->user_id!=Auth::id())        
-            {
-                $coll_share = CollectionShare::where('collection_id', $id)->where('to_user', Auth::id())->first();
-                if( !!empty($coll_share) )                $id = null;
-            }              
+
+            // if(!empty(Auth::id()))          # if registerd user
+            // if( $coll->user_id!=Auth::id())        
+            // {
+            //     $coll_share = CollectionShare::where('collection_id', $id)->where('to_user', Auth::id())->first();
+            //     if( !!empty($coll_share) )                $id = null;
+            // }              
         }
 
         if($this->current_route=='collection-shares')
@@ -63,6 +65,7 @@ class CollectionFiles extends Component
             else if( !!empty( ( $coll = Collection::where('publish_key', $sharekey)->first() ) ))    $id = null;
             else                            $id=$coll->id;
 
+            if(!empty(Auth::id()))          # if registerd user, add it into the shared-collections-to-me
             if($id!=null && $coll->user_id!=Auth::id())
             {
                 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -98,7 +101,6 @@ class CollectionFiles extends Component
 
         $query = \App\Models\CollectionItem::selectRaw(DB::raw("collection_items.id, collection_items.collection_id, collection_items.course_id, collection_items.created_at"))
                 ->leftjoin('collections', 'collections.id', '=', 'collection_items.collection_id')
-        //        ->where('collections.user_id', Auth::id())
                 ->where('collections.id', $this->collection->id)
                 ->where( function($query1) use ($searchWord) {
                         if(count($searchWord)>0)

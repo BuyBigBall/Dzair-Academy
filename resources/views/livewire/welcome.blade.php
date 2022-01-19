@@ -48,7 +48,9 @@
                         </div>
                     </section> -->
                     </div>
-                    <h3 class="u-custom-font u-font-oswald u-text u-text-palette-4-base u-text-2" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000" style="will-change: contents;">120</h3>
+                    
+                    
+                    <!-- <h3 class="u-custom-font u-font-oswald u-text u-text-palette-4-base u-text-2" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000" style="will-change: contents;">120</h3> -->
 
                 </div>
                 

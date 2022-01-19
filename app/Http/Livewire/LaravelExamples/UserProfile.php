@@ -27,7 +27,6 @@ class UserProfile extends Component
     public $hide_email = 0;
     public $hide_phone = 0;
 
-    public $myUpload_courses;
     public $university_options;
 
     public $showSuccesNotification  = false;
@@ -105,11 +104,6 @@ class UserProfile extends Component
         {
             $this->user_photo= "no-image";
         }
-        if(!empty($request->user_id))
-            $this->myUpload_courses = Course::where('created_by', $this->user->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
-        else
-            $this->myUpload_courses = Course::where('created_by', $this->user->id)->orderBy('created_at', 'DESC')->get();
-        
         
         $this->university_options = University::orderBy('mainname')->get();//->toArray();
 
@@ -154,13 +148,6 @@ class UserProfile extends Component
     }
     public function render()
     {
-        
-        $query = CollectionShare::where('to_user', Auth::id())
-                ->orderBy('created_at', 'ASC');
-
-        
-        $this->search_result = $query->get(); //paginate( $this->perPage );
-
-        return view('livewire.laravel-examples.user-profile')->with('pagination', $this->search_result);
+        return view('livewire.laravel-examples.user-profile');
     }
 }

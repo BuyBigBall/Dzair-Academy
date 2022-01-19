@@ -209,157 +209,14 @@
                             @if(!empty(Auth::id()) && $user->id==Auth::id())
                             <!-- #################### shared for Me ######################## -->
                             <div class="tab-pane fade {{$tabs_id == 2 ? 'show active' : ''}} pt-3" id="share" role="tabpanel" aria-labelledby="share-tab">
-                                <table class="align-items-center mb-0 w-100" id='all-course-table'>
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" >
-                                                {{ translate('ID')}}
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                                {{ translate('User Name')}}
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                                {{ translate('Collection Name')}}
-                                            </th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                {{ translate('Number of Files')}}
-                                            </th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                {{ translate('Added Date')}}
-                                            </th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                {{ translate('Action')}}
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if(count($pagination)<=0)
-                                        <tr>
-                                        <td colspan="20" class="text-xs ps-3 pt-2 text-center">
-                                            {{ translate('no collections shared for me.') }}
-                                        </td>
-                                        </tr>
-                                        @endif
-
-                                        @foreach($pagination as $row)
-                                        <tr>
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0 ">{{$row->id}}</p>
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0">{{$row->coll->owner->name}}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0">{{$row->coll->collection_name}}</p>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                {{ $row->coll->course!=null ? count($row->coll->course) : 0}}</p>
-                                            </td>
-                                            <td class="text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
-                                            </td>
-                                            <?php $skey = $row->publish_key ? $row->publish_key : str_replace('/', '', str_replace('$', '', Illuminate\Support\Facades\Hash::make($row->id))); ?>
-                                            <td class="text-center">
-                                            <span  data-bs-toggle="tooltip" 
-                                                    wire:click="$emit('share_url', '{{$row->id}}', '{{$skey}}')"
-                                                    onclick="shareme( '{{route('collection-shares', $skey )}}' )"
-                                                    data-bs-original-title="{{translate('copy shared url')}}"
-                                                    class="mx-1" >
-                                                    <i class="cursor-pointer fa fa-copy text-secondary"></i>
-                                                </span>
-                                            
-                                                <a  data-bs-toggle="tooltip" 
-                                                    href="{{route('send-message', $row->coll->owner->email)}}"
-                                                    data-bs-original-title="{{translate('send message to this user.')}}"
-                                                    class="mx-1" >
-                                                    <i class="cursor-pointer fa fa-envelope text-secondary"></i>
-                                                </a>
-                                            
-                                                <a href="{{route('collection-files', $row->coll->id)}}" 
-                                                    class="mx-1" 
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-original-title="collection files"
-                                                    >
-                                                    <i class="cursor-pointer fas fa-list-ul text-secondary"></i>
-                                                </a>
-                                                @if( !empty(Auth::id()) && Auth::user()->role=='admin' )
-                                                <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('delete this collection share')}}"
-                                                        class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('Are you sure to delete this collection?')}}', stopShareCollection, '{{$row->id}}')">
-                                                    <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                                </span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>  
-                                <div class="align-items-center justify-content-center mt-5 mb-0 w-100 text-center" >
-                                    <button type="button" class="btn btn-primary" onclick="location.href='{{route('message')}}'">
-                                                    {{ translate("Send Message") }}
-                                                </button>
-                                                </div>
+                                @livewire("component.shared-collection-to-me", ['user_self' => $user])
                             </div>
                             @endif
 
 
                             <!-- #################### My Upload courses ######################## -->
                             <div class="tab-pane fade {{$tabs_id == 3 ? 'show active' : ''}} pt-3" id="upload" role="tabpanel" aria-labelledby="upload-tab">
-                                <ul class="list-group">
-                                    @foreach($myUpload_courses as $course)
-                                    <li class="list-group-item border-0 d-flex  flex-column p-md-3 p-lg-4 p-2 mb-2 bg-gray-100 border-radius-lg">
-                                        <div class="row">
-                                            <div class="col-8 d-flex flex-column">
-                                                <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
-                                                <span class="mb-2 text-xs">{{ translate('User Name:' )}}<span
-                                                        class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span></span>
-                                            @if( !empty(Auth::id()) && ($user->id==Auth::id() || Auth::user()->role=='admin') 
-                                                || 
-                                                !!empty($hide_email) )
-                                                <span class="mb-2 text-xs">{{ translate('Email Address:' )}} <span
-                                                        class="text-dark ms-2 font-weight-bold">{{ $course->creator->email }}</span></span>
-                                            @endif
-                                                <span class="mb-2 text-xs">{{ translate('University:' )}} <span
-                                                        class="text-dark ms-2 font-weight-bold">{{ $course->creator->location }}</span></span>
-                                            </div>
-
-                                            @if( !empty(Auth::id()) && Auth::user()->role=='admin' )
-                                            <div class="col-4 text-right">
-                                                <a class="btn btn-link text-danger text-gradient px-1 mb-0" 
-                                                    onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
-                                                            href="javascript:;"><i
-                                                        class="far fa-trash-alt me-2"></i>Delete</a>
-                                                @if($course->status==0)
-                                                <br>
-                                                <span class="text-info">waiting for approval</span>
-                                                @endif
-                                                
-                                            </div>
-                                            @endif
-                                            </div>
-                                            <div class="row d-flex align-items-center">
-                                            <div class="col-9">
-                                                <span class="mb-2 text-xs">File: <span
-                                                        class="text-dark font-weight-bold me-3">{{ filetypename($course->filetype) }}</span></span>
-                                                <span class="mb-2 text-xs">size: <span
-                                                        class="text-dark me-3 font-weight-bold">{{size($course->filesize)}}</span></span>
-                                                <span class="mb-2 text-xs">uploaded date: <span
-                                                        class="text-dark me-3 font-weight-bold"> {{ agotime($course->created_at) }}</span></span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <div class="align-items-center justify-content-center mt-5 mb-0 w-100 text-center" >
-                                    <button type="button" class="btn btn-primary" onclick="location.href='{{route('course-material')}}'">
-                                                    {{ translate("Uplaod File") }}
-                                                </button>
-                                                </div>
+                                @livewire("component.my-courses", ['user_self' => $user])
                             </div>
                         </div>
                     </div>
@@ -388,13 +245,6 @@
 </script>
 
 <script>
-    function shareme(share_url)
-    {
-        document.getElementById("copy_sharekey").value=share_url;
-        document.getElementById("copy_sharekey").select();
-        document.execCommand('copy');
-        alert("you can share this collection as following url: \r\n" + document.getElementById("copy_sharekey").value);
-    }
         
     function stopShareCollection(del_id)
     {
