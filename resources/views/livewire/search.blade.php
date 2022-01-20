@@ -14,11 +14,8 @@
                  @endif
                </div>
                <div class="col-md-8 col-sm-6 p-1 d-none d-md-block" style='min-height:60px;'>
-                 <a href="{{ env('ADVERTISE1_LINK') }}">
-                   <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                      class="w-100"
-                     /></a>
-                     </div>
+                {!! $ads1contents !!}
+                </div>
              </div>
            </div>
            <style>
@@ -187,11 +184,7 @@
                    </div>
                  </div>
                  <div class="col-md-3 d-none d-lg-block">
-                    <a href="{{ env('ADVERTISE3_LINK') }}">
-                      <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                          class="w-100"
-                        />
-                    </a>
+                    {!! $ads3contents !!}
                  </div>
                </div>
              </form>

@@ -61,7 +61,40 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div wire:ignore class="form-group">
+                                <label for="ads1_file" class="form-control-label">{{ translate('top advertisement') }}</label>
+                                <div class="">
+                                    <textarea wire:model='ads1contents' class="form-control" 
+                                        id="top-adv" name="TopAdv"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div wire:ignore class="form-group">
+                                <label for="ads1_file" class="form-control-label">{{ translate('left advertisement') }}</label>
+                                <div class="" style="min-height:500px;">
+                                    <textarea wire:model='ads2contents' class="form-control" 
+                                        id="left-adv" name="LeftAdv"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div wire:ignore class="form-group">
+                                <label for="ads1_file" class="form-control-label">{{ translate('right advertisement') }}</label>
+                                <div class="" style="min-height:500px;">
+                                    <textarea wire:model='ads3contents'  class="form-control" 
+                                        id="right-adv"
+                                        name="RightAdv"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="ads1_file" class="form-control-label">{{ translate('top advertisement') }}</label>
                                 <div class="">
@@ -78,9 +111,8 @@
                                     @error('ads1_link') <span class="error">{{ translate($message) }}</span> @enderror
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                        </div> -->
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="ads2_file" class="form-control-label">{{ translate('left advertisement') }}</label>
@@ -119,7 +151,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <input type='hidden' id='h1' name='h1' />
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-center py-3">
                             <button class="btn btn-primary btn-sm mb-1" type="submit">{{translate('Save')}}</button>
@@ -132,4 +165,58 @@
     </div>
     </form>
 </div>
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+        // var editor = CKEDITOR.instances['TopAdv'];
+        // console.log(editor);
+        // if (editor) { editor.destroy(true); }
+        
+    $(document).ready(function () {
+        var config = {
+            height : 80,
+            width : 1000,
+            fullPage : true,
+            linkShowAdvancedTab : false,
+            scayt_autoStartup : true,
+            enterMode : Number(2),
+            toolbar : [
+                ['Styles','Bold', 'Italic', 'Underline', '-', 
+                'NumberedList',
+                'BulletedList', 'SpellChecker', '-', 'Undo',
+                'Redo', '-', 'SelectAll', 'NumberedList',
+                'BulletedList','FontSize' ], [ 'UIColor' ] ]
+        };
+        
+        console.log($('.ckeditor').length);
+        //$('#top-adv').ckeditor();
+    
+        const TopAdv_editor = CKEDITOR.replace('TopAdv', {
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height : 100,
+            width : 1000,
+        });
+        const LeftAdv_editor = CKEDITOR.replace('LeftAdv', {
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height : 500,
+        });
+        const RightAdv_editor = CKEDITOR.replace('RightAdv', {
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height : 500,
+        });
+        TopAdv_editor.on('change', function(event){
+                @this.set('ads1contents', event.editor.getData());
+                
+            });
+        // LeftAdv_editor.on('change', function(event){
+        //         @this.set('ads2contents_changed', event.editor.getData());
+        //     });
+        // RightAdv_editor.on('change', function(event){
+        //         @this.set('ads3contents_changed', event.editor.getData());
+        //     });
+    });
+</script>
 </main>

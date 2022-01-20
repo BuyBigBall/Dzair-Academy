@@ -39,6 +39,7 @@ use App\Http\Livewire\Admin\UniversityManage;
 
 use App\Http\Livewire\Component\MyCourses;
 
+use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\ApplicationController;
 use Illuminate\Http\Request;
 
@@ -108,6 +109,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings',             Settings::class)->name('settings');
     Route::get('/report-view',          ReportView::class)->name('report-view');
     Route::get('/university-manage',    UniversityManage::class)->name('university-manage');
+    
+    Route::get('ck-editor',             [CkeditorController::class,'index']);
+    Route::post('ck-editor/imgupload',  [CkeditorController::class,'imgupload'])->name('ckeditor.upload');
+    Route::post('ck-editor/imgupload2',  [CkeditorController::class,'imgupload2'])->name('ckeditor.upload2');
+    Route::post('ck-editor/imgupload3',  [CkeditorController::class,'imgupload3'])->name('ckeditor.upload3');
 });
 
 Route::post('/save-contact',            Contact::class)->name('save-contact');

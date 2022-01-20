@@ -10,18 +10,13 @@
         class="modal-backdrop fade show"
         id="backdrop"
         style="display: @if($show === true)
-                                block
-                        @else
-                                none
-                        @endif;"></div>
+                                    block
+                            @else
+                                    none
+                            @endif;"></div>
     <!-- Modal -->
-    <div
-        class="modal fade @if($show === true) show @endif"
-        style="display: @if($show === true)
-                            block
-                        @else
-                            none
-                        @endif;"
+    <div class="modal fade @if($show === true) show @endif"
+            style="display: @if($show === true) block @else none @endif;" 
         id="translateMateralModal"
         tabindex="-1"
         role="dialog"
