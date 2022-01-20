@@ -211,12 +211,12 @@
                 @this.set('ads1contents', event.editor.getData());
                 
             });
-        // LeftAdv_editor.on('change', function(event){
-        //         @this.set('ads2contents_changed', event.editor.getData());
-        //     });
-        // RightAdv_editor.on('change', function(event){
-        //         @this.set('ads3contents_changed', event.editor.getData());
-        //     });
+        LeftAdv_editor.on('change', function(event){
+                @this.set('ads2contents', event.editor.getData());
+            });
+        RightAdv_editor.on('change', function(event){
+                @this.set('ads3contents', event.editor.getData());
+            });
     });
 </script>
 </main>

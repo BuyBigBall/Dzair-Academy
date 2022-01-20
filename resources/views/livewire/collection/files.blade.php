@@ -9,11 +9,7 @@
                             <h5 class="mb-0">{{ translate('Collection Files') }}</h5>
                         </div>
                         <div class="col-md-9 d-none d-lg-block"  >
-                            <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    class="w-100"
-                                    />
-                                </a>
+                         {!! topAdvertise() !!}
                         </div>
                     </div>
                 </div>
@@ -98,13 +94,11 @@
                         </div>
                         <!-- #################################### -->
                         
-                        <div class="col-lg-3 d-none d-lg-block" >
-                            <a href="{{ env('ADVERTISE3_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    class="w-100"                                    
-                                    />
-                                </a>                                
-                        </div>
+                        <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
+                                </div>
+                            </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">

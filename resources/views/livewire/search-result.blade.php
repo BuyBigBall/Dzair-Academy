@@ -10,11 +10,7 @@
                  <div>Previous filters : {{$filter}} </div>
                </div>
                <div class="col-md-9 col-sm-6 p-1 d-none d-md-block" >
-                      <a href="{{ env('ADVERTISE1_LINK') }}">
-                          <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                              class="w-100"        
-                              />
-                          </a>
+                {!! topAdvertise() !!}
                       </div>
              </div>
            </div>
@@ -79,13 +75,11 @@
                    <button class="btn btn-secondary px-5" onclick="history.back(-1);">{{translate('Back')}}</button>
                  </div>
                </div>
-               <div class="col-md-3 d-none d-lg-block">
-                        <a href="{{ env('ADVERTISE3_LINK') }}">
-                            <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                class="w-100"
-                                />
-                            </a>
-                        </div>
+               <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
+                                </div>
+                            </div>
              </div>
            </div>
 

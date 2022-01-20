@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Translate;
-use App\Models\settings;
+use App\Models\Setting;
 
 use Illuminate\Support\Str;
 use File as fle;
@@ -22,6 +22,42 @@ if( !defined('ARCHIVE_EXTENSIONS')) define('ARCHIVE_EXTENSIONS', [
 if( !defined('MAX_COURSE_UPLOAD_SIZE')) define('MAX_COURSE_UPLOAD_SIZE', 1024);
 //We use this to convert date to new format
 
+function topAdvertise()
+{
+    $objects = Setting::where("key", 'ads1')->get();
+    foreach($objects as $row)
+    {
+        if( empty($ads1contents))     $ads1contents = $row->description;
+        if( $row->value==lang() )   { $ads1contents = $row->description; break;}
+    }
+    
+    if(empty($ads1contents))  $ads1contents = '<img src="'.asset('uploads/' . env('ADVERTISE1_URL')).'"  class="w-100" />';
+    return $ads1contents;
+}
+
+function leftAdvertise()
+{
+    $objects = Setting::where( "key", 'ads2')->get();
+    foreach($objects as $row)
+    {
+        if( empty($ads2contents))     $ads2contents = $row->description;
+        if( $row->value==lang() )   { $ads2contents = $row->description; break;}
+    }
+    if(empty($ads2contents))  $ads2contents = '<img src="'.asset('uploads/' . env('ADVERTISE2_URL')).'"  class="w-100" />';
+    return $ads2contents;
+}
+
+function rightAdvertise()
+{
+    $objects = Setting::where("key", 'ads3')->get();
+    foreach($objects as $row)
+    {
+        if( empty($ads3contents))     $ads3contents = $row->description;
+        if( $row->value==lang() )   { $ads3contents = $row->description; break;}
+    }
+    if(empty($ads3contents))  $ads3contents = '<img src="'.asset('uploads/' . env('ADVERTISE3_URL')).'"  class="w-100" />';
+    return $ads3contents;
+}
 function seo_friendly_url($string){
     $string = str_replace(array('[\', \']'), '', $string);
     $string = preg_replace('/\[.*\]/U', '', $string);

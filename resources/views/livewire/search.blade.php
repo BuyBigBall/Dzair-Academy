@@ -14,7 +14,7 @@
                  @endif
                </div>
                <div class="col-md-8 col-sm-6 p-1 d-none d-md-block" style='min-height:60px;'>
-                {!! $ads1contents !!}
+                {!! topAdvertise() !!}
                 </div>
              </div>
            </div>
@@ -183,9 +183,11 @@
                      </div>
                    </div>
                  </div>
-                 <div class="col-md-3 d-none d-lg-block">
-                    {!! $ads3contents !!}
-                 </div>
+                 <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
+                                </div>
+                            </div>
                </div>
              </form>
            </div>

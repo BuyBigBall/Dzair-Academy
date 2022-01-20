@@ -10,11 +10,7 @@
                             </div>
                             <div class="col-md-8 col-sm-6  text-center p-1" style='display:none;' >
                                 <div style='min-height:60px;'>
-                                <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
-                                    />
-                                </A>                                
+                                 {!! topAdvertise() !!}                            
 
                                 </div>                        
                             </div>
@@ -25,13 +21,8 @@
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-1 row col-12 mx-0">
                             <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block" >
-                                <div class="w-100" style='min-height:50vh;'>
-                                <a href="{{ env('ADVERTISE2_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                    class="w-100"
-                                    />
-                                </A>                                
-
+                                <div class="w-100" style='min-height:50vh;overflow-x: hidden;'>
+                                    {!! leftAdvertise() !!}                              
                                 </div>
                             </div>
 
@@ -93,15 +84,9 @@
                             
                             <!-- #################################### -->
 
-
-                            <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-md-block" >
-                                <div class="w-100" style='min-height:50vh;'>
-                                        <a href="{{ env('ADVERTISE3_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    class="w-100"
-                                    />
-                                </A>                                
-
+                            <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
                                 </div>
                             </div>
                         </div>

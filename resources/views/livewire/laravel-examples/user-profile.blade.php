@@ -14,11 +14,7 @@
                     </div>
                     <div class="col-md-8 col-sm-12 d-none d-md-block">
                         <div style='min-height:60px;'>
-                        <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    class="w-100"
-                                    />
-                                </a>   
+                            {!! topAdvertise() !!}
                         </div>
                     </div>
                 </div>
@@ -227,12 +223,8 @@
                         </div>
                     </div>
                     <div class="col-md-3 d-none d-md-block">
-                        <div style='min-height:50vh;'>
-                            <a href="{{ env('ADVERTISE2_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE2_URL'))}}"
-                                    class="w-100"
-                                    />
-                                </a>                                
+                        <div style='min-height:50vh;overflow-x: hidden;'>
+                            {!! leftAdvertise() !!}                              
                         </div>
                     </div>
                 </div>

@@ -10,11 +10,7 @@
                             </div>
                             <div class="col-md-7 col-sm-6  text-center p-1" style='display:none;' >
                                 <div style='min-height:60px;'>
-                                <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    
-                                    />
-                                </a>                                
+                                    {!! topAdvertise() !!}                             
                                 </div>                        
                             </div>
                             <div class="col-md-1 col-sm-6 d-flex justify-content-start align-items-center" >
@@ -81,13 +77,9 @@
                             </div>
                             <!-- #################################### -->
                             
-                            <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start" >
-                                <div style='min-height:50vh;width:100%;'>
-                                <a href="{{ env('ADVERTISE3_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    
-                                    />
-                                </a>                                
+                            <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
                                 </div>
                             </div>
                         </div>

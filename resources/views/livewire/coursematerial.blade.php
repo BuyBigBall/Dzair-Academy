@@ -9,11 +9,7 @@
                                 <h4 class="title">Course Upload</h4>
                             </div>
                             <div class="col-md-9 col-sm-6 p-1 d-none d-md-block" >
-                            <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    class="w-100"        
-                                    />
-                                </a>
+                                {!! topAdvertise() !!}
                             </div>
                         </div>
                     </div>
@@ -288,12 +284,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 d-none d-lg-block" >
-                                <a href="{{ env('ADVERTISE3_LINK') }}">
-                                    <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                        class="w-100"
-                                        />
-                                    </a>
+                                <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                    <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                        {!! rightAdvertise() !!}
+                                    </div>
                                 </div>
                             </div>
                         </form>

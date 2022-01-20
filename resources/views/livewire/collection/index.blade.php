@@ -10,11 +10,7 @@
                         </div>
                         <div class="col-md-9 col-sm-6 text-center p-1 d-none d-lg-block"  >
                             <div style='min-height:60px;'>
-                            <a href="{{ env('ADVERTISE1_LINK') }}">
-                                <img src="{{ asset('uploads/' . env('ADVERTISE1_URL'))}}"
-                                    class="w-100"   
-                                    />
-                                </a>                                
+                                {!! topAdvertise() !!}                       
                             </div>                        
                         </div>
                     </div>
@@ -108,15 +104,11 @@
                         </div>
                         <!-- #################################### -->
                         
-                        <div class="col-md-3 col-sm-6 text-center d-flex justify-content-start align-items-start d-none d-lg-block" >
-                            <div style='min-height:50vh;width:98%;'>
-                                <a href="{{ env('ADVERTISE3_LINK') }}">
-                                    <img src="{{ asset('uploads/' . env('ADVERTISE3_URL'))}}"
-                                    class="w-100"
-                                        />
-                                    </a>                                
+                        <div class="col-md-3 text-center d-flex justify-content-start align-items-start d-none d-lg-block">
+                                <div class="w-100" style="min-height:50vh;overflow-x:hidden;">
+                                    {!! rightAdvertise() !!}
+                                </div>
                             </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">

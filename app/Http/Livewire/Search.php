@@ -28,39 +28,10 @@ class Search extends Component
     private $collection_id; //the id of collection into add the course file.
 
     
-    public $ads1contents;
-    public $ads2contents;
-    public $ads3contents;
-
-    public function getAdvertise()
-    {
-        $objects = Setting::where("key", 'ads1')->get();
-        foreach($objects as $row)
-        {
-            if( empty($this->ads1contents))     $this->ads1contents = $row->description;
-            if( $row->value==lang() )   { $this->ads1contents = $row->description; break;}
-        }
-        $objects = Setting::where( "key", 'ads2')->get();
-        foreach($objects as $row)
-        {
-            if( empty($this->ads2contents))     $this->ads2contents = $row->description;
-            if( $row->value==lang() )   { $this->ads2contents = $row->description; break;}
-        }
-        $objects = Setting::where("key", 'ads3')->get();
-        foreach($objects as $row)
-        {
-            if( empty($this->ads3contents))     $this->ads3contents = $row->description;
-            if( $row->value==lang() )   { $this->ads3contents = $row->description; break;}
-        }
-        if(empty($this->ads1contents))  $this->ads1contents = '<img src="'.asset('uploads/' . env('ADVERTISE1_URL')).'"  class="w-100" />';
-        if(empty($this->ads2contents))  $this->ads2contents = '<img src="'.asset('uploads/' . env('ADVERTISE2_URL')).'"  class="w-100" />';
-        if(empty($this->ads3contents))  $this->ads3contents = '<img src="'.asset('uploads/' . env('ADVERTISE3_URL')).'"  class="w-100" />';
-    }
+ 
 
     public function __construct()
     {
-        $this->getAdvertise();
-        
         parent::__construct();
     }
     
