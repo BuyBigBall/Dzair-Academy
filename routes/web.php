@@ -17,6 +17,7 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\Translate;
 use App\Http\Livewire\TranslateMaterial;
 use App\Http\Livewire\Settings;
+use App\Http\Livewire\Pages;
 use App\Http\Livewire\Welcome;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Contact;
@@ -112,8 +113,8 @@ Route::middleware('auth')->group(function () {
     
     Route::get('ck-editor',             [CkeditorController::class,'index']);
     Route::post('ck-editor/imgupload',  [CkeditorController::class,'imgupload'])->name('ckeditor.upload');
-    Route::post('ck-editor/imgupload2',  [CkeditorController::class,'imgupload2'])->name('ckeditor.upload2');
-    Route::post('ck-editor/imgupload3',  [CkeditorController::class,'imgupload3'])->name('ckeditor.upload3');
+
+    Route::get('/site-pages',           Pages::class)->name('site-pages');
 });
 
 Route::post('/save-contact',            Contact::class)->name('save-contact');

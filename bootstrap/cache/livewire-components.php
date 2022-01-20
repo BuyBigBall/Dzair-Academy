@@ -47,6 +47,7 @@
   'modal.translatematerial-modal' => 'App\\Http\\Livewire\\Modal\\TranslatematerialModal',
   'modal.universityedit-modal' => 'App\\Http\\Livewire\\Modal\\UniversityeditModal',
   'modal.useredit-modal' => 'App\\Http\\Livewire\\Modal\\UsereditModal',
+  'pages' => 'App\\Http\\Livewire\\Pages',
   'profile' => 'App\\Http\\Livewire\\Profile',
   'rtl' => 'App\\Http\\Livewire\\Rtl',
   'search' => 'App\\Http\\Livewire\\Search',
