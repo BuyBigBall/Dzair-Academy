@@ -1,6 +1,5 @@
 <!-- Footer Starts Here -->
 <footer class="card blur">
-    No- use this
     <div class="d-flex flex-md-row flex-column align-items-center justify-content-between  px-3">
         <div class="order-first">
             <div class="nav-item dropup pe-2 d-flex align-items-center">
@@ -47,8 +46,8 @@
         </div>
         <ul class="menu-list d-flex align-items-center mb-0 list-unstyled order-md-last order-1" style="display:-webkit-inline-box;">
             <li class=""><a href="{{ route('aboutus') }}" target="_blank" class="text-white">{{ translate('About Us') }}</a></li>
-            <!-- <li class=""><a href="#">How We Work</a></li> -->
-            <li class="px-3">
+            <li class="px-3"><a href="{{ route('how-to-use') }}" target="_blank" class="text-white">{{ translate('How We Work') }}</a></li>
+            <li class="">
                 <a class="cursor-pointer text-white"
                     onclick="showContact()"
                     >{{ translate('Contact Us') }}</a>

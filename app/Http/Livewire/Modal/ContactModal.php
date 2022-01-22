@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Modal;
 
 use Livewire\Component;
 use App\Http\Livewire\Modal;
+use Illuminate\Support\Facades\Auth;
 
 class ContactModal extends Component
 {
@@ -30,6 +31,11 @@ class ContactModal extends Component
     }
     public function showContactus()
     {
+        if( !empty(Auth::id()))
+        {
+            $this->fullname = Auth::user()->name;
+            $this->email = Auth::user()->email;
+        }
         $this->show = true;
     }
     public function doClose()
