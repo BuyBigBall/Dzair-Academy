@@ -1,5 +1,6 @@
-<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
-    <ul class="navbar-nav justify-content-end">
+<div class="mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
+<!-- collapse navbar-collapse  -->
+    <ul class="navbar-nav  flex-row">
         <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0 ">
                 <livewire:auth.logout />

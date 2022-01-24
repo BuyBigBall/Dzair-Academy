@@ -453,7 +453,22 @@ legend+* {
 ::-webkit-color-swatch-wrapper {
     padding: 0;
 }
-
+.Modern-Slider .item-1 .img-fill
+{
+    background-image: url(../img/slide_01_right.jpg);
+}
+.Modern-Slider .text-content {
+    text-align: right;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
 ::file-selector-button {
     font: inherit;
 }

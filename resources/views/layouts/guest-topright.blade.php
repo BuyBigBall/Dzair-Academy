@@ -1,3 +1,8 @@
+<style>
+    .navbar-toggler.navbar-toggler.shadow-none{
+        position: inherit !important;
+    }
+</style>
 <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>

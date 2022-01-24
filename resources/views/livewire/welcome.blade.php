@@ -1,7 +1,24 @@
 <main>
     <link rel="stylesheet" href="assets/css/fontawesome.css">
-    
-    <div class="main-banner header-text" id="top">
+    <style>
+        .text-content
+        {
+            width:90% !important;
+        }
+        @media (min-width: 576px) {
+            .text-content
+            {
+                width:80% !important;
+            }
+        }
+        @media (min-width: 892px) {
+            .text-content
+            {
+                width:75%;
+            }
+        }
+    </style>
+    <div class="main-banner header-text mt-5 mt-lg-0" id="top">
         <div id="carouselExampleControls" class="carousel slide Modern-Slider" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active item item-1">

@@ -4,8 +4,46 @@
     {{-- If the user is authenticated --}}
     @auth()
         @if (in_array(request()->route()->getName(),['aboutus', 'how-to-use'],))
-            @include('layouts.navbars.guest.login')
-            {{ $slot }}            
+
+            <style>
+                header{
+                    z-index: 999;
+                }
+                .page-body
+                {
+                    max-width: 800px; 
+                    margin: 0 auto; 
+                    width: 90% !important;
+                    margin-top:10rem !important;
+                    overflow-x: hidden;
+                }
+                @media (min-width: 992px) {
+                    .page-body
+                    {
+                        margin-top:7rem !important;
+                    }
+                }
+                .page-top-adv
+                {
+                    /* display: none; */
+                }
+                @media (min-width: 768px) {
+                    .page-top-adv
+                    {
+                        display: block;
+                    }
+                }
+            </style>
+            <div class="d-xl-none">
+                @include('layouts.navbars.auth.sidebar')
+            </div>
+            @include('layouts.navbars.auth.header')
+            <div class="mt-5 page-body" >
+                <div class="mt-0 page-top-adv">
+                    {!! topAdvertise() !!}
+                </div>
+            {{ $slot }}       
+            </div>     
             @include('layouts.footers.guest.footer')
   
         <?php /*
