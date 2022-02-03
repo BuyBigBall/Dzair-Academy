@@ -90,7 +90,7 @@
                               <div class="form-check form-check-info text-left">
                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
                                   <label class="form-check-label" for="flexCheckDefault">
-                                      {{ __('I agree the') }} <a href="javascript:;" class="text-dark font-weight-bolder">{{ __('Terms
+                                      {{ __('I agree the') }} <a href="privacy" target="_blank" class="text-dark font-weight-bolder">{{ __('Terms
                                           and
                                           Conditions') }}</a>
                                   </label>

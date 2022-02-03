@@ -23,13 +23,15 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Aboutus;
 use App\Http\Livewire\HowToUse;
+use App\Http\Livewire\Privacy;
+use App\Http\Livewire\Contactus;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Livewire\Courses\BranchManagement;
 use App\Http\Livewire\Courses\CourseDetail;
 use App\Http\Livewire\Message\MessageManage;
-use App\Http\Livewire\Message\MessageInbox;
+use App\Http\Livewire\Message\MessageSend;
 use App\Http\Livewire\Message\MessageOutbox;
 
 use App\Http\Livewire\Collection\CollectionManage;
@@ -94,7 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-management',      UserManagement::class)->name('user-management');
     Route::get('/branch-management',    BranchManagement::class)->name('branch-management');
     Route::get('/message',              MessageManage::class)->name('message');
-    Route::get('/send-message',         MessageManage::class)->name('send-message');
+    Route::get('/send-message',         MessageSend::class)->name('send-message');
     
     Route::get('/my-courses',           MyCourses::class)->name('my-courses');
     Route::get('/collection',           CollectionManage::class)->name('collection');
@@ -117,8 +119,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/site-pages',           Pages::class)->name('site-pages');
 });
 
-Route::post('/save-contact',            Contact::class)->name('save-contact');
+//Route::post('/save-contact',            Contact::class)->name('save-contact');
+Route::get('/contactus',                Contactus::class)->name('contactus');
 Route::get('/aboutus',                  Aboutus::class)->name('aboutus');
 Route::get('/how-to-use',               HowToUse::class)->name('how-to-use');
+Route::get('/privacy',                  Privacy::class)->name('privacy');
+
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 Route::get('storage/{group}/{file}', 'App\Http\Controllers\SearchController@index')->name('storage');

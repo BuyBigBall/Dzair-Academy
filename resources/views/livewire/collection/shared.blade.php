@@ -96,7 +96,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center py-3">
-                            <a href="{{ route('message') }}" class="btn btn-primary btn-sm mb-1 mx-2">{{translate('Send Message')}}</a>
+                            <a href="{{ route('send-message') }}" class="btn btn-primary btn-sm mb-1 mx-2">{{translate('Send Message')}}</a>
                             <button onclick="javascript:history.back(01);" class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
                         </div>
                     </div>

@@ -1,0 +1,1 @@
+{!! getPageHtml('privacy') !!}

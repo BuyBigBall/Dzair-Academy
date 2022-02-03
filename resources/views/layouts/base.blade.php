@@ -181,7 +181,7 @@
         </div>
     </div>
 
-    <script src="../assets/js/main.js?v=0.0.0"></script>
+    <script src="../assets/js/main.js?v=0.0.1"></script>
 </body>
 
 </html>

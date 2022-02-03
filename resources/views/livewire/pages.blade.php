@@ -1,6 +1,6 @@
 <main class="body-content">
 <div class="container-fluid py-4">
-    <form wire:submit.prevent="save" methos="post" enctype="multipart/form-data">
+    <form wire:submit.prevent="save"  enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-md-12">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hidden" style="display:none;">
                         <div class="col-md-12">
                             <div wire:ignore class="form-group">
                                 <label for="ads1_file" class="form-control-label">{{ translate('Tutorial Page') }}</label>
@@ -43,6 +43,19 @@
                                     <textarea wire:model='tutorial'  class="form-control" 
                                         id="tutorial"
                                         name="tutorial"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div wire:ignore class="form-group">
+                                <label for="privacy" class="form-control-label">{{ translate('Privacy Page') }}</label>
+                                <div class="" style="min-height:400px;">
+                                    <textarea wire:model='privacy'  class="form-control" 
+                                        id="privacy"
+                                        name="privacy"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -91,6 +104,14 @@
         RightAdv_editor.on('change', function(event){
                 @this.set('tutorial', event.editor.getData());
             });
+
+        const Privacy_editor = CKEDITOR.replace('privacy', {
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height : 300,});
+        Privacy_editor.on('change', function(event){
+                @this.set('privacy', event.editor.getData());
+        });
     });
 </script>
 </main>

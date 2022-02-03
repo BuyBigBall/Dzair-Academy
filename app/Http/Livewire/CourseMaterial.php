@@ -142,7 +142,7 @@ class CourseMaterial extends Component
 
         $validatedData = $this->validate();
 
-       //dd($this->add_coll_type);
+        //dd($this->add_coll_type);
         if(!empty($this->protection))
         {
             if( !! empty($this->password_code))

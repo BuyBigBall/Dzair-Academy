@@ -1,6 +1,6 @@
 <main class="body-content">
 <div class="container-fluid py-4">
-    <form wire:submit.prevent="save" methos="post" enctype="multipart/form-data">
+    <form wire:submit.prevent="save"  enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-md-12">

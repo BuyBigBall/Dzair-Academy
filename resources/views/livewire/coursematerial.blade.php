@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-3 col-sm-6">
-                                <h4 class="title">Course Upload</h4>
+                                <h4 class="title">{{ translate('Course Upload') }}</h4>
                             </div>
                             <div class="col-md-9 col-sm-6 p-1 d-none d-md-block" >
                                 {!! topAdvertise() !!}
@@ -22,14 +22,14 @@
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-md-9 col-sm-12 p-2 p-sm-1 mx-3 mx-sm-1">
-                            didn’t
+                            {{ translate( 'didn’t
                                 find your modules specialization, please
                                 help us by providing more information
                                 about them so other members can submit
-                                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >click here</a> to add them
+                                files,') }} <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >{{ translate( 'click here</a> to add them') }}
                                 </div>
                             </div>
-                        <form wire:submit.prevent="savecourse" methos="post">
+                        <form wire:submit.prevent="savecourse" >
                             <input type='hidden' wire:model="edit_id" name='edit_id' id='hId' />
                             <div class="row">
                                 <div class="col-md-9 col-sm-12">

@@ -50,7 +50,7 @@
             <!-- <li class=""><a href="#">How We Work</a></li> -->
             <li class="px-3">
                 <a class="cursor-pointer text-white"
-                    onclick="showContact()"
+                    href="{{ route('contactus') }}"
                     >{{ translate('Contact Us') }}</a>
                     <!-- data-bs-toggle="modal" data-bs-target="#dialogContactus" -->
                     <!-- wire:click.prevent="$emit('WireAlert', '')" -->

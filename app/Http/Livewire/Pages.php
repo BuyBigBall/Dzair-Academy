@@ -14,12 +14,17 @@ class Pages extends Component
     public $aboutus;
     public $qna;
     public $tutorial;
+    public $privacy;
+    
     protected $rules = [
-        'aboutus'=>'required',
-        'qna'=>'required',
-        'tutorial'=>'required',
+        // 'aboutus'=>'required',
+        // 'qna'=>'required',
+        // 'tutorial'=>'required',
     ];
     protected $messages = [
+        // 'aboutus.required'   => ('The Aboutus content cannot be empty.'),
+        // 'qna.required'  => ('The QnA content cannot be empty.'),
+        // 'tutorial.required'  => ('The Tutorial Content cannot be empty.'),
     ];
 
     public function __construct()
@@ -32,12 +37,13 @@ class Pages extends Component
         $this->aboutus  = getPageHtml('aboutus');
         $this->qna      = getPageHtml('qna');
         $this->tutorial = getPageHtml('tutorial');
+        $this->privacy  = getPageHtml('privacy');
     }
 
     public function save(Request $request)
     {
         
-        $validatedData = $this->validate();
+       //  $validatedData = $this->validate();
 
         Setting::updateOrCreate([   'key' => 'aboutus', 'value'   => lang() ],
                                [ 'description' =>$this->aboutus ]);
@@ -45,10 +51,13 @@ class Pages extends Component
                                [ 'description' =>$this->qna ]);
         Setting::updateOrCreate([   'key' => 'tutorial', 'value'   => lang() ],
                                [ 'description' =>$this->tutorial ]);
+        Setting::updateOrCreate([   'key' => 'privacy', 'value'   => lang() ],
+                               [ 'description' =>$this->privacy ]);
                                 
         $this->dispatchBrowserEvent('contentSaved', ['type' => 'success',  'message' => 'Setting saved Successfully!']);
 
     }
+
     public function render()
     {
         return view('livewire.pages', [] );

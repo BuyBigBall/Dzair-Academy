@@ -49,7 +49,7 @@
             <li class="px-3"><a href="{{ route('how-to-use') }}" target="_blank" class="text-white">{{ translate('How We Work') }}</a></li>
             <li class="">
                 <a class="cursor-pointer text-white"
-                    onclick="showContact()"
+                    href="{{ route('contactus') }}"
                     >{{ translate('Contact Us') }}</a>
                     <!-- data-bs-toggle="modal" data-bs-target="#dialogContactus" -->
                     <!-- wire:click.prevent="$emit('WireAlert', '')" -->

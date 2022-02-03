@@ -24,7 +24,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="contact" action="{{ route('save-contact') }}" 
+                    <form id="contact" action="" 
                         onsubmit="contactSend(event)"
                         method="post">
                         <div class="row">

@@ -103,7 +103,7 @@
         <button
             type="button"
             class="btn btn-primary"
-            onclick="location.href='{{route('message')}}'">
+            onclick="location.href='{{ route('send-message') }}'">
             {{ translate("Send Message") }}
         </button>
     </div>
