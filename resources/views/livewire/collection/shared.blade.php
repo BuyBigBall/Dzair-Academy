@@ -76,7 +76,7 @@
                                                 </a>
                                                 <span  data-bs-toggle="tooltip" data-bs-original-title="{{translate('discard this collection share?')}}"
                                                         class="mx-1" 
-                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{translate('discard this collection share?')}}', discardSharedCollection, '{{$row->id}}')">
+                                                        data-id='{{$row->id}}'  onclick="ConfirmFunction('{{ translate('discard this collection share?') }}', discardSharedCollection, '{{ $row->id }}')">
                                                     <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                 </span>
                                             </td>
