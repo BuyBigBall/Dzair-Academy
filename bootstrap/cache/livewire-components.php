@@ -31,7 +31,7 @@
   'laravel-examples.user-profile' => 'App\\Http\\Livewire\\LaravelExamples\\UserProfile',
   'message.message-inbox' => 'App\\Http\\Livewire\\Message\\MessageInbox',
   'message.message-manage' => 'App\\Http\\Livewire\\Message\\MessageManage',
-  'message.message-outbox' => 'App\\Http\\Livewire\\Message\\MessageOutbox',
+  'message.message-send' => 'App\\Http\\Livewire\\Message\\MessageSend',
   'modal' => 'App\\Http\\Livewire\\Modal',
   'modal.add-module-modal' => 'App\\Http\\Livewire\\Modal\\AddModuleModal',
   'modal.add-specialization-modal' => 'App\\Http\\Livewire\\Modal\\AddSpecializationModal',

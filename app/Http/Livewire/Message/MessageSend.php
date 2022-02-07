@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Message;
 
 use Livewire\Component;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class MessageSend extends Component
 {
@@ -42,23 +44,30 @@ class MessageSend extends Component
             //dd($query->toSql());
             $user = $query->first();
             
-            //dd($user);
             if($user){
-                $this->email = $user->email;
-                $mailRequest["recipent"] = [$this->email];
-                $mailRequest["subject"] = sprintf( translate( "Dzair deliver a message from %s."), $user->name );
-                $mailRequest["content"] = [ "content" => $this->content ];
-                $mailRequest["template"] = "deliver";
-                sendMail($mailRequest);
-                // $this->showSuccesNotification = true;
-                // $this->showFailureNotification = false;
+                // $this->email = $user->email;
+                // $mailRequest["recipent"] = [$this->email];
+                // $mailRequest["subject"] = sprintf( translate( "Dzair deliver a message from %s."), $user->name );
+                // $mailRequest["content"] = [ "content" => $this->content ];
+                // $mailRequest["template"] = "deliver";
+                // sendMail($mailRequest);
+                
+                $chatmessage    = $this->content;
+                $to_id          = $user->id;
+                $from_id        = Auth::id();
+                Message::create([
+                    'from'          => $from_id, 
+                    'to'            => $to_id,
+                    'title'         => '',
+                    'content'       => $chatmessage,
+                    'attached'      => '',
+                    'status'        => 1
+                ]);
+
                 $this->emit('WireAlert', translate('Your message has been sent successfully.'), '');
             } else {
                 $this->emit('WireAlert', translate('could not be found a user to send the message'), '');
-                //$this->showFailureNotification = true;
             }
-        //$this->email = '';
-        //$this->username = '';
         $this->content = '';
     }
     public function render()

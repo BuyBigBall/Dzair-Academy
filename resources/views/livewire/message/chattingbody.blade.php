@@ -175,7 +175,7 @@
 
         setInterval( function() {
             window.livewire.emit('RefreshUserList', '');
-            console.log("RefreshUserList function content");
+            //console.log("RefreshUserList function content");
         }, 3000);
         
     </script>
