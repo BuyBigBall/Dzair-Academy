@@ -44,7 +44,7 @@
 
                     @foreach($userlist as $user)
                     <a wire:click="SelectChatUser({{ $user->id }})" class="list-group-item list-group-item-action border-0 cursor-pointer">
-                        <div class="badge bg-success float-right {{ $user->sent_message->count()==0 ? 'd-none' : '' }}"> $user->sent_message->count()  }}</div>
+                        <div class="badge bg-success float-right {{ $user->sent_message->count()==0 ? 'd-none' : '' }}"> {{ $user->sent_message->count() }}</div>
                         <div class="d-flex align-items-center opp-man">
                             <img
                                 src="{{ userphoto($user->photo) }}"
@@ -82,7 +82,9 @@
                     </div>
                     <div class="position-relative chatting-content">
                         <div class="chat-messages p-4">
-                            <?php $last_from = 0; $last_to = 0; $last_status = 0; ?>
+                            <?php $last_from = 0; $last_to = 0; $last_status = 0;
+                                $datetime2 = new DateTime( date('Y-n-d H:i:s'));
+                             ?>
                             @foreach($chathist as $content)
                             <div class="@if($content->sender->id==Auth::id()) 
                                             chat-message-right
@@ -90,7 +92,13 @@
                                             chat-message-left
                                         @endif
                                         h-100">
-                                @if($last_from!=$content->from || $last_to!=$content->to || $last_status!=$content->status )
+                                <?php 
+                                    
+                                    $datetime1 = new DateTime( date('Y-n-d H:i:s', strtotime($content->sent_at) ));
+                                    $elapsed = $datetime1->getTimestamp() - $datetime2->getTimestamp();
+                                    $datetime2 = $datetime1;
+                                ?>
+                                @if($last_from!=$content->from || $last_to!=$content->to || $last_status!=$content->status || $elapsed>=120 )
                                 <div class="mt-3">
                                     <img
                                         src="{{ userphoto($content->sender->photo) }}"
@@ -101,8 +109,8 @@
                                     <div class="text-muted small text-nowrap mt-2">{{ chattime($content->created_at) }}</div>
                                 </div>
                                 @endif
-                                <div class="flex-shrink-1 bg-light rounded px-3 mr-3">
-                                    @if($last_from!=$content->from || $last_to!=$content->to || $last_status!=$content->status )
+                                <div class="flex-shrink-1 bg-light rounded px-3 mr-3" interval="<?php print $elapsed ?>">
+                                    @if($last_from!=$content->from || $last_to!=$content->to || $last_status!=$content->status || $elapsed>=120 )
                                     <div class="font-weight-bold mb-1">
                                         @if($content->sender->id==Auth::id())
                                             You
@@ -139,8 +147,8 @@
                     </div>
                     <div class="flex-grow-0 py-3 px-4 border-top">
                         <div class="input-group">
-                            <input type="text" class="form-control" id='message-content' placeholder="{{ translate('Type your message') }}"/>
-                            <button wire:click="SendChatMessage( $('#message-content').val() )" id="sendBtn" class="btn btn-primary">{{ translate('Send') }}</button>
+                            <input  type="text" class="form-control" id='message-content' placeholder="{{ translate('Type your message') }}"/>
+                            <button onclick="sendMessage(event);" id="sendBtn" class="btn btn-primary">{{ translate('Send') }}</button>
                         </div>
                     </div>
                 </div>
@@ -149,13 +157,26 @@
     </div>
 
     <script>
+        function sendMessage(evt)
+        {
+            event.preventDefault();
+            window.livewire.emit('SendChatMessage', $('#message-content').val() );
+            $('#message-content').val('');
+        }
+
         $('#message-content').keyup(function(evt){
             var code = evt.key; // recommended to use e.key, it's normalized across devices and languages
             if(code==="Enter") 
             {
                 evt.preventDefault();
-                $('#sendBtn').trigger('click');
+                sendMessage(evt);
             }
         });
+
+        setInterval( function() {
+            window.livewire.emit('RefreshUserList', '');
+            console.log("RefreshUserList function content");
+        }, 3000);
+        
     </script>
 </main>

@@ -11,8 +11,6 @@ use DB;
 
 class MessageManage extends Component
 {
-
-   // public Post $post;
     public $selusername;        //model
     public $seluserphoto;        //model
     public $search;             //model
@@ -21,6 +19,47 @@ class MessageManage extends Component
     public $selected_user;
     public $chathist;
     
+    protected $listeners = [
+        'RefreshUserList' => 'RefreshUserList'        ,
+        'SendChatMessage' => 'SendChatMessage'
+    ];
+    
+    public function RefreshUserList()
+    {
+        $query = Message::select('from', 'to')
+            ->distinct()
+            ->where('from', Auth::id())
+            ->orWhere('to', Auth::id());
+
+        $this->userlist = [];
+        foreach( $query->get()  as $row)
+        {
+            $opp = null;
+            $opp_id = 0;
+            if($row->from==Auth::id())
+            {
+                $opp    = $row->receiver;
+                $opp_id = $row->receiver->id;
+            }
+            else
+            {
+                $opp    = $row->sender;
+                $opp_id = $row->sender->id;
+            }
+            //dd($opp->name);
+            if( !empty($word) )
+            {
+                //dd(stripos($word, $opp->name));
+                if(stripos($opp->name, $word) === false)
+                {
+                    $opp = null;
+                }
+            }
+
+            if($opp!=null)         $this->userlist[$opp_id] = $opp;
+        }
+    }
+
     public function mount(Request $request) 
     {
         $this->chathist = [];
@@ -65,41 +104,14 @@ class MessageManage extends Component
 
     public function RefreshContent($word=null)
     {
-        $query = Message::select('from', 'to')
-            ->distinct()
-            ->where('from', Auth::id())
-            ->orWhere('to', Auth::id());
-
-        //dd($query->toSql());
-        //dd($word);
-        $this->userlist = [];
-        foreach( $query->get()  as $row)
+        if( !empty($this->selected_user))
         {
-            $opp = null;
-            $opp_id = 0;
-            if($row->from==Auth::id())
-            {
-                $opp    = $row->receiver;
-                $opp_id = $row->receiver->id;
-            }
-            else
-            {
-                $opp    = $row->sender;
-                $opp_id = $row->sender->id;
-            }
-            //dd($opp->name);
-            if( !empty($word) )
-            {
-                //dd(stripos($word, $opp->name));
-                if(stripos($opp->name, $word) === false)
-                {
-                    $opp = null;
-                }
-            }
-
-            if($opp!=null)         $this->userlist[$opp_id] = $opp;
+            Message::where(['to' => Auth::id(), 'from'=>$this->selected_user->id, 'status'=>1])
+            ->update(['status'=>2]);
         }
-        //  dd($this->userlist);
+
+        $this->RefreshUserList();
+
         $this->chathist = [];
         if(!empty($this->selected_user))
         {
