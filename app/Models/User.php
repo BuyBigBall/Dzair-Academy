@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -55,6 +55,12 @@ class User extends Authenticatable
     }
     public function university() {
         return $this->hasOne('App\Models\University', 'id', 'university_id');
+    }
+
+    public function sent_message() {
+        return $this->hasMany('App\Models\Message', 'from','id')
+                        ->where('to', '=', Auth::id() )
+                        ->where('status', '=', '1');
     }
 
 }

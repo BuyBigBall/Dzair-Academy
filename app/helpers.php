@@ -92,13 +92,27 @@ function agotime($date)
     return $ago_time;
 }
 
+function chattime($date)
+{
+    if(!! empty($date)) return "";
+    $diff = date_diff( new \DateTime( "now" ), new \DateTime( date( 'Y-n-d H:i:s', strtotime($date))) );
+    $ago_time = (($diff->y>=1) ? (($diff->y+1) . __(' years ago') ) : 
+                (($diff->m>=2) ? ( date( 'n-j H:i', strtotime($date)) ) : 
+                (($diff->m>=1) ? ( ($diff->m+1) . __(' months ago') ) : 
+                (($diff->d>=1) ? ( date( 'n-j H:i', strtotime($date)) ) : 
+                (($diff->h>=1) ? ( date( 'H:i', strtotime($date)) ) : 
+                (($diff->i>=1) ? (($diff->i+1) . __(' minutes ago') ) : 
+                date( 'n-j H:i', strtotime($date))   
+            ))))));
+    return $ago_time;
+}
 
 function userphoto($path)
 {
     //if(!empty($path))     dd(__DIR__ . '/../public/uploads/' . ($path));
     if( !!empty($path) || !file_exists(__DIR__ . '/../public/uploads/' . ($path)))
     {
-        return '/assets/img/user.png';
+        return asset('/assets/img/user.png');
     }
     return asset('uploads/'. $path);
 }
