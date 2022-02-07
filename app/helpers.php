@@ -146,6 +146,15 @@ function mat_lang($mat)
     return null;
 }
 
+function lang_item($val)
+{
+    $lang = lang();
+    if( !empty($val[$lang]) ) return $val[$lang];
+    if( !empty($val['en']) ) return $val['en'];
+    if( !empty($val['fr']) ) return $val['fr'];
+    if( !empty($val['ar']) ) return $val['ar'];
+    return '';
+}
 function ln($obj)
 {
     $lang = App::getLocale();

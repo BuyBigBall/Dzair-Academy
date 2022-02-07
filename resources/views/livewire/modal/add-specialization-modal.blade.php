@@ -45,7 +45,7 @@
                                     <select class="form-control" wire:model="training" name='training'>
                                                     <option>{{ __('pages.seltraining')}}</option>
                                                     @foreach($training_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ {{ lang_item( $val ) }} }}</option>
                                                     @endforeach
                                                 </select>
                                     </div>
@@ -58,7 +58,7 @@
                                         <select class="form-control" wire:model="faculty" name='faculty'>
                                                     <option>{{ __('pages.selfaculty')}}</option>
                                                     @foreach($faculty_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ {{ lang_item( $val ) }} }}</option>
                                                     @endforeach
                                                 </select>
                                     </div>

@@ -26,7 +26,7 @@
                                 find your modules specialization, please
                                 help us by providing more information
                                 about them so other members can submit
-                                files,') }} <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >{{ translate( 'click here</a> to add them') }}
+                                files,') }} <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >{{ translate( 'click here') }} </a> {{ translate(' to add them') }}
                                 </div>
                             </div>
                         <form wire:submit.prevent="savecourse" >
@@ -41,7 +41,7 @@
                                                 <select class="form-control" wire:model="training" name='training'>
                                                     <option>{{ __('pages.seltraining')}}</option>
                                                     @foreach($training_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('training') <span class="error">{{ $message }}</span> @enderror
@@ -54,7 +54,7 @@
                                                 <select class="form-control" wire:model="faculty" name='faculty'>
                                                     <option>{{ __('pages.selfaculty')}}</option>
                                                     @foreach($faculty_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('faculty') <span class="error">{{ $message }}</span> @enderror
@@ -67,7 +67,7 @@
                                                     name='specialization'>
                                                     <option>{{ __('pages.selspecia')}}</option>
                                                     @foreach($specialization_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('specialization') <span class="error">{{ $message }}</span>
@@ -92,7 +92,7 @@
                                                 <select class="form-control" wire:model="module" name='module'>
                                                     <option>{{ translate('Select Module')}}</option>
                                                     @foreach($module_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
+                                                    <option value="{{ $val['id'] }}">{{ lang_item( $val )   }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('module') <span class="error">{{ $message }}</span> @enderror

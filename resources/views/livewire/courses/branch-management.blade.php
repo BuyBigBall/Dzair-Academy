@@ -21,7 +21,7 @@
                           <select class="form-control"   wire:model="training" name='training'>
                             <option value=''>{{ translate('Select Training')}}</option>
                               @foreach($training_options as $val)
-                              <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                               @endforeach
                             </select>
 
@@ -35,7 +35,7 @@
                           <select class="form-control"  wire:model="faculty" name='faculty'>
                                 <option value=''>{{ translate('Select Faculty')}}</option>
                               @foreach($faculty_options as $val)
-                              <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                               @endforeach
                           </select>
                         </div>
@@ -46,7 +46,7 @@
                           <select class="form-control" wire:model="specialization" name='specialization'>
                                 <option value=''>{{ translate('Select specialization')}}</option>
                               @foreach($specialization_options as $val)
-                              <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                               @endforeach
                           </select>
                         </div>
@@ -69,7 +69,7 @@
                           <select class="form-control" wire:model="module" name='module'>
                                 <option value=''>{{ translate('Select Module')}}</option>
                               @foreach($module_options as $val)
-                              <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
+                              <option value="{{ $val['id'] }}">{{ lang_item( $val )   }}</option>
                               @endforeach
                           </select>                        
                         </div>

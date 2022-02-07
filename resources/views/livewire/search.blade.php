@@ -27,11 +27,12 @@
            <div class="card-body p-3">
              <div class="row">
               <div class="col-md-9 col-sm-12 p-3">
+                {{ translate('
                didn’t
                 find your modules specialization, please
                 help us by providing more information
                 about them so other members can submit
-                files, <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >click here</a> to add them
+                files,') }} <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >{{ translate( 'click here') }} </a> {{ translate(' to add them') }}
                 </div>
               </div>
              <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">
@@ -47,7 +48,7 @@
                          <select class="form-control" wire:model="training" name='training'>
                            <option value=''>{{ __('pages.seltraining')}}</option>
                            @foreach($training_options as $val)
-                           <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                           <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
                            @endforeach
                          </select>
 
@@ -61,7 +62,7 @@
                          <select class="form-control" wire:model="faculty" name='faculty'>
                            <option value=''>{{ __('pages.selfaculty')}}</option>
                            @foreach($faculty_options as $val)
-                           <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                           <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
                            @endforeach
                          </select>
                        </div>
@@ -72,7 +73,7 @@
                          <select class="form-control" wire:model="specialization" name='specialization'>
                            <option value=''>{{ __('pages.selspecia')}}</option>
                            @foreach($specialization_options as $val)
-                           <option value="{{ $val['id'] }}">{{ $val[lang()] }}</option>
+                           <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
                            @endforeach
                          </select>
                        </div>
@@ -94,7 +95,7 @@
                          <select class="form-control" wire:model="module" name='module'>
                            <option value=''>{{ translate('Select Module')}}</option>
                            @foreach($module_options as $val)
-                           <option value="{{ $val['id'] }}">{{ $val[lang()]  }}</option>
+                           <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                            @endforeach
                          </select>
                        </div>
