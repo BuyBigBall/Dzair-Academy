@@ -4,7 +4,7 @@
         <li
             class="list-group-item border-0 d-flex  flex-column p-md-3 p-lg-4 p-2 mb-2 bg-gray-100 border-radius-lg">
             <div class="row">
-                <div class="col-8 d-flex flex-column">
+                <div class="col-sm-12 col-lg-8 d-flex flex-column">
                     <h6 class="mb-3 text-sm">{{ $course->title }}</h6>
                     <span class="mb-2 text-xs">{{ translate('User Name:' )}}
                         <span class="text-dark font-weight-bold ms-2">{{ $course->creator->name }}</span>
@@ -21,17 +21,23 @@
                 </div>
 
                 @if( !empty(Auth::id()) && Auth::user()->role=='admin' )
-                <div class="col-4 text-right">
+                <div class="col-sm-12 col-lg-4 text-right">
                     <a
-                        class="btn btn-link text-secondary px-1 mb-0 text-xs"
+                        class="btn btn-link text-secondary text-xs px-1 mb-0 me-3" 
+                        data-bs-toggle="tooltip" data-bs-original-title="add to collection"
+                        >
+                        <i class="cursor-pointer fas fa-list-ul me-2 text-sm"></i>{{ translate('Add to Collection') }}</a>
+                        <!-- <a href="http://127.0.0.1:8000/collection-files/1" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="collection files"> -->
+                                                    
+                    <a
+                        class="btn btn-link text-secondary text-xs px-1 mb-0"
                         onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$course->id}}')"
                         href="javascript:;">
-                        <i class="far fa-trash-alt me-2 text-sm"></i>Delete</a>
+                        <i class="far fa-trash-alt me-2 text-sm"></i>{{ translate('Delete') }}</a>
                     @if($course->status==0)
-                    <br>
-                        <span class="text-info text-sm">waiting for approval</span>
+                        <br>
+                        <span class="text-info text-sm">{{ translate( 'waiting for approval') }}</span>
                         @endif
-
                     </div>
                     @endif
                 </div>

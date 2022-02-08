@@ -63,6 +63,7 @@
                                                     />
                                                 <input wire:model="user_edit_photo" type='file' name="photo" id="photo" style='display:none;'>
                                                 @error('user_photo') <span class="error row">{{ translate($message) }}</span> @enderror
+                                                @error('user_edit_photo') <span class="error row">{{ translate($message) }}</span> @enderror
                                             </div>    
                                             @if( !empty(Auth::id()) && $user->id!=Auth::id())
                                             <div class="row pt-3 text-primary">

@@ -20,6 +20,7 @@ if( !defined('ARCHIVE_EXTENSIONS')) define('ARCHIVE_EXTENSIONS', [
 ]);
 
 if( !defined('MAX_COURSE_UPLOAD_SIZE')) define('MAX_COURSE_UPLOAD_SIZE', 1024);
+if( !defined('MAX_PHOTO_UPLOAD_SIZE')) define('MAX_PHOTO_UPLOAD_SIZE', 256);
 //We use this to convert date to new format
 
 function getPageHtml($page)

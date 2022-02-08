@@ -44,7 +44,9 @@ class UserProfile extends Component
         'user_about'    => 'max:200',
         //'user_location' => 'min:3',
         'user_university'=> 'required',
-        'user_photo'    => 'max:'.MAX_COURSE_UPLOAD_SIZE,  
+        'user_photo'    => 'max:'.MAX_PHOTO_UPLOAD_SIZE,  
+        'user_edit_photo'    => 'max:'.MAX_PHOTO_UPLOAD_SIZE,  
+        
     ];
     protected $messages = [
         'user_name.min'     =>  ('The user name length cannot be less than 3 characters.'),
@@ -54,7 +56,8 @@ class UserProfile extends Component
         'user_phone.numeric'=>  ('The user phone can be allow only numeric.'),
         'user_about.max'    =>  ('The user description length cannot be over than 200 characters.'),
         //'user_location.min' =>  ('The user univercity name length cannot be less than 3 characters.'),
-        'user_photo.min'    =>  ('The user photo file size cannot be over than '.MAX_COURSE_UPLOAD_SIZE.' bytes.'),
+        'user_photo.max'    =>  ('The user photo file size cannot be over than '.MAX_PHOTO_UPLOAD_SIZE.' kb.'),
+        'user_edit_photo.max'=>  ('The user photo file size cannot be over than '.MAX_PHOTO_UPLOAD_SIZE.' kb.'),
         'user_university.required'=> ('The user university cannot be empty'),
     ];
 
@@ -70,6 +73,15 @@ class UserProfile extends Component
     public function updatedHidePhone($value) { 
         $this->user->hide_phone = $this->hide_phone ? 1 : 0;
         $this->user->save();
+    }
+
+    public function updatedUserEditPhoto($value) { 
+        
+        $this->validate([
+            'user_edit_photo' => 'max:'.MAX_COURSE_UPLOAD_SIZE.       // Max 1MB =1024K
+                     '|mimes:'.env('ALLOW_PHOTO_EXTENSIONS')
+        ]);
+        
     }
 
     public function updatedUserPhoto($value) { 
