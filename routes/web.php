@@ -23,6 +23,7 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Aboutus;
 use App\Http\Livewire\HowToUse;
+use App\Http\Livewire\TermsConditions;
 use App\Http\Livewire\Privacy;
 use App\Http\Livewire\Contactus;
 
@@ -123,6 +124,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/contactus',                Contactus::class)->name('contactus');
 Route::get('/aboutus',                  Aboutus::class)->name('aboutus');
 Route::get('/how-to-use',               HowToUse::class)->name('how-to-use');
+Route::get('/terms-and-conditions',     TermsConditions::class)->name('terms-and-conditions');
+
 Route::get('/privacy',                  Privacy::class)->name('privacy');
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);

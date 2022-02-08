@@ -1,3 +1,3 @@
 <div style="min-height:80vh;">
-{!! getPageHtml('qna') !!}
+{!! getPageHtml('terms') !!}
 </div>

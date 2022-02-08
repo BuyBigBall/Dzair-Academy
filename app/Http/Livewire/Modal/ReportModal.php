@@ -35,7 +35,7 @@ class ReportModal extends Component
         // $course = Course::find( $this->course_id);
         // $report = Report::where( "course_id" , $course_id )->first();
         $this->course_url = $course_url;
-        $this->report_content = 'This content is illegal.';
+        $this->report_content = '';
 
         $this->show = true;
     }

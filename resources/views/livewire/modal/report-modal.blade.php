@@ -41,9 +41,9 @@
                         <div class="form-group">
                             <label for="user-email" class="form-control-label">{{translate('Report Content')}}</label>
                             <div class="">
-                                <textarea wire:model="report_content" class="form-control" placeholder="report desciption" 
-                                    READONLY    
-                                    row=3 id="report-text">This content is illegal.</textarea>
+                                <textarea wire:model="report_content" class="form-control" placeholder="{{ translate('ex:This content is illegal.') }}" 
+                                    required=""
+                                    row=3 id="report-text"></textarea>
                                 @error('report_content') <span class="error">{{ translate($message) }}</span> @enderror
                             </div>
                         </div>

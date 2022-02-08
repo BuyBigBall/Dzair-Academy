@@ -59,12 +59,11 @@
                    @endforeach
                  </ul>
 
-                 <!-- {{ $pagination->links() }}
-                  {{ $pagination->nextPageUrl() }} -->
                  <hr />
                  <!-- select page show & pagenation -->
                  <div class="d-sm-flex justify-content-between align-items-center">
                    @include('livewire.pagination')
+                   <span style="display:none;">{{ $pagination->links() }}</span>
                  </div>
                  @else
                  <div class="d-sm-flex justify-content-between align-items-center pb-5 mb-3">
@@ -93,5 +92,8 @@
  </main>
 
  <script>
-   console.log('{{$perPage}}');
+   function nextPage()
+    {
+        $("button[dusk='nextPage.before']").trigger('click');
+    }
  </script>

@@ -35,14 +35,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row hidden" style="display:none;">
+                    <div class="row hidden">
                         <div class="col-md-12">
                             <div wire:ignore class="form-group">
-                                <label for="ads1_file" class="form-control-label">{{ translate('Tutorial Page') }}</label>
+                                <label for="ads1_file" class="form-control-label">{{ translate('Terms and Coditions') }}</label>
                                 <div class="" style="min-height:400px;">
-                                    <textarea wire:model='tutorial'  class="form-control" 
-                                        id="tutorial"
-                                        name="tutorial"></textarea>
+                                    <textarea wire:model='terms'  class="form-control" 
+                                        id="terms"
+                                        name="terms"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
             filebrowserUploadMethod: 'form',
             height : 300,
         });
-        const RightAdv_editor = CKEDITOR.replace('tutorial', {
+        const RightAdv_editor = CKEDITOR.replace('terms', {
             filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form',
             height : 300,
@@ -102,7 +102,7 @@
                 @this.set('qna', event.editor.getData());
             });
         RightAdv_editor.on('change', function(event){
-                @this.set('tutorial', event.editor.getData());
+                @this.set('terms', event.editor.getData());
             });
 
         const Privacy_editor = CKEDITOR.replace('privacy', {

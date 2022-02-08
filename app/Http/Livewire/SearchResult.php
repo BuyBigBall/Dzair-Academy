@@ -55,6 +55,7 @@ class SearchResult extends Component
     public function updatedCurPage($value)
     {
         $this->curPage = $value;
+        $this->gotoPage($value);
         //dd($this->curPage);
     }
     public function updatedPerPage($value)

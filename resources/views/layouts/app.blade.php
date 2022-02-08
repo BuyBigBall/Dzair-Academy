@@ -124,6 +124,7 @@
                     'aboutus', 
                     'how-to-use',
                     'privacy',
+                    'terms-and-conditions',
                     ]))
         <style>
                 header{
@@ -171,4 +172,12 @@
     
     <?php /* @livewire('modal.contact-modal') */ ?>
     
+    @if( in_array(request()->route()->getName(),['login', 'sign-up', 'aboutus', 'how-to-use', 'terms-and-conditions', 'contactus', 'privacy', 'welcome'],) )
+    <style>
+        footer.card
+        {
+            border-radius: 0px !important;
+        }
+    </style>
+    @endif
 </x-layouts.base>

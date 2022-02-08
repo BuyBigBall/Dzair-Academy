@@ -25,15 +25,19 @@
     <ul class="pagination justify-content-end m-0">
         <li class="page-item px-3  d-none d-sm-block">
             <!-- {{ translate('go to : ') }} -->
-            <select wire:model="curPage" class="form-control" onchange="location.href='{{route($current_route).'?page='}}' + this.value;">
+            <select class="form-control" wire:model="curPage">
+            <!-- onchange="location.href='{ { route($current_route).'?page=' } }' + this.value" -->
                 @for($i=0; $i< $pagination->lastPage(); $i++)
-                <option value="{{ $i+1 }}" @if($i==$pagination->currentPage()-1) selected @endif>{{$i+1}} {{translate('page')}}</option>
+                <option value="{{ $i+1 }}" @if($i==($curPage-1)) selected="selected" @endif <?php echo $i==($curPage-1) ? 'selected' : '' ?>  >{{$i+1}} {{translate('page')}}</option>
                 @endfor
             </select>
         </li>
 
         <li class="page-item @if($pagination->currentPage()==1) disabled @endif">
-        <a class="page-link" href="{{ route($current_route).'?page='.( ($pagination->currentPage() - $pagination->perPage())<=0 ? 1 :  ($pagination->currentPage() - $pagination->perPage()) )}}" tabindex="-1">
+        <a class="page-link cursor-pointer" 
+            wire:click="previousPage('page')"
+            tabindex="-1">
+            <!-- href=" { { route($current_route).'?page='.( ($pagination->currentPage() - $pagination->perPage())<=0 ? 1 :  ($pagination->currentPage() - $pagination->perPage()) ) } }" -->
             <i class="fa fa-angle-left"></i>
             <span class="sr-only">Previous</span>
         </a>
@@ -46,11 +50,14 @@
                 @if($i==$pagination->currentPage()-1)  
                 active 
                 @endif
-                "><a class="page-link" href="{{route($current_route).'?page='.($i+1)}}">{{($i+1)}}</a></li>
+                "
+                ><a class="page-link cursor-pointer" wire:click="gotoPage({{($i+1)}}, 'page')">{{($i+1)}}</a></li>
+                <!-- href="{ { route($current_route).'?page='.($i+1) } }" -->
             @endif
         @endfor
         <li class="page-item  @if($pagination->currentPage()==$pagination->lastPage()) disabled @endif">
         <a class="page-link px-2 px-md-3" href="{{route($current_route).'?page='.(   ($pagination->currentPage() + $pagination->perPage())>$pagination->lastPage() ? $pagination->lastPage() : ($pagination->currentPage() + $pagination->perPage())    )}}">
+            <!-- onclick="nextPage();" -->
             <i class="fa fa-angle-right"></i>
             <span class="sr-only">Next</span>
         </a>
