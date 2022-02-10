@@ -7,14 +7,14 @@
                     <div class="d-flex flex-row justify-content-between">
                         <div>
                             <h5 class="mb-0">
-                            {{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong>
+                            {{ $list_title }} @if(!empty($list_of)) of @endif <strong>{{$list_of}}</strong>
                             </h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <!-- Search Box row -->
-                    <div class="row p-3"> 
+                    <div class="row p-3 pb-0"> 
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Traning')}}</label>
@@ -80,23 +80,42 @@
                     <!-- End Search Box row -->
 
                     <!-- Add area row -->
-                    <div class="row px-2 py-0"> 
-                      <!-- <div class="col-md-2 col-sm-6">
-                        <div class="form-group d-flex justify-content-end">
-                          
-                        </div>
-                      </div> -->
-                      <div class="col-md-6 col-sm-6">
+                    @if( !empty($training) )
+                    <div class="row px-2 py-0 pb-3"> 
+                      <div class="col-md-6 col-sm-12">
                         <div class="form-group d-flex justify-content-between align-items-center">
-                            <label class="sm-hide mx-2 ">{{ translate('New Faculty Name')}}</label>
+                            <label class="sm-hide mx-2 ">{{ $Label }}</label>
                             <input class="form-control mx-2 w-50" 
                                 wire:model="registered_name" name='registered_name'
-                                placeholder="{{ translate('Please enter a new Faculty name.') }}"
+                                placeholder="{{ $PlaceHolder }}"
                                 />
                             <button class="btn btn-info my-0 w-20"  type="button" >{{ translate('save') }}</button>
                         </div>
                       </div>
+                          @if( !!empty($faculty) )
+                          <div class="col-md-6 col-sm-12">
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="sm-hide mx-2 my-2 text-md" style="color:blue;"><span style="color:red"> ** </span>{{ translate('You can select Faculty to create a new Specialization.') }}</label>
+                            </div>
+                          </div>
+                          @elseif( !!empty($specialization) )
+                          <div class="col-md-6 col-sm-12">
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="sm-hide mx-2 my-2 text-md" style="color:blue;"><span style="color:red"> * </span>{{ translate('You can select Specialization to create a new module.') }}</label>
+                            </div>
+                          </div>
+                          @endif
+
                     </div>
+                    @else
+                    <div class="row px-2 py-0 pb-3"> 
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="sm-hide mx-2 my-2 text-md" style="color:blue;"><span style="color:red"> *** </span>{{ translate('Please select Training to create a new item.') }}</label>
+                        </div>
+                      </div>
+                    </div>  
+                    @endif
                     <!-- End Add area row -->
 
 

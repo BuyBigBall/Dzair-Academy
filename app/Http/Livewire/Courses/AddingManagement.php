@@ -34,6 +34,9 @@ class AddingManagement extends Component
     public $level;          //wire:model
     public $word;           //wire:model
 
+    public $Label;
+    public $PlaceHolder;
+
     public $path_level = 1;
     protected $listeners = [
         'deleteCourse' => 'deleteCourse'        ,
@@ -214,7 +217,17 @@ class AddingManagement extends Component
     }
     public function render()
     {
-        return view('livewire.courses.adding-management');
+        $this->Label = '';
+        $this->PlaceHolder = '';
         
+        if( !empty($this->training) )           $this->Label = translate("New Faculty Name");
+        if( !empty($this->faculty) )            $this->Label = translate("New Specialization Name");
+        if( !empty($this->specialization) )     $this->Label = translate("New Module Name");
+
+        if( !empty($this->training) )           $this->PlaceHolder = translate("Please enter a new Faculty name.");
+        if( !empty($this->faculty) )            $this->PlaceHolder = translate("Please enter a new Specialization name.");
+        if( !empty($this->specialization) )     $this->PlaceHolder = translate("Please enter a new Module name.");
+        
+        return view('livewire.courses.adding-management');
     }
 }
