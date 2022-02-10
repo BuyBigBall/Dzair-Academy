@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class BranchManagement extends Component
+class AddingManagement extends Component
 {
     private $const_path_level = ['training'=>1,'faculty'=>2,'specialization'=>3,'course'=>4,'material'=>5];
     public $const_path_name;
@@ -214,6 +214,7 @@ class BranchManagement extends Component
     }
     public function render()
     {
-        return view('livewire.courses.branch-management');
+        return view('livewire.courses.adding-management');
+        
     }
 }

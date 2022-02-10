@@ -43,11 +43,11 @@
                                     <label for="en_words" class="form-control-label sm-hide">select training</label>
                                     <div class="">
                                     <select class="form-control" wire:model="training" name='training'>
-                                                    <option>{{ __('pages.seltraining')}}</option>
-                                                    @foreach($training_options as $val)
-                                                    <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
-                                                    @endforeach
-                                                </select>
+                                        <option>{{ __('pages.seltraining')}}</option>
+                                        @foreach($training_options as $val)
+                                        <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                 </div>
                             </div>

@@ -20,9 +20,9 @@
                           <label class="sm-hide">{{ translate('Traning')}}</label>
                           <select class="form-control"   wire:model="training" name='training'>
                             <option value=''>{{ translate('Select Training')}}</option>
-                              @foreach($training_options as $val)
-                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
-                              @endforeach
+                            @foreach($training_options as $val)
+                            <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
+                            @endforeach
                           </select>
                         </div>
 
@@ -31,7 +31,7 @@
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Faculty')}}</label>
                           <select class="form-control"  wire:model="faculty" name='faculty'>
-                                <option value=''>{{ translate('Select Faculty')}}</option>
+                              <option value=''>{{ translate('Select Faculty')}}</option>
                               @foreach($faculty_options as $val)
                               <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                               @endforeach
@@ -74,16 +74,32 @@
                       </div>
                       <div class="col-md-2 col-sm-6 d-flex align-items-end justify-content-center">
                         <div class="form-group">
-                            <!-- @if($path_level>=3)
-                            <a href="{{ route('course-material') }}" 
-                                class="btn bg-gradient-primary btn-sm mb-0" 
-                                wire:click.prevent="$emit('ShowBranchModal', '{{$path_level}}', '{{$training}}', '{{$faculty}}', '{{$specialization}}', '{{$module}}', 0)"
-                                type="button">&nbsp; {{ $path_level==1 ? translate('New Training') : ( $path_level==2 ? translate('New Faculty') : ( $path_level==3 ? translate('New Specialization') : ( $path_level==4 ? translate('New Module') : translate('New Course') ) ) ) }}</a>
-                            @endif -->
                         </div>
                       </div>
                     </div>
                     <!-- End Search Box row -->
+
+                    <!-- Add area row -->
+                    <div class="row px-2 py-0"> 
+                      <!-- <div class="col-md-2 col-sm-6">
+                        <div class="form-group d-flex justify-content-end">
+                          
+                        </div>
+                      </div> -->
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="sm-hide mx-2 ">{{ translate('New Faculty Name')}}</label>
+                            <input class="form-control mx-2 w-50" 
+                                wire:model="registered_name" name='registered_name'
+                                placeholder="{{ translate('Please enter a new Faculty name.') }}"
+                                />
+                            <button class="btn btn-info my-0 w-20"  type="button" >{{ translate('save') }}</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Add area row -->
+
+
                     <!-- <div class="row p-1 ps-3"> <h5><p>{{ $list_title }} @if(!empty( $list_of)) of @endif <strong>{{$list_of}}</strong></p></h5></div> -->
                     <input type='hidden' id='path_level' name='path_level' value='' wire:model="path_level" />
                     <div class="table-responsive p-0" style='min-height:60vh'>

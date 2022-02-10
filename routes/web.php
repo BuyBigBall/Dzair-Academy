@@ -40,12 +40,12 @@ use App\Http\Livewire\Collection\CollectionFiles;
 use App\Http\Livewire\Collection\CollectionShared;
 use App\Http\Livewire\Admin\ReportView;
 use App\Http\Livewire\Admin\UniversityManage;
-
 use App\Http\Livewire\Component\MyCourses;
 
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\ApplicationController;
 use Illuminate\Http\Request;
+use App\Http\Livewire\Courses\AddingManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/course-material',      CourseMaterial::class)->name('course-material');
     Route::get('/user-management',      UserManagement::class)->name('user-management');
     Route::get('/branch-management',    BranchManagement::class)->name('branch-management');
+    Route::get('/adding-management',    AddingManagement::class)->name('adding-management');
+    
     Route::get('/message',              MessageManage::class)->name('message');
     Route::get('/send-message',         MessageSend::class)->name('send-message');
     

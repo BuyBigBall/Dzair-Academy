@@ -51,8 +51,6 @@
                            <option value="{{ $val['id'] }}">{{ lang_item( $val ) }}</option>
                            @endforeach
                          </select>
-
-                         </select>
                        </div>
 
                      </div>
