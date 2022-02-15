@@ -112,6 +112,9 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
 
+    <!-- Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4957453670189096"
+     crossorigin="anonymous"></script>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">

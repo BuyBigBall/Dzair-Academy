@@ -1,4 +1,9 @@
 <main>
+  <style>
+    .branch {
+      background-color: #f6f6f6 !important;
+    }
+  </style>
 <div class="container-fluid py-4 body-content">
     <div class="row">
         <div class="col-12">
@@ -18,8 +23,8 @@
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Traning')}}</label>
-                          <select class="form-control"   wire:model="training" name='training'>
-                            <option value=''>{{ translate('Select Training')}}</option>
+                          <select class="form-control branch"  wire:model="training" style="{{ $training_style }}" name='training'>
+                            <option value='0'>{{ translate('Select Training')}}</option>
                             @foreach($training_options as $val)
                             <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
                             @endforeach
@@ -30,10 +35,10 @@
                       <div class="col-md-2 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Faculty')}}</label>
-                          <select class="form-control"  wire:model="faculty" name='faculty'>
-                              <option value=''>{{ translate('Select Faculty')}}</option>
+                          <select class="form-control branch"  wire:model="faculty" style="{{ $faculty_style }}" name='faculty'>
+                              <option value='0'>{{ translate('Select Faculty')}}</option>
                               @foreach($faculty_options as $val)
-                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
+                              <option value="{{ $val['id'] }}" style="background-color:{{ !!empty($val['status']) ? '#f6f6f2' : '#fff' }}">{{ lang_item( $val )  }}</option>
                               @endforeach
                           </select>
                         </div>
@@ -41,10 +46,10 @@
                       <div class="col-md-2 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Specialization')}}</label>
-                          <select class="form-control" wire:model="specialization" name='specialization'>
-                                <option value=''>{{ translate('Select specialization')}}</option>
+                          <select class="form-control branch" wire:model="specialization" style="{{ $spec_style }}" name='specialization'>
+                                <option value='0'>{{ translate('Select specialization')}}</option>
                               @foreach($specialization_options as $val)
-                              <option value="{{ $val['id'] }}">{{ lang_item( $val )  }}</option>
+                              <option value="{{ $val['id'] }}" style="background-color:{{ !!empty($val['status']) ? '#f6f6f2' : '#fff' }}">{{ lang_item( $val )  }}</option>
                               @endforeach
                           </select>
                         </div>
@@ -52,10 +57,10 @@
                       <div class="col-md-2 col-sm-6">
                           <div class="form-group">
                               <label class="sm-hide">{{ __('pages.Level')}}</label>
-                              <select class="form-control" wire:model="level" name='level'>
-                                  <option>{{ __('pages.sellevel')}}</option>
+                              <select class="form-control branch" wire:model="level" style="{{ $level_style }}" name='level'>
+                                  <option value=''>{{ __('pages.sellevel')}}</option>
                                   @foreach($level_options as $val)
-                                  <option value="{{ $val}}">{{ $val }}</option>
+                                  <option value="{{ $val}}" style="background-color:#fff;">{{ $val }}</option>
                                   @endforeach
                               </select>
                               @error('level') <span class="error">{{ $message }}</span> @enderror
@@ -64,10 +69,10 @@
                       <div class="col-md-3 col-sm-6">
                         <div class="form-group">
                           <label class="sm-hide">{{ translate('Module')}}</label>
-                          <select class="form-control" wire:model="module" name='module'>
-                                <option value=''>{{ translate('Select Module')}}</option>
+                          <select class="form-control branch" wire:model="module" style="{{ $module_style }}" name='module'>
+                                <option value='0'>{{ translate('Select Module')}}</option>
                               @foreach($module_options as $val)
-                              <option value="{{ $val['id'] }}">{{ lang_item( $val )   }}</option>
+                              <option value="{{ $val['id'] }}" style="background-color:{{ !!empty($val['status']) ? '#f6f6f2' : '#fff' }}">{{ lang_item( $val )   }}</option>
                               @endforeach
                           </select>                        
                         </div>
@@ -80,6 +85,7 @@
                     <!-- End Search Box row -->
 
                     <!-- Add area row -->
+                    @if( !!empty($module) )
                     @if( !empty($training) )
                     <div class="row px-2 py-0 pb-3"> 
                       <div class="col-md-6 col-sm-12">
@@ -89,7 +95,7 @@
                                 wire:model="registered_name" name='registered_name'
                                 placeholder="{{ $PlaceHolder }}"
                                 />
-                            <button class="btn btn-info my-0 w-20"  type="button" >{{ translate('save') }}</button>
+                            <button wire:click="save" class="btn btn-info my-0 w-20"  type="button" >{{ translate('save') }}</button>
                         </div>
                       </div>
                           @if( !!empty($faculty) )
@@ -115,6 +121,7 @@
                         </div>
                       </div>
                     </div>  
+                    @endif
                     @endif
                     <!-- End Add area row -->
 
@@ -160,7 +167,8 @@
                             </thead>
                             <tbody>
                                 @foreach($list_items as $row)
-                                <tr>
+                                <tr 
+                                    style="{{ isset($row['status']) && $row['status']==0 ? 'background-color:#f6f6f2;' :'' }}">
                                     <td class="text-center p-2">
                                         <p class="text-xs font-weight-bold mb-0">{{$row['id']}}</p>
                                     </td>

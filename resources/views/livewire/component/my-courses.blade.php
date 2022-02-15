@@ -25,6 +25,7 @@
                     <a
                         class="btn btn-link text-secondary text-xs px-1 mb-0 me-3" 
                         data-bs-toggle="tooltip" data-bs-original-title="add to collection"
+                        href="{{ route('collection') .'?course_id='.$course->id }}"
                         >
                         <i class="cursor-pointer fas fa-list-ul me-2 text-sm"></i>{{ translate('Add to Collection') }}</a>
                         <!-- <a href="http://127.0.0.1:8000/collection-files/1" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="collection files"> -->

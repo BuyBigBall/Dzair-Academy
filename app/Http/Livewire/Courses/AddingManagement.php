@@ -33,6 +33,13 @@ class AddingManagement extends Component
     public $module;         //wire:model
     public $level;          //wire:model
     public $word;           //wire:model
+    public $registered_name;//wire:model
+
+    public $training_style = '';
+    public $faculty_style = '';
+    public $spec_style = '';
+    public $level_style = '';
+    public $module_style = '';
 
     public $Label;
     public $PlaceHolder;
@@ -96,37 +103,45 @@ class AddingManagement extends Component
         $this->faculty_options = [];
         $this->specialization_options = [];
         $this->module_options = [];
+
     }
     public function updatedTraining($value)
     {
         if($value==0) 
         {
+            $this->training_style = 'background-color:#f6f6f2 !important; font-weight:normal;';
             $this->training = 0;
             $this->faculty = 0;
             $this->specialization = 0;
             $this->module = 0;
             return $this->mount();
         }
+        $this->training_style = 'background-color:#fff !important;font-weight:600;';
+
         $this->path_level = $this->const_path_level['faculty'];
         $this->const_path_name = translate("Edit Faculty");
         $this->list_items = 
-        $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+        $this->faculty_options = Faculty::where('training_id', $value)->where('status','>=', 0)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Faculties');
         $this->list_of = Training::where('id', $value)->first()->toArray()[lang()];
+
     }
     public function updatedFaculty($value)
     {
         if($value==0) 
         {
+            $this->faculty_style = 'background-color:#f6f6f2 !important;font-weight:normal;';
             $this->faculty = 0;
             $this->specialization = 0;
             $this->module = 0;
             return $this->updatedTraining($this->training);
         }
+
+        $this->faculty_style = 'background-color:#fff !important;font-weight:600;';
         $this->path_level = $this->const_path_level['specialization'];
         $this->const_path_name = translate("Edit Specialization");
         $this->list_items = 
-        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+        $this->specialization_options = Specialization::where('faculty_id', $value)->where('status','>=', 0)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Specializations');
         $this->list_of = Faculty::where('id', $value)->first()->toArray()[lang()];
     }
@@ -134,10 +149,14 @@ class AddingManagement extends Component
     {
         if($value==0) 
         {
+            $this->spec_style = 'background-color:#f6f6f2 !important;font-weight:normal;';
+            $this->module_style = 'background-color:#f6f6f2 !important;font-weight:normal;';
             $this->specialization = 0;
             $this->module = 0;
             return $this->updatedFaculty($this->faculty);
         }
+        $this->spec_style = 'background-color:#fff !important;font-weight:600;';
+
         $this->path_level       = $this->const_path_level['course'];
         $this->const_path_name  = translate("Edit Course");
         $this->list_title       = translate('All Subjects');
@@ -146,36 +165,50 @@ class AddingManagement extends Component
         //dd($this->level);
         if(!empty($this->level) && is_numeric($this->level))
         {
-            $query = Module::where('specialization_id', $value)->where('level', $this->level)->where('status', 1)->orderBy('id');
+            $query = Module::where('specialization_id', $value)->where('level', $this->level)->where('status','>=', 0)->orderBy('id');
         }
         else
         {
-            $query = Module::where('specialization_id', $value)->where('status', 1)->orderBy('id');
+            $query = Module::where('specialization_id', $value)->where('status','>=', 0)->orderBy('id');
         }
         //dd($query->toSql());
         $this->list_items = $this->module_options = $query->get()->toArray();    
+
+        // dd($this->list_items);
+
     }
     public function updatedLevel($value)
     {
         if(!empty($this->specialization))
         {
-            $this->list_items = 
-            $this->module_options = Module::where('level', $value)->where('specialization_id', $this->specialization)->where('status', 1)->orderBy('id')->get()->toArray();
+            if( !empty($value) )
+                $this->list_items = 
+                $this->module_options = Module::where('level', $value)->where('specialization_id', $this->specialization)->orderBy('id')->get()->toArray();
+            else
+                $this->list_items = 
+                $this->module_options = Module::where('specialization_id', $this->specialization)->orderBy('id')->get()->toArray();
         }
         else
         {
             $this->list_items = 
-            $this->module_options = Module::where('level', $value)->where('status', 1)->orderBy('id')->get()->toArray();
+            $this->module_options = Module::where('level', $value)->orderBy('id')->get()->toArray();
         }
+
+        if(!empty($value))
+            $this->level_style = 'background-color:#fff !important;font-weight:600;';
+        else
+            $this->level_style = 'background-color:#f6f6f2 !important;font-weight:normal;';
     }
 
     public function updatedModule($value)
     {
         if($value==0) 
         {
+            $this->module_style = 'background-color:#f6f6f2 !important;font-weight:normal;';
             $this->module = 0;
             return $this->updatedSpecialization($this->specialization);
         }
+        $this->module_style = 'background-color:#fff !important;font-weight:600;';
         $this->path_level = $this->const_path_level['material'];
         $this->const_path_name = translate("Edit Course");
         $cols =  "   courses.id as id" 
@@ -215,6 +248,48 @@ class AddingManagement extends Component
     public function updated($field, $newValue)
     {
     }
+
+    public function save()
+    {
+        if( !!empty($this->registered_name))
+        {
+            $this->emit('WireAlert', translate('please input new item name'), ''); return;
+        }
+        if(!empty($this->specialization) && !empty($this->faculty) && !empty($this->training) )
+        {
+            if( !!empty($this->level))
+            {
+                $this->emit('WireAlert', translate('please select level'), ''); return;
+            }
+
+            $newModule = Module::create([
+                'specialization_id' => $this->specialization,
+                'level'             => $this->level,
+                lang()              => $this->registered_name,
+            ]);
+            $this->updatedSpecialization($this->specialization);
+            $this->registered_name = '';
+        }
+        if(!!empty($this->specialization) && !empty($this->faculty) && !empty($this->training) )
+        {
+            $newSpec = Specialization::create([
+                'faculty_id'        => $this->faculty,
+                lang()              => $this->registered_name,
+            ]);
+            $this->updatedFaculty($this->faculty);
+            $this->registered_name = '';
+        }
+        if(!!empty($this->specialization) && !!empty($this->faculty) && !empty($this->training) )
+        {
+            $newFaculty = Faculty::create([
+                'training_id'       => $this->training,
+                lang()              => $this->registered_name,
+            ]);
+            $this->updatedTraining($this->training);
+            $this->registered_name = '';
+        }
+    }
+
     public function render()
     {
         $this->Label = '';

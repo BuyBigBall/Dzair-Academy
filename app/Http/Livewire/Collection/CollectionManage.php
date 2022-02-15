@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collection;
+use App\Models\CollectionItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
@@ -18,7 +19,10 @@ class CollectionManage extends Component
     public  $current_route = 'collection';   //for pagination jump
     public  $word;          //wire:model
 
+    public  $SelectCollection = false;
+    public  $CourseIdForCollection = 0;
 
+    
     public  $coll_name;
     public  $coll_desp;
 
@@ -28,6 +32,7 @@ class CollectionManage extends Component
             'share_url'     => 'share_collection' ,
             'refresh_list'  => 'refresh_collection_list' ,
             'deleteCollection'  => 'deleteCollection' ,
+            'addToColl'         => 'addToColl'
                 ];
 
     public function __construct()
@@ -36,7 +41,12 @@ class CollectionManage extends Component
         parent::__construct();
         $this->current_route = Route::currentRouteName();
     }
-
+    public function mount(Request $req)
+    {
+        $this->CourseIdForCollection =  $req->course_id;
+        $this->SelectCollection = ( !empty($this->CourseIdForCollection) );
+        
+    }
     public function updatedCurPage($value)
     {
         $this->curPage = $value;
@@ -61,6 +71,28 @@ class CollectionManage extends Component
     {
         Collection::find($collection_id)->delete();
     }
+
+    public function addToColl($row_ids)
+    {
+        $first_collection_id = 0;
+        $rowidArray = explode(',', $row_ids );
+        foreach($rowidArray as $coll_id)
+        {
+            if(!$first_collection_id)   $first_collection_id=$coll_id;
+            CollectionItem::updateOrCreate(
+                [   'collection_id' => $coll_id,
+                    'course_id'   => $this->CourseIdForCollection
+                ],
+                []);
+        }
+
+        if($first_collection_id)
+        {
+            return redirect( route('collection-files', $first_collection_id) );
+        }
+
+    }
+
     public function render()
     {
         $searchWord = [];

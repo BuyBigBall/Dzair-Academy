@@ -27,12 +27,10 @@
            <div class="card-body p-3">
              <div class="row">
               <div class="col-md-9 col-sm-12 p-3">
-                {{ translate('
-               didn’t
-                find your modules specialization, please
-                help us by providing more information
-                about them so other members can submit
-                files,') }} <a href="#" wire:click.prevent="$emit('SelectWayModal', 0)" class="click-here" >{{ translate( 'click here') }} </a> {{ translate(' to add them') }}
+                {{ translate("
+                  You didn't find your Faculty, specialization or module?, you can contact us from") }} <a 
+                  href="{{ route('contactus') }}" class="click-here" >{{ translate( 'here') }} </a>
+                  
                 </div>
               </div>
              <form action="{{ (!empty($collection_id)) ? route('search-result', 'collection_id='.$collection_id) : route('search-result') }}" method="post">

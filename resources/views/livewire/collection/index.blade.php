@@ -27,6 +27,11 @@
                                 <table class="align-items-center mt-3 w-100" id='all-course-table'>
                                     <thead>
                                         <tr>
+                                            @if( !empty($SelectCollection))
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <input type="checkbox" id="select-all" />
+                                            </th>
+                                            @endif
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 {{ translate('ID')}}
                                             </th>
@@ -47,6 +52,11 @@
                                     <tbody>
                                         @foreach($pagination as $row)
                                         <tr>
+                                            @if( !empty($SelectCollection))
+                                            <td class="text-center">
+                                                <input type='checkbox' class='select-coll' row-id='{{$row->id}}' />
+                                            </td>
+                                            @endif
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{$row->id}}</p>
                                             </td>
@@ -114,7 +124,10 @@
                         <div class="col-md-6 d-flex justify-content-center py-3">
                             <!-- <button onclick="$('#collectionModal').modal('show');" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button> -->
                             <button wire:click.prevent="$emit('doShow')" class="btn btn-primary btn-sm mb-1 mx-2" type="button">{{translate('New')}}</button>
-                            <button onclick="javascript:history.back(01);" class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
+                            <button onclick="javascript:history.back(1);" class="btn btn-secondary btn-sm mb-1 mx-2" type="button">{{translate('Back')}}</button>
+                            @if( !empty($SelectCollection) )
+                            <button onclick="javascript:addToColl()" class="btn btn-info btn-sm mb-1 mx-2" type="button">{{translate('Add to these collections')}}</button>
+                            @endif
                         </div>
                     </div>
 
@@ -140,4 +153,32 @@
     {
         window.livewire.emit('deleteCollection', del_id);
     }
+    $('#select-all').change( function() {
+        if(this.checked)
+            $('input[type=checkbox]').attr('checked', true);
+        else
+            $('input[type=checkbox]').attr('checked', false);
+    });
+    function addToColl()
+    {
+        let row_ids = '';
+        for(i=0; i<$(".select-coll:checked").length; i++)
+        {
+            let rowId = $($(".select-coll:checked")[i]).attr('row-id');
+            if(row_ids!='') row_ids += ',';
+            row_ids += (''+rowId);
+        }
+        if(row_ids=='')
+        {
+            alert( "{{translate('please select a collection.')}}" );
+            return;
+        }
+        window.livewire.emit('addToColl', row_ids);
+    }
 </script>
+<style>
+    input[type=checkbox] {
+        margin-top:3px;
+        cursor:pointer;
+    }
+</style>
