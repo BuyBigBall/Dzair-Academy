@@ -7,6 +7,8 @@ use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
 use App\Models\Module;
+use App\Models\Course;
+use App\Models\CourseLanguage;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -67,16 +69,62 @@ class AddingManagement extends Component
              $this->user_role=='staff' && $this->path_level>=3) 
              && !empty($del_id) )
         {
+            $course_count = 0;
             $dbtable = null;
-            if( $this->path_level==1) $dbtable = Training::find($del_id);
-            if( $this->path_level==2) $dbtable = Faculty::find($del_id);
-            if( $this->path_level==3) $dbtable = Specialization::find($del_id);
-            if( $this->path_level==4) $dbtable = Module::find($del_id);
+            if( $this->path_level==1) 
+            {
+                $dbtable = Training::find($del_id);
+                $course_count = Course::where('training_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==2) 
+            {
+                $dbtable = Faculty::find($del_id);
+                $course_count = Course::where('faculty_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==3) 
+            {
+                $dbtable = Specialization::find($del_id);
+                $course_count = Course::where('specialization_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==4) 
+            {
+                $dbtable = Module::find($del_id);
+                $course_count = Course::where('module_id', $del_id)->get()->where('status', '>=', 0)->count();
+            }
             if( $this->path_level==5) $dbtable = Course::find($del_id);
             
             if(  $dbtable!=null )
             {
-                $dbtable->delete();
+                if($course_count>0)
+                {
+                    $this->emit('WireAlert', translate('Can not delete, please delete including courses first.'), ''); return;
+                }
+                if( $this->path_level==1)
+                {
+                    //CourseLanguage
+                    Course::where('training_id', $del_id)->where('status', -1)->delete();
+                }
+                else if( $this->path_level==1)
+                {
+                    Course::where('faculty_id', $del_id)->where('status', -1)->delete();
+                }
+                else if( $this->path_level==1)
+                {
+                    Course::where('specialization_id', $del_id)->where('status', -1)->delete();
+                }
+                else if( $this->path_level==1)
+                {
+                    Course::where('module_id', $del_id)->where('status', -1)->delete();
+                }
+                
+                try{
+                    $dbtable->delete();
+                }
+                catch( \Throwable $e)
+                {
+                    return;
+                }
+                
             }
             else
             {
