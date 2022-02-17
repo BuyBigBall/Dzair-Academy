@@ -57,16 +57,70 @@ class BranchManagement extends Component
              $this->user_role=='staff' && $this->path_level>=3) 
              && !empty($del_id) )
         {
+            $course_count = 0;
             $dbtable = null;
-            if( $this->path_level==1) $dbtable = Training::find($del_id);
-            if( $this->path_level==2) $dbtable = Faculty::find($del_id);
-            if( $this->path_level==3) $dbtable = Specialization::find($del_id);
-            if( $this->path_level==4) $dbtable = Module::find($del_id);
+            if( $this->path_level==1) 
+            {
+                $dbtable = Training::find($del_id);
+                $course_count = Course::where('training_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==2) 
+            {
+                $dbtable = Faculty::find($del_id);
+                $course_count = Course::where('faculty_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==3) 
+            {
+                $dbtable = Specialization::find($del_id);
+                $course_count = Course::where('specialization_id', $del_id)->where('status', '>=', 0)->get()->count();
+            }
+            if( $this->path_level==4) 
+            {
+                $dbtable = Module::find($del_id);
+                $course_count = Course::where('module_id', $del_id)->get()->where('status', '>=', 0)->count();
+            }
             if( $this->path_level==5) $dbtable = Course::find($del_id);
             
             if(  $dbtable!=null )
             {
-                $dbtable->delete();
+                if($course_count>0)
+                {
+                    $this->emit('WireAlert', translate('Can not delete, please delete including courses first.'), ''); return;
+                }
+
+                // $parnt_id = 'training_id';
+                // if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'training_id';
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'faculty_id';
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'specialization_id'      ;              
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'module_id';
+                // }
+
+                // foreach(Course::where($parnt_id, $del_id)->where('status', -1)->get() as $row)
+                // {
+                //     CourseLanguage::where('course_id', $row->id)->delete();
+                // }
+                // Course::where($parnt_id, $del_id)->where('status', -1)->delete();
+            
+                try{
+                    // $dbtable->delete();
+                    $dbtable->status = -1; $dbtable->save();
+                }
+                catch( \Throwable $e)
+                {
+                    dd($e);
+                    return;
+                }
             }
             else
             {
@@ -79,6 +133,7 @@ class BranchManagement extends Component
             if( $this->path_level==5) $this->updatedModule($this->module); 
         }
     }
+    
     public function mount()
     {
         $this->user_role = Auth::user()->role;
@@ -86,7 +141,7 @@ class BranchManagement extends Component
         $this->path_level = $this->const_path_level['training'];
         $this->const_path_name = translate("Edit Training");
         $this->list_items = 
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
         $this->list_title = translate('All Trainings');
         $this->level_options = \Config::get('constants.levels');
         $this->list_of = '';
@@ -109,7 +164,7 @@ class BranchManagement extends Component
         $this->list_items = 
         $this->faculty_options = Faculty::where('training_id', $value)->where('status', 1)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Faculties');
-        $this->list_of = Training::where('id', $value)->first()->toArray()[lang()];
+        $this->list_of = Training::find($value)->toArray()[lang()];
     }
     public function updatedFaculty($value)
     {

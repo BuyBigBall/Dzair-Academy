@@ -112,7 +112,7 @@ class TranslateMaterial extends Component
             Cookie::queue(Cookie::forget('searchWord'));
         }
 
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');
 
         if(!empty($request->id) && !empty($course = Course::find($request->id)) )

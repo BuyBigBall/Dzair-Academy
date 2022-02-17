@@ -99,32 +99,40 @@ class AddingManagement extends Component
                 {
                     $this->emit('WireAlert', translate('Can not delete, please delete including courses first.'), ''); return;
                 }
-                if( $this->path_level==1)
-                {
-                    //CourseLanguage
-                    Course::where('training_id', $del_id)->where('status', -1)->delete();
-                }
-                else if( $this->path_level==1)
-                {
-                    Course::where('faculty_id', $del_id)->where('status', -1)->delete();
-                }
-                else if( $this->path_level==1)
-                {
-                    Course::where('specialization_id', $del_id)->where('status', -1)->delete();
-                }
-                else if( $this->path_level==1)
-                {
-                    Course::where('module_id', $del_id)->where('status', -1)->delete();
-                }
-                
+
+                // $parnt_id = 'training_id';
+                // if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'training_id';
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'faculty_id';
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'specialization_id'      ;              
+                // }
+                // else if( $this->path_level==1)
+                // {
+                //     $parnt_id = 'module_id';
+                // }
+
+                // foreach(Course::where($parnt_id, $del_id)->where('status', -1)->get() as $row)
+                // {
+                //     CourseLanguage::where('course_id', $row->id)->delete();
+                // }
+                // Course::where($parnt_id, $del_id)->where('status', -1)->delete();
+            
                 try{
-                    $dbtable->delete();
+                    // $dbtable->delete();
+                    $dbtable->status = -1; $dbtable->save();
                 }
                 catch( \Throwable $e)
                 {
+                    dd($e);
                     return;
                 }
-                
             }
             else
             {
@@ -144,7 +152,7 @@ class AddingManagement extends Component
         $this->path_level = $this->const_path_level['training'];
         $this->const_path_name = translate("Edit Training");
         $this->list_items = 
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
         $this->list_title = translate('All Trainings');
         $this->level_options = \Config::get('constants.levels');
         $this->list_of = '';
@@ -171,7 +179,7 @@ class AddingManagement extends Component
         $this->list_items = 
         $this->faculty_options = Faculty::where('training_id', $value)->where('status','>=', 0)->orderBy('id')->get()->toArray();
         $this->list_title = translate('All Faculties');
-        $this->list_of = Training::where('id', $value)->first()->toArray()[lang()];
+        $this->list_of = Training::find($value)->toArray()[lang()];
 
     }
     public function updatedFaculty($value)

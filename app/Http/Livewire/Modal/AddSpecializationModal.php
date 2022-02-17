@@ -36,7 +36,7 @@ class AddSpecializationModal extends Component
     public function mount(Request $request) {
         $this->show = false;
         $this->title = translate("Add specialization or faculty");
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
     }
 
     public function updatedTraining($value)

@@ -40,7 +40,7 @@ class AddModuleModal extends Component
         
         $this->show = false;
         $this->title = translate("Add module");
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');
     }
 

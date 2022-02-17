@@ -90,7 +90,7 @@ class CourseMaterial extends Component
     }
     public function mount()
     {
-        $this->training_options = Training::select('*')->orderBy('symbol')->get()->toArray();
+        $this->training_options = Training::where('status', '>=', '0')->select('*')->orderBy('symbol')->get()->toArray();
         $this->level_options = \Config::get('constants.levels');
         $this->add_coll_type = 0;
 
