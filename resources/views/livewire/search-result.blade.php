@@ -45,13 +45,15 @@
                             <i class="cursor-pointer fas fa-bookmark text-secondary"></i>
                           </span>
                           @endif
-                          <!-- <span data-bs-toggle="tooltip" 
-                              data-bs-original-title="{{translate('view this user profile.')}}" 
+                          @if( Auth::user()->role=='admin' )
+                          <span data-bs-toggle="tooltip" 
+                              data-bs-original-title="{{translate('delete this course file.')}}" 
                               class="mx-1" data-id='{{$row->id}}' 
-                              onclick="javascript:location.href='{{route('user-profile', 'user_id='.$row->created_by)}}'"
+                              onclick="ConfirmFunction('{{ translate('Are you sure to delete this uploaded course?')}}', deleteUploadedCourse, '{{$row->id}}')"
                               >
-                            <i class="cursor-pointer fa fa-user text-secondary"></i>
-                          </span> -->
+                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                          </span>
+                          @endif
                          </div>
                        </div>
                      </div>
@@ -96,4 +98,10 @@
     {
         $("button[dusk='nextPage.before']").trigger('click');
     }
- </script>
+
+    function deleteUploadedCourse(course_id)
+    {
+        window.livewire.emit('delete_course', course_id);
+    }
+
+  </script>

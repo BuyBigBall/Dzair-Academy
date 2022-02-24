@@ -38,7 +38,7 @@ class TranslateappModal extends Component
 
     public function doShow($main_key) {
         #dd($_id);
-        $this->main_key = $main_key;
+        $this->main_key = urldecode($main_key);
         $cols =  "   translates.key as strkey" 
             ." , GROUP_CONCAT(IF(lang='en', `value`, '') SEPARATOR  '') as en "
             ." , GROUP_CONCAT(IF(lang='fr', `value`, '') SEPARATOR  '') as fr "

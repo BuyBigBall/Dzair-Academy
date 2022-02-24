@@ -68,4 +68,11 @@
             {{ translate("Uplaod File") }}
         </button>
     </div>
+    <script>
+            function deleteUploadedCourse(course_id)
+            {
+                window.livewire.emit('delete_course', course_id);
+            }
+
+    </script>
 </div>

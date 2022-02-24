@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
-
+use Livewire\Livewire;
 use LivewireUI\Modal\ModalComponent;
 
 class TranslateMaterial extends Component

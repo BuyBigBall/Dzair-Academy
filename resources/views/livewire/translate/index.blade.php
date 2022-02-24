@@ -71,7 +71,7 @@
                                             <a href="#" class="mx-1 ms-2" data-bs-toggle="tooltip"
                                                 data-bs-original-title="register translate for this words"
                                                 data-id='{{$row->strkey}}'
-                                                wire:click.prevent="$emit('ShowTranslateModal', '{{$row->strkey}}')"
+                                                wire:click.prevent="$emit('ShowTranslateModal', '<?php echo urlencode( $row->strkey); ?>')"
                                                 >
                                                 <i class="fa fa-edit text-secondary"></i>
                                             </a>

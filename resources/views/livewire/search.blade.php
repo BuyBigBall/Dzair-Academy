@@ -27,8 +27,7 @@
            <div class="card-body p-3">
              <div class="row">
               <div class="col-md-9 col-sm-12 p-3">
-                {{ translate("
-                  You didn't find your Faculty, specialization or module?, you can contact us from") }} <a 
+                {{ translate("You didn't find your Faculty, specialization or module?, you can contact us from") }} <a 
                   href="{{ route('contactus') }}" class="click-here" >{{ translate( 'here') }} </a>
                   
                 </div>

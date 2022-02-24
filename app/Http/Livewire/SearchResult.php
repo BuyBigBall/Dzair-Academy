@@ -4,14 +4,15 @@ namespace App\Http\Livewire;
 use App\Models\Training;
 use App\Models\Faculty;
 use App\Models\Specialization;
-use App\Models\Module;
 use App\Models\Course;
+use App\Models\CourseLanguage;
 use Livewire\Component;
 use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SearchResult extends Component
 {
@@ -38,6 +39,9 @@ class SearchResult extends Component
     
     public  $collection_id;
 
+    public $listeners = [
+        'delete_course' => 'delete_course'
+    ];
     public function __construct()
     {
         parent::__construct();
@@ -81,7 +85,15 @@ class SearchResult extends Component
         {
             $this->perPage = Cookie::get("perPage");
         }
+
         $this->search_input = $request->input();
+
+        if(Session::has("request"))
+        {
+            $this->search_input = Session::pull("request");
+        }
+
+
         if( !empty($this->search_input['training']))        $this->training = Training::find($this->search_input['training'])->name;
         if( !empty($this->search_input['faculty']))         $this->faculty = Faculty::find($this->search_input['faculty'])->name;
         if( !empty($this->search_input['specialization']))  $this->specialization = Specialization::find($this->search_input['specialization'])->name;
@@ -117,9 +129,20 @@ class SearchResult extends Component
         $this->filter .= ',';
         if(!empty($this->word))
         $this->filter .= ("search:'".$this->word."'");
+        
+        
+        Session::push("request", $this->search_input);
 
         //dd($this->search_input);
     }
+    
+    public function delete_course($course_id)
+    {
+        CourseLanguage::where('course_id', $course_id)->delete();
+        Course::find($course_id)->delete();
+        $this->mount( Request::capture() );
+    }
+
     public function nextPage($page)
     {
     }

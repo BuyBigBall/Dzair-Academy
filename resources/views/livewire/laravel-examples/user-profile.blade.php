@@ -250,11 +250,6 @@
         window.livewire.emit('stopShareCollection', del_id);
     }
 
-    function deleteUploadedCourse(course_id)
-    {
-        window.livewire.emit('delete_course', course_id);
-    }
-
     $(document).ready( function() {
         setTimeout(function() {
             $('#user-name').focus();$('#user-name').select();
